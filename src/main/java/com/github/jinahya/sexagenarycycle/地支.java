@@ -60,16 +60,32 @@ public enum 地支 { // \u5730\u652f 지지(\uc9c0\uc9c0)
         VALUES_BY_KOREAN_NAMES = Collections.unmodifiableMap(m);
     }
 
+    /**
+     * Returns the value of specified Korean name.
+     *
+     * @param koreanName the Korean name.
+     * @return the value of specified Korean name.
+     */
     public static 地支 valueOfKoreanName(final String koreanName) {
         return VALUES_BY_KOREAN_NAMES.get(koreanName);
     }
 
     // -----------------------------------------------------------------------------------------------------------------
+    /**
+     * Returns the Korean name of this 天干.
+     *
+     * @return the Korean name of this 天干.
+     */
     public String koreanName() {
         return KOREAN_NAMES_BY_VALUES.get(this);
     }
 
     // -----------------------------------------------------------------------------------------------------------------
+    /**
+     * Returns the previous value of this 地支.
+     *
+     * @return the previous value of this 地支.
+     */
     public 地支 getPrevious() {
         地支 p = previous;
         if (p == null) {
@@ -83,6 +99,11 @@ public enum 地支 { // \u5730\u652f 지지(\uc9c0\uc9c0)
         return p;
     }
 
+    /**
+     * Returns the next value of this 地支.
+     *
+     * @return the next value of this 地支.
+     */
     public 地支 getNext() {
         地支 n = next;
         if (n == null) {
