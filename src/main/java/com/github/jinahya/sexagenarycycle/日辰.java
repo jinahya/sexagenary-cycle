@@ -22,7 +22,8 @@ public class 日辰 extends Assigned<日辰> { // 일진
 
     /**
      * Creates a new instance with specified 干支, 月建, and day of month.
-     *  @param 干支         the 干支.
+     *
+     * @param 干支         the 干支.
      * @param dayOfMonth the day of month.
      * @param 月建         the 月建.
      */
