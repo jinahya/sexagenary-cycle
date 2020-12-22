@@ -46,7 +46,6 @@
     <maven.compiler.testSource>${maven.compiler.source}</maven.compiler.testSource>
     <maven.compiler.testTarget>${maven.compiler.testSource}</maven.compiler.testTarget>
     <sonar.host.url>https://sonarcloud.io</sonar.host.url>
-    <sonar.java.binaries>target/classes</sonar.java.binaries>
     <sonar.organization>jinahya-github</sonar.organization>
     <sonar.projectKey>jinahya_sexagenary-cycle</sonar.projectKey>
     <vesion.ch.qos.logback>1.2.3</vesion.ch.qos.logback>
