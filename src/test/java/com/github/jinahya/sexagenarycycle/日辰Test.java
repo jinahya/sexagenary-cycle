@@ -14,20 +14,20 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 @Slf4j
-class 日辰Test { // 日辰Test
+class 日辰Test {
 
     // ------------------------------------------------------------------------------------------------------ 2020-04-01
     static 日辰 of2020庚子年04辛巳月01丙申日() { // 경자년 신사월 병신일
-        return new 日辰(干支.valueOfName("丙申"), of2020庚子年04辛巳月(), 1);
+        return new 日辰(干支.valueOfName("丙申"), 1, of2020庚子年04辛巳月());
     }
 
     static 日辰 of2020庚子年04閏四月01丙寅日() { // 경자년 윤사월 병인일
-        return new 日辰(干支.valueOfName("丙寅"), of2020庚子年04閏四月(), 1);
+        return new 日辰(干支.valueOfName("丙寅"), 1, of2020庚子年04閏四月());
     }
 
     // -------------------------------------------------------------------------------- (陰) 2020-11-14 / (陽) 2020-12-28
     static 日辰 of2020庚子年11戊子月14乙巳日() { // 경자년 무자월 을사일
-        return new 日辰(干支.valueOfName("乙巳"), of2020庚子年12戊子月(), 14);
+        return new 日辰(干支.valueOfName("乙巳"), 14, of2020庚子年12戊子月());
     }
 
     // -----------------------------------------------------------------------------------------------------------------
@@ -48,13 +48,13 @@ class 日辰Test { // 日辰Test
         assertThrows(
                 IllegalArgumentException.class,
                 () -> {
-                    new 日辰(干支, 月建, 0);
+                    new 日辰(干支, 0, 月建);
                 }
         );
         assertThrows(
                 IllegalArgumentException.class,
                 () -> {
-                    new 日辰(干支, 月建, 31);
+                    new 日辰(干支, 31, 月建);
                 }
         );
     }
@@ -68,8 +68,8 @@ class 日辰Test { // 日辰Test
 
     @MethodSource({"parameters"})
     @ParameterizedTest
-    void testEquals(final 日辰 日辰) {
-        assertThat(日辰).isEqualTo(new 日辰(日辰.get干支(), 日辰.get月建(), 日辰.getDayOfMonth()));
+    void testEquals(final 日辰 日辰) throws CloneNotSupportedException{
+        assertThat(日辰).isEqualTo(日辰.clone());
     }
 
     @MethodSource({"parameters"})

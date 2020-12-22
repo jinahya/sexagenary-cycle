@@ -22,12 +22,11 @@ public class 日辰 extends Assigned<日辰> { // 일진
 
     /**
      * Creates a new instance with specified 干支, 月建, and day of month.
-     *
-     * @param 干支         the 干支.
-     * @param 月建         the 月建.
+     *  @param 干支         the 干支.
      * @param dayOfMonth the day of month.
+     * @param 月建         the 月建.
      */
-    public 日辰(final 干支 干支, final com.github.jinahya.sexagenarycycle.月建 月建, final int dayOfMonth) {
+    public 日辰(final 干支 干支, final int dayOfMonth, final 月建 月建) {
         super(requireNonNull(干支, "干支 is null"));
         this.月建 = requireNonNull(月建, "月建 is null");
         if (dayOfMonth <= 0 || dayOfMonth > 30) {

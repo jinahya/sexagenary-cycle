@@ -13,20 +13,20 @@ import static com.github.jinahya.sexagenarycycle.歲次Test.of2020庚子年;
 import static org.assertj.core.api.Assertions.assertThat;
 
 @Slf4j
-class 月建Test { // 月建Test
+class 月建Test {
 
     // --------------------------------------------------------------------------------------------------------- 2020-04
     static 月建 of2020庚子年04辛巳月() { // 경자년 신사월
-        return new 月建(干支.valueOfName("辛巳"), of2020庚子年(), Month.APRIL);
+        return new 月建(干支.valueOfName("辛巳"), Month.APRIL, of2020庚子年());
     }
 
     static 月建 of2020庚子年04閏四月() { // 경자년 윤사월
-        return 月建.ofLeapMonth(of2020庚子年(), Month.APRIL);
+        return 月建.ofLeapMonth(Month.APRIL, of2020庚子年());
     }
 
     // --------------------------------------------------------------------------------------------------------- 2020-12
     static 月建 of2020庚子年12戊子月() { // 경자년 무자월
-        return new 月建(干支.valueOfName("戊子"), of2020庚子年(), Month.DECEMBER);
+        return new 月建(干支.valueOfName("戊子"), Month.DECEMBER, of2020庚子年());
     }
 
     // -----------------------------------------------------------------------------------------------------------------
@@ -74,29 +74,6 @@ class 月建Test { // 月建Test
     void testCompareTo(final 月建 月建) throws CloneNotSupportedException {
         assertThat(月建.compareTo(月建.clone())).isZero();
     }
-
-//    // -----------------------------------------------------------------------------------------------------------------
-//    @Test
-//    void testGetPrevious() {
-//        {
-//            final 月建 current = of2020庚子年04辛巳月();
-//            assertThat(current.getPrevious()).isNotNull().satisfies(p -> {
-//                assertThat(p.getYear()).isNotNull().isEqualTo(current.getYear());
-//                assertThat(p.getMonth()).isNotNull().isEqualTo(current.getMonth().minus(1L));
-//            });
-//        }
-//    }
-//
-//    @Test
-//    void testGetNext() {
-//        {
-//            final 月建 current = of2020庚子年04辛巳月();
-//            assertThat(current.getNext()).isNotNull().satisfies(p -> {
-//                assertThat(p.getYear()).isNotNull().isEqualTo(current.getYear());
-//                assertThat(p.getMonth()).isNotNull().isEqualTo(current.getMonth().plus(1L));
-//            });
-//        }
-//    }
 
     // -----------------------------------------------------------------------------------------------------------------
     @MethodSource({"parameters"})
