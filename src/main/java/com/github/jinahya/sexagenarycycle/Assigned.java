@@ -2,7 +2,6 @@ package com.github.jinahya.sexagenarycycle;
 
 import java.util.Objects;
 
-// -----------------------------------------------------------------------------------------------------------------
 abstract class Assigned<T extends Assigned<T>> implements Comparable<T>, Cloneable {
 
     /**

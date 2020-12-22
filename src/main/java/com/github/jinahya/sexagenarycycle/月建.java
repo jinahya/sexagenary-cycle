@@ -62,6 +62,7 @@ public class 月建 extends Assigned<月建> { // 월건
         return super.toString() + '{'
                + "歲次=" + 歲次
                + ",month=" + month
+               + ",leapMonth=" + isLeapMonth()
                + '}';
     }
 
@@ -95,26 +96,6 @@ public class 月建 extends Assigned<月建> { // 월건
     public int compareTo(final 月建 o) {
         return COMPARING_歲次_THEN_COMPARING_MONTH.thenComparing(LEAP_MONTH_LAST).compare(this, o);
     }
-
-//        // -------------------------------------------------------------------------------------------------------------
-//
-//        /**
-//         * Returns the previous value of this 月建.
-//         *
-//         * @return the previous value of this 月建.
-//         */
-//        public 月建 getPrevious() {
-//            return new 月建(get干支().getPrevious(), month == Month.JANUARY ? 歲次.getPrevious() : 歲次, month.minus(1L));
-//        }
-//
-//        /**
-//         * Returns the next value of this 月建.
-//         *
-//         * @return the next value of this 月建.
-//         */
-//        public 月建 getNext() {
-//            return new 月建(get干支().getNext(), month == Month.DECEMBER ? 歲次.getNext() : 歲次, month.plus(1L));
-//        }
 
     // -------------------------------------------------------------------------------------------------------------
 
