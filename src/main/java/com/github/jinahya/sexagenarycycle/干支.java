@@ -56,11 +56,11 @@ public final class 干支 { // \u5e72\u652f 간지(\uac04\uc9c0)
 
     static {
         final Map<天干, Map<地支, 干支>> hashedValues = new EnumMap<>(天干.class);
-        VALUES.forEach(stemAndBranch -> {
-            hashedValues.computeIfAbsent(stemAndBranch.getStem(), k -> new EnumMap<>(地支.class))
-                    .compute(stemAndBranch.getBranch(), (k, v) -> {
+        VALUES.forEach(天干 -> {
+            hashedValues.computeIfAbsent(天干.get干(), k -> new EnumMap<>(地支.class))
+                    .compute(天干.get支(), (k, v) -> {
                         assert v == null;
-                        return stemAndBranch;
+                        return 天干;
                     });
         });
         HASHED_VALUES = Collections.unmodifiableMap(hashedValues);

@@ -54,7 +54,7 @@ public class 歲次 extends Assigned<歲次> { // 세차
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         if (!super.equals(o)) return false;
-        歲次 歲次 = (com.github.jinahya.sexagenarycycle.歲次) o;
+        歲次 歲次 = (歲次) o;
         return year.equals(歲次.year);
     }
 

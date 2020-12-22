@@ -18,7 +18,7 @@ public class 日辰 extends Assigned<日辰> { // 일진
     static final Comparator<日辰> COMPARING_月建_THEN_COMPARING_DAY_OF_MOHTH =
             Comparator.comparing(日辰::get月建).thenComparingInt(日辰::getDayOfMonth);
 
-    // -------------------------------------------------------------------------------------------------------------
+    // -----------------------------------------------------------------------------------------------------------------
 
     /**
      * Creates a new instance with specified 干支, 月建, and day of month.
@@ -36,7 +36,7 @@ public class 日辰 extends Assigned<日辰> { // 일진
         this.dayOfMonth = dayOfMonth;
     }
 
-    // -------------------------------------------------------------------------------------------------------------
+    // -----------------------------------------------------------------------------------------------------------------
 
     /**
      * Returns a string representation of the object.
@@ -62,7 +62,7 @@ public class 日辰 extends Assigned<日辰> { // 일진
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         if (!super.equals(o)) return false;
-        日辰 日辰 = (com.github.jinahya.sexagenarycycle.日辰) o;
+        日辰 日辰 = (日辰) o;
         return dayOfMonth == 日辰.dayOfMonth && 月建.equals(日辰.月建);
     }
 
@@ -76,7 +76,7 @@ public class 日辰 extends Assigned<日辰> { // 일진
         return Objects.hash(super.hashCode(), 月建, dayOfMonth);
     }
 
-    // -------------------------------------------------------------------------------------------------------------
+    // -----------------------------------------------------------------------------------------------------------------
 
     @Override
     public int compareTo(final 日辰 o) {
@@ -90,7 +90,7 @@ public class 日辰 extends Assigned<日辰> { // 일진
      *
      * @return the 月建 of this 日辰.
      */
-    public com.github.jinahya.sexagenarycycle.月建 get月建() {
+    public 月建 get月建() {
         return 月建;
     }
 
@@ -122,7 +122,7 @@ public class 日辰 extends Assigned<日辰> { // 일진
     }
 
     // -------------------------------------------------------------------------------------------------------------
-    private final com.github.jinahya.sexagenarycycle.月建 月建;
+    private final 月建 月建;
 
     private final int dayOfMonth;
 }

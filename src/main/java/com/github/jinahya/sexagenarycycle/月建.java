@@ -77,7 +77,7 @@ public class 月建 extends Assigned<月建> { // 월건
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         if (!super.equals(o)) return false;
-        月建 月建 = (com.github.jinahya.sexagenarycycle.月建) o;
+        月建 月建 = (月建) o;
         return 歲次.equals(月建.歲次) && month == 月建.month;
     }
 
