@@ -11,7 +11,7 @@ import java.util.stream.Stream;
 import static org.assertj.core.api.Assertions.assertThat;
 
 @Slf4j
-class 歲次Test { // 歲次Test
+class 歲次Test {
 
     // ------------------------------------------------------------------------------------------------------------ 2020
     static 歲次 of2020庚子年() { // 경자년
