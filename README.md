@@ -7,11 +7,16 @@
 
 A small library for [Sexagenary cycle](https://en.wikipedia.org/wiki/Sexagenary_cycle) depends on 0 external libraries.
 
+Note that this library is not for converting dates between lunar calendar and sonar calendar. Please see [음양력변환계산 (한국천문연구원/천문우주시직정보)](https://astro.kasi.re.kr/life/pageView/8) and/or [음양력 정보 (공공데이터포탈)](https://www.data.go.kr/data/15012679/openapi.do).
+
+See also [datagokr-api-b090041-lrsrcldinfoservice-client-spring](https://github.com/jinahya/datagokr-api-b090041-lrsrcldinfoservice-client-spring).
+
 ## [천간][천간]\([天干][天干], [Heavenly Stems][Heavenly_Stems])
 
 ```java
 final 天干 갑 = 天干.valueOf("甲");
 assert 갑.getPrevious() == 天干.valueOfKoreanName("계");
+
 final 天干 乙 = 天干.valueOfKoreanName("을");
 assert 乙.getNext() == 天干.valueOfKoreanName("병");
 assert 乙.getPrevious() == 갑;
@@ -22,6 +27,7 @@ assert 乙.getPrevious() == 갑;
 ```java
 final 地支 子 = 地支.valueOfKoreanName("자");
 assert 子.getPrevious() == 地支.valueOfName("亥");
+
 final 地支 축 = 地支.valueOf("丑");
 assert 축.getNext() == 地支.valueOf("寅");
 assert 축.getPrevious() == 子;
