@@ -5,6 +5,9 @@ import java.util.EnumMap;
 import java.util.HashMap;
 import java.util.Map;
 
+import static java.util.Objects.requireNonNull;
+import static java.util.Optional.ofNullable;
+
 /**
  * Constants of <a href="https://en.wikipedia.org/wiki/Heavenly_Stems">Heavenly Stems</a>.
  *
@@ -29,6 +32,26 @@ public enum 天干 { // 天干(\u5929\u5e72) 천간(\ucc9c\uac04)
     static final String REGEXP_NAME = "[\u7532\u4e59\u4e19\u4e01\u620a\u5df1\u5e9a\u8f9b\u58ec\u7678]";
 
     static final String REGEXP_KOREAN_NAME = "[\uac11\uc744\ubcd1\uc815\ubb34\uae30\uacbd\uc2e0\uc784\uacc4]";
+
+    // -----------------------------------------------------------------------------------------------------------------
+    private static final Map<String, 天干> VALUES_BY_NAMES;
+
+    static {
+        final Map<String, 天干> m = new HashMap<>();
+        for (final 天干 value : values()) {
+            m.put(value.name(), value);
+        }
+        VALUES_BY_NAMES = Collections.unmodifiableMap(m);
+    }
+
+    public static 天干 valueOfName(final String name) {
+        requireNonNull(name, "name is null");
+        final 天干 value = VALUES_BY_NAMES.get(name);
+        if (value == null) {
+            throw new IllegalArgumentException("no value for name: " + name);
+        }
+        return value;
+    }
 
     // -----------------------------------------------------------------------------------------------------------------
     private static final Map<天干, String> KOREAN_NAMES_BY_VALUES;
@@ -63,7 +86,8 @@ public enum 天干 { // 天干(\u5929\u5e72) 천간(\ucc9c\uac04)
      * @return the value of specified Korean name.
      */
     public static 天干 valueOfKoreanName(final String koreanName) {
-        return VALUES_BY_KOREAN_NAMES.get(koreanName);
+        return ofNullable(VALUES_BY_KOREAN_NAMES.get(koreanName))
+                .orElseThrow(() -> new IllegalArgumentException("no value for " + koreanName));
     }
 
     // -----------------------------------------------------------------------------------------------------------------

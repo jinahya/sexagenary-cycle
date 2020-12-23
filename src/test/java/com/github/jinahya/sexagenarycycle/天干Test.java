@@ -1,26 +1,33 @@
 package com.github.jinahya.sexagenarycycle;
 
 import lombok.extern.slf4j.Slf4j;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import java.util.EnumSet;
+import java.util.Set;
 import java.util.regex.Pattern;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 @Slf4j
 class 天干Test {
 
     // -----------------------------------------------------------------------------------------------------------------
+    @DisplayName("REGEXP_NAME matches for every name")
     @Test
-    void test_REGEXP_NAME() {
+    void REGEXP_NAME_Match_EveryName() {
         final Pattern pattern = Pattern.compile(天干.REGEXP_NAME);
         for (final 天干 value : 天干.values()) {
             assertThat(pattern.matcher(value.name()).matches()).isTrue();
         }
     }
 
+    // -----------------------------------------------------------------------------------------------------------------
+    @DisplayName("REGEXP_KOREAN_NAME matches for every koreanName")
     @Test
-    void test_REGEXP_KOREAN_NAME() {
+    void REGEXP_KOREAN_NAME_Match_EveryKoreanName() {
         final Pattern pattern = Pattern.compile(天干.REGEXP_KOREAN_NAME);
         for (final 天干 value : 天干.values()) {
             assertThat(pattern.matcher(value.koreanName()).matches()).isTrue();
@@ -28,41 +35,72 @@ class 天干Test {
     }
 
     // -----------------------------------------------------------------------------------------------------------------
+    @DisplayName("valueOfName(name) returns valid value for known name")
     @Test
-    void testPrevious() {
-        for (final 天干 value : 天干.values()) {
-            assertThat(value.getPrevious()).isNotNull().isNotSameAs(value)
-                    .satisfiesAnyOf(
-                            p -> {
-                                assertThat(p.ordinal()).isSameAs(value.ordinal() - 1);
-                            },
-                            i -> {
-                                assertThat(i.ordinal()).isSameAs(天干.values().length - 1);
-                            }
-                    )
-                    .satisfies(p -> {
-                        assertThat(p.getNext()).isNotNull().isSameAs(value);
-                    })
-            ;
+    void valueOfName_ExpectedResult_NameIsKnown() {
+        final String[] names = new String[] {"甲", "乙", "丙", "丁", "戊", "己", "庚", "辛", "壬", "癸"};
+        for (int i = 0; i < names.length; i++) {
+            final String name = names[i];
+            assertThat(天干.valueOfName(name)).isNotNull().isSameAs(天干.valueOf(name));
+            assertThat(天干.valueOfName(name).ordinal()).isSameAs(i);
         }
     }
 
+    @DisplayName("valueOfName(name) throws IllegalArgumentException when name is unknown")
     @Test
-    void testNext() {
-        for (final 天干 value : 天干.values()) {
-            assertThat(value.getNext()).isNotNull().isNotSameAs(value)
-                    .satisfiesAnyOf(
-                            n -> {
-                                assertThat(n.ordinal()).isSameAs(value.ordinal() + 1);
-                            },
-                            n -> {
-                                assertThat(n.ordinal()).isZero();
-                            }
-                    )
+    void valueOfName_IllegalArgumentException_NameIsUnknown() {
+        assertThrows(IllegalArgumentException.class, () -> 天干.valueOfName(""));
+    }
+
+    // -----------------------------------------------------------------------------------------------------------------
+    @DisplayName("valueOfKoreanName(koreanName) returns valid value for known koreanName")
+    @Test
+    void valueOfKoreanName_ExpectedResult_KoreanNameIsKnown() {
+        final String[] koreanNames = new String[] {"갑", "을", "병", "정", "무", "기", "경", "신", "임", "계"};
+        for (int i = 0; i < koreanNames.length; i++) {
+            final String koreanName = koreanNames[i];
+            assertThat(天干.valueOfKoreanName(koreanName)).isNotNull();
+            assertThat(天干.valueOfKoreanName(koreanName).ordinal()).isSameAs(i);
+        }
+    }
+
+    @DisplayName("valueOfKoreanName(koreanName) throws IllegalArgumentException when koreanName is unknown")
+    @Test
+    void valueOfKoreanName_IllegalArgumentException_KoreanNameIsUnknown() {
+        assertThrows(IllegalArgumentException.class, () -> 天干.valueOfKoreanName(""));
+    }
+
+    // -----------------------------------------------------------------------------------------------------------------
+    @DisplayName("getPrevious() returns expected value")
+    @Test
+    void getPrevious_ExpectedResult() {
+        final Set<天干> all = EnumSet.allOf(天干.class);
+        for (final 天干 each : all) {
+            assertThat(each.getPrevious()).isNotNull().isNotSameAs(each)
+                    .satisfies(p -> {
+                        assertThat(p.getNext()).isNotNull().isSameAs(each);
+                        assertThat(p.ordinal()).satisfiesAnyOf(
+                                o -> assertThat(o).isSameAs(each.ordinal() - 1),
+                                o -> assertThat(o).isSameAs(all.size() - 1)
+                        );
+                    });
+        }
+    }
+
+    // -----------------------------------------------------------------------------------------------------------------
+    @DisplayName("getNext() returns expected value")
+    @Test
+    void getNext_ExpectedResult() {
+        final Set<天干> all = EnumSet.allOf(天干.class);
+        for (final 天干 each : all) {
+            assertThat(each.getNext()).isNotNull().isNotSameAs(each)
                     .satisfies(n -> {
-                        assertThat(n.getPrevious()).isNotNull().isSameAs(value);
-                    })
-            ;
+                        assertThat(n.getPrevious()).isNotNull().isSameAs(each);
+                        assertThat(n.ordinal()).satisfiesAnyOf(
+                                o -> assertThat(o).isSameAs(each.ordinal() + 1),
+                                o -> assertThat(o).isZero()
+                        );
+                    });
         }
     }
 }

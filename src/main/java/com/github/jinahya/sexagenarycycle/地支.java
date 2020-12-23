@@ -5,8 +5,11 @@ import java.util.EnumMap;
 import java.util.HashMap;
 import java.util.Map;
 
+import static java.util.Objects.requireNonNull;
+import static java.util.Optional.ofNullable;
+
 /**
- * Constants of <a href="https://en.wikipedia.org/wiki/Earthly_Branches">Earthly Branches</a>.
+ * Constants of 10 <a href="https://en.wikipedia.org/wiki/Earthly_Branches">Earthly Branches</a>.
  *
  * @author Jin Kwon &lt;onacit_at_gmail.com&gt;
  * @see <a href="https://en.wikipedia.org/wiki/Earthly_Branches">Earthly Branches</a>
@@ -28,11 +31,40 @@ public enum 地支 { // \u5730\u652f 지지(\uc9c0\uc9c0)
     亥; // 해
 
     // -----------------------------------------------------------------------------------------------------------------
-    static final String REGEXP_NAME = "[\u5b50\u4e11\u5bc5\u536f\u8fb0\u5df3\u5348\u672a\u7533\u9149\u620c\u4ea5]";
 
-    static final String REGEXP_KOREAN_NAME
+    /**
+     * The regular expression for a single name.
+     */
+    public static final String REGEXP_NAME
+            = "[\u5b50\u4e11\u5bc5\u536f\u8fb0\u5df3\u5348\u672a\u7533\u9149\u620c\u4ea5]";
+
+    /**
+     * The regular expression for a single Korean name.
+     */
+    public static final String REGEXP_KOREAN_NAME
             = "[\uc790\ucd95\uc778\ubb18\uc9c4\uc0ac\uc624\ubbf8\uc2e0\uc720\uc220\ud574]";
 
+    // -----------------------------------------------------------------------------------------------------------------
+    private static final Map<String, 地支> VALUES_BY_NAMES;
+
+    static {
+        final Map<String, 地支> m = new HashMap<>();
+        for (final 地支 value : values()) {
+            m.put(value.name(), value);
+        }
+        VALUES_BY_NAMES = Collections.unmodifiableMap(m);
+    }
+
+    public static 地支 valueOfName(final String name) {
+        requireNonNull(name, "name is null");
+        final 地支 value = VALUES_BY_NAMES.get(name);
+        if (value == null) {
+            throw new IllegalArgumentException("no value for name: " + name);
+        }
+        return value;
+    }
+
+    // -----------------------------------------------------------------------------------------------------------------
     private static final Map<地支, String> KOREAN_NAMES_BY_VALUES;
 
     static {
@@ -56,7 +88,10 @@ public enum 地支 { // \u5730\u652f 지지(\uc9c0\uc9c0)
 
     static {
         final Map<String, 地支> m = new HashMap<>();
-        KOREAN_NAMES_BY_VALUES.forEach((k, v) -> m.put(v, k));
+        KOREAN_NAMES_BY_VALUES.forEach((k, v) -> {
+            final 地支 地支 = m.put(v, k);
+            assert 地支 == null;
+        });
         VALUES_BY_KOREAN_NAMES = Collections.unmodifiableMap(m);
     }
 
@@ -67,10 +102,12 @@ public enum 地支 { // \u5730\u652f 지지(\uc9c0\uc9c0)
      * @return the value of specified Korean name.
      */
     public static 地支 valueOfKoreanName(final String koreanName) {
-        return VALUES_BY_KOREAN_NAMES.get(koreanName);
+        return ofNullable(VALUES_BY_KOREAN_NAMES.get(koreanName))
+                .orElseThrow(() -> new IllegalArgumentException("no value for " + koreanName));
     }
 
     // -----------------------------------------------------------------------------------------------------------------
+
     /**
      * Returns the Korean name of this 天干.
      *
@@ -81,6 +118,7 @@ public enum 地支 { // \u5730\u652f 지지(\uc9c0\uc9c0)
     }
 
     // -----------------------------------------------------------------------------------------------------------------
+
     /**
      * Returns the previous value of this 地支.
      *

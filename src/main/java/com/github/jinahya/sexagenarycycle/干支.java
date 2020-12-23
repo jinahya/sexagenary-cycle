@@ -3,9 +3,12 @@ package com.github.jinahya.sexagenarycycle;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.EnumMap;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
+import java.util.function.Function;
+import java.util.stream.Collectors;
 
 import static java.util.Objects.requireNonNull;
 import static java.util.Optional.ofNullable;
@@ -20,15 +23,31 @@ import static java.util.Optional.ofNullable;
 public final class 干支 { // \u5e72\u652f 간지(\uac04\uc9c0)
 
     // -----------------------------------------------------------------------------------------------------------------
-    static final String REGEXP_NAME_GROUP_STEM = "stem";
 
+    /**
+     * A group name for matching {@code 干} group in {@link #REGEXP_NAME} and {@link #REGEXP_KOREAN_NAME}. The value is
+     * {@value}.
+     */
+    public static final String REGEXP_NAME_GROUP_STEM = "stem";
+
+    /**
+     * A group name for matching {@code 支} group in {@link #REGEXP_NAME} and {@link #REGEXP_KOREAN_NAME}. The value is
+     * {@value}.
+     */
     static final String REGEXP_NAME_GROUP_BRANCH = "branch";
 
-    static final String REGEXP_NAME = "(?<" + REGEXP_NAME_GROUP_STEM + ">" + 天干.REGEXP_NAME + ")"
-                                      + "(?<" + REGEXP_NAME_GROUP_BRANCH + ">" + 地支.REGEXP_NAME + ")";
+    /**
+     * A regular expression for matching {@link #getName() name}. The value is {@value}.
+     */
+    public static final String REGEXP_NAME = "(?<" + REGEXP_NAME_GROUP_STEM + ">" + 天干.REGEXP_NAME + ")"
+                                             + "(?<" + REGEXP_NAME_GROUP_BRANCH + ">" + 地支.REGEXP_NAME + ")";
 
-    static final String REGEXP_KOREAN_NAME = "(?<" + REGEXP_NAME_GROUP_STEM + ">" + 天干.REGEXP_KOREAN_NAME + ")"
-                                             + "(?<" + REGEXP_NAME_GROUP_BRANCH + ">" + 地支.REGEXP_KOREAN_NAME + ")";
+    /**
+     * A regular expression for matching {@link #getKoreanName() koreanName}. The value is {@value}.
+     */
+    public static final String REGEXP_KOREAN_NAME
+            = "(?<" + REGEXP_NAME_GROUP_STEM + ">" + 天干.REGEXP_KOREAN_NAME + ")"
+              + "(?<" + REGEXP_NAME_GROUP_BRANCH + ">" + 地支.REGEXP_KOREAN_NAME + ")";
 
     // -----------------------------------------------------------------------------------------------------------------
 
@@ -69,9 +88,9 @@ public final class 干支 { // \u5e72\u652f 간지(\uac04\uc9c0)
     /**
      * Returns the value of specified 天干 and 地支.
      *
-     * @param 干 the 天干.
-     * @param 支 the 地支.
-     * @return the value of specified 天干 and 地支.
+     * @param 干 the value of 天干.
+     * @param 支 the value of 地支.
+     * @return the value of {@code 干} and {@code 支}.
      */
     public static 干支 valueOf(final 天干 干, final 地支 支) {
         requireNonNull(干, "干 is null");
@@ -81,6 +100,10 @@ public final class 干支 { // \u5e72\u652f 간지(\uac04\uc9c0)
                 .orElseThrow(() -> new IllegalArgumentException("no value for " + 干 + " and " + 支));
     }
 
+    // -----------------------------------------------------------------------------------------------------------------
+    private static final Map<String, 干支> VALUES_BY_NAMES = Collections.unmodifiableMap(
+            VALUES.stream().collect(Collectors.toMap(干支::getName, Function.identity())));
+
     /**
      * Returns the value associated to specified name.
      *
@@ -88,33 +111,23 @@ public final class 干支 { // \u5e72\u652f 간지(\uac04\uc9c0)
      * @return the value of {@code name}.
      */
     public static 干支 valueOfName(final String name) {
-        requireNonNull(name, "name is null");
-        final int[] codepoints = name.chars().toArray();
-        if (codepoints.length != 2) {
-            throw new IllegalArgumentException(
-                    "invalid number of codepoints(" + codepoints.length + ") from " + name);
-        }
-        final 天干 干 = 天干.valueOf(new String(codepoints, 0, 1));
-        final 地支 支 = 地支.valueOf(new String(codepoints, 1, 1));
-        return valueOf(干, 支);
+        return ofNullable(VALUES_BY_NAMES.get(requireNonNull(name, "name is null")))
+                .orElseThrow(() -> new IllegalArgumentException("no value for name: " + name));
     }
 
+    // -----------------------------------------------------------------------------------------------------------------
+    private static final Map<String, 干支> VALUES_BY_KORAN_NAMES = Collections.unmodifiableMap(
+            VALUES.stream().collect(Collectors.toMap(干支::getKoreanName, Function.identity())));
+
     /**
-     * Returns the value associated to specified name in Korean.
+     * Returns the value associated to specified Korean name.
      *
-     * @param name the name.
-     * @return the value of {@code name}.
+     * @param koreanName the Korean name.
+     * @return the value of {@code koreanName}.
      */
-    public static 干支 valueOfKoreanName(final String name) {
-        requireNonNull(name, "koreanName is null");
-        final int[] codepoints = name.chars().toArray();
-        if (codepoints.length != 2) {
-            throw new IllegalArgumentException(
-                    "invalid number of codepoints(" + codepoints.length + ") from " + name);
-        }
-        final 天干 干 = 天干.valueOfKoreanName(new String(codepoints, 0, 1));
-        final 地支 支 = 地支.valueOfKoreanName(new String(codepoints, 1, 1));
-        return valueOf(干, 支);
+    public static 干支 valueOfKoreanName(final String koreanName) {
+        return ofNullable(VALUES_BY_KORAN_NAMES.get(requireNonNull(koreanName, "koreanName is null")))
+                .orElseThrow(() -> new IllegalArgumentException("no value for koreanName: " + koreanName));
     }
 
     // -----------------------------------------------------------------------------------------------------------------
@@ -122,8 +135,8 @@ public final class 干支 { // \u5e72\u652f 간지(\uac04\uc9c0)
     /**
      * Creates a new instance with specified 天干 and 地支.
      *
-     * @param 干 the 天干.
-     * @param 支 the 地支.
+     * @param 干 the value of 天干.
+     * @param 支 the value of 地支.
      */
     private 干支(final 天干 干, final 地支 支) {
         super();
