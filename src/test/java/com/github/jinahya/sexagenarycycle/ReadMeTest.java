@@ -17,7 +17,7 @@ class ReadMeTest {
     }
 
     @Test
-    void branch() {
+    void 地支() {
         final 地支 子 = 地支.valueOfName("子");
         assert 子.getPrevious() == 地支.valueOfName("亥");
         final 地支 丑 = 地支.valueOf("丑");
@@ -27,24 +27,11 @@ class ReadMeTest {
 
     @Test
     void 干支() {
-//        final 干支 c = 干支.valueOfName("甲子");
-//        assert c.equals(干支.valueOf(天干.valueOfName("甲"), 地支.valueOfKoreanName("자")));
-//        assert c.getName().equals("甲子");
-//        assert c.getKoreanName().equals("갑자");
-//        assert c.getPrevious().equals(干支.valueOfName("癸亥"));
-//        assert c.getPrevious().equals(干支.valueOfKoreanName("계해"));
-//
-//        final 干支 k = 干支.valueOfKoreanName("갑자");
-//        assert k.equals(干支.valueOf(天干.valueOfKoreanName("갑"), 地支.valueOfName("子")));
-//        assert k.getName().equals("甲子");
-//        assert k.getKoreanName().equals("갑자");
-//        assert k.getNext().equals(干支.valueOfKoreanName("을축"));
-//        assert c.getNext().equals(干支.valueOfName("乙丑"));
-//
-//        assert c.equals(k);
-//        assert c == k;
-//        assert k.equals(c);
-//        assert k == c;
+        final 干支 甲子 = 干支.valueOfName("甲子");
+        assert 甲子.getName().equals("甲子");
+        assert 甲子.equals(干支.valueOf(天干.valueOfName("甲"), 地支.valueOfName("子")));
+        assert 甲子.getPrevious().equals(干支.valueOfName("癸亥"));
+        assert 甲子.getNext().equals(干支.valueOfName("乙丑"));
     }
 
     @Test
