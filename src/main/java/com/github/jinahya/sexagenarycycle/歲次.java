@@ -4,8 +4,6 @@ import java.time.Year;
 import java.util.Comparator;
 import java.util.Objects;
 
-import static java.util.Objects.requireNonNull;
-
 /**
  * Represents a 干支 assigned to a specific year.
  *
@@ -25,8 +23,8 @@ public class 歲次 extends Assigned<歲次> { // 세차
      * @param year the year.
      */
     public 歲次(final 干支 干支, final Year year) {
-        super(requireNonNull(干支, "干支 is null"));
-        this.year = requireNonNull(year, "year is null");
+        super(Objects.requireNonNull(干支, "干支 is null"));
+        this.year = Objects.requireNonNull(year, "year is null");
     }
 
     // -------------------------------------------------------------------------------------------------------------

@@ -1,21 +1,18 @@
 package com.github.jinahya.sexagenarycycle;
 
 import java.util.Collections;
-import java.util.EnumMap;
 import java.util.HashMap;
 import java.util.Map;
-
-import static java.util.Objects.requireNonNull;
-import static java.util.Optional.ofNullable;
+import java.util.Objects;
 
 /**
  * Constants of 10 <a href="https://en.wikipedia.org/wiki/Earthly_Branches">Earthly Branches</a>.
  *
  * @author Jin Kwon &lt;onacit_at_gmail.com&gt;
- * @see <a href="https://en.wikipedia.org/wiki/Earthly_Branches">Earthly Branches</a>
- * @see <a href="https://ko.wikipedia.org/wiki/%EC%A7%80%EC%A7%80_(%EC%97%AD%EB%B2%95)">지지 (역법)</a>
+ * @see 지지
+ * @see <a href="https://zh.wikipedia.org/wiki/%E5%9C%B0%E6%94%AF">地支</a>
  */
-public enum 地支 { // \u5730\u652f 지지(\uc9c0\uc9c0)
+public enum 地支 implements Rolling<地支> { // \u5730\u652f
 
     子, // 자
     丑, // 축
@@ -38,12 +35,6 @@ public enum 地支 { // \u5730\u652f 지지(\uc9c0\uc9c0)
     public static final String REGEXP_NAME
             = "[\u5b50\u4e11\u5bc5\u536f\u8fb0\u5df3\u5348\u672a\u7533\u9149\u620c\u4ea5]";
 
-    /**
-     * The regular expression for a single Korean name.
-     */
-    public static final String REGEXP_KOREAN_NAME
-            = "[\uc790\ucd95\uc778\ubb18\uc9c4\uc0ac\uc624\ubbf8\uc2e0\uc720\uc220\ud574]";
-
     // -----------------------------------------------------------------------------------------------------------------
     private static final Map<String, 地支> VALUES_BY_NAMES;
 
@@ -55,66 +46,19 @@ public enum 地支 { // \u5730\u652f 지지(\uc9c0\uc9c0)
         VALUES_BY_NAMES = Collections.unmodifiableMap(m);
     }
 
+    /**
+     * Returns the constant of specified name. This method, unlikely to {@link #valueOf(String)} method, uses a cache.
+     *
+     * @param name the name.
+     * @return the constant associated with {@code name}.
+     */
     public static 地支 valueOfName(final String name) {
-        requireNonNull(name, "name is null");
+        Objects.requireNonNull(name, "name is null");
         final 地支 value = VALUES_BY_NAMES.get(name);
         if (value == null) {
             throw new IllegalArgumentException("no value for name: " + name);
         }
         return value;
-    }
-
-    // -----------------------------------------------------------------------------------------------------------------
-    private static final Map<地支, String> KOREAN_NAMES_BY_VALUES;
-
-    static {
-        final Map<地支, String> m = new EnumMap<>(地支.class);
-        m.put(子, "자");
-        m.put(丑, "축");
-        m.put(寅, "인");
-        m.put(卯, "묘");
-        m.put(辰, "진");
-        m.put(巳, "사");
-        m.put(午, "오");
-        m.put(未, "미");
-        m.put(申, "신");
-        m.put(酉, "유");
-        m.put(戌, "술");
-        m.put(亥, "해");
-        KOREAN_NAMES_BY_VALUES = Collections.unmodifiableMap(m);
-    }
-
-    private static final Map<String, 地支> VALUES_BY_KOREAN_NAMES;
-
-    static {
-        final Map<String, 地支> m = new HashMap<>();
-        KOREAN_NAMES_BY_VALUES.forEach((k, v) -> {
-            final 地支 地支 = m.put(v, k);
-            assert 地支 == null;
-        });
-        VALUES_BY_KOREAN_NAMES = Collections.unmodifiableMap(m);
-    }
-
-    /**
-     * Returns the value of specified Korean name.
-     *
-     * @param koreanName the Korean name.
-     * @return the value of specified Korean name.
-     */
-    public static 地支 valueOfKoreanName(final String koreanName) {
-        return ofNullable(VALUES_BY_KOREAN_NAMES.get(koreanName))
-                .orElseThrow(() -> new IllegalArgumentException("no value for " + koreanName));
-    }
-
-    // -----------------------------------------------------------------------------------------------------------------
-
-    /**
-     * Returns the Korean name of this 天干.
-     *
-     * @return the Korean name of this 天干.
-     */
-    public String koreanName() {
-        return KOREAN_NAMES_BY_VALUES.get(this);
     }
 
     // -----------------------------------------------------------------------------------------------------------------
@@ -127,12 +71,7 @@ public enum 地支 { // \u5730\u652f 지지(\uc9c0\uc9c0)
     public 地支 getPrevious() {
         地支 p = previous;
         if (p == null) {
-            final 地支[] values = values();
-            if (ordinal() == 0) {
-                previous = p = values[values.length - 1];
-            } else {
-                previous = p = values()[ordinal() - 1];
-            }
+            previous = p = Rolling.getPrevious(this);
         }
         return p;
     }
@@ -142,15 +81,11 @@ public enum 地支 { // \u5730\u652f 지지(\uc9c0\uc9c0)
      *
      * @return the next value of this 地支.
      */
+    @Override
     public 地支 getNext() {
         地支 n = next;
         if (n == null) {
-            final 地支[] values = values();
-            if (ordinal() == values.length - 1) {
-                next = n = values[0];
-            } else {
-                next = n = values()[ordinal() + 1];
-            }
+            next = n = Rolling.getNext(this);
         }
         return n;
     }

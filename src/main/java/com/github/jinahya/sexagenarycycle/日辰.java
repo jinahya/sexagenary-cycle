@@ -5,8 +5,6 @@ import java.time.Year;
 import java.util.Comparator;
 import java.util.Objects;
 
-import static java.util.Objects.requireNonNull;
-
 /**
  * Represents a 干支 assigned to a specific date.
  *
@@ -28,8 +26,8 @@ public class 日辰 extends Assigned<日辰> { // 일진
      * @param 月建         the 月建.
      */
     public 日辰(final 干支 干支, final int dayOfMonth, final 月建 月建) {
-        super(requireNonNull(干支, "干支 is null"));
-        this.月建 = requireNonNull(月建, "月建 is null");
+        super(Objects.requireNonNull(干支, "干支 is null"));
+        this.月建 = Objects.requireNonNull(月建, "月建 is null");
         if (dayOfMonth <= 0 || dayOfMonth > 30) {
             throw new IllegalArgumentException("invalid dayOfMonth: " + dayOfMonth);
         }

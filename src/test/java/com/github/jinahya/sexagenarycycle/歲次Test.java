@@ -34,13 +34,13 @@ class 歲次Test {
 
     // -----------------------------------------------------------------------------------------------------------------
     @Test
-    void testEquals() {
-        assertThat(of2020庚子年()).isEqualTo(new 歲次(干支.valueOfKoreanName("경자"), Year.of(2020)));
+    void equals_True_New() {
+        assertThat(of2020庚子年()).isEqualTo(new 歲次(干支.valueOfName("庚子"), Year.of(2020)));
     }
 
     @MethodSource({"parameters"})
     @ParameterizedTest
-    void testEquals(final 歲次 歲次) throws CloneNotSupportedException {
+    void equals_True_Clone(final 歲次 歲次) throws CloneNotSupportedException {
         assertThat(歲次).isEqualTo(歲次.clone());
     }
 

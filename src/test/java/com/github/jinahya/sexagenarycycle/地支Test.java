@@ -25,16 +25,6 @@ class 地支Test {
     }
 
     // -----------------------------------------------------------------------------------------------------------------
-    @DisplayName("REGEXP_KOREAN_NAME matches for every value's koreanName")
-    @Test
-    void REGEXP_KOREAN_NAME_Match_EveryKoreanName() {
-        final Pattern pattern = Pattern.compile(地支.REGEXP_KOREAN_NAME);
-        for (final 地支 value : 地支.values()) {
-            assertThat(pattern.matcher(value.koreanName()).matches()).isTrue();
-        }
-    }
-
-    // -----------------------------------------------------------------------------------------------------------------
     @DisplayName("valueOf(name) returns valid value for known name")
     @Test
     void valueOfName_ExpectedResult_NameIsKnown() {
@@ -49,24 +39,6 @@ class 地支Test {
     @DisplayName("valueOfName(name) throws IllegalArgumentException when name is unknown")
     @Test
     void valueOfName_IllegalArgumentException_NameIsUnknown() {
-        assertThrows(IllegalArgumentException.class, () -> 地支.valueOfName(""));
-    }
-
-    // -----------------------------------------------------------------------------------------------------------------
-    @DisplayName("valueOfKoreanName(koreanName) returns valid value when koreanName is known")
-    @Test
-    void valueOfKoreanName_ExpectedResult_KoreanNameIsKnown() {
-        final String[] koreanNames = new String[] {"자", "축", "인", "묘", "진", "사", "오", "미", "신", "유", "술", "해"};
-        for (int i = 0; i < koreanNames.length; i++) {
-            final String koreanName = koreanNames[i];
-            assertThat(地支.valueOfKoreanName(koreanName)).isNotNull();
-            assertThat(地支.valueOfKoreanName(koreanName).ordinal()).isSameAs(i);
-        }
-    }
-
-    @DisplayName("valueOfKoreanName(koreanName) throws IllegalArgumentException when koreanName is unknown")
-    @Test
-    void valueOfKoreanName_IllegalArgumentException_KoreanNameIsUnknown() {
         assertThrows(IllegalArgumentException.class, () -> 地支.valueOfName(""));
     }
 

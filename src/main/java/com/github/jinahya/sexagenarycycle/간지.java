@@ -14,42 +14,32 @@ import java.util.stream.Collectors;
  * A class for <a href="https://en.wikipedia.org/wiki/Sexagenary_cycle">Sexagenary cycle</a>.
  *
  * @author Jin Kwon &lt;onacit_at_gmail.com&gt;
- * @see <a href="https://zh.wikipedia.org/wiki/%E5%B9%B2%E6%94%AF">干支</a>.
+ * @see <a href="https://ko.wikipedia.org/wiki/%EA%B0%84%EC%A7%80">간지</a>
  */
-public final class 干支 { // \u5e72\u652f
+public final class 간지 { // \uac04\uc9c0
 
     // -----------------------------------------------------------------------------------------------------------------
 
     /**
-     * A group name for matching {@code 干} group in {@link #REGEXP_NAME}. The value is {@value}.
-     */
-    public static final String REGEXP_NAME_GROUP_STEM = "stem";
-
-    /**
-     * A group name for matching {@code 支} group in {@link #REGEXP_NAME}. The value is {@value}.
-     */
-    public static final String REGEXP_NAME_GROUP_BRANCH = "branch";
-
-    /**
      * A regular expression for matching {@link #getName() name}. The value is {@value}.
      */
-    public static final String REGEXP_NAME = "(?<" + REGEXP_NAME_GROUP_STEM + ">" + 天干.REGEXP_NAME + ")"
-                                             + "(?<" + REGEXP_NAME_GROUP_BRANCH + ">" + 地支.REGEXP_NAME + ")";
+    public static final String REGEXP_NAME = "(?<" + 干支.REGEXP_NAME_GROUP_STEM + ">" + 천간.REGEXP_NAME + ")"
+                                             + "(?<" + 干支.REGEXP_NAME_GROUP_BRANCH + ">" + 지지.REGEXP_NAME + ")";
 
     // -----------------------------------------------------------------------------------------------------------------
 
     /**
      * An unmodifiable list of all values.
      */
-    public static final List<干支> VALUES;
+    public static final List<간지> VALUES;
 
     static {
-        final List<干支> values = new ArrayList<>();
+        final List<간지> values = new ArrayList<>();
         {
-            final 天干[] stems = 天干.values();
-            final 地支[] branches = 地支.values();
+            final 천간[] stems = 천간.values();
+            final 지지[] branches = 지지.values();
             for (int s = 0, b = 0; ; s = ++s % stems.length, b = ++b % branches.length) {
-                values.add(new 干支(stems[s], branches[b]));
+                values.add(new 간지(stems[s], branches[b]));
                 if (s == stems.length - 1 && b == branches.length - 1) {
                     break;
                 }
@@ -58,38 +48,38 @@ public final class 干支 { // \u5e72\u652f
         VALUES = Collections.unmodifiableList(values);
     }
 
-    private static final Map<天干, Map<地支, 干支>> HASHED_VALUES;
+    private static final Map<천간, Map<지지, 간지>> HASHED_VALUES;
 
     static {
-        final Map<天干, Map<地支, 干支>> hashedValues = new EnumMap<>(天干.class);
-        VALUES.forEach(天干 -> {
-            hashedValues.computeIfAbsent(天干.get干(), k -> new EnumMap<>(地支.class))
-                    .compute(天干.get支(), (k, v) -> {
+        final Map<천간, Map<지지, 간지>> hashedValues = new EnumMap<>(천간.class);
+        VALUES.forEach(천간 -> {
+            hashedValues.computeIfAbsent(천간.get간(), k -> new EnumMap<>(지지.class))
+                    .compute(천간.get지(), (k, v) -> {
                         assert v == null;
-                        return 天干;
+                        return 천간;
                     });
         });
         HASHED_VALUES = Collections.unmodifiableMap(hashedValues);
     }
 
     /**
-     * Returns the value of specified 天干 and 地支.
+     * Returns the value of specified 천간 and 지지.
      *
-     * @param 干 the value of 天干.
-     * @param 支 the value of 地支.
-     * @return the value of {@code 干} and {@code 支}.
+     * @param 간 the value of 천간.
+     * @param 지 the value of 지지.
+     * @return the value of {@code 간} and {@code 지}.
      */
-    public static 干支 valueOf(final 天干 干, final 地支 支) {
-        Objects.requireNonNull(干, "干 is null");
-        Objects.requireNonNull(支, "支 is null");
-        return Optional.ofNullable(HASHED_VALUES.get(干))
-                .map(m -> m.get(支))
-                .orElseThrow(() -> new IllegalArgumentException("no value for " + 干 + " and " + 支));
+    public static 간지 valueOf(final 천간 간, final 지지 지) {
+        Objects.requireNonNull(간, "간 is null");
+        Objects.requireNonNull(지, "지 is null");
+        return Optional.ofNullable(HASHED_VALUES.get(간))
+                .map(m -> m.get(지))
+                .orElseThrow(() -> new IllegalArgumentException("no value for " + 간 + " and " + 지));
     }
 
     // -----------------------------------------------------------------------------------------------------------------
-    private static final Map<String, 干支> VALUES_BY_NAMES = Collections.unmodifiableMap(
-            VALUES.stream().collect(Collectors.toMap(干支::getName, Function.identity())));
+    private static final Map<String, 간지> VALUES_BY_NAMES = Collections.unmodifiableMap(
+            VALUES.stream().collect(Collectors.toMap(간지::getName, Function.identity())));
 
     /**
      * Returns the value associated to specified name.
@@ -97,7 +87,7 @@ public final class 干支 { // \u5e72\u652f
      * @param name the name.
      * @return the value of {@code name}.
      */
-    public static 干支 valueOfName(final String name) {
+    public static 간지 valueOfName(final String name) {
         return Optional.ofNullable(VALUES_BY_NAMES.get(Objects.requireNonNull(name, "name is null")))
                 .orElseThrow(() -> new IllegalArgumentException("no value for name: " + name));
     }
@@ -105,15 +95,15 @@ public final class 干支 { // \u5e72\u652f
     // -----------------------------------------------------------------------------------------------------------------
 
     /**
-     * Creates a new instance with specified 天干 and 地支.
+     * Creates a new instance with specified 천간 and 지지.
      *
-     * @param 干 the value of 天干.
-     * @param 支 the value of 地支.
+     * @param 간 the value of 천간.
+     * @param 지 the value of 지지.
      */
-    private 干支(final 天干 干, final 地支 支) {
+    private 간지(final 천간 간, final 지지 지) {
         super();
-        this.干 = Objects.requireNonNull(干, "干 is null");
-        this.支 = Objects.requireNonNull(支, "支 is null");
+        this.간 = Objects.requireNonNull(간, "干 is null");
+        this.지 = Objects.requireNonNull(지, "支 is null");
     }
 
     // -----------------------------------------------------------------------------------------------------------------
@@ -126,8 +116,8 @@ public final class 干支 { // \u5e72\u652f
     @Override
     public String toString() {
         return super.toString() + '{'
-               + "干=" + 干
-               + ",支=" + 支
+               + "간=" + 간
+               + ",지=" + 지
                + '}';
     }
 
@@ -147,8 +137,8 @@ public final class 干支 { // \u5e72\u652f
         if (o == null || getClass() != o.getClass()) {
             return false;
         }
-        final 干支 casted = (干支) o;
-        return 干 == casted.干 && 支 == casted.支;
+        final 간지 casted = (간지) o;
+        return 간 == casted.간 && 지 == casted.지;
     }
 
     /**
@@ -158,35 +148,35 @@ public final class 干支 { // \u5e72\u652f
      */
     @Override
     public int hashCode() {
-        return Objects.hash(干, 支);
+        return Objects.hash(간, 지);
     }
 
     // -----------------------------------------------------------------------------------------------------------------
 
     /**
-     * Returns the previous value of this 干支.
+     * Returns the previous value of this 간지.
      *
-     * @return previous value of this 干支.
+     * @return previous value of this 간지.
      */
     // http://jtechies.blogspot.com/2012/07/item-71-use-lazy-initialization.html
-    public 干支 getPrevious() {
-        干支 p = previous;
+    public 간지 getPrevious() {
+        간지 p = previous;
         if (p == null) {
-            previous = p = valueOf(干.getPrevious(), 支.getPrevious());
+            previous = p = valueOf(간.getPrevious(), 지.getPrevious());
         }
         return p;
     }
 
     /**
-     * Returns the next value of this 干支.
+     * Returns the next value of this 간지.
      *
-     * @return next value of this 干支.
+     * @return next value of this 간지.
      */
     // http://jtechies.blogspot.com/2012/07/item-71-use-lazy-initialization.html
-    public 干支 getNext() {
-        干支 n = next;
+    public 간지 getNext() {
+        간지 n = next;
         if (n == null) {
-            next = n = valueOf(干.getNext(), 支.getNext());
+            next = n = valueOf(간.getNext(), 지.getNext());
         }
         return n;
     }
@@ -194,44 +184,44 @@ public final class 干支 { // \u5e72\u652f
     // -----------------------------------------------------------------------------------------------------------------
 
     /**
-     * Returns the name of this 干支.
+     * Returns the name of this 간지.
      *
-     * @return the name of this 干支.
+     * @return the name of this 간지.
      * @see #valueOfName(String)
      */
     public String getName() {
-        return 干.name() + 支.name();
+        return 간.name() + 지.name();
     }
 
     // -----------------------------------------------------------------------------------------------------------------
 
     /**
-     * Returns the 天干 of this 干支.
+     * Returns the 천간 of this 간지.
      *
-     * @return the 天干 of this 干支.
+     * @return the 천간 of this 간지.
      */
-    public 天干 get干() {
-        return 干;
+    public 천간 get간() {
+        return 간;
     }
 
     // -----------------------------------------------------------------------------------------------------------------
 
     /**
-     * Returns the 地支 of this 干支.
+     * Returns the 지지 of this 간지.
      *
-     * @return the 地支 of this 干支.
+     * @return the 지지 of this 간지.
      */
-    public 地支 get支() {
-        return 支;
+    public 지지 get지() {
+        return 지;
     }
 
     // -----------------------------------------------------------------------------------------------------------------
-    private final 天干 干;
+    private final 천간 간;
 
-    private final 地支 支;
+    private final 지지 지;
 
     // -----------------------------------------------------------------------------------------------------------------
-    private volatile 干支 previous;
+    private volatile 간지 previous;
 
-    private volatile 干支 next;
+    private volatile 간지 next;
 }

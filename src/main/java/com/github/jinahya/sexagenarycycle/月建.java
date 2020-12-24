@@ -5,8 +5,6 @@ import java.time.Year;
 import java.util.Comparator;
 import java.util.Objects;
 
-import static java.util.Objects.requireNonNull;
-
 /**
  * Represents a 干支 assigned to a specific month of a year.
  *
@@ -46,8 +44,8 @@ public class 月建 extends Assigned<月建> { // 월건
      */
     public 月建(final 干支 干支, final Month month, final 歲次 歲次) {
         super(干支);
-        this.歲次 = requireNonNull(歲次, " 歲次 is null");
-        this.month = requireNonNull(month, "month is null");
+        this.歲次 = Objects.requireNonNull(歲次, " 歲次 is null");
+        this.month = Objects.requireNonNull(month, "month is null");
     }
 
     // -------------------------------------------------------------------------------------------------------------
