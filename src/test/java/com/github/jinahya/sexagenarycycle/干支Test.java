@@ -56,8 +56,8 @@ class 干支Test {
             final String name = value.getName();
             assertThat(pattern.matcher(name)).satisfies(m -> {
                 assertThat(m.matches()).isTrue();
-                assertThat(m.group(干支.REGEXP_NAME_GROUP_STEM)).isNotNull().isEqualTo(value.get干().name());
-                assertThat(m.group(干支.REGEXP_NAME_GROUP_BRANCH)).isNotNull().isEqualTo(value.get支().name());
+                assertThat(m.group(干支.REGEXP_NAME_GROUP_STEM)).isNotNull().isEqualTo(value.干.name());
+                assertThat(m.group(干支.REGEXP_NAME_GROUP_BRANCH)).isNotNull().isEqualTo(value.支.name());
             });
         }
     }
@@ -76,7 +76,7 @@ class 干支Test {
     @Test
     void testValueOf() {
         for (final 干支 value : 干支.VALUES) {
-            assertThat(干支.valueOf(value.get干(), value.get支())).isNotNull().isSameAs(value);
+            assertThat(干支.valueOf(value.干, value.支)).isNotNull().isSameAs(value);
         }
     }
 

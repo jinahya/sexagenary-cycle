@@ -58,8 +58,8 @@ class 간지Test {
             final String name = value.getName();
             assertThat(pattern.matcher(name)).satisfies(m -> {
                 assertThat(m.matches()).isTrue();
-                assertThat(m.group(干支.REGEXP_NAME_GROUP_STEM)).isNotNull().isEqualTo(value.get간().name());
-                assertThat(m.group(干支.REGEXP_NAME_GROUP_BRANCH)).isNotNull().isEqualTo(value.get지().name());
+                assertThat(m.group(干支.REGEXP_NAME_GROUP_STEM)).isNotNull().isEqualTo(value.간.name());
+                assertThat(m.group(干支.REGEXP_NAME_GROUP_BRANCH)).isNotNull().isEqualTo(value.지.name());
             });
         }
     }
@@ -78,7 +78,16 @@ class 간지Test {
     @Test
     void testValueOf() {
         for (final 간지 value : 간지.VALUES) {
-            assertThat(간지.valueOf(value.get간(), value.get지())).isNotNull().isSameAs(value);
+            assertThat(간지.valueOf(value.간, value.지)).isNotNull().isSameAs(value);
+        }
+    }
+
+    @Test
+    void valueOf_NonNullValid_干支IsValid() {
+        for (int i = 0; i < 干支Test.ALL_NAMES.size(); i++) {
+            final 干支 c = 干支.valueOfName(干支Test.ALL_NAMES.get(i));
+            final 간지 k = 간지.valueOf(c);
+            assertThat(k).isNotNull().isSameAs(간지.valueOfName(ALL_NAMES.get(i)));
         }
     }
 
@@ -166,6 +175,16 @@ class 간지Test {
         for (final 간지 value : 간지.VALUES) {
             assertThat(value.hashCode()).satisfies(v -> {
             });
+        }
+    }
+
+    // -----------------------------------------------------------------------------------------------------------------
+    @Test
+    void get干支_NonNullExpected() {
+        for (int i = 0; i < 干支Test.ALL_NAMES.size(); i++) {
+            final 干支 expected = 干支.valueOfName(干支Test.ALL_NAMES.get(i));
+            final 干支 actual = 간지.valueOfName(ALL_NAMES.get(i)).get干支();
+            assertThat(actual).isNotNull().isSameAs(expected);
         }
     }
 

@@ -63,8 +63,8 @@ public final class 干支 { // \u5e72\u652f
     static {
         final Map<天干, Map<地支, 干支>> hashedValues = new EnumMap<>(天干.class);
         VALUES.forEach(天干 -> {
-            hashedValues.computeIfAbsent(天干.get干(), k -> new EnumMap<>(地支.class))
-                    .compute(天干.get支(), (k, v) -> {
+            hashedValues.computeIfAbsent(天干.干, k -> new EnumMap<>(地支.class))
+                    .compute(天干.支, (k, v) -> {
                         assert v == null;
                         return 天干;
                     });
@@ -204,31 +204,9 @@ public final class 干支 { // \u5e72\u652f
     }
 
     // -----------------------------------------------------------------------------------------------------------------
+    public final 天干 干;
 
-    /**
-     * Returns the 天干 of this 干支.
-     *
-     * @return the 天干 of this 干支.
-     */
-    public 天干 get干() {
-        return 干;
-    }
-
-    // -----------------------------------------------------------------------------------------------------------------
-
-    /**
-     * Returns the 地支 of this 干支.
-     *
-     * @return the 地支 of this 干支.
-     */
-    public 地支 get支() {
-        return 支;
-    }
-
-    // -----------------------------------------------------------------------------------------------------------------
-    private final 天干 干;
-
-    private final 地支 支;
+    public final 地支 支;
 
     // -----------------------------------------------------------------------------------------------------------------
     private volatile 干支 previous;

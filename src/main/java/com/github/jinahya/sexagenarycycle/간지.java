@@ -53,8 +53,8 @@ public final class 간지 { // \uac04\uc9c0
     static {
         final Map<천간, Map<지지, 간지>> hashedValues = new EnumMap<>(천간.class);
         VALUES.forEach(천간 -> {
-            hashedValues.computeIfAbsent(천간.get간(), k -> new EnumMap<>(지지.class))
-                    .compute(천간.get지(), (k, v) -> {
+            hashedValues.computeIfAbsent(천간.간, k -> new EnumMap<>(지지.class))
+                    .compute(천간.지, (k, v) -> {
                         assert v == null;
                         return 천간;
                     });
@@ -88,8 +88,22 @@ public final class 간지 { // \uac04\uc9c0
      * @return the value of {@code name}.
      */
     public static 간지 valueOfName(final String name) {
-        return Optional.ofNullable(VALUES_BY_NAMES.get(Objects.requireNonNull(name, "name is null")))
+        Objects.requireNonNull(name, "name is null");
+        return Optional.ofNullable(VALUES_BY_NAMES.get(name))
                 .orElseThrow(() -> new IllegalArgumentException("no value for name: " + name));
+    }
+
+    // -----------------------------------------------------------------------------------------------------------------
+
+    /**
+     * Returns the value of specified 干支.
+     *
+     * @param 干支 the 干支.
+     * @return the value of {@code 干支}.
+     */
+    public static 간지 valueOf(final 干支 干支) {
+        Objects.requireNonNull(干支, "干支 is null");
+        return valueOf(천간.valueOf天干(干支.干), 지지.valueOf地支(干支.支));
     }
 
     // -----------------------------------------------------------------------------------------------------------------
@@ -154,6 +168,29 @@ public final class 간지 { // \uac04\uc9c0
     // -----------------------------------------------------------------------------------------------------------------
 
     /**
+     * Returns the 干支 value equivalent to this 지지.
+     *
+     * @return the 干支 value equivalent to this 지지.
+     */
+    public 干支 get干支() {
+        return 干支.valueOf(간.天干, 지.地支);
+    }
+
+    // -----------------------------------------------------------------------------------------------------------------
+
+    /**
+     * Returns the name of this 간지.
+     *
+     * @return the name of this 간지.
+     * @see #valueOfName(String)
+     */
+    public String getName() {
+        return 간.name() + 지.name();
+    }
+
+    // -----------------------------------------------------------------------------------------------------------------
+
+    /**
      * Returns the previous value of this 간지.
      *
      * @return previous value of this 간지.
@@ -182,43 +219,9 @@ public final class 간지 { // \uac04\uc9c0
     }
 
     // -----------------------------------------------------------------------------------------------------------------
+    public final 천간 간;
 
-    /**
-     * Returns the name of this 간지.
-     *
-     * @return the name of this 간지.
-     * @see #valueOfName(String)
-     */
-    public String getName() {
-        return 간.name() + 지.name();
-    }
-
-    // -----------------------------------------------------------------------------------------------------------------
-
-    /**
-     * Returns the 천간 of this 간지.
-     *
-     * @return the 천간 of this 간지.
-     */
-    public 천간 get간() {
-        return 간;
-    }
-
-    // -----------------------------------------------------------------------------------------------------------------
-
-    /**
-     * Returns the 지지 of this 간지.
-     *
-     * @return the 지지 of this 간지.
-     */
-    public 지지 get지() {
-        return 지;
-    }
-
-    // -----------------------------------------------------------------------------------------------------------------
-    private final 천간 간;
-
-    private final 지지 지;
+    public final 지지 지;
 
     // -----------------------------------------------------------------------------------------------------------------
     private volatile 간지 previous;
