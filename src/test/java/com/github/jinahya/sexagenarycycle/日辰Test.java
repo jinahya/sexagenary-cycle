@@ -9,7 +9,7 @@ import java.util.stream.Stream;
 
 import static com.github.jinahya.sexagenarycycle.月建Test.of2020庚子年04辛巳月;
 import static com.github.jinahya.sexagenarycycle.月建Test.of2020庚子年04閏四月;
-import static com.github.jinahya.sexagenarycycle.月建Test.of2020庚子年12戊子月;
+import static com.github.jinahya.sexagenarycycle.月建Test.of2020庚子年11戊子月;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
@@ -18,16 +18,16 @@ class 日辰Test {
 
     // ------------------------------------------------------------------------------------------------------ 2020-04-01
     static 日辰 of2020庚子年04辛巳月01丙申日() { // 경자년 신사월 병신일
-        return new 日辰(干支.valueOfName("丙申"), 1, of2020庚子年04辛巳月());
+        return new 日辰(干支.ofName("丙申"), 1, of2020庚子年04辛巳月());
     }
 
     static 日辰 of2020庚子年04閏四月01丙寅日() { // 경자년 윤사월 병인일
-        return new 日辰(干支.valueOfName("丙寅"), 1, of2020庚子年04閏四月());
+        return new 日辰(干支.ofName("丙寅"), 1, of2020庚子年04閏四月());
     }
 
-    // -------------------------------------------------------------------------------- (陰) 2020-11-14 / (陽) 2020-12-28
-    static 日辰 of2020庚子年11戊子月14乙巳日() { // 경자년 무자월 을사일
-        return new 日辰(干支.valueOfName("乙巳"), 14, of2020庚子年12戊子月());
+    // -------------------------------------------------------------------------------- (陰) 2020-11-11 / (陽) 2020-12-25
+    static 日辰 of2020庚子年11戊子月11壬寅日() { // 경자년 무자월 을사일
+        return new 日辰(干支.ofName("壬寅"), 11, of2020庚子年11戊子月());
     }
 
     // -----------------------------------------------------------------------------------------------------------------
@@ -35,7 +35,7 @@ class 日辰Test {
         return Stream.of(
                 of2020庚子年04辛巳月01丙申日(),
                 of2020庚子年04閏四月01丙寅日(),
-                of2020庚子年11戊子月14乙巳日()
+                of2020庚子年11戊子月11壬寅日()
         );
     }
 
@@ -43,20 +43,10 @@ class 日辰Test {
     @DisplayName("new 日辰(,![1..30],) -> IllegalArgumentException")
     @MethodSource({"com.github.jinahya.sexagenarycycle.月建Test#parameters"})
     @ParameterizedTest
-    void assertConstructorThrowsIllegalArgumentsExceptionForInvalidDayOfMonth(final 月建 月建) {
-        final 干支 干支 = 月建.get歲次().get干支();
-        assertThrows(
-                IllegalArgumentException.class,
-                () -> {
-                    new 日辰(干支, 0, 月建);
-                }
-        );
-        assertThrows(
-                IllegalArgumentException.class,
-                () -> {
-                    new 日辰(干支, 31, 月建);
-                }
-        );
+    void 日辰_IllegalArgumentsException_日(final 月建 月建) {
+        final 干支 干支 = 月建.歲次.干支;
+        assertThrows(IllegalArgumentException.class, () -> new 日辰(干支, 0, 月建));
+        assertThrows(IllegalArgumentException.class, () -> new 日辰(干支, 31, 月建));
     }
 
     // -----------------------------------------------------------------------------------------------------------------
@@ -89,27 +79,7 @@ class 日辰Test {
     @MethodSource({"parameters"})
     @ParameterizedTest
     void testGet干支(final 日辰 日辰) {
-        assertThat(日辰.get干支()).satisfies(v -> {
+        assertThat(日辰.干支).satisfies(v -> {
         });
-    }
-
-    @MethodSource({"parameters"})
-    @ParameterizedTest
-    void testGetYear(final 日辰 日辰) {
-        assertThat(日辰.getYear()).satisfies(v -> {
-        });
-    }
-
-    @MethodSource({"parameters"})
-    @ParameterizedTest
-    void testGetMonth(final 日辰 日辰) {
-        assertThat(日辰.getMonth()).satisfies(v -> {
-        });
-    }
-
-    @MethodSource({"parameters"})
-    @ParameterizedTest
-    void testGetDayOfMonth(final 日辰 日辰) {
-        assertThat(日辰.getDayOfMonth()).isBetween(1, 30);
     }
 }

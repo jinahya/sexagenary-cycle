@@ -62,25 +62,7 @@ abstract class Assigned<T extends Assigned<T>> implements Comparable<T>, Cloneab
     // -----------------------------------------------------------------------------------------------------------------
 
     /**
-     * Returns the 干支 of this object.
-     *
-     * @return the 干支 of this object.
-     * @see #getGanzhi()
+     * The 干支 assigned to this value; maybe {@code null} if not assigned.
      */
-    public 干支 get干支() {
-        return 干支;
-    }
-
-    /**
-     * Returns the ganzhi of this object.
-     *
-     * @return the ganzhi of this object.
-     * @see #get干支()
-     */
-    public 干支 getGanzhi() {
-        return get干支();
-    }
-
-    // -----------------------------------------------------------------------------------------------------------------
-    private final 干支 干支; // may be null
+    public final 干支 干支; // may be null
 }

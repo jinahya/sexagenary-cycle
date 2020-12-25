@@ -1,7 +1,7 @@
 package com.github.jinahya.sexagenarycycle;
 
-import java.time.Month;
-import java.time.Year;
+import javax.validation.Valid;
+import javax.validation.constraints.NotNull;
 import java.util.Comparator;
 import java.util.Objects;
 
@@ -11,27 +11,27 @@ import java.util.Objects;
  * @author Jin Kwon &lt;onacit_at_gmail.com&gt;
  * @see <a href="https://ko.wikipedia.org/wiki/%EC%9D%BC%EC%A7%84_(%EA%B0%84%EC%A7%80)">일진 (간지)</a>
  */
-public class 日辰 extends Assigned<日辰> { // 일진
+public class 日辰 extends Assigned<日辰> {
 
-    static final Comparator<日辰> COMPARING_月建_THEN_COMPARING_DAY_OF_MOHTH =
-            Comparator.comparing(日辰::get月建).thenComparingInt(日辰::getDayOfMonth);
+    static final Comparator<日辰> COMPARING_月建_THEN_COMPARING_DAY_OF_MONTH
+            = Comparator.<日辰, 月建>comparing(v -> v.月建).thenComparingInt(v -> v.日);
 
     // -----------------------------------------------------------------------------------------------------------------
 
     /**
      * Creates a new instance with specified 干支, 月建, and day of month.
      *
-     * @param 干支         the 干支.
-     * @param dayOfMonth the day of month.
-     * @param 月建         the 月建.
+     * @param 干支 the 干支.
+     * @param 日  the day of month.
+     * @param 月建 the 月建.
      */
-    public 日辰(final 干支 干支, final int dayOfMonth, final 月建 月建) {
+    public 日辰(final 干支 干支, final int 日, final 月建 月建) {
         super(Objects.requireNonNull(干支, "干支 is null"));
-        this.月建 = Objects.requireNonNull(月建, "月建 is null");
-        if (dayOfMonth <= 0 || dayOfMonth > 30) {
-            throw new IllegalArgumentException("invalid dayOfMonth: " + dayOfMonth);
+        this.月建 = Objects.requireNonNull(月建, "月 is null");
+        if (日 <= 0 || 日 > 30) {
+            throw new IllegalArgumentException("invalid 日: " + 日);
         }
-        this.dayOfMonth = dayOfMonth;
+        this.日 = 日;
     }
 
     // -----------------------------------------------------------------------------------------------------------------
@@ -44,8 +44,8 @@ public class 日辰 extends Assigned<日辰> { // 일진
     @Override
     public String toString() {
         return super.toString() + '{'
-               + "月建=" + 月建
-               + ",dayOfMonth=" + dayOfMonth
+               + "日=" + 日
+               + ",月建=" + 月建
                + '}';
     }
 
@@ -60,8 +60,8 @@ public class 日辰 extends Assigned<日辰> { // 일진
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         if (!super.equals(o)) return false;
-        日辰 日辰 = (日辰) o;
-        return dayOfMonth == 日辰.dayOfMonth && 月建.equals(日辰.月建);
+        final 日辰 casted = (日辰) o;
+        return 日 == casted.日 && 月建.equals(casted.月建);
     }
 
     /**
@@ -71,56 +71,28 @@ public class 日辰 extends Assigned<日辰> { // 일진
      */
     @Override
     public int hashCode() {
-        return Objects.hash(super.hashCode(), 月建, dayOfMonth);
+        return Objects.hash(super.hashCode(), 月建, 日);
     }
 
     // -----------------------------------------------------------------------------------------------------------------
 
     @Override
     public int compareTo(final 日辰 o) {
-        return COMPARING_月建_THEN_COMPARING_DAY_OF_MOHTH.compare(this, o);
+        return COMPARING_月建_THEN_COMPARING_DAY_OF_MONTH.compare(this, o);
     }
 
     // -----------------------------------------------------------------------------------------------------------------
 
     /**
-     * Returns the 月建 of this 日辰.
-     *
-     * @return the 月建 of this 日辰.
+     * The day-of-month of this 日辰.
      */
-    public 月建 get月建() {
-        return 月建;
-    }
+    @NotNull
+    public final int 日;
 
     /**
-     * Returns the year of this 日辰.
-     *
-     * @return the year of this 日辰.
+     * The 月建 of this 日辰.
      */
-    public Year getYear() {
-        return get月建().getYear();
-    }
-
-    /**
-     * Returns the month of this 日辰.
-     *
-     * @return the month of this 日辰.
-     */
-    public Month getMonth() {
-        return get月建().getMonth();
-    }
-
-    /**
-     * Returns the day of month of this 日辰.
-     *
-     * @return the day of month of this 日辰.
-     */
-    public int getDayOfMonth() {
-        return dayOfMonth;
-    }
-
-    // -------------------------------------------------------------------------------------------------------------
-    private final 月建 月建;
-
-    private final int dayOfMonth;
+    @Valid
+    @NotNull
+    public final 月建 月建;
 }

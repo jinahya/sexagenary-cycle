@@ -31,15 +31,15 @@ class 天干Test {
         final String[] names = new String[] {"甲", "乙", "丙", "丁", "戊", "己", "庚", "辛", "壬", "癸"};
         for (int i = 0; i < names.length; i++) {
             final String name = names[i];
-            assertThat(天干.valueOfName(name)).isNotNull().isSameAs(天干.valueOf(name));
-            assertThat(天干.valueOfName(name).ordinal()).isSameAs(i);
+            assertThat(天干.ofName(name)).isNotNull().isSameAs(天干.valueOf(name));
+            assertThat(天干.ofName(name).ordinal()).isSameAs(i);
         }
     }
 
     @DisplayName("valueOfName(name) throws IllegalArgumentException when name is unknown")
     @Test
     void valueOfName_IllegalArgumentException_NameIsUnknown() {
-        assertThrows(IllegalArgumentException.class, () -> 天干.valueOfName(""));
+        assertThrows(IllegalArgumentException.class, () -> 天干.ofName(""));
     }
 
     // -----------------------------------------------------------------------------------------------------------------

@@ -78,16 +78,16 @@ class 간지Test {
     @Test
     void testValueOf() {
         for (final 간지 value : 간지.VALUES) {
-            assertThat(간지.valueOf(value.간, value.지)).isNotNull().isSameAs(value);
+            assertThat(간지.of(value.간, value.지)).isNotNull().isSameAs(value);
         }
     }
 
     @Test
     void valueOf_NonNullValid_干支IsValid() {
         for (int i = 0; i < 干支Test.ALL_NAMES.size(); i++) {
-            final 干支 c = 干支.valueOfName(干支Test.ALL_NAMES.get(i));
-            final 간지 k = 간지.valueOf(c);
-            assertThat(k).isNotNull().isSameAs(간지.valueOfName(ALL_NAMES.get(i)));
+            final 干支 c = 干支.ofName(干支Test.ALL_NAMES.get(i));
+            final 간지 k = 간지.from(c);
+            assertThat(k).isNotNull().isSameAs(간지.ofName(ALL_NAMES.get(i)));
         }
     }
 
@@ -96,27 +96,27 @@ class 간지Test {
     @ValueSource(strings = {"", "갑", "갑자갑"})
     @ParameterizedTest
     void testValueOfNameWithNameOfInvalidNumberOfCodepoints(final String nameWithInvalidNumberOfCodepoints) {
-        assertThrows(IllegalArgumentException.class, () -> 간지.valueOfName(nameWithInvalidNumberOfCodepoints));
+        assertThrows(IllegalArgumentException.class, () -> 간지.ofName(nameWithInvalidNumberOfCodepoints));
     }
 
     @Test
     void testValueOfName() {
         for (final 간지 value : 간지.VALUES) {
-            assertThat(간지.valueOfName(value.getName())).isNotNull().isSameAs(value);
+            assertThat(간지.ofName(value.getName())).isNotNull().isSameAs(value);
         }
     }
 
     @Test
     void testValueOfName_against_ALL_NAMES() {
         for (final String name : ALL_NAMES) {
-            assertThat(간지.valueOfName(name)).isNotNull();
+            assertThat(간지.ofName(name)).isNotNull();
         }
     }
 
     @Test
     void testValueOfName_against_ALL_INVALID_NAMES() {
         for (final String invalidName : ALL_INVALID_NAMES) {
-            assertThrows(IllegalArgumentException.class, () -> 간지.valueOfName(invalidName));
+            assertThrows(IllegalArgumentException.class, () -> 간지.ofName(invalidName));
         }
     }
 
@@ -182,8 +182,8 @@ class 간지Test {
     @Test
     void get干支_NonNullExpected() {
         for (int i = 0; i < 干支Test.ALL_NAMES.size(); i++) {
-            final 干支 expected = 干支.valueOfName(干支Test.ALL_NAMES.get(i));
-            final 干支 actual = 간지.valueOfName(ALL_NAMES.get(i)).get干支();
+            final 干支 expected = 干支.ofName(干支Test.ALL_NAMES.get(i));
+            final 干支 actual = 간지.ofName(ALL_NAMES.get(i)).to干支();
             assertThat(actual).isNotNull().isSameAs(expected);
         }
     }
@@ -195,30 +195,6 @@ class 간지Test {
         for (final 간지 value : 간지.VALUES) {
             final String name = value.getName();
             assertThat(name).isNotNull().hasSize(2);
-        }
-    }
-
-    // -----------------------------------------------------------------------------------------------------------------
-    @Test
-    void getPrevious_Valid() {
-        for (final 간지 value : 간지.VALUES) {
-            assertThat(value.getPrevious()).isNotNull().satisfies(p -> {
-                assertThat(p).isNotEqualTo(value);
-                assertThat(p.getNext()).isNotNull().isEqualTo(value);
-                assertThat(p.getNext()).isNotNull().isSameAs(value);
-            });
-        }
-    }
-
-    // -----------------------------------------------------------------------------------------------------------------
-    @Test
-    void getNext_Valid() {
-        for (final 간지 value : 간지.VALUES) {
-            assertThat(value.getNext()).isNotNull().satisfies(n -> {
-                assertThat(n).isNotEqualTo(value);
-                assertThat(n.getPrevious()).isNotNull().isEqualTo(value);
-                assertThat(n.getPrevious()).isNotNull().isSameAs(value);
-            });
         }
     }
 }

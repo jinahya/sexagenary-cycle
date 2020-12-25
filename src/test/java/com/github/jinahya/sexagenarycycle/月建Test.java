@@ -6,7 +6,6 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.MethodSource;
 
 import java.time.Month;
-import java.time.Year;
 import java.util.stream.Stream;
 
 import static com.github.jinahya.sexagenarycycle.歲次Test.of2020庚子年;
@@ -17,16 +16,21 @@ class 月建Test {
 
     // --------------------------------------------------------------------------------------------------------- 2020-04
     static 月建 of2020庚子年04辛巳月() { // 경자년 신사월
-        return new 月建(干支.valueOfName("辛巳"), Month.APRIL, of2020庚子年());
+        return new 月建(干支.ofName("辛巳"), Month.APRIL, of2020庚子年());
     }
 
     static 月建 of2020庚子年04閏四月() { // 경자년 윤사월
         return 月建.ofLeapMonth(Month.APRIL, of2020庚子年());
     }
 
+    // --------------------------------------------------------------------------------------------------------- 2020-11
+    static 月建 of2020庚子年11戊子月() { // 경자년 무자월
+        return new 月建(干支.ofName("戊子"), Month.NOVEMBER, of2020庚子年());
+    }
+
     // --------------------------------------------------------------------------------------------------------- 2020-12
-    static 月建 of2020庚子年12戊子月() { // 경자년 무자월
-        return new 月建(干支.valueOfName("戊子"), Month.DECEMBER, of2020庚子年());
+    static 月建 of2020庚子年12己丑月() { // 경자년 기축월
+        return new 月建(干支.ofName("己丑"), Month.DECEMBER, of2020庚子年());
     }
 
     // -----------------------------------------------------------------------------------------------------------------
@@ -34,7 +38,8 @@ class 月建Test {
         return Stream.of(
                 of2020庚子年04辛巳月(),
                 of2020庚子年04閏四月(),
-                of2020庚子年12戊子月()
+                of2020庚子年11戊子月(),
+                of2020庚子年12己丑月()
         );
     }
 
@@ -42,10 +47,9 @@ class 月建Test {
     @Test
     void test_of2020庚子04辛巳() {
         final 月建 月建 = of2020庚子年04辛巳月();
-        assertThat(月建.getGanzhi()).isNotNull().isEqualTo(干支.valueOf(天干.valueOf("辛"), 地支.valueOf("巳")));
-        assertThat(月建.getYear()).isNotNull().isEqualTo(Year.of(2020));
-        assertThat(月建.getMonth()).isNotNull().isEqualTo(Month.APRIL);
-        assertThat(月建.isLeapMonth()).isFalse();
+        assertThat(月建.干支).isNotNull().isEqualTo(干支.of(天干.valueOf("辛"), 地支.valueOf("巳")));
+        assertThat(月建.月).isNotNull().isEqualTo(Month.APRIL);
+        assertThat(月建.is閏月()).isFalse();
     }
 
     // -----------------------------------------------------------------------------------------------------------------
@@ -79,29 +83,13 @@ class 月建Test {
     @MethodSource({"parameters"})
     @ParameterizedTest
     void testGet干支(final 月建 月建) {
-        assertThat(月建.get干支()).satisfies(v -> {
+        assertThat(月建.干支).satisfies(v -> {
         });
     }
 
     @MethodSource({"parameters"})
     @ParameterizedTest
     void testIsLeapMonth(final 月建 月建) {
-        assertThat(月建.isLeapMonth()).isEqualTo(月建.get干支() == null);
-    }
-
-    // -----------------------------------------------------------------------------------------------------------------
-    @MethodSource({"parameters"})
-    @ParameterizedTest
-    void testGetYear(final 月建 月建) {
-        assertThat(月建.getYear()).satisfies(v -> {
-        });
-    }
-
-    // -----------------------------------------------------------------------------------------------------------------
-    @MethodSource({"parameters"})
-    @ParameterizedTest
-    void testGetMonth(final 月建 月建) {
-        assertThat(月建.getMonth()).satisfies(v -> {
-        });
+        assertThat(月建.is閏月()).isEqualTo(月建.干支 == null);
     }
 }

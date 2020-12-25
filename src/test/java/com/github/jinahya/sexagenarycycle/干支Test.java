@@ -53,7 +53,7 @@ class 干支Test {
     void test_REGEXP_NAME() {
         final Pattern pattern = Pattern.compile(干支.REGEXP_NAME);
         for (final 干支 value : 干支.VALUES) {
-            final String name = value.getName();
+            final String name = value.name();
             assertThat(pattern.matcher(name)).satisfies(m -> {
                 assertThat(m.matches()).isTrue();
                 assertThat(m.group(干支.REGEXP_NAME_GROUP_STEM)).isNotNull().isEqualTo(value.干.name());
@@ -68,7 +68,7 @@ class 干支Test {
         assertThat(new HashSet<>(干支.VALUES).size()).isEqualTo(干支.VALUES.size());
         for (int i = 0; i < 干支.VALUES.size(); i++) {
             final 干支 value = 干支.VALUES.get(i);
-            assertThat(ALL_NAMES.indexOf(value.getName())).isEqualTo(i);
+            assertThat(ALL_NAMES.indexOf(value.name())).isEqualTo(i);
         }
     }
 
@@ -76,7 +76,7 @@ class 干支Test {
     @Test
     void testValueOf() {
         for (final 干支 value : 干支.VALUES) {
-            assertThat(干支.valueOf(value.干, value.支)).isNotNull().isSameAs(value);
+            assertThat(干支.of(value.干, value.支)).isNotNull().isSameAs(value);
         }
     }
 
@@ -85,27 +85,27 @@ class 干支Test {
     @ValueSource(strings = {"", "甲", "甲子甲"})
     @ParameterizedTest
     void testValueOfNameWithNameOfInvalidNumberOfCodepoints(final String nameWithInvalidNumberOfCodepoints) {
-        assertThrows(IllegalArgumentException.class, () -> 干支.valueOfName(nameWithInvalidNumberOfCodepoints));
+        assertThrows(IllegalArgumentException.class, () -> 干支.ofName(nameWithInvalidNumberOfCodepoints));
     }
 
     @Test
     void testValueOfName() {
         for (final 干支 value : 干支.VALUES) {
-            assertThat(干支.valueOfName(value.getName())).isNotNull().isSameAs(value);
+            assertThat(干支.ofName(value.name())).isNotNull().isSameAs(value);
         }
     }
 
     @Test
     void testValueOfName_against_ALL_NAMES() {
         for (final String name : ALL_NAMES) {
-            assertThat(干支.valueOfName(name)).isNotNull();
+            assertThat(干支.ofName(name)).isNotNull();
         }
     }
 
     @Test
     void testValueOfName_against_ALL_INVALID_NAMES() {
         for (final String invalidName : ALL_INVALID_NAMES) {
-            assertThrows(IllegalArgumentException.class, () -> 干支.valueOfName(invalidName));
+            assertThrows(IllegalArgumentException.class, () -> 干支.ofName(invalidName));
         }
     }
 
@@ -172,7 +172,7 @@ class 干支Test {
     @Test
     void getName_Valid() {
         for (final 干支 value : 干支.VALUES) {
-            final String name = value.getName();
+            final String name = value.name();
             assertThat(name).isNotNull().hasSize(2);
         }
     }

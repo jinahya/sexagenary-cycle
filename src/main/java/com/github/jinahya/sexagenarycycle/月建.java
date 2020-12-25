@@ -1,7 +1,8 @@
 package com.github.jinahya.sexagenarycycle;
 
+import javax.validation.Valid;
+import javax.validation.constraints.NotNull;
 import java.time.Month;
-import java.time.Year;
 import java.util.Comparator;
 import java.util.Objects;
 
@@ -13,12 +14,12 @@ import java.util.Objects;
  */
 public class 月建 extends Assigned<月建> { // 월건
 
-    static final Comparator<月建> LEAP_MONTH_FIRST = (o1, o2) -> Boolean.compare(o1.isLeapMonth(), o2.isLeapMonth());
+    static final Comparator<月建> LEAP_MONTH_FIRST = (o1, o2) -> Boolean.compare(o1.is閏月(), o2.is閏月());
 
     static final Comparator<月建> LEAP_MONTH_LAST = (o1, o2) -> LEAP_MONTH_FIRST.compare(o2, o1);
 
     static final Comparator<月建> COMPARING_歲次_THEN_COMPARING_MONTH
-            = Comparator.comparing(月建::get歲次).thenComparing(月建::getMonth);
+            = Comparator.<月建, 歲次>comparing(v -> v.歲次).thenComparing(v -> v.月);
 
     // -----------------------------------------------------------------------------------------------------------------
 
@@ -38,14 +39,14 @@ public class 月建 extends Assigned<月建> { // 월건
     /**
      * Creates a new instance with specified 干支, 歲次, and month.
      *
-     * @param 干支    the 干支; {@code null} for a leap month.
-     * @param month the month.
-     * @param 歲次    the 歲次.
+     * @param 干支 the 干支; {@code null} for a leap month.
+     * @param 月  the month.
+     * @param 歲次 the 歲次.
      */
-    public 月建(final 干支 干支, final Month month, final 歲次 歲次) {
+    public 月建(final 干支 干支, final Month 月, final 歲次 歲次) {
         super(干支);
+        this.月 = Objects.requireNonNull(月, "month is null");
         this.歲次 = Objects.requireNonNull(歲次, " 歲次 is null");
-        this.month = Objects.requireNonNull(month, "month is null");
     }
 
     // -------------------------------------------------------------------------------------------------------------
@@ -58,9 +59,9 @@ public class 月建 extends Assigned<月建> { // 월건
     @Override
     public String toString() {
         return super.toString() + '{'
-               + "歲次=" + 歲次
-               + ",month=" + month
-               + ",leapMonth=" + isLeapMonth()
+               + "月=" + 月
+               + ",閏月=" + is閏月()
+               + ",歲次=" + 歲次
                + '}';
     }
 
@@ -75,8 +76,8 @@ public class 月建 extends Assigned<月建> { // 월건
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         if (!super.equals(o)) return false;
-        月建 月建 = (月建) o;
-        return 歲次.equals(月建.歲次) && month == 月建.month;
+        final 月建 casted = (月建) o;
+        return 歲次.equals(casted.歲次) && 月 == casted.月;
     }
 
     /**
@@ -86,7 +87,7 @@ public class 月建 extends Assigned<月建> { // 월건
      */
     @Override
     public int hashCode() {
-        return Objects.hash(super.hashCode(), 歲次, month);
+        return Objects.hash(super.hashCode(), 歲次, 月);
     }
 
     // -------------------------------------------------------------------------------------------------------------
@@ -98,43 +99,26 @@ public class 月建 extends Assigned<月建> { // 월건
     // -------------------------------------------------------------------------------------------------------------
 
     /**
-     * Returns the 歲次 of this 月建.
+     * Indicates whether this 月建 represents a 閏月.
      *
-     * @return the 歲次 of this 月建.
+     * @return {@code true} when this 月建 represents a a 閏月; {@code false} otherwise.
      */
-    public 歲次 get歲次() {
-        return 歲次;
-    }
-
-    /**
-     * Returns the year of this the 月建.
-     *
-     * @return the year of this the 月建.
-     */
-    public Year getYear() {
-        return get歲次().getYear();
-    }
-
-    /**
-     * Returns the month of this the 月建.
-     *
-     * @return the month of this the 月建.
-     */
-    public Month getMonth() {
-        return month;
-    }
-
-    /**
-     * Indicates whether this 月建 represents a leap month.
-     *
-     * @return {@code true} when this 月建 represents a a leap month; {@code false} otherwise.
-     */
-    public boolean isLeapMonth() {
-        return get干支() == null;
+    public boolean is閏月() {
+        return 干支 == null;
     }
 
     // -------------------------------------------------------------------------------------------------------------
-    private final 歲次 歲次;
 
-    private final Month month;
+    /**
+     * The 月 of this 月建.
+     */
+    @NotNull
+    public final Month 月;
+
+    /**
+     * The 歲次 of this 月建.
+     */
+    @Valid
+    @NotNull
+    public final 歲次 歲次;
 }

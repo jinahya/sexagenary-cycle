@@ -24,7 +24,7 @@ import static com.github.jinahya.sexagenarycycle.天干.辛;
  * @see 天干
  * @see <a href="https://ko.wikipedia.org/wiki/%EC%B2%9C%EA%B0%84">천간</a>
  */
-public enum 천간 implements Rolling<천간> { // \ucc9c\uac04
+public enum 천간 { // \ucc9c\uac04
 
     갑(甲),
     을(乙),
@@ -57,7 +57,7 @@ public enum 천간 implements Rolling<천간> { // \ucc9c\uac04
      * @param name the name.
      * @return the constant associated with {@code name}.
      */
-    public static 천간 valueOfName(final String name) {
+    public static 천간 ofName(final String name) {
         Objects.requireNonNull(name, "name is null");
         final 천간 value = VALUES_BY_NAMES.get(name);
         if (value == null) {
@@ -83,7 +83,7 @@ public enum 천간 implements Rolling<천간> { // \ucc9c\uac04
      * @param 天干 the 天干.
      * @return the constant associated with {@code name}.
      */
-    public static 천간 valueOf天干(final 天干 天干) {
+    public static 천간 of(final 天干 天干) {
         return VALUES_BY_天干S.get(Objects.requireNonNull(天干, "天干 is null"));
     }
 
@@ -93,38 +93,5 @@ public enum 천간 implements Rolling<천간> { // \ucc9c\uac04
     }
 
     // -----------------------------------------------------------------------------------------------------------------
-
-    /**
-     * Returns the previous value of this 천간.
-     *
-     * @return the previous value of this 천간.
-     */
-    public 천간 getPrevious() {
-        천간 p = previous;
-        if (p == null) {
-            previous = p = Rolling.getPrevious(this);
-        }
-        return p;
-    }
-
-    /**
-     * Returns the next value of this 천간.
-     *
-     * @return the next value of this 천간.
-     */
-    public 천간 getNext() {
-        천간 n = next;
-        if (n == null) {
-            next = n = Rolling.getNext(this);
-        }
-        return n;
-    }
-
-    // -----------------------------------------------------------------------------------------------------------------
     public final 天干 天干;
-
-    // -----------------------------------------------------------------------------------------------------------------
-    private volatile 천간 previous;
-
-    private volatile 천간 next;
 }

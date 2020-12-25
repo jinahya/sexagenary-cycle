@@ -26,7 +26,7 @@ import static com.github.jinahya.sexagenarycycle.地支.酉;
  * @see 地支
  * @see <a href="https://ko.wikipedia.org/wiki/%EC%A7%80%EC%A7%80_(%EC%97%AD%EB%B2%95)">지지 (역법)</a>
  */
-public enum 지지 implements Rolling<지지> { // \uc9c0\uc9c0
+public enum 지지 { // \uc9c0\uc9c0
 
     자(子),
     축(丑),
@@ -66,7 +66,7 @@ public enum 지지 implements Rolling<지지> { // \uc9c0\uc9c0
      * @param name the name.
      * @return the constant associated with {@code name}.
      */
-    public static 지지 valueOfName(final String name) {
+    public static 지지 ofName(final String name) {
         Objects.requireNonNull(name, "name is null");
         final 지지 value = VALUES_BY_NAMES.get(name);
         if (value == null) {
@@ -92,7 +92,7 @@ public enum 지지 implements Rolling<지지> { // \uc9c0\uc9c0
      * @param 地支 the 地支.
      * @return the constant associated with {@code name}.
      */
-    public static 지지 valueOf地支(final 地支 地支) {
+    public static 지지 of(final 地支 地支) {
         return VALUES_BY_地支S.get(Objects.requireNonNull(地支, "地支 is null"));
     }
 
@@ -102,38 +102,5 @@ public enum 지지 implements Rolling<지지> { // \uc9c0\uc9c0
     }
 
     // -----------------------------------------------------------------------------------------------------------------
-
-    /**
-     * Returns the previous value of this 地支.
-     *
-     * @return the previous value of this 地支.
-     */
-    public 지지 getPrevious() {
-        지지 p = previous;
-        if (p == null) {
-            previous = p = Rolling.getPrevious(this);
-        }
-        return p;
-    }
-
-    /**
-     * Returns the next value of this 地支.
-     *
-     * @return the next value of this 地支.
-     */
-    public 지지 getNext() {
-        지지 n = next;
-        if (n == null) {
-            next = n = Rolling.getNext(this);
-        }
-        return n;
-    }
-
-    // -----------------------------------------------------------------------------------------------------------------
     public final 地支 地支;
-
-    // -----------------------------------------------------------------------------------------------------------------
-    private volatile 지지 previous;
-
-    private volatile 지지 next;
 }

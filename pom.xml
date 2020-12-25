@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
 
   <parent>
@@ -47,11 +48,13 @@
     <sonar.host.url>https://sonarcloud.io</sonar.host.url>
     <sonar.organization>jinahya-github</sonar.organization>
     <sonar.projectKey>jinahya_sexagenary-cycle</sonar.projectKey>
-    <vesion.ch.qos.logback>1.2.3</vesion.ch.qos.logback>
+    <version.ch.qos.logback>1.2.3</version.ch.qos.logback>
+    <version.jakarta.validation>2.0.2</version.jakarta.validation>
     <version.maven-failsafe>${version.maven-surefire}</version.maven-failsafe>
     <version.maven-surefire>3.0.0-M5</version.maven-surefire>
     <version.org.assert.jassertj-core>3.18.1</version.org.assert.jassertj-core>
     <version.org.junit.jupiter>5.7.0</version.org.junit.jupiter>
+    <version.org.mockito>3.6.28</version.org.mockito>
     <version.org.projectlombok>1.18.16</version.org.projectlombok>
   </properties>
 
@@ -68,8 +71,14 @@
     <dependency>
       <groupId>ch.qos.logback</groupId>
       <artifactId>logback-classic</artifactId>
-      <version>${vesion.ch.qos.logback}</version>
+      <version>${version.ch.qos.logback}</version>
       <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>jakarta.validation</groupId>
+      <artifactId>jakarta.validation-api</artifactId>
+      <version>${version.jakarta.validation}</version>
+      <scope>provided</scope>
     </dependency>
     <dependency>
       <groupId>org.assertj</groupId>
@@ -93,6 +102,12 @@
       <groupId>org.junit.jupiter</groupId>
       <artifactId>junit-jupiter-params</artifactId>
       <version>${version.org.junit.jupiter}</version>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.mockito</groupId>
+      <artifactId>mockito-core</artifactId>
+      <version>${version.org.mockito}</version>
       <scope>test</scope>
     </dependency>
     <dependency>
@@ -172,9 +187,8 @@
               <goal>enforce</goal>
             </goals>
             <configuration>
-              <!--              <skip>true</skip>-->
               <rules>
-                <dependencyConvergence />
+                <dependencyConvergence/>
               </rules>
             </configuration>
           </execution>
@@ -366,6 +380,17 @@
           </plugin>
         </plugins>
       </build>
+    </profile>
+    <profile>
+      <id>version-alignment-spring-boot-2_4_1</id>
+      <properties>
+        <r.ch.qos.logback>1.2.3</r.ch.qos.logback>
+        <version.jakarta.validation>2.0.2</version.jakarta.validation>
+        <version.org.assert.jassertj-core>3.18.1</version.org.assert.jassertj-core>
+        <version.org.junit.jupiter>5.7.0</version.org.junit.jupiter>
+        <version.org.mockito>3.6.28</version.org.mockito>
+        <version.org.projectlombok>1.18.16</version.org.projectlombok>
+      </properties>
     </profile>
   </profiles>
 </project>

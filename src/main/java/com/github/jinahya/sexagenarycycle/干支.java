@@ -1,5 +1,6 @@
 package com.github.jinahya.sexagenarycycle;
 
+import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.EnumMap;
@@ -31,7 +32,7 @@ public final class 干支 { // \u5e72\u652f
     public static final String REGEXP_NAME_GROUP_BRANCH = "branch";
 
     /**
-     * A regular expression for matching {@link #getName() name}. The value is {@value}.
+     * A regular expression for matching {@link #name() name}. The value is {@value}.
      */
     public static final String REGEXP_NAME = "(?<" + REGEXP_NAME_GROUP_STEM + ">" + 天干.REGEXP_NAME + ")"
                                              + "(?<" + REGEXP_NAME_GROUP_BRANCH + ">" + 地支.REGEXP_NAME + ")";
@@ -79,7 +80,7 @@ public final class 干支 { // \u5e72\u652f
      * @param 支 the value of 地支.
      * @return the value of {@code 干} and {@code 支}.
      */
-    public static 干支 valueOf(final 天干 干, final 地支 支) {
+    public static 干支 of(final 天干 干, final 地支 支) {
         Objects.requireNonNull(干, "干 is null");
         Objects.requireNonNull(支, "支 is null");
         return Optional.ofNullable(HASHED_VALUES.get(干))
@@ -89,7 +90,7 @@ public final class 干支 { // \u5e72\u652f
 
     // -----------------------------------------------------------------------------------------------------------------
     private static final Map<String, 干支> VALUES_BY_NAMES = Collections.unmodifiableMap(
-            VALUES.stream().collect(Collectors.toMap(干支::getName, Function.identity())));
+            VALUES.stream().collect(Collectors.toMap(干支::name, Function.identity())));
 
     /**
      * Returns the value associated to specified name.
@@ -97,8 +98,9 @@ public final class 干支 { // \u5e72\u652f
      * @param name the name.
      * @return the value of {@code name}.
      */
-    public static 干支 valueOfName(final String name) {
-        return Optional.ofNullable(VALUES_BY_NAMES.get(Objects.requireNonNull(name, "name is null")))
+    public static 干支 ofName(final String name) {
+        Objects.requireNonNull(name, "name is null");
+        return Optional.ofNullable(VALUES_BY_NAMES.get(name))
                 .orElseThrow(() -> new IllegalArgumentException("no value for name: " + name));
     }
 
@@ -172,7 +174,7 @@ public final class 干支 { // \u5e72\u652f
     public 干支 getPrevious() {
         干支 p = previous;
         if (p == null) {
-            previous = p = valueOf(干.getPrevious(), 支.getPrevious());
+            previous = p = of(干.getPrevious(), 支.getPrevious());
         }
         return p;
     }
@@ -186,7 +188,7 @@ public final class 干支 { // \u5e72\u652f
     public 干支 getNext() {
         干支 n = next;
         if (n == null) {
-            next = n = valueOf(干.getNext(), 支.getNext());
+            next = n = of(干.getNext(), 支.getNext());
         }
         return n;
     }
@@ -197,15 +199,17 @@ public final class 干支 { // \u5e72\u652f
      * Returns the name of this 干支.
      *
      * @return the name of this 干支.
-     * @see #valueOfName(String)
+     * @see #ofName(String)
      */
-    public String getName() {
+    public String name() {
         return 干.name() + 支.name();
     }
 
     // -----------------------------------------------------------------------------------------------------------------
+    @NotNull
     public final 天干 干;
 
+    @NotNull
     public final 地支 支;
 
     // -----------------------------------------------------------------------------------------------------------------

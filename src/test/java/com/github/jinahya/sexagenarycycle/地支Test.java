@@ -31,15 +31,15 @@ class 地支Test {
         final String[] names = new String[] {"子", "丑", "寅", "卯", "辰", "巳", "午", "未", "申", "酉", "戌", "亥"};
         for (int i = 0; i < names.length; i++) {
             final String name = names[i];
-            assertThat(地支.valueOfName(name)).isNotNull().isSameAs(地支.valueOf(name));
-            assertThat(地支.valueOfName(name).ordinal()).isSameAs(i);
+            assertThat(地支.ofName(name)).isNotNull().isSameAs(地支.valueOf(name));
+            assertThat(地支.ofName(name).ordinal()).isSameAs(i);
         }
     }
 
     @DisplayName("valueOfName(name) throws IllegalArgumentException when name is unknown")
     @Test
     void valueOfName_IllegalArgumentException_NameIsUnknown() {
-        assertThrows(IllegalArgumentException.class, () -> 地支.valueOfName(""));
+        assertThrows(IllegalArgumentException.class, () -> 地支.ofName(""));
     }
 
     // -----------------------------------------------------------------------------------------------------------------

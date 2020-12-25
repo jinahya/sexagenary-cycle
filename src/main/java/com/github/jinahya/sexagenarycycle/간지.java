@@ -1,5 +1,6 @@
 package com.github.jinahya.sexagenarycycle;
 
+import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.EnumMap;
@@ -23,8 +24,9 @@ public final class 간지 { // \uac04\uc9c0
     /**
      * A regular expression for matching {@link #getName() name}. The value is {@value}.
      */
-    public static final String REGEXP_NAME = "(?<" + 干支.REGEXP_NAME_GROUP_STEM + ">" + 천간.REGEXP_NAME + ")"
-                                             + "(?<" + 干支.REGEXP_NAME_GROUP_BRANCH + ">" + 지지.REGEXP_NAME + ")";
+    public static final String REGEXP_NAME
+            = "(?<" + com.github.jinahya.sexagenarycycle.干支.REGEXP_NAME_GROUP_STEM + ">" + 천간.REGEXP_NAME + ")"
+              + "(?<" + com.github.jinahya.sexagenarycycle.干支.REGEXP_NAME_GROUP_BRANCH + ">" + 지지.REGEXP_NAME + ")";
 
     // -----------------------------------------------------------------------------------------------------------------
 
@@ -69,7 +71,7 @@ public final class 간지 { // \uac04\uc9c0
      * @param 지 the value of 지지.
      * @return the value of {@code 간} and {@code 지}.
      */
-    public static 간지 valueOf(final 천간 간, final 지지 지) {
+    public static 간지 of(final 천간 간, final 지지 지) {
         Objects.requireNonNull(간, "간 is null");
         Objects.requireNonNull(지, "지 is null");
         return Optional.ofNullable(HASHED_VALUES.get(간))
@@ -87,7 +89,7 @@ public final class 간지 { // \uac04\uc9c0
      * @param name the name.
      * @return the value of {@code name}.
      */
-    public static 간지 valueOfName(final String name) {
+    public static 간지 ofName(final String name) {
         Objects.requireNonNull(name, "name is null");
         return Optional.ofNullable(VALUES_BY_NAMES.get(name))
                 .orElseThrow(() -> new IllegalArgumentException("no value for name: " + name));
@@ -101,9 +103,9 @@ public final class 간지 { // \uac04\uc9c0
      * @param 干支 the 干支.
      * @return the value of {@code 干支}.
      */
-    public static 간지 valueOf(final 干支 干支) {
+    public static 간지 from(final 干支 干支) {
         Objects.requireNonNull(干支, "干支 is null");
-        return valueOf(천간.valueOf天干(干支.干), 지지.valueOf地支(干支.支));
+        return of(천간.of(干支.干), 지지.of(干支.支));
     }
 
     // -----------------------------------------------------------------------------------------------------------------
@@ -172,8 +174,12 @@ public final class 간지 { // \uac04\uc9c0
      *
      * @return the 干支 value equivalent to this 지지.
      */
-    public 干支 get干支() {
-        return 干支.valueOf(간.天干, 지.地支);
+    public 干支 to干支() {
+        干支 v = 干支;
+        if (v == null) {
+            干支 = v = 干支.of(간.天干, 지.地支);
+        }
+        return v;
     }
 
     // -----------------------------------------------------------------------------------------------------------------
@@ -182,7 +188,7 @@ public final class 간지 { // \uac04\uc9c0
      * Returns the name of this 간지.
      *
      * @return the name of this 간지.
-     * @see #valueOfName(String)
+     * @see #ofName(String)
      */
     public String getName() {
         return 간.name() + 지.name();
@@ -191,40 +197,17 @@ public final class 간지 { // \uac04\uc9c0
     // -----------------------------------------------------------------------------------------------------------------
 
     /**
-     * Returns the previous value of this 간지.
-     *
-     * @return previous value of this 간지.
+     * The 천간 of this 간지.
      */
-    // http://jtechies.blogspot.com/2012/07/item-71-use-lazy-initialization.html
-    public 간지 getPrevious() {
-        간지 p = previous;
-        if (p == null) {
-            previous = p = valueOf(간.getPrevious(), 지.getPrevious());
-        }
-        return p;
-    }
-
-    /**
-     * Returns the next value of this 간지.
-     *
-     * @return next value of this 간지.
-     */
-    // http://jtechies.blogspot.com/2012/07/item-71-use-lazy-initialization.html
-    public 간지 getNext() {
-        간지 n = next;
-        if (n == null) {
-            next = n = valueOf(간.getNext(), 지.getNext());
-        }
-        return n;
-    }
-
-    // -----------------------------------------------------------------------------------------------------------------
+    @NotNull
     public final 천간 간;
 
+    /**
+     * The 지지 of this 간지.
+     */
+    @NotNull
     public final 지지 지;
 
     // -----------------------------------------------------------------------------------------------------------------
-    private volatile 간지 previous;
-
-    private volatile 간지 next;
+    private volatile 干支 干支;
 }

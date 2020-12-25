@@ -52,7 +52,7 @@ public enum 地支 implements Rolling<地支> { // \u5730\u652f
      * @param name the name.
      * @return the constant associated with {@code name}.
      */
-    public static 地支 valueOfName(final String name) {
+    public static 地支 ofName(final String name) {
         Objects.requireNonNull(name, "name is null");
         final 地支 value = VALUES_BY_NAMES.get(name);
         if (value == null) {

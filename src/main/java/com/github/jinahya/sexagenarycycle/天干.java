@@ -45,7 +45,7 @@ public enum 天干 implements Rolling<天干> { // \u5929\u5e72
      * @param name the name.
      * @return the constant associated with {@code name}.
      */
-    public static 天干 valueOfName(final String name) {
+    public static 天干 ofName(final String name) {
         Objects.requireNonNull(name, "name is null");
         final 天干 value = VALUES_BY_NAMES.get(name);
         if (value == null) {
