@@ -14,6 +14,7 @@ import java.util.stream.Collectors;
 
 import static java.util.Arrays.stream;
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatNoException;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 @Slf4j
@@ -22,7 +23,7 @@ class 干支Test {
     /**
      * An unmodifiable list of all valid names.
      */
-    static final List<String> ALL_NAMES = Arrays.asList(
+    static final List<String> VALID_NAMES = Arrays.asList(
             "甲子", "乙丑", "丙寅", "丁卯", "戊辰", "己巳", "庚午", "辛未", "壬申", "癸酉",
             "甲戌", "乙亥", "丙子", "丁丑", "戊寅", "己卯", "庚辰", "辛巳", "壬午", "癸未",
             "甲申", "乙酉", "丙戌", "丁亥", "戊子", "己丑", "庚寅", "辛卯", "壬辰", "癸巳",
@@ -32,20 +33,20 @@ class 干支Test {
     );
 
     static {
-        assert ALL_NAMES.size() == 干支.VALUES.size();
+        assert VALID_NAMES.size() == 干支.VALUES.size();
     }
 
     /**
      * An unmodifiable list of all invalid names among all the possible combinations.
      */
-    static final List<String> ALL_INVALID_NAMES = stream(天干.values())
+    static final List<String> INVALID_NAMES = stream(天干.values())
             .map(Enum::name)
             .flatMap(stemName -> stream(地支.values()).map(Enum::name).map(branchName -> stemName + branchName))
-            .filter(n -> !ALL_NAMES.contains(n))
+            .filter(n -> !VALID_NAMES.contains(n))
             .collect(Collectors.toList());
 
     static {
-        assert ALL_INVALID_NAMES.size() == 干支.VALUES.size(); // 60 == 120 - 60;
+        assert INVALID_NAMES.size() == 干支.VALUES.size(); // 60 == 120 - 60;
     }
 
     // -----------------------------------------------------------------------------------------------------------------
@@ -68,7 +69,7 @@ class 干支Test {
         assertThat(new HashSet<>(干支.VALUES).size()).isEqualTo(干支.VALUES.size());
         for (int i = 0; i < 干支.VALUES.size(); i++) {
             final 干支 value = 干支.VALUES.get(i);
-            assertThat(ALL_NAMES.indexOf(value.name())).isEqualTo(i);
+            assertThat(VALID_NAMES.indexOf(value.name())).isEqualTo(i);
         }
     }
 
@@ -97,14 +98,14 @@ class 干支Test {
 
     @Test
     void testValueOfName_against_ALL_NAMES() {
-        for (final String name : ALL_NAMES) {
+        for (final String name : VALID_NAMES) {
             assertThat(干支.ofName(name)).isNotNull();
         }
     }
 
     @Test
     void testValueOfName_against_ALL_INVALID_NAMES() {
-        for (final String invalidName : ALL_INVALID_NAMES) {
+        for (final String invalidName : INVALID_NAMES) {
             assertThrows(IllegalArgumentException.class, () -> 干支.ofName(invalidName));
         }
     }
@@ -160,10 +161,9 @@ class 干支Test {
 
     // ----------------------------------------------------------------------------------------------------- hashCode()I
     @Test
-    void hashCode_ResultValid() {
+    void hashCode_NoException_() {
         for (final 干支 value : 干支.VALUES) {
-            assertThat(value.hashCode()).satisfies(v -> {
-            });
+            assertThatNoException().isThrownBy(value::hashCode);
         }
     }
 

@@ -22,7 +22,7 @@ public final class 간지 { // \uac04\uc9c0
     // -----------------------------------------------------------------------------------------------------------------
 
     /**
-     * A regular expression for matching {@link #getName() name}. The value is {@value}.
+     * A regular expression for matching {@link #name() name}. The value is {@value}.
      */
     public static final String REGEXP_NAME
             = "(?<" + com.github.jinahya.sexagenarycycle.干支.REGEXP_NAME_GROUP_STEM + ">" + 천간.REGEXP_NAME + ")"
@@ -50,12 +50,13 @@ public final class 간지 { // \uac04\uc9c0
         VALUES = Collections.unmodifiableList(values);
     }
 
-    private static final Map<천간, Map<지지, 간지>> HASHED_VALUES;
+    // -----------------------------------------------------------------------------------------------------------------
+    private static final Map<천간, Map<지지, 간지>> VALUES_BY_간_AND_지;
 
     static {
         final Map<천간, Map<지지, 간지>> hashedValues = new EnumMap<>(천간.class);
         VALUES.forEach(v -> hashedValues.computeIfAbsent(v.간, k -> new EnumMap<>(지지.class)).put(v.지, v));
-        HASHED_VALUES = Collections.unmodifiableMap(hashedValues);
+        VALUES_BY_간_AND_지 = Collections.unmodifiableMap(hashedValues);
     }
 
     /**
@@ -68,14 +69,14 @@ public final class 간지 { // \uac04\uc9c0
     public static 간지 of(final 천간 간, final 지지 지) {
         Objects.requireNonNull(간, "간 is null");
         Objects.requireNonNull(지, "지 is null");
-        return Optional.ofNullable(HASHED_VALUES.get(간))
+        return Optional.ofNullable(VALUES_BY_간_AND_지.get(간))
                 .map(m -> m.get(지))
                 .orElseThrow(() -> new IllegalArgumentException("no value for " + 간 + " and " + 지));
     }
 
     // -----------------------------------------------------------------------------------------------------------------
     private static final Map<String, 간지> VALUES_BY_NAMES = Collections.unmodifiableMap(
-            VALUES.stream().collect(Collectors.toMap(간지::getName, Function.identity())));
+            VALUES.stream().collect(Collectors.toMap(간지::name, Function.identity())));
 
     /**
      * Returns the value associated to specified name.
@@ -136,18 +137,18 @@ public final class 간지 { // \uac04\uc9c0
     /**
      * Indicates whether some other object is "equal to" this one.
      *
-     * @param o the reference object with which to compare.
+     * @param obj the reference object with which to compare.
      * @return {@code true} if this object is the same as the obj argument; {@code false} otherwise.
      */
     @Override
-    public boolean equals(final Object o) {
-        if (this == o) {
+    public boolean equals(final Object obj) {
+        if (this == obj) {
             return true;
         }
-        if (o == null || getClass() != o.getClass()) {
+        if (obj == null || getClass() != obj.getClass()) {
             return false;
         }
-        final 간지 casted = (간지) o;
+        final 간지 casted = (간지) obj;
         return 간 == casted.간 && 지 == casted.지;
     }
 
@@ -169,7 +170,7 @@ public final class 간지 { // \uac04\uc9c0
      * @return the name of this 간지.
      * @see #ofName(String)
      */
-    public String getName() {
+    public String name() {
         return 간.name() + 지.name();
     }
 

@@ -35,8 +35,12 @@ abstract class 부여된<T extends 부여된<T>> implements Comparable<T>, Clone
     // -----------------------------------------------------------------------------------------------------------------
     @Override
     @SuppressWarnings({"unchecked"})
-    public T clone() throws CloneNotSupportedException {
-        return (T) super.clone();
+    public T clone() {
+        try {
+            return (T) super.clone();
+        } catch (final CloneNotSupportedException cnse) {
+            throw new AssertionError("failed to clone; " + cnse.toString());
+        }
     }
 
     // -----------------------------------------------------------------------------------------------------------------

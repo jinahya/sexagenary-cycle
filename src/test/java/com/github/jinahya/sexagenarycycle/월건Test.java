@@ -6,6 +6,7 @@ import org.junit.jupiter.params.provider.MethodSource;
 import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatNoException;
 
 class 월건Test {
 
@@ -62,7 +63,7 @@ class 월건Test {
 
     @MethodSource({"parameters"})
     @ParameterizedTest
-    void equals_True_Clone(final 월건 월건) throws CloneNotSupportedException {
+    void equals_True_Clone(final 월건 월건) {
         assertThat(월건).isEqualByComparingTo(월건.clone());
         assertThat(월건.equals(월건.clone())).isTrue();
     }
@@ -71,6 +72,6 @@ class 월건Test {
     @MethodSource({"parameters"})
     @ParameterizedTest
     void hashCode_NoException_(final 월건 월건) {
-        final int hashCode = 월건.hashCode();
+        assertThatNoException().isThrownBy(월건::hashCode);
     }
 }

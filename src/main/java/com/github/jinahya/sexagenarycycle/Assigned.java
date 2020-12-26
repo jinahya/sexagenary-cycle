@@ -53,10 +53,20 @@ abstract class Assigned<T extends Assigned<T>> implements Comparable<T>, Cloneab
     }
 
     // -----------------------------------------------------------------------------------------------------------------
-    @Override
+
+    /**
+     * Creates and returns copy of this object.
+     *
+     * @return a clone of this instance.
+     */
     @SuppressWarnings({"unchecked"})
-    public T clone() throws CloneNotSupportedException {
-        return (T) super.clone();
+    @Override
+    public T clone() {
+        try {
+            return (T) super.clone();
+        } catch (final CloneNotSupportedException cnse) {
+            throw new AssertionError("failed to clone; " + cnse.toString());
+        }
     }
 
     // -----------------------------------------------------------------------------------------------------------------

@@ -6,6 +6,7 @@ import org.junit.jupiter.params.provider.MethodSource;
 import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatNoException;
 
 class 세차Test {
 
@@ -38,21 +39,21 @@ class 세차Test {
 
     @MethodSource({"parameters"})
     @ParameterizedTest
-    void equals_True_Clone(final 세차 세차) throws CloneNotSupportedException {
+    void equals_True_Clone(final 세차 세차) {
         assertThat(세차).isEqualTo(세차.clone());
     }
 
     // -----------------------------------------------------------------------------------------------------------------
     @MethodSource({"parameters"})
     @ParameterizedTest
-    void hashCode_Valid(final 세차 세차) {
-        final int hashCode = 세차.hashCode();
+    void hashCode_NoException_(final 세차 세차) {
+        assertThatNoException().isThrownBy(세차::hashCode);
     }
 
     // ------------------------------------------------------------------------------------------------------- compareTo
     @MethodSource({"parameters"})
     @ParameterizedTest
-    void compareTo_Zero(final 세차 세차) throws CloneNotSupportedException {
+    void compareTo_Zero(final 세차 세차) {
         assertThat(세차).isEqualByComparingTo(세차);
         assertThat(세차).isEqualByComparingTo(세차.clone());
     }

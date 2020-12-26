@@ -58,7 +58,7 @@ class 日辰Test {
 
     @MethodSource({"parameters"})
     @ParameterizedTest
-    void testEquals(final 日辰 日辰) throws CloneNotSupportedException {
+    void testEquals(final 日辰 日辰) {
         assertThat(日辰).isEqualTo(日辰.clone());
     }
 
@@ -71,7 +71,7 @@ class 日辰Test {
     // -----------------------------------------------------------------------------------------------------------------
     @MethodSource({"parameters"})
     @ParameterizedTest
-    void testCompareTo(final 日辰 日辰) throws CloneNotSupportedException {
+    void testCompareTo(final 日辰 日辰) {
         assertThat(日辰.compareTo(日辰.clone())).isZero();
     }
 

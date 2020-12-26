@@ -8,6 +8,7 @@ import java.util.stream.Stream;
 
 import static java.util.Optional.ofNullable;
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatNoException;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 class 일진Test {
@@ -80,7 +81,7 @@ class 일진Test {
     // ---------------------------------------------------------------------------------------------------------- equals
     @MethodSource({"parameters"})
     @ParameterizedTest
-    void equals_True_Clone(final 일진 일진) throws CloneNotSupportedException {
+    void equals_True_Clone(final 일진 일진) {
         assertThat(일진.equals(일진.clone())).isTrue();
         assertThat(일진).isEqualTo(일진.clone());
     }
@@ -88,8 +89,8 @@ class 일진Test {
     // -------------------------------------------------------------------------------------------------------- hashCode
     @MethodSource({"parameters"})
     @ParameterizedTest
-    void hashCode_NoException_WhatEver(final 일진 일진) {
-        final int hashCode = 일진.hashCode();
+    void hashCode_NoException_(final 일진 일진) {
+        assertThatNoException().isThrownBy(일진::hashCode);
     }
 
     // ------------------------------------------------------------------------------------------------------- compareTo
@@ -102,7 +103,7 @@ class 일진Test {
 
     @MethodSource({"parameters"})
     @ParameterizedTest
-    void compareTo_True_Clone(final 일진 일진) throws CloneNotSupportedException {
+    void compareTo_True_Clone(final 일진 일진) {
         assertThat(일진.compareTo(일진.clone())).isZero();
         assertThat(일진).isEqualByComparingTo(일진.clone());
     }
