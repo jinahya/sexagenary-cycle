@@ -62,7 +62,7 @@ abstract class Assigned<T extends Assigned<T>> implements Comparable<T>, Cloneab
     // -----------------------------------------------------------------------------------------------------------------
 
     /**
-     * The 干支 assigned to this value; maybe {@code null} if not assigned.
+     * The 干支 assigned to this value; maybe {@code null} when none assigned.
      */
     public final 干支 干支; // may be null
 }

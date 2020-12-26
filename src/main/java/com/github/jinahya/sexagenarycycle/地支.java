@@ -70,9 +70,9 @@ public enum 地支 implements Rolling<地支> { // \u5730\u652f
      */
     public 地支 getPrevious() {
         {
-            final 地支 p = previous;
-            if (p != null) {
-                return p;
+            final 地支 result = previous;
+            if (result != null) {
+                return result;
             }
         }
         synchronized (this) {
@@ -91,9 +91,9 @@ public enum 地支 implements Rolling<地支> { // \u5730\u652f
     @Override
     public 地支 getNext() {
         {
-            final 地支 n = next;
-            if (n != null) {
-                return n;
+            final 地支 result = next;
+            if (result != null) {
+                return result;
             }
         }
         synchronized (this) {

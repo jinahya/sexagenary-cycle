@@ -1,6 +1,8 @@
 package com.github.jinahya.sexagenarycycle;
 
 import javax.validation.Valid;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import java.util.Comparator;
 import java.util.Objects;
@@ -13,7 +15,7 @@ import java.util.Objects;
  */
 public class 日辰 extends Assigned<日辰> {
 
-    static final Comparator<日辰> COMPARING_月建_THEN_COMPARING_DAY_OF_MONTH
+    static final Comparator<日辰> COMPARING_月建_THEN_COMPARING_日
             = Comparator.<日辰, 月建>comparing(v -> v.月建).thenComparingInt(v -> v.日);
 
     // -----------------------------------------------------------------------------------------------------------------
@@ -78,7 +80,7 @@ public class 日辰 extends Assigned<日辰> {
 
     @Override
     public int compareTo(final 日辰 o) {
-        return COMPARING_月建_THEN_COMPARING_DAY_OF_MONTH.compare(this, o);
+        return COMPARING_月建_THEN_COMPARING_日.compare(this, o);
     }
 
     // -----------------------------------------------------------------------------------------------------------------
@@ -86,7 +88,8 @@ public class 日辰 extends Assigned<日辰> {
     /**
      * The day-of-month of this 日辰.
      */
-    @NotNull
+    @Max(30)
+    @Min(1)
     public final int 日;
 
     /**

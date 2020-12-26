@@ -182,9 +182,9 @@ public final class 간지 { // \uac04\uc9c0
      */
     public 干支 to干支() {
         {
-            final 干支 v = 干支;
-            if (v != null) {
-                return v;
+            final 干支 result = 干支;
+            if (result != null) {
+                return result;
             }
         }
         synchronized (this) {

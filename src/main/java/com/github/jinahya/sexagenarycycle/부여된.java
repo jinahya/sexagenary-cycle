@@ -42,7 +42,7 @@ abstract class 부여된<T extends 부여된<T>> implements Comparable<T>, Clone
     // -----------------------------------------------------------------------------------------------------------------
 
     /**
-     * The 간지 assigned to this value; maybe {@code null} is not assigned.
+     * The 간지 assigned to this value; maybe {@code null} when none assigned.
      */
     public final 간지 간지;
 }

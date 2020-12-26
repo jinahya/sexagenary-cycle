@@ -64,9 +64,9 @@ public enum 天干 implements Rolling<天干> { // \u5929\u5e72
     @Override
     public 天干 getPrevious() {
         {
-            final 天干 p = previous;
-            if (p != null) {
-                return p;
+            final 天干 result = previous;
+            if (result != null) {
+                return result;
             }
         }
         synchronized (this) {
@@ -85,9 +85,9 @@ public enum 天干 implements Rolling<天干> { // \u5929\u5e72
     @Override
     public 天干 getNext() {
         {
-            final 天干 n = next;
-            if (n != null) {
-                return n;
+            final 天干 result = next;
+            if (result != null) {
+                return result;
             }
         }
         synchronized (this) {

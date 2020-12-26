@@ -185,9 +185,9 @@ public final class 干支 { // \u5e72\u652f
     // http://jtechies.blogspot.com/2012/07/item-71-use-lazy-initialization.html
     public 干支 getPrevious() {
         {
-            final 干支 p = previous;
-            if (p != null) {
-                return p;
+            final 干支 result = previous;
+            if (result != null) {
+                return result;
             }
         }
         synchronized (this) {
@@ -206,9 +206,9 @@ public final class 干支 { // \u5e72\u652f
     // http://jtechies.blogspot.com/2012/07/item-71-use-lazy-initialization.html
     public 干支 getNext() {
         {
-            final 干支 n = next;
-            if (n != null) {
-                return n;
+            final 干支 result = next;
+            if (result != null) {
+                return result;
             }
         }
         synchronized (this) {

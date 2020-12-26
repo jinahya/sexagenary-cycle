@@ -2,9 +2,8 @@ package com.github.jinahya.sexagenarycycle;
 
 import javax.validation.constraints.NotNull;
 import java.time.Year;
+import java.util.Comparator;
 import java.util.Objects;
-
-import static com.github.jinahya.sexagenarycycle.歲次.COMPARING_YEAR;
 
 /**
  * Represents a {@link 간지} assigned to a specific year.
@@ -16,6 +15,9 @@ import static com.github.jinahya.sexagenarycycle.歲次.COMPARING_YEAR;
 public class 세차 extends 부여된<세차> {
 
     // -----------------------------------------------------------------------------------------------------------------
+    static final Comparator<세차> COMPARING_년 = Comparator.comparing(v -> v.년);
+
+    // -----------------------------------------------------------------------------------------------------------------
 
     /**
      * Creates a new instance from specified 歲次.
@@ -23,9 +25,12 @@ public class 세차 extends 부여된<세차> {
      * @param 歲次 the 歲次.
      * @return new instance created from {@code 歲次}.
      */
+    @SuppressWarnings({"java:S117"})
     public static 세차 from(final 歲次 歲次) {
         Objects.requireNonNull(歲次, "歲次 is null");
-        return new 세차(com.github.jinahya.sexagenarycycle.간지.from(歲次.干支), 歲次.年);
+        final 간지 간지 = com.github.jinahya.sexagenarycycle.간지.from(歲次.干支);
+        final Year 년 = 歲次.年;
+        return new 세차(간지, 년);
     }
 
     // -------------------------------------------------------------------------------------------------------------
@@ -37,7 +42,7 @@ public class 세차 extends 부여된<세차> {
      * @param 년  the year.
      */
     public 세차(final 간지 간지, final Year 년) {
-        super(간지);
+        super(Objects.requireNonNull(간지, "간지 is null"));
         this.년 = Objects.requireNonNull(년, "년 is null");
     }
 
@@ -85,7 +90,7 @@ public class 세차 extends 부여된<세차> {
     // -----------------------------------------------------------------------------------------------------------------
     @Override
     public int compareTo(final 세차 o) {
-        return COMPARING_YEAR.compare(to歲次(), o.to歲次());
+        return COMPARING_년.compare(this, o);
     }
 
     // --------------------------------------------------------------------------------------------------------------- 년
@@ -99,9 +104,9 @@ public class 세차 extends 부여된<세차> {
      */
     public 歲次 to歲次() {
         {
-            final 歲次 v = 歲次;
-            if (v != null) {
-                return v;
+            final 歲次 result = 歲次;
+            if (result != null) {
+                return result;
             }
         }
         synchronized (this) {

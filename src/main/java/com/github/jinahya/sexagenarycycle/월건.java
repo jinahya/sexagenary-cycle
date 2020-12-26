@@ -19,7 +19,7 @@ public class 월건 extends 부여된<월건> {
 
     static final Comparator<월건> LEAP_MONTH_LAST = (o1, o2) -> LEAP_MONTH_FIRST.compare(o2, o1);
 
-    static final Comparator<월건> COMPARING_세차_THEN_COMPARING_MONTH
+    static final Comparator<월건> COMPARING_세차_THEN_COMPARING_월
             = Comparator.<월건, 세차>comparing(v -> v.세차).thenComparing(v -> v.월);
 
     // -----------------------------------------------------------------------------------------------------------------
@@ -30,12 +30,13 @@ public class 월건 extends 부여된<월건> {
      * @param 月建 the 月建.
      * @return new instance equivalent to {@code 月建}.
      */
+    @SuppressWarnings({"java:s117"})
     public static 월건 from(final 月建 月建) {
         Objects.requireNonNull(月建, "月建 is null");
         final 간지 간지 = Optional.ofNullable(月建.干支).map(com.github.jinahya.sexagenarycycle.간지::from).orElse(null);
-        final Month 月 = 月建.月;
+        final Month 월 = 月建.月;
         final 세차 세차 = com.github.jinahya.sexagenarycycle.세차.from(月建.歲次);
-        return new 월건(간지, 月, 세차);
+        return new 월건(간지, 월, 세차);
     }
 
     // -----------------------------------------------------------------------------------------------------------------
@@ -111,7 +112,7 @@ public class 월건 extends 부여된<월건> {
     // -------------------------------------------------------------------------------------------------------------
     @Override
     public int compareTo(final 월건 o) {
-        return COMPARING_세차_THEN_COMPARING_MONTH.thenComparing(LEAP_MONTH_LAST).compare(this, o);
+        return COMPARING_세차_THEN_COMPARING_월.thenComparing(LEAP_MONTH_LAST).compare(this, o);
     }
 
     // --------------------------------------------------------------------------------------------------------------- 월
@@ -137,9 +138,9 @@ public class 월건 extends 부여된<월건> {
      */
     public 月建 to月建() {
         {
-            final 月建 v = 月建;
-            if (v != null) {
-                return v;
+            final 月建 result = 月建;
+            if (result != null) {
+                return result;
             }
         }
         synchronized (this) {

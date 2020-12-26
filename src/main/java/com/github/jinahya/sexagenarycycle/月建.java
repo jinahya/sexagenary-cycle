@@ -14,11 +14,11 @@ import java.util.Objects;
  */
 public class 月建 extends Assigned<月建> { // 월건
 
-    static final Comparator<月建> LEAP_MONTH_FIRST = (o1, o2) -> Boolean.compare(o1.is閏月(), o2.is閏月());
+    static final Comparator<月建> 閏月_FIRST = (o1, o2) -> Boolean.compare(o1.is閏月(), o2.is閏月());
 
-    static final Comparator<月建> LEAP_MONTH_LAST = (o1, o2) -> LEAP_MONTH_FIRST.compare(o2, o1);
+    static final Comparator<月建> 閏月_LAST = (o1, o2) -> 閏月_FIRST.compare(o2, o1);
 
-    static final Comparator<月建> COMPARING_歲次_THEN_COMPARING_MONTH
+    static final Comparator<月建> COMPARING_歲次_THEN_COMPARING_月
             = Comparator.<月建, 歲次>comparing(v -> v.歲次).thenComparing(v -> v.月);
 
     // -----------------------------------------------------------------------------------------------------------------
@@ -93,7 +93,7 @@ public class 月建 extends Assigned<月建> { // 월건
     // -------------------------------------------------------------------------------------------------------------
     @Override
     public int compareTo(final 月建 o) {
-        return COMPARING_歲次_THEN_COMPARING_MONTH.thenComparing(LEAP_MONTH_LAST).compare(this, o);
+        return COMPARING_歲次_THEN_COMPARING_月.thenComparing(閏月_LAST).compare(this, o);
     }
 
     // -------------------------------------------------------------------------------------------------------------

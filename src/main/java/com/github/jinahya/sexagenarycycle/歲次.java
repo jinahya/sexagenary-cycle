@@ -14,7 +14,7 @@ import java.util.Objects;
  */
 public class 歲次 extends Assigned<歲次> {
 
-    static final Comparator<歲次> COMPARING_YEAR = Comparator.comparing(v -> v.年);
+    static final Comparator<歲次> COMPARING_年 = Comparator.comparing(v -> v.年);
 
     // -------------------------------------------------------------------------------------------------------------
 
@@ -71,7 +71,7 @@ public class 歲次 extends Assigned<歲次> {
     // -----------------------------------------------------------------------------------------------------------------
     @Override
     public int compareTo(final 歲次 o) {
-        return COMPARING_YEAR.compare(this, o);
+        return COMPARING_年.compare(this, o);
     }
 
     // -------------------------------------------------------------------------------------------------------------
@@ -83,9 +83,9 @@ public class 歲次 extends Assigned<歲次> {
      */
     public 歲次 getPrevious() {
         {
-            final 歲次 p = previous;
-            if (p != null) {
-                return p;
+            final 歲次 result = previous;
+            if (result != null) {
+                return result;
             }
         }
         synchronized (this) {
@@ -103,9 +103,9 @@ public class 歲次 extends Assigned<歲次> {
      */
     public 歲次 getNext() {
         {
-            final 歲次 n = next;
-            if (n != null) {
-                return n;
+            final 歲次 result = next;
+            if (result != null) {
+                return result;
             }
         }
         synchronized (this) {

@@ -1,11 +1,11 @@
 package com.github.jinahya.sexagenarycycle;
 
 import javax.validation.Valid;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import java.util.Comparator;
 import java.util.Objects;
-
-import static java.util.Objects.requireNonNull;
 
 /**
  * Represents a {@link 간지} assigned to a specific date.
@@ -15,7 +15,7 @@ import static java.util.Objects.requireNonNull;
  */
 public class 일진 extends 부여된<일진> {
 
-    static final Comparator<일진> COMPARING_월건_THEN_COMPARING_DAY_OF_MONTH
+    static final Comparator<일진> COMPARING_월건_THEN_COMPARING_일
             = Comparator.<일진, 월건>comparing(v -> v.월건).thenComparingInt(v -> v.일);
 
     // -----------------------------------------------------------------------------------------------------------------
@@ -26,12 +26,13 @@ public class 일진 extends 부여된<일진> {
      * @param 日辰 the 日辰.
      * @return a new instance created from {@code 日辰}.
      */
+    @SuppressWarnings({"java:S117"})
     public static 일진 from(final 日辰 日辰) {
-        requireNonNull(日辰, "日辰 is null");
+        Objects.requireNonNull(日辰, "日辰 is null");
         final 간지 간지 = com.github.jinahya.sexagenarycycle.간지.from(日辰.干支);
-        final int 日 = 日辰.日;
+        final int 일 = 日辰.日;
         final 월건 월건 = com.github.jinahya.sexagenarycycle.월건.from(日辰.月建);
-        return new 일진(간지, 日, 월건);
+        return new 일진(간지, 일, 월건);
     }
 
     // -----------------------------------------------------------------------------------------------------------------
@@ -44,8 +45,8 @@ public class 일진 extends 부여된<일진> {
      * @param 월건 the 월건.
      */
     public 일진(final 간지 간지, final int 일, final 월건 월건) {
-        super(requireNonNull(간지, "간지 is null"));
-        this.월건 = requireNonNull(월건, "월건 is null");
+        super(Objects.requireNonNull(간지, "간지 is null"));
+        this.월건 = Objects.requireNonNull(월건, "월건 is null");
         if (일 <= 0 || 일 > 30) {
             throw new IllegalArgumentException("invalid dayOfMonth: " + 일);
         }
@@ -95,7 +96,7 @@ public class 일진 extends 부여된<일진> {
     // -----------------------------------------------------------------------------------------------------------------
     @Override
     public int compareTo(final 일진 o) {
-        return COMPARING_월건_THEN_COMPARING_DAY_OF_MONTH.compare(this, o);
+        return COMPARING_월건_THEN_COMPARING_일.compare(this, o);
     }
 
     // -------------------------------------------------------------------------------------------------------------- 日辰
@@ -107,9 +108,9 @@ public class 일진 extends 부여된<일진> {
      */
     public 日辰 to日辰() {
         {
-            final 日辰 v = 日辰;
-            if (v != null) {
-                return v;
+            final 日辰 result = 日辰;
+            if (result != null) {
+                return result;
             }
         }
         synchronized (this) {
@@ -125,7 +126,8 @@ public class 일진 extends 부여된<일진> {
     /**
      * The day-of-month of this 日辰.
      */
-    @NotNull
+    @Max(30)
+    @Min(1)
     public final int 일;
 
     /**
