@@ -103,7 +103,7 @@ public class 歲次 extends Assigned<歲次> {
      */
     public 歲次 getNext() {
         {
-            歲次 n = next;
+            final 歲次 n = next;
             if (n != null) {
                 return n;
             }
