@@ -31,7 +31,7 @@ class 천간Test {
         final String[] names = new String[] {"갑", "을", "병", "정", "무", "기", "경", "신", "임", "계"};
         for (int i = 0; i < names.length; i++) {
             final String name = names[i];
-            final 천간 value = 천간.ofName(name);
+            final 천간 value = 천간.valueOfName(name);
             assertThat(value).isNotNull().isSameAs(천간.valueOf(name));
             assertThat(value.ordinal()).isSameAs(i);
             assertThat(set.remove(value)).isTrue();
@@ -42,7 +42,7 @@ class 천간Test {
     @DisplayName("ofName(name) throws IllegalArgumentException when name is unknown")
     @Test
     void ofName_IllegalArgumentException_NameIsUnknown() {
-        assertThrows(IllegalArgumentException.class, () -> 천간.ofName(""));
+        assertThrows(IllegalArgumentException.class, () -> 천간.valueOfName(""));
     }
 
     // -----------------------------------------------------------------------------------------------------------------
@@ -51,7 +51,7 @@ class 천간Test {
     void ofName天干_ExpectedResult_天干IsKnown() {
         final EnumSet<천간> set = EnumSet.noneOf(천간.class);
         for (final 天干 天干 : 天干.values()) {
-            final 천간 value = 천간.of(天干);
+            final 천간 value = 천간.valueOf(天干);
             assertThat(value).isNotNull();
             assertThat(value.天干).isSameAs(天干);
             assertThat(set.add(value)).isTrue();

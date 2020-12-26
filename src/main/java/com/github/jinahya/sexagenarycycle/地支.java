@@ -1,9 +1,11 @@
 package com.github.jinahya.sexagenarycycle;
 
+import java.time.Month;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Objects;
+
+import static java.util.Objects.requireNonNull;
 
 /**
  * Constants of 10 <a href="https://en.wikipedia.org/wiki/Earthly_Branches">Earthly Branches</a>.
@@ -53,12 +55,54 @@ public enum 地支 implements Rolling<地支> { // \u5730\u652f
      * @return the constant associated with {@code name}.
      */
     public static 地支 ofName(final String name) {
-        Objects.requireNonNull(name, "name is null");
+        requireNonNull(name, "name is null");
         final 地支 value = VALUES_BY_NAMES.get(name);
         if (value == null) {
             throw new IllegalArgumentException("no value for name: " + name);
         }
         return value;
+    }
+
+    // -----------------------------------------------------------------------------------------------------------------
+    地支() {
+    }
+
+    // -----------------------------------------------------------------------------------------------------------------
+
+    /**
+     * Returns the 二十四方 associated to this 地支.
+     *
+     * @return the 二十四方 associated to this 地支.
+     */
+    public 二十四方 get二十四方() {
+        return 地支二十四方.valueOf(this);
+    }
+
+    /**
+     * Returns the 五行 associated to this 地支.
+     *
+     * @return the 五行 associated to this 地支.
+     */
+    public 五行 get五行() {
+        return 地支五行.valueOf(this);
+    }
+
+    /**
+     * Returns the 月份 associated to this 地支.
+     *
+     * @return the 月份 associated to this 地支.
+     */
+    public Month get月份() {
+        return 地支月份.valueOf(this);
+    }
+
+    /**
+     * Returns the 陰陽 associated to this 地支.
+     *
+     * @return the 陰陽 associated to this 地支.
+     */
+    public 陰陽 get陰陽() {
+        return 地支陰陽.valueOf(this);
     }
 
     // -----------------------------------------------------------------------------------------------------------------

@@ -4,6 +4,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import java.time.Month;
 import java.util.EnumSet;
 import java.util.Set;
 import java.util.regex.Pattern;
@@ -40,6 +41,43 @@ class 地支Test {
     @Test
     void valueOfName_IllegalArgumentException_NameIsUnknown() {
         assertThrows(IllegalArgumentException.class, () -> 地支.ofName(""));
+    }
+
+    // ----------------------------------------------------------------------------------------------------------- get五行
+    @Test
+    void get五行_NonNull() {
+        for (final 地支 value : 地支.values()) {
+            assertThat(value.get五行()).isNotNull();
+        }
+    }
+
+    // ----------------------------------------------------------------------------------------------------------- get陰陽
+    @Test
+    void get陰陽_NonNull() {
+        for (final 地支 value : 地支.values()) {
+            assertThat(value.get陰陽()).isNotNull();
+        }
+    }
+
+    // --------------------------------------------------------------------------------------------------------- get二十四方
+    @Test
+    void get二十四方_NonNullOrdinalTimes30() {
+        for (final 地支 value : 地支.values()) {
+            assertThat(value.get二十四方()).isNotNull().satisfies(v -> {
+                assertThat(v.direction).isEqualTo(value.ordinal() * 30);
+            });
+        }
+    }
+
+    // ----------------------------------------------------------------------------------------------------------- get月份
+    @Test
+    void get月份_NonNullUnique() {
+        final Set<Month> set = EnumSet.noneOf(Month.class);
+        for (final 地支 value : 地支.values()) {
+            assertThat(value.get月份()).isNotNull().satisfies(v -> {
+                assertThat(set.add(v)).isTrue();
+            });
+        }
     }
 
     // -----------------------------------------------------------------------------------------------------------------

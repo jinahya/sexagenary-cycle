@@ -5,7 +5,6 @@ import java.util.Collections;
 import java.util.EnumMap;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Objects;
 
 import static com.github.jinahya.sexagenarycycle.地支.丑;
 import static com.github.jinahya.sexagenarycycle.地支.亥;
@@ -19,6 +18,7 @@ import static com.github.jinahya.sexagenarycycle.地支.未;
 import static com.github.jinahya.sexagenarycycle.地支.申;
 import static com.github.jinahya.sexagenarycycle.地支.辰;
 import static com.github.jinahya.sexagenarycycle.地支.酉;
+import static java.util.Objects.requireNonNull;
 
 /**
  * Constants of 10 <a href="https://en.wikipedia.org/wiki/Earthly_Branches">Earthly Branches</a>.
@@ -67,8 +67,8 @@ public enum 지지 { // \uc9c0\uc9c0
      * @param name the name.
      * @return the constant associated with {@code name}.
      */
-    public static 지지 ofName(final String name) {
-        Objects.requireNonNull(name, "name is null");
+    public static 지지 valueOfName(final String name) {
+        requireNonNull(name, "name is null");
         final 지지 value = VALUES_BY_NAMES.get(name);
         if (value == null) {
             throw new IllegalArgumentException("no value for name: " + name);
@@ -93,13 +93,13 @@ public enum 지지 { // \uc9c0\uc9c0
      * @param 地支 the 地支.
      * @return the constant associated with {@code name}.
      */
-    public static 지지 of(final 地支 地支) {
-        return VALUES_BY_地支S.get(Objects.requireNonNull(地支, "地支 is null"));
+    public static 지지 valueOf(final 地支 地支) {
+        return VALUES_BY_地支S.get(requireNonNull(地支, "地支 is null"));
     }
 
     // -----------------------------------------------------------------------------------------------------------------
     지지(final 地支 地支) {
-        this.地支 = Objects.requireNonNull(地支, "地支 is null");
+        this.地支 = requireNonNull(地支, "地支 is null");
     }
 
     // -----------------------------------------------------------------------------------------------------------------

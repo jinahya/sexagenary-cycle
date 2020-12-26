@@ -58,7 +58,7 @@ public enum 천간 { // \ucc9c\uac04
      * @param name the name.
      * @return the constant associated with {@code name}.
      */
-    public static 천간 ofName(final String name) {
+    public static 천간 valueOfName(final String name) {
         Objects.requireNonNull(name, "name is null");
         final 천간 value = VALUES_BY_NAMES.get(name);
         if (value == null) {
@@ -84,7 +84,7 @@ public enum 천간 { // \ucc9c\uac04
      * @param 天干 the 天干.
      * @return the constant associated with {@code name}.
      */
-    public static 천간 of(final 天干 天干) {
+    public static 천간 valueOf(final 天干 天干) {
         return VALUES_BY_天干S.get(Objects.requireNonNull(天干, "天干 is null"));
     }
 

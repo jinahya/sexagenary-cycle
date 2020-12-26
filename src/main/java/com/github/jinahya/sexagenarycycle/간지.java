@@ -100,7 +100,7 @@ public final class 간지 { // \uac04\uc9c0
      */
     public static 간지 from(final 干支 干支) {
         Objects.requireNonNull(干支, "干支 is null");
-        return of(천간.of(干支.干), 지지.of(干支.支));
+        return of(천간.valueOf(干支.干), 지지.valueOf(干支.支));
     }
 
     // -----------------------------------------------------------------------------------------------------------------

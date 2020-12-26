@@ -31,7 +31,7 @@ class 지지Test {
         final String[] names = new String[] {"자", "축", "인", "묘", "진", "사", "오", "미", "신", "유", "술", "해"};
         for (int i = 0; i < names.length; i++) {
             final String name = names[i];
-            final 지지 value = 지지.ofName(name);
+            final 지지 value = 지지.valueOfName(name);
             assertThat(value).isNotNull().isSameAs(지지.valueOf(name));
             assertThat(value.ordinal()).isSameAs(i);
             assertThat(set.remove(value)).isTrue();
@@ -42,7 +42,7 @@ class 지지Test {
     @DisplayName("ofName(name) throws IllegalArgumentException when name is unknown")
     @Test
     void ofName_IllegalArgumentException_NameIsUnknown() {
-        assertThrows(IllegalArgumentException.class, () -> 지지.ofName(""));
+        assertThrows(IllegalArgumentException.class, () -> 지지.valueOfName(""));
     }
 
     // -----------------------------------------------------------------------------------------------------------------
@@ -51,7 +51,7 @@ class 지지Test {
     void of地支_ExpectedResult_地支IsKnown() {
         final EnumSet<지지> set = EnumSet.noneOf(지지.class);
         for (final 地支 地支 : 地支.values()) {
-            final 지지 value = 지지.of(地支);
+            final 지지 value = 지지.valueOf(地支);
             assertThat(value).isNotNull();
             assertThat(value.地支).isSameAs(地支);
             assertThat(set.add(value)).isTrue();

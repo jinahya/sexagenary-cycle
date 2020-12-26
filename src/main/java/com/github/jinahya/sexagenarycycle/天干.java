@@ -57,6 +57,44 @@ public enum 天干 implements Rolling<天干> { // \u5929\u5e72
     // -----------------------------------------------------------------------------------------------------------------
 
     /**
+     * Returns the 二十四方 associated to this 天干.
+     *
+     * @return the 二十四方 associated to this 天干; may be {@code null} when associated to none.
+     */
+    public 二十四方 get二十四方() {
+        return 天干二十四方.valueOf(this);
+    }
+
+    /**
+     * Returns the 五方 associated to this 天干.
+     *
+     * @return the 五方 associated to this 天干.
+     */
+    public 五方 get五方() {
+        return 天干五方.valueOf(this);
+    }
+
+    /**
+     * Returns the 五行 associated to this 天干.
+     *
+     * @return the 五行 associated to this 天干.
+     */
+    public 五行 get五行() {
+        return 天干五行.valueOf(this);
+    }
+
+    /**
+     * Returns the 陰陽 associated to this 天干.
+     *
+     * @return the 陰陽 associated to this 天干.
+     */
+    public 陰陽 get陰陽() {
+        return 天干陰陽.valueOf(this);
+    }
+
+    // -----------------------------------------------------------------------------------------------------------------
+
+    /**
      * Returns the previous value of this 天干.
      *
      * @return the previous value of this 天干.
