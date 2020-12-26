@@ -166,17 +166,36 @@ public final class 干支 { // \u5e72\u652f
     // -----------------------------------------------------------------------------------------------------------------
 
     /**
+     * Returns the name of this 干支.
+     *
+     * @return the name of this 干支.
+     * @see #ofName(String)
+     */
+    public String name() {
+        return 干.name() + 支.name();
+    }
+
+    // -----------------------------------------------------------------------------------------------------------------
+
+    /**
      * Returns the previous value of this 干支.
      *
      * @return previous value of this 干支.
      */
     // http://jtechies.blogspot.com/2012/07/item-71-use-lazy-initialization.html
     public 干支 getPrevious() {
-        干支 p = previous;
-        if (p == null) {
-            previous = p = of(干.getPrevious(), 支.getPrevious());
+        {
+            final 干支 p = previous;
+            if (p != null) {
+                return p;
+            }
         }
-        return p;
+        synchronized (this) {
+            if (previous == null) {
+                previous = of(干.getPrevious(), 支.getPrevious());
+            }
+            return previous;
+        }
     }
 
     /**
@@ -186,23 +205,18 @@ public final class 干支 { // \u5e72\u652f
      */
     // http://jtechies.blogspot.com/2012/07/item-71-use-lazy-initialization.html
     public 干支 getNext() {
-        干支 n = next;
-        if (n == null) {
-            next = n = of(干.getNext(), 支.getNext());
+        {
+            final 干支 n = next;
+            if (n != null) {
+                return n;
+            }
         }
-        return n;
-    }
-
-    // -----------------------------------------------------------------------------------------------------------------
-
-    /**
-     * Returns the name of this 干支.
-     *
-     * @return the name of this 干支.
-     * @see #ofName(String)
-     */
-    public String name() {
-        return 干.name() + 支.name();
+        synchronized (this) {
+            if (next == null) {
+                next = of(干.getNext(), 支.getNext());
+            }
+            return next;
+        }
     }
 
     // -----------------------------------------------------------------------------------------------------------------

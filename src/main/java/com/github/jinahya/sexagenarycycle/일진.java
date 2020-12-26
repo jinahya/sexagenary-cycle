@@ -55,21 +55,6 @@ public class 일진 extends 부여된<일진> {
     // -----------------------------------------------------------------------------------------------------------------
 
     /**
-     * Returns an instance of {@code 日辰} created from this 일진.
-     *
-     * @return an instance {@code 日辰}.
-     */
-    public 日辰 to日辰() {
-        日辰 v = 日辰;
-        if (v == null) {
-            日辰 = v = new 日辰(간지.to干支(), 일, 월건.to月建());
-        }
-        return v;
-    }
-
-    // -----------------------------------------------------------------------------------------------------------------
-
-    /**
      * Returns a string representation of the object.
      *
      * @return a string representation of the object.
@@ -111,6 +96,28 @@ public class 일진 extends 부여된<일진> {
     @Override
     public int compareTo(final 일진 o) {
         return COMPARING_월건_THEN_COMPARING_DAY_OF_MONTH.compare(this, o);
+    }
+
+    // -------------------------------------------------------------------------------------------------------------- 日辰
+
+    /**
+     * Returns an instance of {@code 日辰} created from this 일진.
+     *
+     * @return an instance {@code 日辰}.
+     */
+    public 日辰 to日辰() {
+        {
+            final 日辰 v = 日辰;
+            if (v != null) {
+                return v;
+            }
+        }
+        synchronized (this) {
+            if (日辰 == null) {
+                日辰 = new 日辰(간지.to干支(), 일, 월건.to月建());
+            }
+            return 日辰;
+        }
     }
 
     // -----------------------------------------------------------------------------------------------------------------

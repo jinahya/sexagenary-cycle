@@ -36,24 +36,20 @@ class ReadMeTest {
 
     @Test
     void assigned() {
-
         // (陰曆) 2020.
         final 歲次 庚子年 = new 歲次(干支.ofName("庚子"), Year.of(2020));
         assert 庚子年.年.getValue() == 2020;
         assert 庚子年.getPrevious().equals(new 歲次(干支.ofName("庚子").getPrevious(), Year.of(2019)));
         assert 庚子年.getNext().equals(new 歲次(干支.ofName("庚子").getNext(), Year.of(2021)));
-
         // (陰曆) 2020-12.
         final 月建 戊子月 = new 月建(干支.ofName("戊子"), Month.DECEMBER, 庚子年);
         assert !戊子月.is閏月();
         assert 戊子月.月 == Month.DECEMBER;
         assert 戊子月.歲次.年.getValue() == 2020;
-
         // (陰曆) 2020-12-23 represents (陽曆) 2021-02-04.
         final 日辰 庚子日 = new 日辰(干支.ofName("庚子"), 23, 戊子月);
         assert 庚子日.日 == 23;
         assert 庚子日.月建.月 == 戊子月.月;
-
         // There are two APRIL(4月)s in 2020.
         {
             // (陰曆) 2020-04; the 1st APRIL of 2020.
@@ -64,7 +60,7 @@ class ReadMeTest {
         }
         {
             // (陰曆) 2020-04; the 2nd APRIL of 2020.
-            final 月建 閏四月 = 月建.ofLeapMonth(Month.APRIL, 庚子年);
+            final 月建 閏四月 = 月建.of閏月(Month.APRIL, 庚子年);
             assert 閏四月.is閏月();
             // (陰曆) 2020-04-01 represents (陽曆) 2020-05-23.
             final 日辰 丙寅日 = new 日辰(干支.ofName("丙寅"), 1, 閏四月);

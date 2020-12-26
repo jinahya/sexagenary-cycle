@@ -1,5 +1,6 @@
 package com.github.jinahya.sexagenarycycle;
 
+import javax.validation.constraints.NotNull;
 import java.util.Collections;
 import java.util.EnumMap;
 import java.util.HashMap;
@@ -88,10 +89,11 @@ public enum 천간 { // \ucc9c\uac04
     }
 
     // -----------------------------------------------------------------------------------------------------------------
-    천간(天干 天干) {
+    천간(final 天干 天干) {
         this.天干 = Objects.requireNonNull(天干, "天干 is null");
     }
 
     // -----------------------------------------------------------------------------------------------------------------
+    @NotNull
     public final 天干 天干;
 }

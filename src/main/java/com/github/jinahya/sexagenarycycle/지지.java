@@ -1,5 +1,6 @@
 package com.github.jinahya.sexagenarycycle;
 
+import javax.validation.constraints.NotNull;
 import java.util.Collections;
 import java.util.EnumMap;
 import java.util.HashMap;
@@ -97,10 +98,11 @@ public enum 지지 { // \uc9c0\uc9c0
     }
 
     // -----------------------------------------------------------------------------------------------------------------
-    지지(地支 地支) {
+    지지(final 地支 地支) {
         this.地支 = Objects.requireNonNull(地支, "地支 is null");
     }
 
     // -----------------------------------------------------------------------------------------------------------------
+    @NotNull
     public final 地支 地支;
 }

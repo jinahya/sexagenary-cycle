@@ -15,7 +15,7 @@ import java.util.Optional;
  */
 public class 월건 extends 부여된<월건> {
 
-    static final Comparator<월건> LEAP_MONTH_FIRST = (o1, o2) -> Boolean.compare(o1.is閏달(), o2.is閏달());
+    static final Comparator<월건> LEAP_MONTH_FIRST = (o1, o2) -> Boolean.compare(o1.is윤달(), o2.is윤달());
 
     static final Comparator<월건> LEAP_MONTH_LAST = (o1, o2) -> LEAP_MONTH_FIRST.compare(o2, o1);
 
@@ -23,6 +23,13 @@ public class 월건 extends 부여된<월건> {
             = Comparator.<월건, 세차>comparing(v -> v.세차).thenComparing(v -> v.월);
 
     // -----------------------------------------------------------------------------------------------------------------
+
+    /**
+     * Returns new instance equivalent to specified 月建.
+     *
+     * @param 月建 the 月建.
+     * @return new instance equivalent to {@code 月建}.
+     */
     public static 월건 from(final 月建 月建) {
         Objects.requireNonNull(月建, "月建 is null");
         final 간지 간지 = Optional.ofNullable(月建.干支).map(com.github.jinahya.sexagenarycycle.간지::from).orElse(null);
@@ -34,15 +41,15 @@ public class 월건 extends 부여된<월건> {
     // -----------------------------------------------------------------------------------------------------------------
 
     /**
-     * Creates a new instance with specified 세차 and month representing a leap month.
+     * Creates a new instance with specified 세차 and month representing a 윤달.
      *
-     * @param month the month.
-     * @param 세차    the 세차.
+     * @param 월  the month.
+     * @param 세차 the 세차.
      * @return a new instance represents a leap month.
      * @see #to月建()
      */
-    public static 월건 ofLeapMonth(final Month month, final 세차 세차) {
-        return new 월건(null, month, 세차);
+    public static 월건 of윤달(final Month 월, final 세차 세차) {
+        return new 월건(null, 월, 세차);
     }
 
     // -------------------------------------------------------------------------------------------------------------
@@ -60,23 +67,6 @@ public class 월건 extends 부여된<월건> {
         this.세차 = Objects.requireNonNull(세차, " 세차 is null");
     }
 
-    // -----------------------------------------------------------------------------------------------------------------
-
-    /**
-     * Returns a 月建 representation of this 월건.
-     *
-     * @return a 月建 representation of this 월건.
-     * @see #from(com.github.jinahya.sexagenarycycle.月建)
-     */
-    public 月建 to月建() {
-        月建 v = 月建;
-        if (v == null) {
-            月建 = v = new 月建(Optional.ofNullable(간지).map(com.github.jinahya.sexagenarycycle.간지::to干支)
-                                    .orElse(null), 월, 세차.to歲次());
-        }
-        return v;
-    }
-
     // -------------------------------------------------------------------------------------------------------------
 
     /**
@@ -88,7 +78,7 @@ public class 월건 extends 부여된<월건> {
     public String toString() {
         return super.toString() + '{'
                + "월=" + 월
-               + ",閏달=" + is閏달()
+               + ",윤달=" + is윤달()
                + ",세차=" + 세차
                + '}';
     }
@@ -124,18 +114,44 @@ public class 월건 extends 부여된<월건> {
         return COMPARING_세차_THEN_COMPARING_MONTH.thenComparing(LEAP_MONTH_LAST).compare(this, o);
     }
 
-    // -------------------------------------------------------------------------------------------------------------
+    // --------------------------------------------------------------------------------------------------------------- 월
 
     /**
      * Indicates whether this 月建 represents a leap month.
      *
      * @return {@code true} when this 月建 represents a a leap month; {@code false} otherwise.
      */
-    public boolean is閏달() {
+    public boolean is윤달() {
         return 간지 == null;
     }
 
-    // -------------------------------------------------------------------------------------------------------------
+    // -------------------------------------------------------------------------------------------------------------- 세차
+
+    // -------------------------------------------------------------------------------------------------------------- 月建
+
+    /**
+     * Returns a 月建 representation of this 월건.
+     *
+     * @return a 月建 representation of this 월건.
+     * @see #from(com.github.jinahya.sexagenarycycle.月建)
+     */
+    public 月建 to月建() {
+        {
+            final 月建 v = 月建;
+            if (v != null) {
+                return v;
+            }
+        }
+        synchronized (this) {
+            if (月建 == null) {
+                月建 = new 月建(Optional.ofNullable(간지).map(com.github.jinahya.sexagenarycycle.간지::to干支).orElse(null),
+                            월, 세차.to歲次());
+            }
+            return 月建;
+        }
+    }
+
+    // -----------------------------------------------------------------------------------------------------------------
 
     /**
      * The month of this 월건.

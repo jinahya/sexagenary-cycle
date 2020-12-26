@@ -54,13 +54,7 @@ public final class 간지 { // \uac04\uc9c0
 
     static {
         final Map<천간, Map<지지, 간지>> hashedValues = new EnumMap<>(천간.class);
-        VALUES.forEach(천간 -> {
-            hashedValues.computeIfAbsent(천간.간, k -> new EnumMap<>(지지.class))
-                    .compute(천간.지, (k, v) -> {
-                        assert v == null;
-                        return 천간;
-                    });
-        });
+        VALUES.forEach(v -> hashedValues.computeIfAbsent(v.간, k -> new EnumMap<>(지지.class)).put(v.지, v));
         HASHED_VALUES = Collections.unmodifiableMap(hashedValues);
     }
 
@@ -170,21 +164,6 @@ public final class 간지 { // \uac04\uc9c0
     // -----------------------------------------------------------------------------------------------------------------
 
     /**
-     * Returns the 干支 value equivalent to this 지지.
-     *
-     * @return the 干支 value equivalent to this 지지.
-     */
-    public 干支 to干支() {
-        干支 v = 干支;
-        if (v == null) {
-            干支 = v = 干支.of(간.天干, 지.地支);
-        }
-        return v;
-    }
-
-    // -----------------------------------------------------------------------------------------------------------------
-
-    /**
      * Returns the name of this 간지.
      *
      * @return the name of this 간지.
@@ -192,6 +171,28 @@ public final class 간지 { // \uac04\uc9c0
      */
     public String getName() {
         return 간.name() + 지.name();
+    }
+
+    // -------------------------------------------------------------------------------------------------------------- 干支
+
+    /**
+     * Returns the 干支 value equivalent to this 지지.
+     *
+     * @return the 干支 value equivalent to this 지지.
+     */
+    public 干支 to干支() {
+        {
+            final 干支 v = 干支;
+            if (v != null) {
+                return v;
+            }
+        }
+        synchronized (this) {
+            if (干支 == null) {
+                干支 = com.github.jinahya.sexagenarycycle.干支.of(간.天干, 지.地支);
+            }
+            return 干支;
+        }
     }
 
     // -----------------------------------------------------------------------------------------------------------------

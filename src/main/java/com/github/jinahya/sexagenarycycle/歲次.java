@@ -82,7 +82,18 @@ public class 歲次 extends Assigned<歲次> {
      * @return the previous value of this 歲次.
      */
     public 歲次 getPrevious() {
-        return new 歲次(干支.getPrevious(), 年.minusYears(1L));
+        {
+            final 歲次 p = previous;
+            if (p != null) {
+                return p;
+            }
+        }
+        synchronized (this) {
+            if (previous == null) {
+                previous = new 歲次(干支.getPrevious(), 年.minusYears(1L));
+            }
+            return previous;
+        }
     }
 
     /**
@@ -91,10 +102,26 @@ public class 歲次 extends Assigned<歲次> {
      * @return the next value of this 歲次.
      */
     public 歲次 getNext() {
-        return new 歲次(干支.getNext(), 年.plusYears(1L));
+        {
+            歲次 n = next;
+            if (n != null) {
+                return n;
+            }
+        }
+        synchronized (this) {
+            if (next == null) {
+                next = new 歲次(干支.getNext(), 年.plusYears(1L));
+            }
+            return next;
+        }
     }
 
     // -------------------------------------------------------------------------------------------------------------
     @NotNull
     public final Year 年;
+
+    // -----------------------------------------------------------------------------------------------------------------
+    private volatile 歲次 previous;
+
+    private volatile 歲次 next;
 }

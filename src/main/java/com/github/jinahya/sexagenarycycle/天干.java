@@ -63,11 +63,18 @@ public enum 天干 implements Rolling<天干> { // \u5929\u5e72
      */
     @Override
     public 天干 getPrevious() {
-        天干 p = previous;
-        if (p == null) {
-            previous = p = Rolling.getPrevious(this);
+        {
+            final 天干 p = previous;
+            if (p != null) {
+                return p;
+            }
         }
-        return p;
+        synchronized (this) {
+            if (previous == null) {
+                previous = Rolling.getPrevious(this);
+            }
+            return previous;
+        }
     }
 
     /**
@@ -77,11 +84,18 @@ public enum 天干 implements Rolling<天干> { // \u5929\u5e72
      */
     @Override
     public 天干 getNext() {
-        天干 n = next;
-        if (n == null) {
-            next = n = Rolling.getNext(this);
+        {
+            final 天干 n = next;
+            if (n != null) {
+                return n;
+            }
         }
-        return n;
+        synchronized (this) {
+            if (next == null) {
+                next = Rolling.getNext(this);
+            }
+            return next;
+        }
     }
 
     // -----------------------------------------------------------------------------------------------------------------

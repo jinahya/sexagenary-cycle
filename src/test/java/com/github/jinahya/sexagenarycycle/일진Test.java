@@ -53,7 +53,7 @@ class 일진Test {
             assertThat(d.月建).isNotNull().satisfies(m -> {
                 assertThat(m.干支).isSameAs(ofNullable(일진.월건.간지).map(간지::to干支).orElse(null));
                 assertThat(m.月).isSameAs(일진.월건.월);
-                assertThat(m.is閏月()).isSameAs(일진.월건.is閏달());
+                assertThat(m.is閏月()).isSameAs(일진.월건.is윤달());
                 assertThat(m.歲次).isNotNull().satisfies(y -> {
                     assertThat(y.干支).isNotNull().isSameAs(일진.월건.세차.간지.to干支());
                     assertThat(y.年).isSameAs(일진.월건.세차.년);

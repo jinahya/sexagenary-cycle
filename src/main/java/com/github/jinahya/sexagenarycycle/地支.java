@@ -69,11 +69,18 @@ public enum 地支 implements Rolling<地支> { // \u5730\u652f
      * @return the previous value of this 地支.
      */
     public 地支 getPrevious() {
-        地支 p = previous;
-        if (p == null) {
-            previous = p = Rolling.getPrevious(this);
+        {
+            final 地支 p = previous;
+            if (p != null) {
+                return p;
+            }
         }
-        return p;
+        synchronized (this) {
+            if (previous == null) {
+                previous = Rolling.getPrevious(this);
+            }
+            return previous;
+        }
     }
 
     /**
@@ -83,11 +90,18 @@ public enum 地支 implements Rolling<地支> { // \u5730\u652f
      */
     @Override
     public 地支 getNext() {
-        地支 n = next;
-        if (n == null) {
-            next = n = Rolling.getNext(this);
+        {
+            final 地支 n = next;
+            if (n != null) {
+                return n;
+            }
         }
-        return n;
+        synchronized (this) {
+            if (next == null) {
+                next = Rolling.getNext(this);
+            }
+            return next;
+        }
     }
 
     // -----------------------------------------------------------------------------------------------------------------

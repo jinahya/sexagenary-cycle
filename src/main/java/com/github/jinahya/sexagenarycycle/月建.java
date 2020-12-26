@@ -24,14 +24,14 @@ public class 月建 extends Assigned<月建> { // 월건
     // -----------------------------------------------------------------------------------------------------------------
 
     /**
-     * Creates a new instance with specified 歲次 and month representing a leap month.
+     * Creates a new instance with specified 月 and 歲次 representing a 閏月.
      *
-     * @param month the month.
-     * @param 歲次    the 歲次.
-     * @return a new instance represents a leap month.
+     * @param 月  the 月.
+     * @param 歲次 the 歲次.
+     * @return a new instance represents a 閏月.
      */
-    public static 月建 ofLeapMonth(final Month month, final 歲次 歲次) {
-        return new 月建(null, month, 歲次);
+    public static 月建 of閏月(final Month 月, final 歲次 歲次) {
+        return new 月建(null, 月, 歲次);
     }
 
     // -------------------------------------------------------------------------------------------------------------
@@ -45,7 +45,7 @@ public class 月建 extends Assigned<月建> { // 월건
      */
     public 月建(final 干支 干支, final Month 月, final 歲次 歲次) {
         super(干支);
-        this.月 = Objects.requireNonNull(月, "month is null");
+        this.月 = Objects.requireNonNull(月, "月 is null");
         this.歲次 = Objects.requireNonNull(歲次, " 歲次 is null");
     }
 

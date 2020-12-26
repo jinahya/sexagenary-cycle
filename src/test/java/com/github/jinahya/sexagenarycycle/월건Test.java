@@ -24,9 +24,9 @@ class 월건Test {
         if (!月建.is閏月()) {
             return;
         }
-        final 월건 월건 = com.github.jinahya.sexagenarycycle.월건.ofLeapMonth(月建.月, 세차.from(月建.歲次));
+        final 월건 월건 = com.github.jinahya.sexagenarycycle.월건.of윤달(月建.月, 세차.from(月建.歲次));
         assertThat(월건).isNotNull().satisfies(v -> {
-            assertThat(v.is閏달()).isTrue();
+            assertThat(v.is윤달()).isTrue();
         });
     }
 
