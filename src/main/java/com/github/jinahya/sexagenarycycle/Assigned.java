@@ -2,7 +2,7 @@ package com.github.jinahya.sexagenarycycle;
 
 import java.util.Objects;
 
-abstract class Assigned<T extends Assigned<T>> implements Comparable<T>, Cloneable {
+abstract class Assigned<T extends Assigned<T>> implements Comparable<T> {
 
     /**
      * Creates a new instance with specified 干支.
@@ -38,8 +38,8 @@ abstract class Assigned<T extends Assigned<T>> implements Comparable<T>, Cloneab
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Assigned<?> casted = (Assigned<?>) o;
-        return Objects.equals(干支, casted.干支);
+        Assigned<?> assigned = (Assigned<?>) o;
+        return Objects.equals(干支, assigned.干支);
     }
 
     /**
@@ -55,24 +55,7 @@ abstract class Assigned<T extends Assigned<T>> implements Comparable<T>, Cloneab
     // -----------------------------------------------------------------------------------------------------------------
 
     /**
-     * Creates and returns copy of this object.
-     *
-     * @return a clone of this instance.
-     */
-    @SuppressWarnings({"unchecked"})
-    @Override
-    public T clone() {
-        try {
-            return (T) super.clone();
-        } catch (final CloneNotSupportedException cnse) {
-            throw new AssertionError("failed to clone; " + cnse.toString());
-        }
-    }
-
-    // -----------------------------------------------------------------------------------------------------------------
-
-    /**
      * The 干支 assigned to this value; maybe {@code null} when none assigned.
      */
-    public final 干支 干支;
+    public final 干支 干支; // may be null
 }

@@ -40,13 +40,6 @@ class 歲次Test {
         assertThat(歲次.equals(歲次)).isTrue();
     }
 
-    @MethodSource({"parameters"})
-    @ParameterizedTest
-    void equals_True_Clone(final 歲次 歲次) {
-        assertThat(歲次).isEqualTo(歲次.clone());
-        assertThat(歲次.equals(歲次.clone())).isTrue();
-    }
-
     // ---------------------------------------------------------------------------------- compareTo(Ljava.lang.Object;)B
     @Test
     void compareTo_() {
@@ -64,7 +57,6 @@ class 歲次Test {
     @MethodSource({"parameters"})
     @ParameterizedTest
     void compareTo_(final 歲次 歲次) {
-        assertThat(歲次).isEqualByComparingTo(歲次.clone());
         assertThat(歲次).isGreaterThan(歲次.getPrevious());
         assertThat(歲次.getPrevious()).isLessThan(歲次);
         assertThat(歲次).isLessThan(歲次.getNext());

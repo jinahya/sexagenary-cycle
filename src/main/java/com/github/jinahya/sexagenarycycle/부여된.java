@@ -4,7 +4,7 @@ import javax.validation.constraints.NotNull;
 import java.util.Objects;
 import java.util.Optional;
 
-abstract class 부여된<T extends 부여된<T, U>, U extends Assigned<U>> implements Comparable<T>, Cloneable {
+abstract class 부여된<T extends 부여된<T, U>, U extends Assigned<U>> implements Comparable<T> {
 
     부여된(final U assigned) {
         super();
@@ -39,17 +39,6 @@ abstract class 부여된<T extends 부여된<T, U>, U extends Assigned<U>> imple
     @Override
     public int compareTo(T o) {
         return assigned.compareTo(o.assigned);
-    }
-
-    // -----------------------------------------------------------------------------------------------------------------
-    @Override
-    @SuppressWarnings({"unchecked"})
-    public T clone() {
-        try {
-            return (T) super.clone();
-        } catch (final CloneNotSupportedException cnse) {
-            throw new AssertionError("failed to clone; " + cnse.toString());
-        }
     }
 
     // -----------------------------------------------------------------------------------------------------------------
