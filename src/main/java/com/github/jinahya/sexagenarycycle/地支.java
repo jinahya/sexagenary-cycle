@@ -15,17 +15,40 @@ import java.util.Objects;
  */
 public enum 地支 implements RollingEnum<地支> { // \u5730\u652f
 
+    @SuppressWarnings({"java:S115"})
     子, // 자
+
+    @SuppressWarnings({"java:S115"})
     丑, // 축
+
+    @SuppressWarnings({"java:S115"})
     寅, // 인
+
+    @SuppressWarnings({"java:S115"})
     卯, // 묘
+
+    @SuppressWarnings({"java:S115"})
     辰, // 진
+
+    @SuppressWarnings({"java:S115"})
     巳, // 사
+
+    @SuppressWarnings({"java:S115"})
     午, // 오
+
+    @SuppressWarnings({"java:S115"})
     未, // 미
+
+    @SuppressWarnings({"java:S115"})
     申, // 신
+
+    @SuppressWarnings({"java:S115"})
     酉, // 유
+
+    @SuppressWarnings({"java:S115"})
     戌, // 술
+
+    @SuppressWarnings({"java:S115"})
     亥; // 해
 
     // -----------------------------------------------------------------------------------------------------------------

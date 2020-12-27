@@ -14,15 +14,34 @@ import java.util.Objects;
  */
 public enum 天干 implements RollingEnum<天干> { // \u5929\u5e72
 
+    @SuppressWarnings({"java:S115"})
     甲, // 갑
+
+    @SuppressWarnings({"java:S115"})
     乙, // 을
+
+    @SuppressWarnings({"java:S115"})
     丙, // 병
+
+    @SuppressWarnings({"java:S115"})
     丁, // 정
+
+    @SuppressWarnings({"java:S115"})
     戊, // 무
+
+    @SuppressWarnings({"java:S115"})
     己, // 기
+
+    @SuppressWarnings({"java:S115"})
     庚, // 경
+
+    @SuppressWarnings({"java:S115"})
     辛, // 신
+
+    @SuppressWarnings({"java:S115"})
     壬, // 임
+
+    @SuppressWarnings({"java:S115"})
     癸; // 계
 
     // -----------------------------------------------------------------------------------------------------------------
