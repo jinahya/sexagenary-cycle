@@ -4,12 +4,11 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Optional;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
-import static java.util.Optional.ofNullable;
-
-public enum 二十四方 implements Rolling<二十四方> {
+public enum 二十四方 implements RollingEnum<二十四方> {
 
     子,
     癸,
@@ -70,7 +69,7 @@ public enum 二十四方 implements Rolling<二十四方> {
     public static 二十四方 valueOfDirection(final int direction, final boolean exact) {
         final int d = (direction % 360) + (direction < 0 ? 360 : 0);
         if (exact) {
-            return ofNullable(VALUES_BY_DIRECTIONS.get(d % 360))
+            return Optional.ofNullable(VALUES_BY_DIRECTIONS.get(d % 360))
                     .orElseThrow(() -> new IllegalArgumentException("no value for direction " + direction));
         } else {
             final int index = Math.round(d / 15.0f);
@@ -84,43 +83,5 @@ public enum 二十四方 implements Rolling<二十四方> {
     }
 
     // -----------------------------------------------------------------------------------------------------------------
-    @Override
-    public 二十四方 getPrevious() {
-        {
-            final 二十四方 result = previous;
-            if (result != null) {
-                return result;
-            }
-        }
-        synchronized (this) {
-            if (previous == null) {
-                previous = Rolling.getPrevious(this);
-            }
-            return previous;
-        }
-    }
-
-    @Override
-    public 二十四方 getNext() {
-        {
-            final 二十四方 result = next;
-            if (result != null) {
-                return result;
-            }
-        }
-        synchronized (this) {
-            if (next == null) {
-                next = Rolling.getNext(this);
-            }
-            return next;
-        }
-    }
-
-    // -----------------------------------------------------------------------------------------------------------------
     public final int direction;
-
-    // -----------------------------------------------------------------------------------------------------------------
-    private volatile 二十四方 previous;
-
-    private volatile 二十四方 next;
 }

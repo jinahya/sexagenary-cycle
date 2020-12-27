@@ -1,15 +1,17 @@
 package com.github.jinahya.sexagenarycycle;
 
 import javax.validation.constraints.NotNull;
-import java.util.ArrayList;
 import java.util.Collections;
-import java.util.EnumMap;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
-import java.util.Optional;
 import java.util.function.Function;
 import java.util.stream.Collectors;
+
+import static com.github.jinahya.sexagenarycycle.干支.REGEXP_NAME_GROUP_BRANCH;
+import static com.github.jinahya.sexagenarycycle.干支.REGEXP_NAME_GROUP_STEM;
+import static java.util.Objects.requireNonNull;
 
 /**
  * A class for <a href="https://en.wikipedia.org/wiki/Sexagenary_cycle">Sexagenary cycle</a>.
@@ -17,7 +19,7 @@ import java.util.stream.Collectors;
  * @author Jin Kwon &lt;onacit_at_gmail.com&gt;
  * @see <a href="https://ko.wikipedia.org/wiki/%EA%B0%84%EC%A7%80">간지</a>
  */
-public final class 간지 { // \uac04\uc9c0
+public final class 간지 implements Rolling<간지> { // \uac04\uc9c0
 
     // -----------------------------------------------------------------------------------------------------------------
 
@@ -25,53 +27,34 @@ public final class 간지 { // \uac04\uc9c0
      * A regular expression for matching {@link #name() name}. The value is {@value}.
      */
     public static final String REGEXP_NAME
-            = "(?<" + com.github.jinahya.sexagenarycycle.干支.REGEXP_NAME_GROUP_STEM + ">" + 천간.REGEXP_NAME + ")"
-              + "(?<" + com.github.jinahya.sexagenarycycle.干支.REGEXP_NAME_GROUP_BRANCH + ">" + 지지.REGEXP_NAME + ")";
+            = "(?<" + REGEXP_NAME_GROUP_STEM + ">" + 천간.REGEXP_NAME + ")"
+              + "(?<" + REGEXP_NAME_GROUP_BRANCH + ">" + 지지.REGEXP_NAME + ")";
 
     // -----------------------------------------------------------------------------------------------------------------
+    static final List<간지> VALUES = Collections.unmodifiableList(
+            com.github.jinahya.sexagenarycycle.干支.VALUES.stream()
+                    .map(간지::new)
+                    .collect(Collectors.toList())
+    );
 
-    /**
-     * An unmodifiable list of all values.
-     */
-    public static final List<간지> VALUES;
+    static final Map<干支, 간지> VALUES_BY_干支S = Collections.unmodifiableMap(
+            VALUES.stream().collect(Collectors.toMap(
+                    v -> v.干支,
+                    Function.identity(),
+                    (v1, v2) -> {
+                        throw new AssertionError("duplicate value: " + v1 + ", " + v2);
+                    },
+                    HashMap::new
+            ))
+    );
 
-    static {
-        final List<간지> values = new ArrayList<>();
-        {
-            final 천간[] stems = 천간.values();
-            final 지지[] branches = 지지.values();
-            for (int s = 0, b = 0; ; s = ++s % stems.length, b = ++b % branches.length) {
-                values.add(new 간지(stems[s], branches[b]));
-                if (s == stems.length - 1 && b == branches.length - 1) {
-                    break;
-                }
-            }
+    public static 간지 valueOf(final 干支 干支) {
+        requireNonNull(干支, "干支 is null");
+        final 간지 value = VALUES_BY_干支S.get(干支);
+        if (value == null) {
+            throw new AssertionError("shouldn't happen; no value for " + 干支);
         }
-        VALUES = Collections.unmodifiableList(values);
-    }
-
-    // -----------------------------------------------------------------------------------------------------------------
-    private static final Map<천간, Map<지지, 간지>> VALUES_BY_간_AND_지;
-
-    static {
-        final Map<천간, Map<지지, 간지>> hashedValues = new EnumMap<>(천간.class);
-        VALUES.forEach(v -> hashedValues.computeIfAbsent(v.간, k -> new EnumMap<>(지지.class)).put(v.지, v));
-        VALUES_BY_간_AND_지 = Collections.unmodifiableMap(hashedValues);
-    }
-
-    /**
-     * Returns the value of specified 천간 and 지지.
-     *
-     * @param 간 the value of 천간.
-     * @param 지 the value of 지지.
-     * @return the value of {@code 간} and {@code 지}.
-     */
-    public static 간지 of(final 천간 간, final 지지 지) {
-        Objects.requireNonNull(간, "간 is null");
-        Objects.requireNonNull(지, "지 is null");
-        return Optional.ofNullable(VALUES_BY_간_AND_지.get(간))
-                .map(m -> m.get(지))
-                .orElseThrow(() -> new IllegalArgumentException("no value for " + 간 + " and " + 지));
+        return value;
     }
 
     // -----------------------------------------------------------------------------------------------------------------
@@ -84,37 +67,25 @@ public final class 간지 { // \uac04\uc9c0
      * @param name the name.
      * @return the value of {@code name}.
      */
-    public static 간지 ofName(final String name) {
-        Objects.requireNonNull(name, "name is null");
-        return Optional.ofNullable(VALUES_BY_NAMES.get(name))
-                .orElseThrow(() -> new IllegalArgumentException("no value for name: " + name));
+    public static 간지 valueOfName(final String name) {
+        requireNonNull(name, "name is null");
+        final 간지 value = VALUES_BY_NAMES.get(name);
+        if (value == null) {
+            throw new IllegalArgumentException("no value for name: " + name);
+        }
+        return value;
     }
 
     // -----------------------------------------------------------------------------------------------------------------
 
     /**
-     * Returns the value of specified 干支.
+     * Creates a new instance with specified 干支.
      *
      * @param 干支 the 干支.
-     * @return the value of {@code 干支}.
      */
-    public static 간지 from(final 干支 干支) {
-        Objects.requireNonNull(干支, "干支 is null");
-        return of(천간.valueOf(干支.干), 지지.valueOf(干支.支));
-    }
-
-    // -----------------------------------------------------------------------------------------------------------------
-
-    /**
-     * Creates a new instance with specified 천간 and 지지.
-     *
-     * @param 간 the value of 천간.
-     * @param 지 the value of 지지.
-     */
-    private 간지(final 천간 간, final 지지 지) {
+    private 간지(final 干支 干支) {
         super();
-        this.간 = Objects.requireNonNull(간, "干 is null");
-        this.지 = Objects.requireNonNull(지, "支 is null");
+        this.干支 = requireNonNull(干支, "干支 is null");
     }
 
     // -----------------------------------------------------------------------------------------------------------------
@@ -127,39 +98,23 @@ public final class 간지 { // \uac04\uc9c0
     @Override
     public String toString() {
         return super.toString() + '{'
-               + "간=" + 간
-               + ",지=" + 지
+               + "干支=" + 干支
                + '}';
     }
 
     // -----------------------------------------------------------------------------------------------------------------
 
-    /**
-     * Indicates whether some other object is "equal to" this one.
-     *
-     * @param obj the reference object with which to compare.
-     * @return {@code true} if this object is the same as the obj argument; {@code false} otherwise.
-     */
     @Override
-    public boolean equals(final Object obj) {
-        if (this == obj) {
-            return true;
-        }
-        if (obj == null || getClass() != obj.getClass()) {
-            return false;
-        }
-        final 간지 casted = (간지) obj;
-        return 간 == casted.간 && 지 == casted.지;
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        간지 casted = (간지) o;
+        return 干支.equals(casted.干支);
     }
 
-    /**
-     * Returns a hash code value for the object.
-     *
-     * @return a hash code value for this object.
-     */
     @Override
     public int hashCode() {
-        return Objects.hash(간, 지);
+        return Objects.hash(干支);
     }
 
     // -----------------------------------------------------------------------------------------------------------------
@@ -168,48 +123,46 @@ public final class 간지 { // \uac04\uc9c0
      * Returns the name of this 간지.
      *
      * @return the name of this 간지.
-     * @see #ofName(String)
+     * @see #valueOfName(String)
      */
     public String name() {
-        return 간.name() + 지.name();
-    }
-
-    // -------------------------------------------------------------------------------------------------------------- 干支
-
-    /**
-     * Returns the 干支 value equivalent to this 지지.
-     *
-     * @return the 干支 value equivalent to this 지지.
-     */
-    public 干支 to干支() {
-        {
-            final 干支 result = 干支;
-            if (result != null) {
-                return result;
-            }
-        }
-        synchronized (this) {
-            if (干支 == null) {
-                干支 = com.github.jinahya.sexagenarycycle.干支.of(간.天干, 지.地支);
-            }
-            return 干支;
-        }
+        return get간().name() + get지().name();
     }
 
     // -----------------------------------------------------------------------------------------------------------------
+    @Override
+    public 간지 getPrevious() {
+        return RollingHelper.getPrevious(this, c -> valueOf(c.干支.getPrevious()));
+    }
 
-    /**
-     * The 천간 of this 간지.
-     */
-    @NotNull
-    public final 천간 간;
-
-    /**
-     * The 지지 of this 간지.
-     */
-    @NotNull
-    public final 지지 지;
+    @Override
+    public 간지 getNext() {
+        return RollingHelper.getNext(this, c -> valueOf(c.干支.getNext()));
+    }
 
     // -----------------------------------------------------------------------------------------------------------------
-    private volatile 干支 干支;
+    public 천간 get간() {
+        천간 result = 간;
+        if (result == null) {
+            간 = result = 천간.valueOf(干支.干);
+        }
+        return result;
+    }
+
+    public 지지 get지() {
+        지지 result = 지;
+        if (result == null) {
+            지 = result = 지지.valueOf(干支.支);
+        }
+        return result;
+    }
+
+    // -----------------------------------------------------------------------------------------------------------------
+    @NotNull
+    public final 干支 干支;
+
+    // -----------------------------------------------------------------------------------------------------------------
+    private volatile 천간 간;
+
+    private volatile 지지 지;
 }

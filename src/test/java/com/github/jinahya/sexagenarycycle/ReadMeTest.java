@@ -60,7 +60,7 @@ class ReadMeTest {
         }
         {
             // (陰曆) 2020-04; the 2nd APRIL of 2020.
-            final 月建 閏四月 = 月建.of閏月(Month.APRIL, 庚子年);
+            final 月建 閏四月 = 月建.newInstanceOf閏月(Month.APRIL, 庚子年);
             assert 閏四月.is閏月();
             // (陰曆) 2020-04-01 represents (陽曆) 2020-05-23.
             final 日辰 丙寅日 = new 日辰(干支.ofName("丙寅"), 1, 閏四月);

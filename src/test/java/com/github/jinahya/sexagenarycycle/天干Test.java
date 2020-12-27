@@ -8,9 +8,7 @@ import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 
 import java.util.Arrays;
-import java.util.EnumSet;
 import java.util.List;
-import java.util.Set;
 import java.util.regex.Pattern;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
@@ -19,7 +17,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 @Slf4j
-class 天干Test {
+class 天干Test implements RollingEnumTest<天干> {
 
     static final List<String> VALID_NAMES = Arrays.asList("甲", "乙", "丙", "丁", "戊", "己", "庚", "辛", "壬", "癸");
 
@@ -98,40 +96,6 @@ class 天干Test {
     void get陰陽_NonNull() {
         for (final 天干 value : 天干.values()) {
             assertThat(value.get陰陽()).isNotNull();
-        }
-    }
-
-    // -----------------------------------------------------------------------------------------------------------------
-    @DisplayName("getPrevious() returns expected value")
-    @Test
-    void getPrevious_ExpectedResult() {
-        final Set<天干> all = EnumSet.allOf(天干.class);
-        for (final 天干 each : all) {
-            assertThat(each.getPrevious()).isNotNull().isNotSameAs(each)
-                    .satisfies(p -> {
-                        assertThat(p.getNext()).isNotNull().isSameAs(each);
-                        assertThat(p.ordinal()).satisfiesAnyOf(
-                                o -> assertThat(o).isSameAs(each.ordinal() - 1),
-                                o -> assertThat(o).isSameAs(all.size() - 1)
-                        );
-                    });
-        }
-    }
-
-    // -----------------------------------------------------------------------------------------------------------------
-    @DisplayName("getNext() returns expected value")
-    @Test
-    void getNext_ExpectedResult() {
-        final Set<天干> all = EnumSet.allOf(天干.class);
-        for (final 天干 each : all) {
-            assertThat(each.getNext()).isNotNull().isNotSameAs(each)
-                    .satisfies(n -> {
-                        assertThat(n.getPrevious()).isNotNull().isSameAs(each);
-                        assertThat(n.ordinal()).satisfiesAnyOf(
-                                o -> assertThat(o).isSameAs(each.ordinal() + 1),
-                                o -> assertThat(o).isZero()
-                        );
-                    });
         }
     }
 }

@@ -16,7 +16,7 @@ public class 歲次 extends Assigned<歲次> implements Rolling<歲次> {
 
     static final Comparator<歲次> COMPARING_年 = Comparator.comparing(v -> v.年);
 
-    // -------------------------------------------------------------------------------------------------------------
+    // -----------------------------------------------------------------------------------------------------------------
 
     /**
      * Creates a new instance with specified 干支 and year.
@@ -29,7 +29,7 @@ public class 歲次 extends Assigned<歲次> implements Rolling<歲次> {
         this.年 = Objects.requireNonNull(年, "year is null");
     }
 
-    // -------------------------------------------------------------------------------------------------------------
+    // -----------------------------------------------------------------------------------------------------------------
 
     /**
      * Returns a string representation of the object.
@@ -54,8 +54,8 @@ public class 歲次 extends Assigned<歲次> implements Rolling<歲次> {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         if (!super.equals(o)) return false;
-        歲次 歲次 = (歲次) o;
-        return 年.equals(歲次.年);
+        final 歲次 casted = (歲次) o;
+        return 年.equals(casted.年);
     }
 
     /**
@@ -83,18 +83,7 @@ public class 歲次 extends Assigned<歲次> implements Rolling<歲次> {
      */
     @Override
     public 歲次 getPrevious() {
-        {
-            final 歲次 result = previous;
-            if (result != null) {
-                return result;
-            }
-        }
-        synchronized (this) {
-            if (previous == null) {
-                previous = new 歲次(干支.getPrevious(), 年.minusYears(1L));
-            }
-            return previous;
-        }
+        return RollingHelper.getPrevious(歲次.class, this, c -> new 歲次(c.干支.getPrevious(), c.年.minusYears(1L)));
     }
 
     /**
@@ -104,26 +93,10 @@ public class 歲次 extends Assigned<歲次> implements Rolling<歲次> {
      */
     @Override
     public 歲次 getNext() {
-        {
-            final 歲次 result = next;
-            if (result != null) {
-                return result;
-            }
-        }
-        synchronized (this) {
-            if (next == null) {
-                next = new 歲次(干支.getNext(), 年.plusYears(1L));
-            }
-            return next;
-        }
+        return RollingHelper.getNext(歲次.class, this, c -> new 歲次(c.干支.getNext(), c.年.plusYears(1L)));
     }
 
-    // -------------------------------------------------------------------------------------------------------------
+    // -----------------------------------------------------------------------------------------------------------------
     @NotNull
     public final Year 年;
-
-    // -----------------------------------------------------------------------------------------------------------------
-    private volatile 歲次 previous;
-
-    private volatile 歲次 next;
 }

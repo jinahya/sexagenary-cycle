@@ -30,7 +30,7 @@ public class 月建 extends Assigned<月建> { // 월건
      * @param 歲次 the 歲次.
      * @return a new instance represents a 閏月.
      */
-    public static 月建 of閏月(final Month 月, final 歲次 歲次) {
+    public static 月建 newInstanceOf閏月(final Month 月, final 歲次 歲次) {
         return new 月建(null, 月, 歲次);
     }
 

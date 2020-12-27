@@ -10,39 +10,10 @@ import static org.assertj.core.api.Assertions.assertThatNoException;
 
 class 월건Test {
 
-    // ---------------------------------------------------------------------------------------------------------- from月建
-    @MethodSource("com.github.jinahya.sexagenarycycle.月建Test#parameters")
-    @ParameterizedTest
-    void from月建_NonNull(final 月建 月建) {
-        final 월건 월건 = com.github.jinahya.sexagenarycycle.월건.from(月建);
-        assertThat(월건).isNotNull();
-    }
-
-    // ----------------------------------------------------------------------------------------------------- ofLeapMonth
-    @MethodSource("com.github.jinahya.sexagenarycycle.月建Test#parameters")
-    @ParameterizedTest
-    void ofLeapMonth_(final 月建 月建) {
-        if (!月建.is閏月()) {
-            return;
-        }
-        final 월건 월건 = com.github.jinahya.sexagenarycycle.월건.of윤달(月建.月, 세차.from(月建.歲次));
-        assertThat(월건).isNotNull().satisfies(v -> {
-            assertThat(v.is윤달()).isTrue();
-        });
-    }
-
     // -----------------------------------------------------------------------------------------------------------------
     static Stream<월건> parameters() {
         return 月建Test.parameters()
-                .map(월건::from);
-    }
-
-    // ------------------------------------------------------------------------------------------------------------ to月建
-    @MethodSource({"parameters"})
-    @ParameterizedTest
-    void to月建_NonNull_(final 월건 월건) {
-        final 月建 月建 = 월건.to月建();
-        assertThat(月建).isNotNull();
+                .map(월건::new);
     }
 
     // -------------------------------------------------------------------------------------------------------- toString
@@ -73,5 +44,12 @@ class 월건Test {
     @ParameterizedTest
     void hashCode_NoException_(final 월건 월건) {
         assertThatNoException().isThrownBy(월건::hashCode);
+    }
+
+    // -----------------------------------------------------------------------------------------------------------------
+    @MethodSource({"parameters"})
+    @ParameterizedTest
+    void is윤달(final 월건 월건) {
+        assertThat(월건.is윤달()).isSameAs(월건.assigned.is閏月());
     }
 }

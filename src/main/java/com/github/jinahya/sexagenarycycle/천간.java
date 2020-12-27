@@ -45,11 +45,11 @@ public enum 천간 { // \ucc9c\uac04
     private static final Map<String, 천간> VALUES_BY_NAMES;
 
     static {
-        final Map<String, 천간> m = new HashMap<>();
+        final Map<String, 천간> map = new HashMap<>();
         for (final 천간 value : values()) {
-            m.put(value.name(), value);
+            map.put(value.name(), value);
         }
-        VALUES_BY_NAMES = Collections.unmodifiableMap(m);
+        VALUES_BY_NAMES = Collections.unmodifiableMap(map);
     }
 
     /**

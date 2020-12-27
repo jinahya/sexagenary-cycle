@@ -21,7 +21,7 @@ final class 地支二十四方 {
             )
     );
 
-    static 二十四方 valueOf(final 地支 地支) {
+    public static 二十四方 valueOf(final 地支 地支) {
         Objects.requireNonNull(地支, "地支 is null");
         return MAP.get(地支);
     }

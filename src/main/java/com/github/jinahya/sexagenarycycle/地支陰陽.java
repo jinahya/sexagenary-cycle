@@ -3,8 +3,7 @@ package com.github.jinahya.sexagenarycycle;
 import java.util.Collections;
 import java.util.EnumMap;
 import java.util.Map;
-
-import static java.util.Objects.requireNonNull;
+import java.util.Objects;
 
 final class 地支陰陽 {
 
@@ -29,8 +28,8 @@ final class 地支陰陽 {
         MAP = Collections.unmodifiableMap(map);
     }
 
-    static 陰陽 valueOf(final 地支 地支) {
-        requireNonNull(地支, "地支 is null");
+    public static 陰陽 valueOf(final 地支 地支) {
+        Objects.requireNonNull(地支, "地支 is null");
         return MAP.get(地支);
     }
 

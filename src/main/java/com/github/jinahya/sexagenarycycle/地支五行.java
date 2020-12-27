@@ -6,7 +6,7 @@ import java.util.Map;
 
 final class 地支五行 {
 
-    public static final Map<地支, 五行> MAP;
+    public static final Map<地支, 五行> 五行S_BY_地支S;
 
     static {
         final Map<地支, 五行> map = new EnumMap<>(地支.class);
@@ -22,11 +22,11 @@ final class 地支五行 {
         map.put(地支.酉, 五行.金);
         map.put(地支.戌, 五行.土);
         map.put(地支.亥, 五行.水);
-        MAP = Collections.unmodifiableMap(map);
+        五行S_BY_地支S = Collections.unmodifiableMap(map);
     }
 
     static 五行 valueOf(final 地支 地支) {
-        return MAP.get(地支);
+        return 五行S_BY_地支S.get(地支);
     }
 
     private 地支五行() {

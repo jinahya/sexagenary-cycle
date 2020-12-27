@@ -21,7 +21,7 @@ final class 地支月份 {
         MAP = Collections.unmodifiableMap(map);
     }
 
-    static Month valueOf(final 地支 地支) {
+    public static Month valueOf(final 地支 地支) {
         Objects.requireNonNull(地支, "地支 is null");
         return MAP.get(地支);
     }

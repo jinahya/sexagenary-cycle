@@ -13,7 +13,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 @Slf4j
-class 地支Test {
+class 地支Test implements RollingEnumTest<地支> {
 
     // -----------------------------------------------------------------------------------------------------------------
     @DisplayName("REGEXP_NAME matches for every value's name")
@@ -77,40 +77,6 @@ class 地支Test {
             assertThat(value.get月份()).isNotNull().satisfies(v -> {
                 assertThat(set.add(v)).isTrue();
             });
-        }
-    }
-
-    // -----------------------------------------------------------------------------------------------------------------
-    @DisplayName("getPrevious() returns expected value")
-    @Test
-    void getPrevious_ExpectedResult() {
-        final Set<地支> all = EnumSet.allOf(地支.class);
-        for (final 地支 each : all) {
-            assertThat(each.getPrevious()).isNotNull().isNotSameAs(each)
-                    .satisfies(p -> {
-                        assertThat(p.getNext()).isNotNull().isSameAs(each);
-                        assertThat(p.ordinal()).satisfiesAnyOf(
-                                o -> assertThat(o).isSameAs(all.size() - 1),
-                                o -> assertThat(o).isSameAs(each.ordinal() - 1)
-                        );
-                    });
-        }
-    }
-
-    // -----------------------------------------------------------------------------------------------------------------
-    @DisplayName("getNext() returns expected value")
-    @Test
-    void getNext_ExpectedResult() {
-        final Set<地支> all = EnumSet.allOf(地支.class);
-        for (final 地支 each : all) {
-            assertThat(each.getNext()).isNotNull().isNotSameAs(each)
-                    .satisfies(n -> {
-                        assertThat(n.getPrevious()).isNotNull().isSameAs(each);
-                        assertThat(n.ordinal()).satisfiesAnyOf(
-                                o -> assertThat(o).isZero(),
-                                o -> assertThat(o).isSameAs(each.ordinal() + 1)
-                        );
-                    });
         }
     }
 }

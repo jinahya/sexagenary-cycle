@@ -10,6 +10,7 @@ import org.junit.jupiter.params.provider.ValueSource;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -19,7 +20,7 @@ import static org.assertj.core.api.Assertions.assertThatNoException;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 @Slf4j
-class 간지Test {
+class 간지Test implements RollingTest<간지> {
 
     // -----------------------------------------------------------------------------------------------------------------
 
@@ -68,8 +69,6 @@ class 간지Test {
             final String name = value.name();
             assertThat(pattern.matcher(name)).satisfies(m -> {
                 assertThat(m.matches()).isTrue();
-                assertThat(m.group(干支.REGEXP_NAME_GROUP_STEM)).isNotNull().isEqualTo(value.간.name());
-                assertThat(m.group(干支.REGEXP_NAME_GROUP_BRANCH)).isNotNull().isEqualTo(value.지.name());
             });
         }
     }
@@ -84,50 +83,43 @@ class 간지Test {
         }
     }
 
-    // -------------------------------------------------------------------------------------------------------------- of
+    // ----------------------------------------------------------------------------------------------------- valueOf(干支)
     @Test
-    void of_NonNull() {
-        for (final 간지 value : 간지.VALUES) {
-            assertThat(간지.of(value.간, value.지)).isNotNull().isSameAs(value);
+    void valueOf干支_NonNullUnique() {
+        final Set<간지> set = new HashSet<>();
+        for (final 干支 value : 干支.VALUES) {
+            assertThat(간지.valueOf(value)).isNotNull().satisfies(v -> {
+                assertThat(set.add(v)).isTrue();
+            });
         }
     }
 
-    // ---------------------------------------------------------------------------------------------------------- ofName
-    @DisplayName("ofName(name) throws IllegalArgumentException when name is unknown")
+    // ----------------------------------------------------------------------------------------------------- valueOfName
+    @DisplayName("valueOfName(name) throws IllegalArgumentException when name is unknown")
     @ValueSource(strings = {"", "갑", "갑자갑"})
     @ParameterizedTest
-    void ofName_IllegalArgumentException_NameIsUnknown(final String unknownName) {
-        assertThrows(IllegalArgumentException.class, () -> 간지.ofName(unknownName));
+    void valueOfName_IllegalArgumentException_NameIsUnknown(final String unknownName) {
+        assertThrows(IllegalArgumentException.class, () -> 간지.valueOfName(unknownName));
     }
 
-    @Test
-    void ofName_NonNullSame_PredefinedValue() {
-        for (final 간지 value : 간지.VALUES) {
-            assertThat(간지.ofName(value.name())).isNotNull().isSameAs(value);
-        }
-    }
-
-    @DisplayName("ofName(name) returns non-null when name is known")
+    @DisplayName("valueOfName(name) returns non-null when name is valid")
     @MethodSource({"validNames"})
     @ParameterizedTest
-    void ofName_NonNull_NameIsKnown(final String knownName) {
-        assertThat(간지.ofName(knownName)).isNotNull();
+    void valueOfName_NonNull_NameIsKnown(final String validName) {
+        assertThat(간지.valueOfName(validName)).isNotNull();
     }
 
-    @DisplayName("ofName(name) throws IllegalArgumentException when name is invalid")
+    @DisplayName("valueOfName(name) throws IllegalArgumentException when name is invalid")
     @MethodSource({"invalidNames"})
     @ParameterizedTest
-    void ofName_IllegalArgumentException_NameIsInvalid(final String invalidName) {
-        assertThrows(IllegalArgumentException.class, () -> 간지.ofName(invalidName));
+    void valueOfName_IllegalArgumentException_NameIsInvalid(final String invalidName) {
+        assertThrows(IllegalArgumentException.class, () -> 간지.valueOfName(invalidName));
     }
 
-    // ------------------------------------------------------------------------------------------------------------ from
     @Test
-    void from_NonNullValid_() {
-        for (int i = 0; i < 干支Test.VALID_NAMES.size(); i++) {
-            final 干支 c = 干支.ofName(干支Test.VALID_NAMES.get(i));
-            final 간지 k = 간지.from(c);
-            assertThat(k).isNotNull().isSameAs(간지.ofName(VALID_NAMES.get(i)));
+    void valueOfName_NonNullSame_OwnName() {
+        for (final 간지 value : 간지.VALUES) {
+            assertThat(간지.valueOfName(value.name())).isNotNull().isSameAs(value);
         }
     }
 
@@ -185,7 +177,7 @@ class 간지Test {
     // ----------------------------------------------------------------------------------------------------- hashCode()I
     @DisplayName("hashCode() throws no exception")
     @Test
-    void hashCode_NoException_() {
+    void hashCode_NoExceptionThrown_() {
         for (final 간지 value : 간지.VALUES) {
             assertThatNoException().isThrownBy(value::hashCode);
         }
@@ -198,5 +190,11 @@ class 간지Test {
         for (final 간지 value : 간지.VALUES) {
             assertThat(value.name()).isNotNull().hasSize(2);
         }
+    }
+
+    // ------------------------------------------------------------------------------------------- getPrevious / getNext
+    @Override
+    public 간지[] values() {
+        return 간지.VALUES.toArray(new 간지[0]);
     }
 }

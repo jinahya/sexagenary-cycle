@@ -6,7 +6,7 @@ import org.junit.jupiter.api.Test;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
 @Slf4j
-class 二十四方Test {
+class 二十四方Test implements RollingEnumTest<二十四方> {
 
     // -----------------------------------------------------------------------------------------------------------------
     @Test
@@ -48,25 +48,9 @@ class 二十四方Test {
 
     // ------------------------------------------------------------------------------------------------------- direction
     @Test
-    void direction_IsEqualToOrdinalTimes15() {
+    void direction_OrdinalTimes15() {
         for (final 二十四方 value : 二十四方.values()) {
             assertThat(value.direction).isEqualTo(value.ordinal() * 15);
-        }
-    }
-
-    // --------------------------------------------------------------------------------------------------- getPrevious()
-    @Test
-    void getPrevious_NonNull_() {
-        for (final 二十四方 value : 二十四方.values()) {
-            assertThat(value.getPrevious()).isNotNull();
-        }
-    }
-
-    // ------------------------------------------------------------------------------------------------------- getNext()
-    @Test
-    void getNext_NonNull_() {
-        for (final 二十四方 value : 二十四方.values()) {
-            assertThat(value.getNext()).isNotNull();
         }
     }
 }

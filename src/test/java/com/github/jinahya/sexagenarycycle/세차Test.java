@@ -8,19 +8,12 @@ import java.util.stream.Stream;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatNoException;
 
-class 세차Test {
-
-    // ------------------------------------------------------------------------------------------------------- from(歲次)
-    @MethodSource("com.github.jinahya.sexagenarycycle.歲次Test#parameters")
-    @ParameterizedTest
-    void from歲次_NonNullValid(final 歲次 歲次) {
-        assertThat(세차.from(歲次)).isNotNull();
-    }
+class 세차Test implements RollingTest<세차> {
 
     // -----------------------------------------------------------------------------------------------------------------
     static Stream<세차> parameters() {
         return 歲次Test.parameters()
-                .map(세차::from);
+                .map(세차::new);
     }
 
     // -----------------------------------------------------------------------------------------------------------------
@@ -56,5 +49,11 @@ class 세차Test {
     void compareTo_Zero(final 세차 세차) {
         assertThat(세차).isEqualByComparingTo(세차);
         assertThat(세차).isEqualByComparingTo(세차.clone());
+    }
+
+    // -----------------------------------------------------------------------------------------------------------------
+    @Override
+    public 세차[] values() {
+        return parameters().toArray(세차[]::new);
     }
 }

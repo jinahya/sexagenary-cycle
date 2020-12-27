@@ -1,20 +1,23 @@
 package com.github.jinahya.sexagenarycycle;
 
+import javax.validation.constraints.NotNull;
 import java.util.Objects;
+import java.util.Optional;
 
-abstract class 부여된<T extends 부여된<T>> implements Comparable<T>, Cloneable {
+abstract class 부여된<T extends 부여된<T, U>, U extends Assigned<U>> implements Comparable<T>, Cloneable {
 
-    부여된(final 간지 간지) {
+    부여된(final U assigned) {
         super();
-        this.간지 = 간지;
+        this.assigned = Objects.requireNonNull(assigned, "assigned is null");
+        간지 = Optional.ofNullable(this.assigned.干支).map(com.github.jinahya.sexagenarycycle.간지::valueOf).orElse(null);
     }
 
     // -----------------------------------------------------------------------------------------------------------------
     @Override
     public String toString() {
-        return super.toString() + '{' +
-               "간지=" + 간지 +
-               '}';
+        return super.toString() + '{'
+               + "assigned=" + assigned
+               + '}';
     }
 
     // -----------------------------------------------------------------------------------------------------------------
@@ -23,13 +26,19 @@ abstract class 부여된<T extends 부여된<T>> implements Comparable<T>, Clone
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        부여된<?> casted = (부여된<?>) o;
-        return Objects.equals(간지, casted.간지);
+        부여된<?, ?> casted = (부여된<?, ?>) o;
+        return assigned.equals(casted.assigned);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(간지);
+        return Objects.hash(assigned);
+    }
+
+    // -----------------------------------------------------------------------------------------------------------------
+    @Override
+    public int compareTo(T o) {
+        return assigned.compareTo(o.assigned);
     }
 
     // -----------------------------------------------------------------------------------------------------------------
@@ -44,9 +53,8 @@ abstract class 부여된<T extends 부여된<T>> implements Comparable<T>, Clone
     }
 
     // -----------------------------------------------------------------------------------------------------------------
+    @NotNull
+    protected final U assigned;
 
-    /**
-     * The 간지 assigned to this value; maybe {@code null} when none assigned.
-     */
     public final 간지 간지;
 }

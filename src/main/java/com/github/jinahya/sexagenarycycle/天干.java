@@ -12,7 +12,7 @@ import java.util.Objects;
  * @see 천간
  * @see <a href="https://zh.wikipedia.org/wiki/%E5%A4%A9%E5%B9%B2">天干</a>
  */
-public enum 天干 implements Rolling<天干> { // \u5929\u5e72
+public enum 天干 implements RollingEnum<天干> { // \u5929\u5e72
 
     甲, // 갑
     乙, // 을
@@ -91,53 +91,4 @@ public enum 天干 implements Rolling<天干> { // \u5929\u5e72
     public 陰陽 get陰陽() {
         return 天干陰陽.valueOf(this);
     }
-
-    // -----------------------------------------------------------------------------------------------------------------
-
-    /**
-     * Returns the previous value of this 天干.
-     *
-     * @return the previous value of this 天干.
-     */
-    @Override
-    public 天干 getPrevious() {
-        {
-            final 天干 result = previous;
-            if (result != null) {
-                return result;
-            }
-        }
-        synchronized (this) {
-            if (previous == null) {
-                previous = Rolling.getPrevious(this);
-            }
-            return previous;
-        }
-    }
-
-    /**
-     * Returns the next value of this 天干.
-     *
-     * @return the next value of this 天干.
-     */
-    @Override
-    public 天干 getNext() {
-        {
-            final 天干 result = next;
-            if (result != null) {
-                return result;
-            }
-        }
-        synchronized (this) {
-            if (next == null) {
-                next = Rolling.getNext(this);
-            }
-            return next;
-        }
-    }
-
-    // -----------------------------------------------------------------------------------------------------------------
-    private volatile 天干 previous;
-
-    private volatile 天干 next;
 }

@@ -5,11 +5,16 @@ import java.util.Collections;
 import java.util.EnumMap;
 import java.util.Map;
 import java.util.Objects;
-import java.util.Optional;
 
+/**
+ * Constants for <a href="https://en.wikipedia.org/wiki/Wuxing_(Chinese_philosophy)">Wuxing (Chinese philosophy)</a>.
+ *
+ * @see 五行
+ * @see <a href="https://ko.wikipedia.org/wiki/%EC%98%A4%ED%96%89">오행</a>
+ */
 public enum 오행 {
 
-    수(com.github.jinahya.sexagenarycycle.五行.木),
+    수(com.github.jinahya.sexagenarycycle.五行.水),
     화(com.github.jinahya.sexagenarycycle.五行.火),
     목(com.github.jinahya.sexagenarycycle.五行.木),
     금(com.github.jinahya.sexagenarycycle.五行.金),
@@ -28,8 +33,11 @@ public enum 오행 {
 
     public static 오행 valueOf(final 五行 五行) {
         Objects.requireNonNull(五行, "五行 is null");
-        return Optional.ofNullable(VALUES_BY_五行S.get(五行))
-                .orElseThrow(() -> new IllegalArgumentException("no value for " + 五行));
+        final 오행 value = VALUES_BY_五行S.get(五行);
+        if (value == null) {
+            throw new AssertionError("shouldn't happen; no value for " + 五行);
+        }
+        return value;
     }
 
     // -----------------------------------------------------------------------------------------------------------------

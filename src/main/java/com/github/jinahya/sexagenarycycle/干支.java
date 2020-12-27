@@ -17,7 +17,7 @@ import java.util.stream.Collectors;
  * @author Jin Kwon &lt;onacit_at_gmail.com&gt;
  * @see <a href="https://zh.wikipedia.org/wiki/%E5%B9%B2%E6%94%AF">干支</a>.
  */
-public final class 干支 { // \u5e72\u652f
+public final class 干支 implements Rolling<干支> { // \u5e72\u652f
 
     // -----------------------------------------------------------------------------------------------------------------
 
@@ -182,20 +182,9 @@ public final class 干支 { // \u5e72\u652f
      *
      * @return previous value of this 干支.
      */
-    // http://jtechies.blogspot.com/2012/07/item-71-use-lazy-initialization.html
+    @Override
     public 干支 getPrevious() {
-        {
-            final 干支 result = previous;
-            if (result != null) {
-                return result;
-            }
-        }
-        synchronized (this) {
-            if (previous == null) {
-                previous = of(干.getPrevious(), 支.getPrevious());
-            }
-            return previous;
-        }
+        return RollingHelper.getPrevious(this, c -> of(c.干.getPrevious(), c.支.getPrevious()));
     }
 
     /**
@@ -203,20 +192,9 @@ public final class 干支 { // \u5e72\u652f
      *
      * @return next value of this 干支.
      */
-    // http://jtechies.blogspot.com/2012/07/item-71-use-lazy-initialization.html
+    @Override
     public 干支 getNext() {
-        {
-            final 干支 result = next;
-            if (result != null) {
-                return result;
-            }
-        }
-        synchronized (this) {
-            if (next == null) {
-                next = of(干.getNext(), 支.getNext());
-            }
-            return next;
-        }
+        return RollingHelper.getNext(this, c -> of(c.干.getNext(), c.支.getNext()));
     }
 
     // -----------------------------------------------------------------------------------------------------------------
@@ -225,9 +203,4 @@ public final class 干支 { // \u5e72\u652f
 
     @NotNull
     public final 地支 支;
-
-    // -----------------------------------------------------------------------------------------------------------------
-    private volatile 干支 previous;
-
-    private volatile 干支 next;
 }

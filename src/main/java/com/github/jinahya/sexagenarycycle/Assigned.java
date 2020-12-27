@@ -38,8 +38,8 @@ abstract class Assigned<T extends Assigned<T>> implements Comparable<T>, Cloneab
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Assigned<?> assigned = (Assigned<?>) o;
-        return Objects.equals(干支, assigned.干支);
+        Assigned<?> casted = (Assigned<?>) o;
+        return Objects.equals(干支, casted.干支);
     }
 
     /**
@@ -74,5 +74,5 @@ abstract class Assigned<T extends Assigned<T>> implements Comparable<T>, Cloneab
     /**
      * The 干支 assigned to this value; maybe {@code null} when none assigned.
      */
-    public final 干支 干支; // may be null
+    public final 干支 干支;
 }

@@ -4,8 +4,7 @@ import java.time.Month;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
-
-import static java.util.Objects.requireNonNull;
+import java.util.Objects;
 
 /**
  * Constants of 10 <a href="https://en.wikipedia.org/wiki/Earthly_Branches">Earthly Branches</a>.
@@ -14,7 +13,7 @@ import static java.util.Objects.requireNonNull;
  * @see 지지
  * @see <a href="https://zh.wikipedia.org/wiki/%E5%9C%B0%E6%94%AF">地支</a>
  */
-public enum 地支 implements Rolling<地支> { // \u5730\u652f
+public enum 地支 implements RollingEnum<地支> { // \u5730\u652f
 
     子, // 자
     丑, // 축
@@ -55,7 +54,7 @@ public enum 地支 implements Rolling<地支> { // \u5730\u652f
      * @return the constant associated with {@code name}.
      */
     public static 地支 ofName(final String name) {
-        requireNonNull(name, "name is null");
+        Objects.requireNonNull(name, "name is null");
         final 地支 value = VALUES_BY_NAMES.get(name);
         if (value == null) {
             throw new IllegalArgumentException("no value for name: " + name);
@@ -104,52 +103,4 @@ public enum 地支 implements Rolling<地支> { // \u5730\u652f
     public 陰陽 get陰陽() {
         return 地支陰陽.valueOf(this);
     }
-
-    // -----------------------------------------------------------------------------------------------------------------
-
-    /**
-     * Returns the previous value of this 地支.
-     *
-     * @return the previous value of this 地支.
-     */
-    public 地支 getPrevious() {
-        {
-            final 地支 result = previous;
-            if (result != null) {
-                return result;
-            }
-        }
-        synchronized (this) {
-            if (previous == null) {
-                previous = Rolling.getPrevious(this);
-            }
-            return previous;
-        }
-    }
-
-    /**
-     * Returns the next value of this 地支.
-     *
-     * @return the next value of this 地支.
-     */
-    @Override
-    public 地支 getNext() {
-        {
-            final 地支 result = next;
-            if (result != null) {
-                return result;
-            }
-        }
-        synchronized (this) {
-            if (next == null) {
-                next = Rolling.getNext(this);
-            }
-            return next;
-        }
-    }
-
-    // -----------------------------------------------------------------------------------------------------------------
-    private volatile 地支 previous;
-
-    private volatile 地支 next;
 }

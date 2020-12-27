@@ -3,8 +3,7 @@ package com.github.jinahya.sexagenarycycle;
 import java.util.Collections;
 import java.util.EnumMap;
 import java.util.Map;
-
-import static java.util.Objects.requireNonNull;
+import java.util.Objects;
 
 final class 天干五方 {
 
@@ -26,7 +25,7 @@ final class 天干五方 {
     }
 
     static 五方 valueOf(final 天干 天干) {
-        requireNonNull(天干, "天干 is null");
+        Objects.requireNonNull(天干, "天干 is null");
         return MAP.get(天干);
     }
 
