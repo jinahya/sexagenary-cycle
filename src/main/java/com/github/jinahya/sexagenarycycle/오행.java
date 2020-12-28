@@ -12,6 +12,7 @@ import java.util.Objects;
  * @see 五行
  * @see <a href="https://ko.wikipedia.org/wiki/%EC%98%A4%ED%96%89">오행</a>
  */
+@SuppressWarnings("NonAsciiCharacters")
 public enum 오행 {
 
     수(com.github.jinahya.sexagenarycycle.五行.水),

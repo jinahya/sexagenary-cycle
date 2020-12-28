@@ -12,6 +12,7 @@ import java.util.Objects;
  * @see 세차
  * @see <a href="https://ko.wikipedia.org/wiki/%EC%84%B8%EC%B0%A8_(%EA%B0%84%EC%A7%80)">세차 (간지)</a>
  */
+@SuppressWarnings("NonAsciiCharacters")
 public class 歲次 extends Assigned<歲次> implements Rolling<歲次> {
 
     static final Comparator<歲次> COMPARING_年 = Comparator.comparing(v -> v.年);

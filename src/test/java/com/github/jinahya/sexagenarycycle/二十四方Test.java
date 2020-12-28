@@ -11,12 +11,12 @@ class 二十四方Test implements RollingEnumTest<二十四方> {
     // -----------------------------------------------------------------------------------------------------------------
     @Test
     void valueOfIndex_NonNullExpected_NegativeOne() {
-        assertThat(二十四方.valueOfIndex(-1)).isNotNull().isSameAs(二十四方.壬);
+        assertThat(二十四方.valueOfOrdinal(-1)).isNotNull().isSameAs(二十四方.壬);
     }
 
     @Test
     void valueOfIndex_NonNullExpected_NegativeTwo() {
-        assertThat(二十四方.valueOfIndex(-2)).isNotNull().isSameAs(二十四方.亥);
+        assertThat(二十四方.valueOfOrdinal(-2)).isNotNull().isSameAs(二十四方.亥);
     }
 
     // ---------------------------------------------------------------------------------- valueOfDirection(I,B)L...二十四方;

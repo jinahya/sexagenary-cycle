@@ -7,7 +7,16 @@ import java.time.temporal.ChronoUnit;
 
 import static java.util.Objects.requireNonNull;
 
+@SuppressWarnings("NonAsciiCharacters")
 public final class 時刻 { // 시각
+
+    public static Duration forTwoHours() {
+        return Duration.ofHours(2L);
+    }
+
+    public static 時刻 newInstanceForTwoHoursFrom(final int hour) {
+        return new 時刻(LocalTime.of(hour, 0), forTwoHours());
+    }
 
     // -----------------------------------------------------------------------------------------------------------------
     private static long limit(final LocalTime time, final boolean leap) {

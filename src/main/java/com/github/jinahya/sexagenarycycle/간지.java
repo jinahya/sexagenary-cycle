@@ -19,6 +19,7 @@ import static java.util.Objects.requireNonNull;
  * @author Jin Kwon &lt;onacit_at_gmail.com&gt;
  * @see <a href="https://ko.wikipedia.org/wiki/%EA%B0%84%EC%A7%80">간지</a>
  */
+@SuppressWarnings("NonAsciiCharacters")
 public final class 간지 implements Rolling<간지> { // \uac04\uc9c0
 
     // -----------------------------------------------------------------------------------------------------------------

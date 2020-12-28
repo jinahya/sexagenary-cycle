@@ -13,6 +13,7 @@ import java.util.Objects;
  * @see 지지
  * @see <a href="https://zh.wikipedia.org/wiki/%E5%9C%B0%E6%94%AF">地支</a>
  */
+@SuppressWarnings("NonAsciiCharacters")
 public enum 地支 implements RollingEnum<地支> { // \u5730\u652f
 
     @SuppressWarnings({"java:S115"})

@@ -5,6 +5,7 @@ package com.github.jinahya.sexagenarycycle;
  *
  * @author Jin Kwon &lt;onacit_at_gmail.com&gt;
  */
+@SuppressWarnings("NonAsciiCharacters")
 public enum 陰陽 {
 
     /**

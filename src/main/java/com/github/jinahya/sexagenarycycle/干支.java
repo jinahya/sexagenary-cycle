@@ -15,8 +15,10 @@ import java.util.stream.Collectors;
  * A class for <a href="https://en.wikipedia.org/wiki/Sexagenary_cycle">Sexagenary cycle</a>.
  *
  * @author Jin Kwon &lt;onacit_at_gmail.com&gt;
+ * @see 간지
  * @see <a href="https://zh.wikipedia.org/wiki/%E5%B9%B2%E6%94%AF">干支</a>.
  */
+@SuppressWarnings("NonAsciiCharacters")
 public final class 干支 implements Rolling<干支> { // \u5e72\u652f
 
     // -----------------------------------------------------------------------------------------------------------------
@@ -59,18 +61,18 @@ public final class 干支 implements Rolling<干支> { // \u5e72\u652f
         VALUES = Collections.unmodifiableList(values);
     }
 
-    private static final Map<天干, Map<地支, 干支>> HASHED_VALUES;
+    private static final Map<天干, Map<地支, 干支>> VALUES_BY_地支S_BY_天干S;
 
     static {
-        final Map<天干, Map<地支, 干支>> hashedValues = new EnumMap<>(天干.class);
+        final Map<天干, Map<地支, 干支>> map = new EnumMap<>(天干.class);
         VALUES.forEach(天干 -> {
-            hashedValues.computeIfAbsent(天干.干, k -> new EnumMap<>(地支.class))
+            map.computeIfAbsent(天干.干, k -> new EnumMap<>(地支.class))
                     .compute(天干.支, (k, v) -> {
                         assert v == null;
                         return 天干;
                     });
         });
-        HASHED_VALUES = Collections.unmodifiableMap(hashedValues);
+        VALUES_BY_地支S_BY_天干S = Collections.unmodifiableMap(map);
     }
 
     /**
@@ -80,10 +82,10 @@ public final class 干支 implements Rolling<干支> { // \u5e72\u652f
      * @param 支 the value of 地支.
      * @return the value of {@code 干} and {@code 支}.
      */
-    public static 干支 of(final 天干 干, final 地支 支) {
+    public static 干支 valueOf(final 天干 干, final 地支 支) {
         Objects.requireNonNull(干, "干 is null");
         Objects.requireNonNull(支, "支 is null");
-        return Optional.ofNullable(HASHED_VALUES.get(干))
+        return Optional.ofNullable(VALUES_BY_地支S_BY_天干S.get(干))
                 .map(m -> m.get(支))
                 .orElseThrow(() -> new IllegalArgumentException("no value for " + 干 + " and " + 支));
     }
@@ -98,7 +100,7 @@ public final class 干支 implements Rolling<干支> { // \u5e72\u652f
      * @param name the name.
      * @return the value of {@code name}.
      */
-    public static 干支 ofName(final String name) {
+    public static 干支 valueOfName(final String name) {
         Objects.requireNonNull(name, "name is null");
         return Optional.ofNullable(VALUES_BY_NAMES.get(name))
                 .orElseThrow(() -> new IllegalArgumentException("no value for name: " + name));
@@ -169,7 +171,7 @@ public final class 干支 implements Rolling<干支> { // \u5e72\u652f
      * Returns the name of this 干支.
      *
      * @return the name of this 干支.
-     * @see #ofName(String)
+     * @see #valueOfName(String)
      */
     public String name() {
         return 干.name() + 支.name();
@@ -184,7 +186,7 @@ public final class 干支 implements Rolling<干支> { // \u5e72\u652f
      */
     @Override
     public 干支 getPrevious() {
-        return RollingHelper.getPrevious(this, c -> of(c.干.getPrevious(), c.支.getPrevious()));
+        return RollingHelper.getPrevious(this, c -> valueOf(c.干.getPrevious(), c.支.getPrevious()));
     }
 
     /**
@@ -194,7 +196,7 @@ public final class 干支 implements Rolling<干支> { // \u5e72\u652f
      */
     @Override
     public 干支 getNext() {
-        return RollingHelper.getNext(this, c -> of(c.干.getNext(), c.支.getNext()));
+        return RollingHelper.getNext(this, c -> valueOf(c.干.getNext(), c.支.getNext()));
     }
 
     // -----------------------------------------------------------------------------------------------------------------

@@ -10,7 +10,7 @@ final class RollingHelper {
     // -----------------------------------------------------------------------------------------------------------------
     private static final Map<Class<?>, Map<Object, Object>> PREVIOUS_VALUES = new ConcurrentHashMap<>();
 
-    @SuppressWarnings({"unchecked"})
+    @SuppressWarnings({"unchecked", "java:S1192"})
     static <T extends Rolling<T>> T getPrevious(final Class<? super T> clazz, final T current,
                                                 final Function<? super T, ? extends T> computer) {
         Objects.requireNonNull(clazz, "clazz is null");

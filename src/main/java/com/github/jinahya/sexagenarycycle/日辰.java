@@ -13,6 +13,7 @@ import java.util.Objects;
  * @author Jin Kwon &lt;onacit_at_gmail.com&gt;
  * @see <a href="https://ko.wikipedia.org/wiki/%EC%9D%BC%EC%A7%84_(%EA%B0%84%EC%A7%80)">일진 (간지)</a>
  */
+@SuppressWarnings("NonAsciiCharacters")
 public class 日辰 extends Assigned<日辰> {
 
     static final Comparator<日辰> COMPARING_月建_THEN_COMPARING_日

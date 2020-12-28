@@ -77,7 +77,7 @@ class 干支Test {
     @Test
     void testValueOf() {
         for (final 干支 value : 干支.VALUES) {
-            assertThat(干支.of(value.干, value.支)).isNotNull().isSameAs(value);
+            assertThat(干支.valueOf(value.干, value.支)).isNotNull().isSameAs(value);
         }
     }
 
@@ -86,27 +86,27 @@ class 干支Test {
     @ValueSource(strings = {"", "甲", "甲子甲"})
     @ParameterizedTest
     void testValueOfNameWithNameOfInvalidNumberOfCodepoints(final String nameWithInvalidNumberOfCodepoints) {
-        assertThrows(IllegalArgumentException.class, () -> 干支.ofName(nameWithInvalidNumberOfCodepoints));
+        assertThrows(IllegalArgumentException.class, () -> 干支.valueOfName(nameWithInvalidNumberOfCodepoints));
     }
 
     @Test
     void testValueOfName() {
         for (final 干支 value : 干支.VALUES) {
-            assertThat(干支.ofName(value.name())).isNotNull().isSameAs(value);
+            assertThat(干支.valueOfName(value.name())).isNotNull().isSameAs(value);
         }
     }
 
     @Test
     void testValueOfName_against_ALL_NAMES() {
         for (final String name : VALID_NAMES) {
-            assertThat(干支.ofName(name)).isNotNull();
+            assertThat(干支.valueOfName(name)).isNotNull();
         }
     }
 
     @Test
     void testValueOfName_against_ALL_INVALID_NAMES() {
         for (final String invalidName : INVALID_NAMES) {
-            assertThrows(IllegalArgumentException.class, () -> 干支.ofName(invalidName));
+            assertThrows(IllegalArgumentException.class, () -> 干支.valueOfName(invalidName));
         }
     }
 

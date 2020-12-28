@@ -11,6 +11,7 @@ import java.util.stream.Collectors;
 
 import static java.util.Objects.requireNonNull;
 
+@SuppressWarnings("NonAsciiCharacters")
 enum 地支時刻 {
 
     /**
@@ -63,6 +64,7 @@ enum 地支時刻 {
         );
     }
 
+    // -----------------------------------------------------------------------------------------------------------------
     public final 地支 地支;
 
     public final 時刻 時刻;

@@ -5,6 +5,7 @@ import java.util.EnumMap;
 import java.util.Map;
 import java.util.Objects;
 
+@SuppressWarnings("NonAsciiCharacters")
 final class 天干五行 {
 
     private static final Map<天干, 五行> MAP;

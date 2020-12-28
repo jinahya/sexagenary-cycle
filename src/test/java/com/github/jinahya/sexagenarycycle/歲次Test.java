@@ -15,7 +15,7 @@ class 歲次Test {
 
     // ------------------------------------------------------------------------------------------------------------ 2020
     static 歲次 of2020庚子年() { // 경자년
-        return new 歲次(干支.ofName("庚子"), Year.of(2020));
+        return new 歲次(干支.valueOfName("庚子"), Year.of(2020));
     }
 
     // -----------------------------------------------------------------------------------------------------------------
@@ -47,7 +47,7 @@ class 歲次Test {
             final 歲次 庚子年 = of2020庚子年();
             assertThat(庚子年).isEqualByComparingTo(庚子年);
             {
-                final 歲次 己亥年 = new 歲次(干支.ofName("己亥"), Year.of(2019));
+                final 歲次 己亥年 = new 歲次(干支.valueOfName("己亥"), Year.of(2019));
                 assertThat(庚子年).isGreaterThan(己亥年);
                 assertThat(己亥年).isLessThan(庚子年);
             }
@@ -68,7 +68,7 @@ class 歲次Test {
     void testGetPrevious() {
         {
             final 歲次 庚子年 = of2020庚子年();
-            final 歲次 己亥年 = new 歲次(干支.ofName("己亥"), Year.of(2019));
+            final 歲次 己亥年 = new 歲次(干支.valueOfName("己亥"), Year.of(2019));
             assertThat(庚子年.getPrevious()).isNotNull().isEqualTo(己亥年);
         }
     }
@@ -84,7 +84,7 @@ class 歲次Test {
     void getNext_() {
         {
             final 歲次 庚子年 = of2020庚子年();
-            final 歲次 辛丑年 = new 歲次(干支.ofName("辛丑"), Year.of(2021));
+            final 歲次 辛丑年 = new 歲次(干支.valueOfName("辛丑"), Year.of(2021));
             assertThat(庚子年.getNext()).isNotNull().isEqualTo(辛丑年);
         }
     }

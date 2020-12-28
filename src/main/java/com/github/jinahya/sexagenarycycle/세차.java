@@ -7,6 +7,7 @@ package com.github.jinahya.sexagenarycycle;
  * @see 歲次
  * @see <a href="https://ko.wikipedia.org/wiki/%EC%84%B8%EC%B0%A8_(%EA%B0%84%EC%A7%80)">세차 (간지)</a>
  */
+@SuppressWarnings("NonAsciiCharacters")
 public class 세차 extends 부여된<세차, 歲次> implements Rolling<세차> {
 
     // -------------------------------------------------------------------------------------------------------------
@@ -20,25 +21,25 @@ public class 세차 extends 부여된<세차, 歲次> implements Rolling<세차>
         super(歲次);
     }
 
-    // -------------------------------------------------------------------------------------------------------------- 歲次
+    // -----------------------------------------------------------------------------------------------------------------
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        return super.equals(o);
+    }
 
-    /**
-     * Returns a 歲次 equivalent to this 세차.
-     *
-     * @return a 歲次 equivalent to this 세차.
-     */
-    public 歲次 get歲次() {
-        return assigned;
+    @Override
+    public int hashCode() {
+        return super.hashCode();
     }
 
     // -----------------------------------------------------------------------------------------------------------------
     @Override
     public 세차 getPrevious() {
-        {
-            final 세차 result = previous;
-            if (result != null) {
-                return result;
-            }
+        final 세차 result = previous;
+        if (result != null) {
+            return result;
         }
         synchronized (this) {
             if (previous == null) {
@@ -50,11 +51,9 @@ public class 세차 extends 부여된<세차, 歲次> implements Rolling<세차>
 
     @Override
     public 세차 getNext() {
-        {
-            final 세차 result = next;
-            if (result != null) {
-                return result;
-            }
+        final 세차 result = next;
+        if (result != null) {
+            return result;
         }
         synchronized (this) {
             if (next == null) {

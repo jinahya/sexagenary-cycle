@@ -10,25 +10,30 @@ public enum 五方 {
     /**
      * East.
      */
+    @SuppressWarnings({"java:S115"})
     東,
 
     /**
      * South.
      */
+    @SuppressWarnings({"java:S115"})
     南,
 
     /**
      * Center.
      */
+    @SuppressWarnings({"java:S115"})
     中,
 
     /**
      * West.
      */
+    @SuppressWarnings({"java:S115"})
     西,
 
     /**
      * North.
      */
+    @SuppressWarnings({"java:S115"})
     北;
 }

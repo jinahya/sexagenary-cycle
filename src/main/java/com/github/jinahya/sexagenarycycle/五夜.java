@@ -4,6 +4,7 @@ import java.time.LocalTime;
 
 import static java.util.Objects.requireNonNull;
 
+@SuppressWarnings("NonAsciiCharacters")
 public enum 五夜 { // 오야
 
     /**

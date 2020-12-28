@@ -6,9 +6,11 @@ import java.util.EnumMap;
 import java.util.Map;
 import java.util.Objects;
 
+@SuppressWarnings("NonAsciiCharacters")
 public enum 음양 {
 
     음(com.github.jinahya.sexagenarycycle.陰陽.陰),
+
     양(com.github.jinahya.sexagenarycycle.陰陽.陽);
 
     // -----------------------------------------------------------------------------------------------------------------

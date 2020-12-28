@@ -12,6 +12,7 @@ import java.util.Objects;
  * @see 천간
  * @see <a href="https://zh.wikipedia.org/wiki/%E5%A4%A9%E5%B9%B2">天干</a>
  */
+@SuppressWarnings("NonAsciiCharacters")
 public enum 天干 implements RollingEnum<天干> { // \u5929\u5e72
 
     @SuppressWarnings({"java:S115"})

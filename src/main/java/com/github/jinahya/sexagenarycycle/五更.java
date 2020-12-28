@@ -5,6 +5,7 @@ import java.time.LocalTime;
 
 import static java.util.Objects.requireNonNull;
 
+@SuppressWarnings("NonAsciiCharacters")
 public enum 五更 { // 오경
 
     /**

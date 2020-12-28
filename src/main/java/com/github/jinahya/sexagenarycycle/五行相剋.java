@@ -14,6 +14,7 @@ import java.util.stream.Collectors;
  *
  * @author Jin Kwon &lt;onacit_at_gmail.com&gt;
  */
+@SuppressWarnings("NonAsciiCharacters")
 public enum 五行相剋 {
 
     木剋土(五行.木, 五行.土),

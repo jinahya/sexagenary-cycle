@@ -5,6 +5,7 @@ import java.util.EnumMap;
 import java.util.Map;
 import java.util.Objects;
 
+@SuppressWarnings("NonAsciiCharacters")
 final class 地支陰陽 {
 
     private static final Map<地支, 陰陽> MAP;

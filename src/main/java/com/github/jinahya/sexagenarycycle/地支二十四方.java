@@ -8,6 +8,7 @@ import java.util.Objects;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
+@SuppressWarnings("NonAsciiCharacters")
 final class 地支二十四方 {
 
     private static final Map<地支, 二十四方> MAP = Collections.unmodifiableMap(

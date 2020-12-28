@@ -9,6 +9,7 @@ import java.util.Objects;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
+@SuppressWarnings("NonAsciiCharacters")
 public enum 五方正色 {
 
     /**

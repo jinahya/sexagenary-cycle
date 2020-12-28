@@ -16,7 +16,7 @@ class 月建Test {
 
     // --------------------------------------------------------------------------------------------------------- 2020-04
     static 月建 of2020庚子年04辛巳月() { // 경자년 신사월
-        return new 月建(干支.ofName("辛巳"), Month.APRIL, of2020庚子年());
+        return new 月建(干支.valueOfName("辛巳"), Month.APRIL, of2020庚子年());
     }
 
     static 月建 of2020庚子年04閏四月() { // 경자년 윤사월
@@ -25,12 +25,12 @@ class 月建Test {
 
     // --------------------------------------------------------------------------------------------------------- 2020-11
     static 月建 of2020庚子年11戊子月() { // 경자년 무자월
-        return new 月建(干支.ofName("戊子"), Month.NOVEMBER, of2020庚子年());
+        return new 月建(干支.valueOfName("戊子"), Month.NOVEMBER, of2020庚子年());
     }
 
     // --------------------------------------------------------------------------------------------------------- 2020-12
     static 月建 of2020庚子年12己丑月() { // 경자년 기축월
-        return new 月建(干支.ofName("己丑"), Month.DECEMBER, of2020庚子年());
+        return new 月建(干支.valueOfName("己丑"), Month.DECEMBER, of2020庚子年());
     }
 
     // -----------------------------------------------------------------------------------------------------------------
@@ -47,7 +47,7 @@ class 月建Test {
     @Test
     void test_of2020庚子04辛巳() {
         final 月建 月建 = of2020庚子年04辛巳月();
-        assertThat(月建.干支).isNotNull().isEqualTo(干支.of(天干.valueOf("辛"), 地支.valueOf("巳")));
+        assertThat(月建.干支).isNotNull().isEqualTo(干支.valueOf(天干.valueOf("辛"), 地支.valueOf("巳")));
         assertThat(月建.月).isNotNull().isEqualTo(Month.APRIL);
         assertThat(月建.is閏月()).isFalse();
     }

@@ -9,10 +9,11 @@ import java.util.function.Function;
 import java.util.stream.Collectors;
 
 /**
- * Defines constants for {@code inter-promoting} cycle and {@ode weakening} cycle between values of {@link 五行}.
+ * Defines constants for {@code inter-promoting} cycle and {@code weakening} cycle between values of {@link 五行}.
  *
  * @author Jin Kwon &lt;onacit_at_gmail.com&gt;
  */
+@SuppressWarnings("NonAsciiCharacters")
 public enum 五行相生 {
 
     木生火(五行.木, 五行.火),

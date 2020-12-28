@@ -6,6 +6,7 @@ package com.github.jinahya.sexagenarycycle;
  * @author Jin Kwon &lt;onacit_at_gmail.com&gt;
  * @see <a href="https://zh.wikipedia.org/wiki/%E4%BA%94%E8%A1%8C">五行</a>
  */
+@SuppressWarnings("NonAsciiCharacters")
 public enum 五行 implements RollingEnum<五行> {
 
     /**

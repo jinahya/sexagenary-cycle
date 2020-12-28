@@ -1,12 +1,10 @@
 package com.github.jinahya.sexagenarycycle;
 
 import javax.validation.constraints.NotNull;
-import java.util.Collections;
-import java.util.EnumMap;
-import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
 
+import static com.github.jinahya.sexagenarycycle.Utils.mapValuesByNames;
 import static com.github.jinahya.sexagenarycycle.地支.丑;
 import static com.github.jinahya.sexagenarycycle.地支.亥;
 import static com.github.jinahya.sexagenarycycle.地支.午;
@@ -19,6 +17,7 @@ import static com.github.jinahya.sexagenarycycle.地支.未;
 import static com.github.jinahya.sexagenarycycle.地支.申;
 import static com.github.jinahya.sexagenarycycle.地支.辰;
 import static com.github.jinahya.sexagenarycycle.地支.酉;
+import static java.util.Collections.unmodifiableMap;
 
 /**
  * Constants of 10 <a href="https://en.wikipedia.org/wiki/Earthly_Branches">Earthly Branches</a>.
@@ -27,6 +26,7 @@ import static com.github.jinahya.sexagenarycycle.地支.酉;
  * @see 地支
  * @see <a href="https://ko.wikipedia.org/wiki/%EC%A7%80%EC%A7%80_(%EC%97%AD%EB%B2%95)">지지 (역법)</a>
  */
+@SuppressWarnings("NonAsciiCharacters")
 public enum 지지 { // \uc9c0\uc9c0
 
     자(子),
@@ -51,15 +51,7 @@ public enum 지지 { // \uc9c0\uc9c0
             = "[\uc790\ucd95\uc778\ubb18\uc9c4\uc0ac\uc624\ubbf8\uc2e0\uc720\uc220\ud574]";
 
     // -----------------------------------------------------------------------------------------------------------------
-    private static final Map<String, 지지> VALUES_BY_NAMES;
-
-    static {
-        final Map<String, 지지> map = new HashMap<>();
-        for (final 지지 value : values()) {
-            map.put(value.name(), value);
-        }
-        VALUES_BY_NAMES = Collections.unmodifiableMap(map);
-    }
+    private static final Map<String, 지지> VALUES_BY_NAMES = unmodifiableMap(mapValuesByNames(지지.class));
 
     /**
      * Returns the constant of specified name. This method, unlikely to {@link #valueOf(String)} method, uses a cache.
@@ -77,15 +69,7 @@ public enum 지지 { // \uc9c0\uc9c0
     }
 
     // -----------------------------------------------------------------------------------------------------------------
-    private static final Map<地支, 지지> VALUES_BY_地支S;
-
-    static {
-        final Map<地支, 지지> m = new EnumMap<>(地支.class);
-        for (final 지지 value : values()) {
-            m.put(value.地支, value);
-        }
-        VALUES_BY_地支S = Collections.unmodifiableMap(m);
-    }
+    private static final Map<地支, 지지> VALUES_BY_地支S = unmodifiableMap(Utils.mapValuesBy(지지.class, v -> v.地支));
 
     /**
      * Returns the constant for specified 地支.

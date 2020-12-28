@@ -14,9 +14,10 @@ import java.util.stream.Collectors;
  *
  * @author Jin Kwon &lt;onacit_at_gmail.com&gt;
  */
-@SuppressWarnings({"java:S101"})
+@SuppressWarnings({"NonAsciiCharacters"})
 final class 天干二十四方 {
 
+    // -----------------------------------------------------------------------------------------------------------------
     private static final Map<天干, 二十四方> MAP = Collections.unmodifiableMap(
             Arrays.stream(天干.values())
                     .filter(v -> v.get五方() != 五方.中)
@@ -36,11 +37,12 @@ final class 天干二十四方 {
      * @return the value mapped to specified 天干; {@code null} if none associated which means {@code 天干}'s {@link
      * 天干#get五方() 五方} is same as {@link 五方#中 中}.
      */
-    public static 二十四方 valueOf(@SuppressWarnings({"java:S117"}) final 天干 天干) {
+    public static 二十四方 valueOf(final 天干 天干) {
         Objects.requireNonNull(天干, "天干 is null");
         return MAP.get(天干);
     }
 
+    // -----------------------------------------------------------------------------------------------------------------
     private 天干二十四方() {
         throw new AssertionError("instantiation is not allowed");
     }

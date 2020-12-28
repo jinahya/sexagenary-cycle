@@ -1,12 +1,11 @@
 package com.github.jinahya.sexagenarycycle;
 
 import javax.validation.constraints.NotNull;
-import java.util.Collections;
-import java.util.EnumMap;
-import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
 
+import static com.github.jinahya.sexagenarycycle.Utils.mapValuesBy;
+import static com.github.jinahya.sexagenarycycle.Utils.mapValuesByNames;
 import static com.github.jinahya.sexagenarycycle.天干.丁;
 import static com.github.jinahya.sexagenarycycle.天干.丙;
 import static com.github.jinahya.sexagenarycycle.天干.乙;
@@ -17,6 +16,7 @@ import static com.github.jinahya.sexagenarycycle.天干.戊;
 import static com.github.jinahya.sexagenarycycle.天干.甲;
 import static com.github.jinahya.sexagenarycycle.天干.癸;
 import static com.github.jinahya.sexagenarycycle.天干.辛;
+import static java.util.Collections.unmodifiableMap;
 
 /**
  * Constants of <a href="https://en.wikipedia.org/wiki/Heavenly_Stems">Heavenly Stems</a>.
@@ -25,6 +25,7 @@ import static com.github.jinahya.sexagenarycycle.天干.辛;
  * @see 天干
  * @see <a href="https://ko.wikipedia.org/wiki/%EC%B2%9C%EA%B0%84">천간</a>
  */
+@SuppressWarnings("NonAsciiCharacters")
 public enum 천간 { // \ucc9c\uac04
 
     갑(甲),
@@ -42,15 +43,7 @@ public enum 천간 { // \ucc9c\uac04
     static final String REGEXP_NAME = "[\uac11\uc744\ubcd1\uc815\ubb34\uae30\uacbd\uc2e0\uc784\uacc4]";
 
     // -----------------------------------------------------------------------------------------------------------------
-    private static final Map<String, 천간> VALUES_BY_NAMES;
-
-    static {
-        final Map<String, 천간> map = new HashMap<>();
-        for (final 천간 value : values()) {
-            map.put(value.name(), value);
-        }
-        VALUES_BY_NAMES = Collections.unmodifiableMap(map);
-    }
+    private static final Map<String, 천간> VALUES_BY_NAMES = unmodifiableMap(mapValuesByNames(천간.class));
 
     /**
      * Returns the constant of specified name. This method, unlikely to {@link #valueOf(String)} method, uses a cache.
@@ -68,15 +61,7 @@ public enum 천간 { // \ucc9c\uac04
     }
 
     // -----------------------------------------------------------------------------------------------------------------
-    private static final Map<天干, 천간> VALUES_BY_天干S;
-
-    static {
-        final Map<天干, 천간> m = new EnumMap<>(天干.class);
-        for (final 천간 value : values()) {
-            m.put(value.天干, value);
-        }
-        VALUES_BY_天干S = Collections.unmodifiableMap(m);
-    }
+    private static final Map<天干, 천간> VALUES_BY_天干S = unmodifiableMap(mapValuesBy(천간.class, v -> v.天干));
 
     /**
      * Returns the constant for specified 天干.

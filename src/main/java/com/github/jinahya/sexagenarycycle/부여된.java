@@ -4,6 +4,7 @@ import javax.validation.constraints.NotNull;
 import java.util.Objects;
 import java.util.Optional;
 
+@SuppressWarnings("NonAsciiCharacters")
 abstract class 부여된<T extends 부여된<T, U>, U extends Assigned<U>> implements Comparable<T> {
 
     부여된(final U assigned) {
