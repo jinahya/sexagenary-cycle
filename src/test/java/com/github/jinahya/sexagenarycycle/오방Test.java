@@ -8,6 +8,7 @@ import java.util.Set;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+@SuppressWarnings({"NonAsciiCharacters", "java:S3577"})
 class 오방Test {
 
     // -----------------------------------------------------------------------------------------------------------------
