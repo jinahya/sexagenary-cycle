@@ -8,6 +8,7 @@ import java.util.stream.Stream;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatNoException;
 
+@SuppressWarnings({"NonAsciiCharacters", "java:S3577"})
 class 일진Test {
 
     // -----------------------------------------------------------------------------------------------------------------
@@ -26,15 +27,7 @@ class 일진Test {
     @MethodSource({"parameters"})
     @ParameterizedTest
     void equals_True_Self(final 일진 일진) {
-        assertThat(일진.equals(일진)).isTrue();
         assertThat(일진).isEqualTo(일진);
-    }
-
-    // ---------------------------------------------------------------------------------------------------------- equals
-    @MethodSource({"parameters"})
-    @ParameterizedTest
-    void equals_True_Clone(final 일진 일진) {
-        // TODO: fix 
     }
 
     // -------------------------------------------------------------------------------------------------------- hashCode
@@ -48,13 +41,6 @@ class 일진Test {
     @MethodSource({"parameters"})
     @ParameterizedTest
     void compareTo_True_Self(final 일진 일진) {
-        assertThat(일진.compareTo(일진)).isZero();
         assertThat(일진).isEqualByComparingTo(일진);
-    }
-
-    @MethodSource({"parameters"})
-    @ParameterizedTest
-    void compareTo_True_Clone(final 일진 일진) {
-        // TODO: fix 
     }
 }

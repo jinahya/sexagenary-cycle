@@ -8,7 +8,7 @@ import java.util.stream.Stream;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatNoException;
 
-@SuppressWarnings("NonAsciiCharacters")
+@SuppressWarnings({"NonAsciiCharacters", "java:S3577"})
 class 월건Test {
 
     // -----------------------------------------------------------------------------------------------------------------
@@ -29,14 +29,7 @@ class 월건Test {
     @MethodSource({"parameters"})
     @ParameterizedTest
     void equals_True_Self(final 월건 월건) {
-        assertThat(월건).isEqualByComparingTo(월건);
-        assertThat(월건.equals(월건)).isTrue();
-    }
-
-    @MethodSource({"parameters"})
-    @ParameterizedTest
-    void equals_True_Clone(final 월건 월건) {
-        // TODO: fix
+        assertThat(월건).isEqualTo(월건);
     }
 
     // -------------------------------------------------------------------------------------------------------- hashCode
