@@ -10,7 +10,7 @@ import java.util.stream.Collectors;
 
 import static java.util.Objects.requireNonNull;
 
-@SuppressWarnings("NonAsciiCharacters")
+@SuppressWarnings({"NonAsciiCharacters", "java:S115", "java:S116", "java:S117"})
 public enum 오방 {
 
     동(com.github.jinahya.sexagenarycycle.五方.東),

@@ -6,7 +6,7 @@ package com.github.jinahya.sexagenarycycle;
  * @author Jin Kwon &lt;onacit_at_gmail.com&gt;
  * @see <a href="https://ko.wikipedia.org/wiki/%EC%9B%94%EA%B1%B4">월건</a>
  */
-@SuppressWarnings("NonAsciiCharacters")
+@SuppressWarnings({"NonAsciiCharacters", "java:S116", "java:S117"})
 public class 월건 extends 부여된<월건, 月建> {
 
     /**

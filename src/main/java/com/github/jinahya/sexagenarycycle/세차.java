@@ -7,7 +7,7 @@ package com.github.jinahya.sexagenarycycle;
  * @see 歲次
  * @see <a href="https://ko.wikipedia.org/wiki/%EC%84%B8%EC%B0%A8_(%EA%B0%84%EC%A7%80)">세차 (간지)</a>
  */
-@SuppressWarnings("NonAsciiCharacters")
+@SuppressWarnings({"NonAsciiCharacters", "java:S101", "java:S117"})
 public class 세차 extends 부여된<세차, 歲次> implements Rolling<세차> {
 
     // -------------------------------------------------------------------------------------------------------------
