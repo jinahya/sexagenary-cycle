@@ -2,6 +2,7 @@ package com.github.jinahya.sexagenarycycle;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+@SuppressWarnings("NonAsciiCharacters")
 class 日辰Assert extends AssignedAssert<日辰Assert, 日辰> {
 
     日辰Assert(日辰 actual) {

@@ -4,11 +4,11 @@ import org.junit.jupiter.api.Test;
 
 import static com.github.jinahya.sexagenarycycle.二十四方Assert.assertThat方位Of;
 
-@SuppressWarnings("java:S3577")
+@SuppressWarnings({"NonAsciiCharacters", "java:S3577"})
 class 天干方位Test {
 
     @Test
-    void valueOf_Expected() {
+    void 方位Of天干_HasExpectedExpected() {
         assertThat方位Of(天干.甲).hasDirection(75);
         assertThat方位Of(天干.乙).hasDirection(105);
         assertThat方位Of(天干.丙).hasDirection(165);

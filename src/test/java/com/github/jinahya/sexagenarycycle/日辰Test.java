@@ -13,6 +13,7 @@ import static com.github.jinahya.sexagenarycycle.月建Test.of2020庚子年11戊
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
+@SuppressWarnings({"NonAsciiCharacters", "java:S3577"})
 @Slf4j
 class 日辰Test {
 

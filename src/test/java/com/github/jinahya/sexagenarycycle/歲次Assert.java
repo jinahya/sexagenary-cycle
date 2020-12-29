@@ -5,6 +5,7 @@ import java.time.Year;
 import static java.util.Objects.requireNonNull;
 import static org.assertj.core.api.Assertions.assertThat;
 
+@SuppressWarnings("NonAsciiCharacters")
 class 歲次Assert extends AssignedAssert<歲次Assert, 歲次> {
 
     歲次Assert(final 歲次 actual) {

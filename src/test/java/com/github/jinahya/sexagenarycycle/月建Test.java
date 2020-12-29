@@ -11,6 +11,7 @@ import java.util.stream.Stream;
 import static com.github.jinahya.sexagenarycycle.歲次Test.of2020庚子年;
 import static org.assertj.core.api.Assertions.assertThat;
 
+@SuppressWarnings({"NonAsciiCharacters", "java:S3577"})
 @Slf4j
 class 月建Test {
 

@@ -5,6 +5,7 @@ import java.time.Month;
 import static java.util.Objects.requireNonNull;
 import static org.assertj.core.api.Assertions.assertThat;
 
+@SuppressWarnings("NonAsciiCharacters")
 class 月建Assert extends AssignedAssert<月建Assert, 月建> {
 
     月建Assert(月建 actual) {

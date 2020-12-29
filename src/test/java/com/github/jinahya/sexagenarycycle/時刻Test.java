@@ -9,6 +9,7 @@ import java.util.stream.IntStream;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+@SuppressWarnings({"NonAsciiCharacters", "java:S3577"})
 class 時刻Test {
 
     @Test

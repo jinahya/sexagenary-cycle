@@ -16,15 +16,11 @@ import java.util.stream.Stream;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-@SuppressWarnings("java:S3577")
+@SuppressWarnings({"NonAsciiCharacters", "java:S3577"})
 @Slf4j
 class 天干Test implements RollingEnumTest<天干> {
 
     static final List<String> VALID_NAMES = Arrays.asList("甲", "乙", "丙", "丁", "戊", "己", "庚", "辛", "壬", "癸");
-
-    static List<String> validNames() {
-        return validNames();
-    }
 
     static Stream<Arguments> validNamesWithIndices() {
         return IntStream.range(0, VALID_NAMES.size()).mapToObj(i -> Arguments.of(VALID_NAMES.get(i), i));
