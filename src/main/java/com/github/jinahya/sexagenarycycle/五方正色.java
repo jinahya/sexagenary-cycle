@@ -1,15 +1,11 @@
 package com.github.jinahya.sexagenarycycle;
 
 import javax.validation.constraints.NotNull;
-import java.util.Arrays;
 import java.util.Collections;
-import java.util.EnumMap;
 import java.util.Map;
 import java.util.Objects;
-import java.util.function.Function;
-import java.util.stream.Collectors;
 
-@SuppressWarnings("NonAsciiCharacters")
+@SuppressWarnings({"NonAsciiCharacters", "java:S115", "java:S116", "java:S117"})
 public enum 五方正色 {
 
     /**
@@ -38,43 +34,39 @@ public enum 五方正色 {
     黃(com.github.jinahya.sexagenarycycle.五行.水, com.github.jinahya.sexagenarycycle.五方.北);
 
     // -----------------------------------------------------------------------------------------------------------------
-    private static final Map<五行, 五方正色> VALUES_BY_五行S = Collections.unmodifiableMap(
-            Arrays.stream(values()).collect(Collectors.toMap(
-                    v -> v.五行,
-                    Function.identity(),
-                    (v1, v2) -> {
-                        throw new AssertionError("duplicate value; " + v1 + ", " + v2);
-                    },
-                    () -> new EnumMap<>(五行.class)
-            ))
-    );
+    private static final Map<五行, 五方正色> VALUES_BY_五行S
+            = Collections.unmodifiableMap(EnumUtils.mapValuesBy(五方正色.class, v -> v.五行));
 
+    /**
+     * Returns the value associated to specified 五行.
+     *
+     * @param 五行 the 五行.
+     * @return the value associated to {@code 五行}.
+     */
     public static 五方正色 valueOf(final 五行 五行) {
         Objects.requireNonNull(五行, "五行 is null");
         final 五方正色 value = VALUES_BY_五行S.get(五行);
         if (value == null) {
-            throw new AssertionError("shouldn't happen; no value for " + 五行);
+            throw new AssertionError("no value for " + 五行);
         }
         return value;
     }
 
     // -----------------------------------------------------------------------------------------------------------------
-    private static final Map<五方, 五方正色> VALUES_BY_五方S = Collections.unmodifiableMap(
-            Arrays.stream(values()).collect(Collectors.toMap(
-                    v -> v.五方,
-                    Function.identity(),
-                    (v1, v2) -> {
-                        throw new AssertionError("duplicate value; " + v1 + ", " + v2);
-                    },
-                    () -> new EnumMap<>(五方.class)
-            ))
-    );
+    private static final Map<五方, 五方正色> VALUES_BY_五方S
+            = Collections.unmodifiableMap(EnumUtils.mapValuesBy(五方正色.class, v -> v.五方));
 
+    /**
+     * Returns the value associated to specified 五方.
+     *
+     * @param 五方 the 五方.
+     * @return the value associated to {@code 五方}.
+     */
     public static 五方正色 valueOf(final 五方 五方) {
         Objects.requireNonNull(五方, "五方 is null");
         final 五方正色 value = VALUES_BY_五方S.get(五方);
         if (value == null) {
-            throw new AssertionError("shouldn't happen; no value for " + 五方);
+            throw new AssertionError("no value for " + 五方);
         }
         return value;
     }

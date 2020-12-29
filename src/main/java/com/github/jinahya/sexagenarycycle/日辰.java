@@ -13,10 +13,13 @@ import java.util.Objects;
  * @author Jin Kwon &lt;onacit_at_gmail.com&gt;
  * @see <a href="https://ko.wikipedia.org/wiki/%EC%9D%BC%EC%A7%84_(%EA%B0%84%EC%A7%80)">일진 (간지)</a>
  */
-@SuppressWarnings("NonAsciiCharacters")
+@SuppressWarnings({"NonAsciiCharacters", "java:S101", "java:S116", "java:S117"})
 public class 日辰 extends Assigned<日辰> {
 
-    static final Comparator<日辰> COMPARING_月建_THEN_COMPARING_日
+    /**
+     * A comparator comparing {@link 日辰#月建} and then comparing {@link 日辰#日}.
+     */
+    public static final Comparator<日辰> COMPARING_月建_THEN_COMPARING_日
             = Comparator.<日辰, 月建>comparing(v -> v.月建).thenComparingInt(v -> v.日);
 
     // -----------------------------------------------------------------------------------------------------------------

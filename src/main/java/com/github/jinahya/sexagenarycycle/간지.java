@@ -2,7 +2,6 @@ package com.github.jinahya.sexagenarycycle;
 
 import javax.validation.constraints.NotNull;
 import java.util.Collections;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
@@ -11,7 +10,6 @@ import java.util.stream.Collectors;
 
 import static com.github.jinahya.sexagenarycycle.干支.REGEXP_NAME_GROUP_BRANCH;
 import static com.github.jinahya.sexagenarycycle.干支.REGEXP_NAME_GROUP_STEM;
-import static java.util.Objects.requireNonNull;
 
 /**
  * A class for <a href="https://en.wikipedia.org/wiki/Sexagenary_cycle">Sexagenary cycle</a>.
@@ -19,13 +17,13 @@ import static java.util.Objects.requireNonNull;
  * @author Jin Kwon &lt;onacit_at_gmail.com&gt;
  * @see <a href="https://ko.wikipedia.org/wiki/%EA%B0%84%EC%A7%80">간지</a>
  */
-@SuppressWarnings("NonAsciiCharacters")
+@SuppressWarnings({"NonAsciiCharacters", "java:S100", "java:S101", "java:S116", "java:S117"})
 public final class 간지 implements Rolling<간지> { // \uac04\uc9c0
 
     // -----------------------------------------------------------------------------------------------------------------
 
     /**
-     * A regular expression for matching {@link #name() name}. The value is {@value}.
+     * A regular expression for matching {@link #getName() name}. The value is {@value}.
      */
     public static final String REGEXP_NAME
             = "(?<" + REGEXP_NAME_GROUP_STEM + ">" + 천간.REGEXP_NAME + ")"
@@ -33,34 +31,25 @@ public final class 간지 implements Rolling<간지> { // \uac04\uc9c0
 
     // -----------------------------------------------------------------------------------------------------------------
     static final List<간지> VALUES = Collections.unmodifiableList(
-            com.github.jinahya.sexagenarycycle.干支.VALUES.stream()
-                    .map(간지::new)
-                    .collect(Collectors.toList())
-    );
+            com.github.jinahya.sexagenarycycle.干支.VALUES.stream().map(간지::new).collect(Collectors.toList()));
 
+    // -----------------------------------------------------------------------------------------------------------------
     static final Map<干支, 간지> VALUES_BY_干支S = Collections.unmodifiableMap(
-            VALUES.stream().collect(Collectors.toMap(
-                    v -> v.干支,
-                    Function.identity(),
-                    (v1, v2) -> {
-                        throw new AssertionError("duplicate value: " + v1 + ", " + v2);
-                    },
-                    HashMap::new
-            ))
+            VALUES.stream().collect(Collectors.toMap(v -> v.干支, Function.identity()))
     );
 
     public static 간지 valueOf(final 干支 干支) {
-        requireNonNull(干支, "干支 is null");
+        Objects.requireNonNull(干支, "干支 is null");
         final 간지 value = VALUES_BY_干支S.get(干支);
         if (value == null) {
-            throw new AssertionError("shouldn't happen; no value for " + 干支);
+            throw new AssertionError("no value for " + 干支);
         }
         return value;
     }
 
     // -----------------------------------------------------------------------------------------------------------------
     private static final Map<String, 간지> VALUES_BY_NAMES = Collections.unmodifiableMap(
-            VALUES.stream().collect(Collectors.toMap(간지::name, Function.identity())));
+            VALUES.stream().collect(Collectors.toMap(간지::getName, Function.identity())));
 
     /**
      * Returns the value associated to specified name.
@@ -69,7 +58,7 @@ public final class 간지 implements Rolling<간지> { // \uac04\uc9c0
      * @return the value of {@code name}.
      */
     public static 간지 valueOfName(final String name) {
-        requireNonNull(name, "name is null");
+        Objects.requireNonNull(name, "name is null");
         final 간지 value = VALUES_BY_NAMES.get(name);
         if (value == null) {
             throw new IllegalArgumentException("no value for name: " + name);
@@ -86,7 +75,7 @@ public final class 간지 implements Rolling<간지> { // \uac04\uc9c0
      */
     private 간지(final 干支 干支) {
         super();
-        this.干支 = requireNonNull(干支, "干支 is null");
+        this.干支 = Objects.requireNonNull(干支, "干支 is null");
     }
 
     // -----------------------------------------------------------------------------------------------------------------
@@ -126,7 +115,7 @@ public final class 간지 implements Rolling<간지> { // \uac04\uc9c0
      * @return the name of this 간지.
      * @see #valueOfName(String)
      */
-    public String name() {
+    public String getName() {
         return get간().name() + get지().name();
     }
 
@@ -142,7 +131,14 @@ public final class 간지 implements Rolling<간지> { // \uac04\uc9c0
     }
 
     // -----------------------------------------------------------------------------------------------------------------
+
+    /**
+     * Returns the 천간 of this 간지.
+     *
+     * @return the 천간 of this 간지.
+     */
     public 천간 get간() {
+        // racy single-check idiom
         천간 result = 간;
         if (result == null) {
             간 = result = 천간.valueOf(干支.干);
@@ -150,7 +146,13 @@ public final class 간지 implements Rolling<간지> { // \uac04\uc9c0
         return result;
     }
 
+    /**
+     * Returns the 지지 of this 간지.
+     *
+     * @return the 지지 of this 간지.
+     */
     public 지지 get지() {
+        // racy single-check idiom
         지지 result = 지;
         if (result == null) {
             지 = result = 지지.valueOf(干支.支);
@@ -159,6 +161,10 @@ public final class 간지 implements Rolling<간지> { // \uac04\uc9c0
     }
 
     // -----------------------------------------------------------------------------------------------------------------
+
+    /**
+     * The 干支 equivalent to this 간지.
+     */
     @NotNull
     public final 干支 干支;
 

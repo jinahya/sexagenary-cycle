@@ -1,33 +1,29 @@
 package com.github.jinahya.sexagenarycycle;
 
+import java.util.Arrays;
 import java.util.Collections;
-import java.util.EnumMap;
 import java.util.Map;
 import java.util.Objects;
+import java.util.function.Function;
+import java.util.stream.Collectors;
 
-@SuppressWarnings("NonAsciiCharacters")
+@SuppressWarnings({"NonAsciiCharacters", "java:S100", "java:S101", "java:S117"})
 final class 天干陰陽 {
 
-    private static final Map<天干, 陰陽> MAP;
+    private static final Map<天干, 陰陽> 陰陽S_BY_天干S = Collections.unmodifiableMap(
+            Arrays.stream(天干.values()).collect(Collectors.toMap(
+                    Function.identity(),
+                    v -> (v.ordinal() & 0x01) == 0 ? 陰陽.陽 : 陰陽.陰
+            ))
+    );
 
-    static {
-        final Map<天干, 陰陽> map = new EnumMap<>(天干.class);
-        map.put(天干.甲, 陰陽.陽);
-        map.put(天干.乙, 陰陽.陰);
-        map.put(天干.丙, 陰陽.陽);
-        map.put(天干.丁, 陰陽.陰);
-        map.put(天干.戊, 陰陽.陽);
-        map.put(天干.己, 陰陽.陰);
-        map.put(天干.庚, 陰陽.陽);
-        map.put(天干.辛, 陰陽.陰);
-        map.put(天干.壬, 陰陽.陽);
-        map.put(天干.癸, 陰陽.陰);
-        MAP = Collections.unmodifiableMap(map);
-    }
-
-    static 陰陽 valueOf(final 天干 天干) {
+    public static 陰陽 陰陽Of(final 天干 天干) {
         Objects.requireNonNull(天干, "天干 is null");
-        return MAP.get(天干);
+        final 陰陽 陰陽 = 陰陽S_BY_天干S.get(天干);
+        if (陰陽 == null) {
+            throw new AssertionError("no 陰陽 for " + 天干);
+        }
+        return 陰陽;
     }
 
     private 天干陰陽() {

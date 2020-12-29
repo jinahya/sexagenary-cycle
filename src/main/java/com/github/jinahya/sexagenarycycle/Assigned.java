@@ -2,6 +2,7 @@ package com.github.jinahya.sexagenarycycle;
 
 import java.util.Objects;
 
+@SuppressWarnings({"NonAsciiCharacters", "java:S116", "java:S117"})
 abstract class Assigned<T extends Assigned<T>> implements Comparable<T> {
 
     /**

@@ -2,6 +2,7 @@ package com.github.jinahya.sexagenarycycle;
 
 import org.assertj.core.api.AbstractAssert;
 
+@SuppressWarnings("NonAsciiCharacters")
 class 二十四方Assert extends AbstractAssert<二十四方Assert, 二十四方> {
 
     // -----------------------------------------------------------------------------------------------------------------
@@ -9,12 +10,12 @@ class 二十四方Assert extends AbstractAssert<二十四方Assert, 二十四方
         return new 二十四方Assert(actual);
     }
 
-    public static 二十四方Assert assertThatValueOf(final 天干 天干) {
-        return assertThat(天干二十四方.valueOf(天干));
+    public static 二十四方Assert assertThat方位Of(final 天干 天干) {
+        return assertThat(天干方位.方位Of(天干));
     }
 
-    public static 二十四方Assert assertThatValueOf(final 地支 地支) {
-        return assertThat(地支二十四方.valueOf(地支));
+    public static 二十四方Assert assertThat方位Of(final 地支 地支) {
+        return assertThat(地支方位.方位Of(地支));
     }
 
     // -----------------------------------------------------------------------------------------------------------------

@@ -16,6 +16,7 @@ import java.util.stream.Stream;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
+@SuppressWarnings("java:S3577")
 @Slf4j
 class 天干Test implements RollingEnumTest<天干> {
 
@@ -44,14 +45,14 @@ class 天干Test implements RollingEnumTest<天干> {
     @MethodSource({"validNamesWithIndices"})
     @ParameterizedTest
     void valueOfName_ExpectedResult_NameIsKnown(final String name, final int index) {
-        assertThat(天干.ofName(name)).isNotNull().isSameAs(天干.valueOf(name));
-        assertThat(天干.ofName(name).ordinal()).isSameAs(index);
+        assertThat(天干.valueOfName(name)).isNotNull().isSameAs(天干.valueOf(name));
+        assertThat(天干.valueOfName(name).ordinal()).isSameAs(index);
     }
 
     @DisplayName("valueOfName(name) throws IllegalArgumentException when name is unknown")
     @Test
     void valueOfName_IllegalArgumentException_NameIsUnknown() {
-        assertThrows(IllegalArgumentException.class, () -> 天干.ofName(""));
+        assertThrows(IllegalArgumentException.class, () -> 天干.valueOfName(""));
     }
 
     // --------------------------------------------------------------------------------------------------------- get二十四方

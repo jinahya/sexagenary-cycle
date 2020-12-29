@@ -13,43 +13,31 @@ import java.util.Objects;
  * @see 지지
  * @see <a href="https://zh.wikipedia.org/wiki/%E5%9C%B0%E6%94%AF">地支</a>
  */
-@SuppressWarnings("NonAsciiCharacters")
+@SuppressWarnings({"NonAsciiCharacters", "java:S100", "java:S115"})
 public enum 地支 implements RollingEnum<地支> { // \u5730\u652f
 
-    @SuppressWarnings({"java:S115"})
     子, // 자
 
-    @SuppressWarnings({"java:S115"})
     丑, // 축
 
-    @SuppressWarnings({"java:S115"})
     寅, // 인
 
-    @SuppressWarnings({"java:S115"})
     卯, // 묘
 
-    @SuppressWarnings({"java:S115"})
     辰, // 진
 
-    @SuppressWarnings({"java:S115"})
     巳, // 사
 
-    @SuppressWarnings({"java:S115"})
     午, // 오
 
-    @SuppressWarnings({"java:S115"})
     未, // 미
 
-    @SuppressWarnings({"java:S115"})
     申, // 신
 
-    @SuppressWarnings({"java:S115"})
     酉, // 유
 
-    @SuppressWarnings({"java:S115"})
     戌, // 술
 
-    @SuppressWarnings({"java:S115"})
     亥; // 해
 
     // -----------------------------------------------------------------------------------------------------------------
@@ -98,7 +86,7 @@ public enum 地支 implements RollingEnum<地支> { // \u5730\u652f
      * @return the 二十四方 associated to this 地支.
      */
     public 二十四方 get二十四方() {
-        return 地支二十四方.valueOf(this);
+        return 地支方位.方位Of(this);
     }
 
     /**
@@ -107,7 +95,7 @@ public enum 地支 implements RollingEnum<地支> { // \u5730\u652f
      * @return the 五行 associated to this 地支.
      */
     public 五行 get五行() {
-        return 地支五行.valueOf(this);
+        return 地支五行.五行Of(this);
     }
 
     /**

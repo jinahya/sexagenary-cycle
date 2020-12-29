@@ -4,7 +4,7 @@ import javax.validation.constraints.NotNull;
 import java.util.Objects;
 import java.util.Optional;
 
-@SuppressWarnings("NonAsciiCharacters")
+@SuppressWarnings({"NonAsciiCharacters", "java:S101", "java:S116", "java:S3577"})
 abstract class 부여된<T extends 부여된<T, U>, U extends Assigned<U>> implements Comparable<T> {
 
     부여된(final U assigned) {
@@ -46,5 +46,8 @@ abstract class 부여된<T extends 부여된<T, U>, U extends Assigned<U>> imple
     @NotNull
     protected final U assigned;
 
+    /**
+     * The 간지 of this value.
+     */
     public final 간지 간지;
 }

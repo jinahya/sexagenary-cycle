@@ -1,33 +1,26 @@
 package com.github.jinahya.sexagenarycycle;
 
+import java.util.Arrays;
 import java.util.Collections;
-import java.util.EnumMap;
 import java.util.Map;
 import java.util.Objects;
+import java.util.function.Function;
+import java.util.stream.Collectors;
 
-@SuppressWarnings("NonAsciiCharacters")
+/**
+ * Maps {@link 陰陽} to {@link 地支}.
+ *
+ * @author Jin Kwon &lt;onacit_at_gmail.com&gt;
+ */
+@SuppressWarnings({"NonAsciiCharacters", "java:S101", "java:S117"})
 final class 地支陰陽 {
 
-    private static final Map<地支, 陰陽> MAP;
-
-    static {
-        final Map<地支, 陰陽> map = new EnumMap<>(地支.class);
-        {
-            map.put(地支.子, 陰陽.陽);
-            map.put(地支.丑, 陰陽.陰);
-            map.put(地支.寅, 陰陽.陽);
-            map.put(地支.卯, 陰陽.陰);
-            map.put(地支.辰, 陰陽.陽);
-            map.put(地支.巳, 陰陽.陰);
-            map.put(地支.午, 陰陽.陽);
-            map.put(地支.未, 陰陽.陰);
-            map.put(地支.申, 陰陽.陽);
-            map.put(地支.酉, 陰陽.陰);
-            map.put(地支.戌, 陰陽.陽);
-            map.put(地支.亥, 陰陽.陰);
-        }
-        MAP = Collections.unmodifiableMap(map);
-    }
+    private static final Map<地支, 陰陽> MAP = Collections.unmodifiableMap(
+            Arrays.stream(地支.values()).collect(Collectors.toMap(
+                    Function.identity(),
+                    v -> (v.ordinal() & 0x01) == 0 ? 陰陽.陽 : 陰陽.陰
+            ))
+    );
 
     public static 陰陽 valueOf(final 地支 地支) {
         Objects.requireNonNull(地支, "地支 is null");

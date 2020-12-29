@@ -17,6 +17,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatNoException;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
+@SuppressWarnings("java:S3577")
 @Slf4j
 class 干支Test {
 
@@ -51,10 +52,10 @@ class 干支Test {
 
     // -----------------------------------------------------------------------------------------------------------------
     @Test
-    void test_REGEXP_NAME() {
+    void REGEXP_NAME_Match_ForAllValues() {
         final Pattern pattern = Pattern.compile(干支.REGEXP_NAME);
         for (final 干支 value : 干支.VALUES) {
-            final String name = value.name();
+            final String name = value.getName();
             assertThat(pattern.matcher(name)).satisfies(m -> {
                 assertThat(m.matches()).isTrue();
                 assertThat(m.group(干支.REGEXP_NAME_GROUP_STEM)).isNotNull().isEqualTo(value.干.name());
@@ -65,11 +66,15 @@ class 干支Test {
 
     // -----------------------------------------------------------------------------------------------------------------
     @Test
-    void test_VALUES() {
+    void VALUES_Unique_Each() {
         assertThat(new HashSet<>(干支.VALUES).size()).isEqualTo(干支.VALUES.size());
+    }
+
+    @Test
+    void VALUES_() {
         for (int i = 0; i < 干支.VALUES.size(); i++) {
             final 干支 value = 干支.VALUES.get(i);
-            assertThat(VALID_NAMES.indexOf(value.name())).isEqualTo(i);
+            assertThat(VALID_NAMES.indexOf(value.getName())).isEqualTo(i);
         }
     }
 
@@ -92,7 +97,7 @@ class 干支Test {
     @Test
     void testValueOfName() {
         for (final 干支 value : 干支.VALUES) {
-            assertThat(干支.valueOfName(value.name())).isNotNull().isSameAs(value);
+            assertThat(干支.valueOfName(value.getName())).isNotNull().isSameAs(value);
         }
     }
 
@@ -120,19 +125,11 @@ class 干支Test {
     }
 
     // ------------------------------------------------------------------------------------- equals(Ljava.lang.Object;)B
-    @DisplayName("equals(o) returns true when o is same")
-    @Test
-    void equals_True_AgainstSelf() {
-        for (final 干支 value : 干支.VALUES) {
-            assertThat(value.equals(value)).isTrue();
-        }
-    }
-
     @DisplayName("equals(obj) returns false when obj is null")
     @Test
     void equals_False_ObjIsNull() {
         for (final 干支 value : 干支.VALUES) {
-            assertThat(value.equals(null)).isFalse();
+            assertThat(value).isNotEqualTo(null);
         }
     }
 
@@ -140,7 +137,15 @@ class 干支Test {
     @Test
     void equals_False_ObjClassIsNotSame() {
         for (final 干支 value : 干支.VALUES) {
-            assertThat(value.equals(new Object())).isFalse();
+            assertThat(value).isNotEqualTo(new Object());
+        }
+    }
+
+    @DisplayName("equals(o) returns true when o is same")
+    @Test
+    void equals_True_AgainstSelf() {
+        for (final 干支 value : 干支.VALUES) {
+            assertThat(value).isEqualTo(value);
         }
     }
 
@@ -172,7 +177,7 @@ class 干支Test {
     @Test
     void getName_Valid() {
         for (final 干支 value : 干支.VALUES) {
-            final String name = value.name();
+            final String name = value.getName();
             assertThat(name).isNotNull().hasSize(2);
         }
     }

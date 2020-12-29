@@ -4,8 +4,8 @@ import javax.validation.constraints.NotNull;
 import java.util.Map;
 import java.util.Objects;
 
-import static com.github.jinahya.sexagenarycycle.Utils.mapValuesBy;
-import static com.github.jinahya.sexagenarycycle.Utils.mapValuesByNames;
+import static com.github.jinahya.sexagenarycycle.EnumUtils.mapValuesBy;
+import static com.github.jinahya.sexagenarycycle.EnumUtils.mapValuesByNames;
 import static com.github.jinahya.sexagenarycycle.天干.丁;
 import static com.github.jinahya.sexagenarycycle.天干.丙;
 import static com.github.jinahya.sexagenarycycle.天干.乙;
@@ -25,7 +25,7 @@ import static java.util.Collections.unmodifiableMap;
  * @see 天干
  * @see <a href="https://ko.wikipedia.org/wiki/%EC%B2%9C%EA%B0%84">천간</a>
  */
-@SuppressWarnings("NonAsciiCharacters")
+@SuppressWarnings({"NonAsciiCharacters", "java:S115", "java:S116", "java:S117"})
 public enum 천간 { // \ucc9c\uac04
 
     갑(甲),

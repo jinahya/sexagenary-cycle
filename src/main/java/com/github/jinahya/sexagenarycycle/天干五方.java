@@ -1,33 +1,28 @@
 package com.github.jinahya.sexagenarycycle;
 
+import java.util.Arrays;
 import java.util.Collections;
-import java.util.EnumMap;
 import java.util.Map;
 import java.util.Objects;
+import java.util.function.Function;
+import java.util.stream.Collectors;
 
-@SuppressWarnings("NonAsciiCharacters")
+@SuppressWarnings({"NonAsciiCharacters", "java:S100", "java:S101", "java:S117"})
 final class 天干五方 {
 
-    private static final Map<天干, 五方> MAP;
+    private static final Map<天干, 五方> 五方S_BY_天干S = Collections.unmodifiableMap(
+            Arrays.stream(天干.values()).collect(Collectors.toMap(
+                    Function.identity(), v -> 五方.VALUES_BY_ORDINALS.get(v.ordinal() >> 1)
+            ))
+    );
 
-    static {
-        final Map<天干, 五方> map = new EnumMap<>(天干.class);
-        map.put(天干.甲, 五方.東);
-        map.put(天干.乙, 五方.東);
-        map.put(天干.丙, 五方.南);
-        map.put(天干.丁, 五方.南);
-        map.put(天干.戊, 五方.中);
-        map.put(天干.己, 五方.中);
-        map.put(天干.庚, 五方.西);
-        map.put(天干.辛, 五方.西);
-        map.put(天干.壬, 五方.北);
-        map.put(天干.癸, 五方.北);
-        MAP = Collections.unmodifiableMap(map);
-    }
-
-    static 五方 valueOf(final 天干 天干) {
+    public static 五方 五方Of(final 天干 天干) {
         Objects.requireNonNull(天干, "天干 is null");
-        return MAP.get(天干);
+        final 五方 五方 = 五方S_BY_天干S.get(天干);
+        if (五方 == null) {
+            throw new AssertionError("no 五方 for " + 天干);
+        }
+        return 五方;
     }
 
     private 天干五方() {

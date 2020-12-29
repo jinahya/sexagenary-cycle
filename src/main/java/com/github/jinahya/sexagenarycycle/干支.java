@@ -18,7 +18,7 @@ import java.util.stream.Collectors;
  * @see 간지
  * @see <a href="https://zh.wikipedia.org/wiki/%E5%B9%B2%E6%94%AF">干支</a>.
  */
-@SuppressWarnings("NonAsciiCharacters")
+@SuppressWarnings({"NonAsciiCharacters", "java:S101", "java:S116", "java:S117"})
 public final class 干支 implements Rolling<干支> { // \u5e72\u652f
 
     // -----------------------------------------------------------------------------------------------------------------
@@ -34,7 +34,7 @@ public final class 干支 implements Rolling<干支> { // \u5e72\u652f
     public static final String REGEXP_NAME_GROUP_BRANCH = "branch";
 
     /**
-     * A regular expression for matching {@link #name() name}. The value is {@value}.
+     * A regular expression for matching {@link #getName() name}. The value is {@value}.
      */
     public static final String REGEXP_NAME = "(?<" + REGEXP_NAME_GROUP_STEM + ">" + 天干.REGEXP_NAME + ")"
                                              + "(?<" + REGEXP_NAME_GROUP_BRANCH + ">" + 地支.REGEXP_NAME + ")";
@@ -44,35 +44,33 @@ public final class 干支 implements Rolling<干支> { // \u5e72\u652f
     /**
      * An unmodifiable list of all values.
      */
-    public static final List<干支> VALUES;
+    static final List<干支> VALUES;
 
     static {
         final List<干支> values = new ArrayList<>();
-        {
-            final 天干[] stems = 天干.values();
-            final 地支[] branches = 地支.values();
-            for (int s = 0, b = 0; ; s = ++s % stems.length, b = ++b % branches.length) {
-                values.add(new 干支(stems[s], branches[b]));
-                if (s == stems.length - 1 && b == branches.length - 1) {
-                    break;
-                }
+        final 天干[] stems = 天干.values();
+        final 地支[] branches = 地支.values();
+        for (int s = 0, b = 0; ; s = ++s % stems.length, b = ++b % branches.length) {
+            values.add(new 干支(stems[s], branches[b]));
+            if (s == stems.length - 1 && b == branches.length - 1) {
+                break;
             }
         }
         VALUES = Collections.unmodifiableList(values);
     }
 
-    private static final Map<天干, Map<地支, 干支>> VALUES_BY_地支S_BY_天干S;
+    // -----------------------------------------------------------------------------------------------------------------
+    private static final Map<天干, Map<地支, 干支>> VALUES_BY_天干S_BY地支S;
 
     static {
         final Map<天干, Map<地支, 干支>> map = new EnumMap<>(天干.class);
-        VALUES.forEach(天干 -> {
-            map.computeIfAbsent(天干.干, k -> new EnumMap<>(地支.class))
-                    .compute(天干.支, (k, v) -> {
-                        assert v == null;
-                        return 天干;
-                    });
-        });
-        VALUES_BY_地支S_BY_天干S = Collections.unmodifiableMap(map);
+        VALUES.forEach(天干 -> map.computeIfAbsent(天干.干, k -> new EnumMap<>(地支.class))
+                .compute(天干.支, (k, v) -> {
+                    assert v == null;
+                    return 天干;
+                })
+        );
+        VALUES_BY_天干S_BY地支S = Collections.unmodifiableMap(map);
     }
 
     /**
@@ -85,14 +83,14 @@ public final class 干支 implements Rolling<干支> { // \u5e72\u652f
     public static 干支 valueOf(final 天干 干, final 地支 支) {
         Objects.requireNonNull(干, "干 is null");
         Objects.requireNonNull(支, "支 is null");
-        return Optional.ofNullable(VALUES_BY_地支S_BY_天干S.get(干))
+        return Optional.ofNullable(VALUES_BY_天干S_BY地支S.get(干))
                 .map(m -> m.get(支))
                 .orElseThrow(() -> new IllegalArgumentException("no value for " + 干 + " and " + 支));
     }
 
     // -----------------------------------------------------------------------------------------------------------------
     private static final Map<String, 干支> VALUES_BY_NAMES = Collections.unmodifiableMap(
-            VALUES.stream().collect(Collectors.toMap(干支::name, Function.identity())));
+            VALUES.stream().collect(Collectors.toMap(干支::getName, Function.identity())));
 
     /**
      * Returns the value associated to specified name.
@@ -168,18 +166,6 @@ public final class 干支 implements Rolling<干支> { // \u5e72\u652f
     // -----------------------------------------------------------------------------------------------------------------
 
     /**
-     * Returns the name of this 干支.
-     *
-     * @return the name of this 干支.
-     * @see #valueOfName(String)
-     */
-    public String name() {
-        return 干.name() + 支.name();
-    }
-
-    // -----------------------------------------------------------------------------------------------------------------
-
-    /**
      * Returns the previous value of this 干支.
      *
      * @return previous value of this 干支.
@@ -197,6 +183,18 @@ public final class 干支 implements Rolling<干支> { // \u5e72\u652f
     @Override
     public 干支 getNext() {
         return RollingHelper.getNext(this, c -> valueOf(c.干.getNext(), c.支.getNext()));
+    }
+
+    // -----------------------------------------------------------------------------------------------------------------
+
+    /**
+     * Returns the name of this 干支.
+     *
+     * @return the name of this 干支.
+     * @see #valueOfName(String)
+     */
+    public String getName() {
+        return 干.name() + 支.name();
     }
 
     // -----------------------------------------------------------------------------------------------------------------

@@ -5,7 +5,7 @@ import java.util.EnumMap;
 import java.util.Map;
 import java.util.Objects;
 
-@SuppressWarnings("NonAsciiCharacters")
+@SuppressWarnings({"NonAsciiCharacters", "java:S100", "java:S101", "java:S117"})
 final class 地支五行 {
 
     public static final Map<地支, 五行> 五行S_BY_地支S;
@@ -27,7 +27,7 @@ final class 地支五行 {
         五行S_BY_地支S = Collections.unmodifiableMap(map);
     }
 
-    static 五行 valueOf(final 地支 地支) {
+    static 五行 五行Of(final 地支 地支) {
         Objects.requireNonNull(地支, "地支 is null");
         return 五行S_BY_地支S.get(地支);
     }

@@ -4,7 +4,7 @@ import javax.validation.constraints.NotNull;
 import java.util.Map;
 import java.util.Objects;
 
-import static com.github.jinahya.sexagenarycycle.Utils.mapValuesByNames;
+import static com.github.jinahya.sexagenarycycle.EnumUtils.mapValuesByNames;
 import static com.github.jinahya.sexagenarycycle.地支.丑;
 import static com.github.jinahya.sexagenarycycle.地支.亥;
 import static com.github.jinahya.sexagenarycycle.地支.午;
@@ -26,7 +26,7 @@ import static java.util.Collections.unmodifiableMap;
  * @see 地支
  * @see <a href="https://ko.wikipedia.org/wiki/%EC%A7%80%EC%A7%80_(%EC%97%AD%EB%B2%95)">지지 (역법)</a>
  */
-@SuppressWarnings("NonAsciiCharacters")
+@SuppressWarnings({"NonAsciiCharacters", "java:S115", "java:S116", "java:S117"})
 public enum 지지 { // \uc9c0\uc9c0
 
     자(子),
@@ -69,7 +69,7 @@ public enum 지지 { // \uc9c0\uc9c0
     }
 
     // -----------------------------------------------------------------------------------------------------------------
-    private static final Map<地支, 지지> VALUES_BY_地支S = unmodifiableMap(Utils.mapValuesBy(지지.class, v -> v.地支));
+    private static final Map<地支, 지지> VALUES_BY_地支S = unmodifiableMap(EnumUtils.mapValuesBy(지지.class, v -> v.地支));
 
     /**
      * Returns the constant for specified 地支.

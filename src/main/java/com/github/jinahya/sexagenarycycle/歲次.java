@@ -12,10 +12,13 @@ import java.util.Objects;
  * @see 세차
  * @see <a href="https://ko.wikipedia.org/wiki/%EC%84%B8%EC%B0%A8_(%EA%B0%84%EC%A7%80)">세차 (간지)</a>
  */
-@SuppressWarnings("NonAsciiCharacters")
+@SuppressWarnings({"NonAsciiCharacters", "java:S101", "java:S116", "java:S117"})
 public class 歲次 extends Assigned<歲次> implements Rolling<歲次> {
 
-    static final Comparator<歲次> COMPARING_年 = Comparator.comparing(v -> v.年);
+    /**
+     * A comparator compares instances with their {@link 歲次#年} property.
+     */
+    public static final Comparator<歲次> COMPARING_年 = Comparator.comparing(v -> v.年);
 
     // -----------------------------------------------------------------------------------------------------------------
 
@@ -76,24 +79,13 @@ public class 歲次 extends Assigned<歲次> implements Rolling<歲次> {
     }
 
     // -----------------------------------------------------------------------------------------------------------------
-
-    /**
-     * Returns the previous value of this 歲次.
-     *
-     * @return the previous value of this 歲次.
-     */
     @Override
-    public 歲次 getPrevious() {
+    public @NotNull 歲次 getPrevious() {
         return RollingHelper.getPrevious(歲次.class, this, c -> new 歲次(c.干支.getPrevious(), c.年.minusYears(1L)));
     }
 
-    /**
-     * Returns the next value of this 歲次.
-     *
-     * @return the next value of this 歲次.
-     */
     @Override
-    public 歲次 getNext() {
+    public @NotNull 歲次 getNext() {
         return RollingHelper.getNext(歲次.class, this, c -> new 歲次(c.干支.getNext(), c.年.plusYears(1L)));
     }
 

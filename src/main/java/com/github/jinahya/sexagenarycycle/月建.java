@@ -12,7 +12,7 @@ import java.util.Objects;
  * @author Jin Kwon &lt;onacit_at_gmail.com&gt;
  * @see <a href="https://ko.wikipedia.org/wiki/%EC%9B%94%EA%B1%B4">월건</a>
  */
-@SuppressWarnings("NonAsciiCharacters")
+@SuppressWarnings({"NonAsciiCharacters", "java:S100", "java:S101", "java:S116", "java:S117"})
 public class 月建 extends Assigned<月建> { // 월건
 
     static final Comparator<月建> 閏月_FIRST = (o1, o2) -> Boolean.compare(o1.is閏月(), o2.is閏月());
@@ -117,7 +117,7 @@ public class 月建 extends Assigned<月建> { // 월건
     public final Month 月;
 
     /**
-     * The 歲次 of this 月建.
+     * ` The 歲次 of this 月建.
      */
     @Valid
     @NotNull

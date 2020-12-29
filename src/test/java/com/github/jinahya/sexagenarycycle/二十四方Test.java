@@ -5,6 +5,7 @@ import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
+@SuppressWarnings({"NonAsciiCharacters", "java:S3577"})
 @Slf4j
 class 二十四方Test implements RollingEnumTest<二十四方> {
 
@@ -20,6 +21,14 @@ class 二十四方Test implements RollingEnumTest<二十四方> {
     }
 
     // ---------------------------------------------------------------------------------- valueOfDirection(I,B)L...二十四方;
+    @Test
+    void valueOfDirection_NonNull_ForAllDirections() {
+        for (int i = 0; i < 360; i++) {
+            assertThat(二十四方.valueOfDirection(i, false)).isNotNull();
+        }
+        assertThat(二十四方.valueOfDirection(360, true)).isNotNull().isSameAs(二十四方.valueOfDirection(0, true));
+    }
+
     @Test
     void valueOfDirection_NonNullExpected() {
         {

@@ -2,10 +2,11 @@ package com.github.jinahya.sexagenarycycle;
 
 import java.time.Duration;
 import java.time.LocalTime;
+import java.util.Collections;
+import java.util.Map;
+import java.util.Objects;
 
-import static java.util.Objects.requireNonNull;
-
-@SuppressWarnings("NonAsciiCharacters")
+@SuppressWarnings({"NonAsciiCharacters", "java:S115", "java:S116"})
 public enum 五更 { // 오경
 
     /**
@@ -34,6 +35,10 @@ public enum 五更 { // 오경
     五更;
 
     // -----------------------------------------------------------------------------------------------------------------
+    static final Map<Integer, 五更> VALUES_BY_ORDINALS
+            = Collections.unmodifiableMap(EnumUtils.mapValuesByOrdinals(五更.class));
+
+    // -----------------------------------------------------------------------------------------------------------------
 
     /**
      * Returns the value {@link #includes(LocalTime) includes} specified time.
@@ -42,13 +47,14 @@ public enum 五更 { // 오경
      * @return the value includes {@code time}
      * @throws IllegalArgumentException when no value includes {@code time};
      */
-    public static 五更 valueOf(final LocalTime time) {
+    public static 五更 valueIncludes(final LocalTime time) {
+        Objects.requireNonNull(time, "time is null");
         for (final 五更 value : values()) {
             if (value.includes(time)) {
                 return value;
             }
         }
-        throw new IllegalArgumentException("no value of " + time);
+        throw new IllegalArgumentException("no value includes " + time);
     }
 
     // -----------------------------------------------------------------------------------------------------------------
@@ -66,7 +72,7 @@ public enum 五更 { // 오경
      * @see 時刻#includes(LocalTime)
      */
     public boolean includes(final LocalTime time) {
-        return 時刻.includes(requireNonNull(time, "time is null"));
+        return 時刻.includes(Objects.requireNonNull(time, "time is null"));
     }
 
     // -----------------------------------------------------------------------------------------------------------------

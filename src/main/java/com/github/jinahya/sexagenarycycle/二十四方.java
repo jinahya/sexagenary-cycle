@@ -1,93 +1,92 @@
 package com.github.jinahya.sexagenarycycle;
 
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
+import java.util.Collections;
 import java.util.Map;
 import java.util.Optional;
 
-import static com.github.jinahya.sexagenarycycle.Utils.mapValuesBy;
-import static com.github.jinahya.sexagenarycycle.Utils.mapValuesByOrdinals;
-import static java.util.Collections.unmodifiableMap;
-
 /**
- * Represents 24 directions.
+ * Represents 24 cardinal directions.
+ *
  * @author Jin Kwon &lt;onacit_at_gmail.com&gt;
+ * @see <a href="https://en.wikipedia.org/wiki/Earthly_Branches#Directions">Directions (Earthly Branches)</a>
  */
-@SuppressWarnings("NonAsciiCharacters")
+@SuppressWarnings({"NonAsciiCharacters", "java:S115", "java:S3577"})
 public enum 二十四方 implements RollingEnum<二十四方> {
 
-    @SuppressWarnings({"java:S115"})
+    /**
+     * Indicates {@code 0°} (north).
+     */
     子,
 
-    @SuppressWarnings({"java:S115"})
+    /**
+     * Indicates {@code 15°}.
+     */
     癸,
 
-    @SuppressWarnings({"java:S115"})
+    /**
+     * Indicates {@code 30°}.
+     */
     丑,
 
-    @SuppressWarnings({"java:S115"})
+    /**
+     * Indicates {@code 45°}.
+     */
     艮, // 易經
 
-    @SuppressWarnings({"java:S115"})
     寅,
 
-    @SuppressWarnings({"java:S115"})
     甲,
 
-    @SuppressWarnings({"java:S115"})
     卯,
 
-    @SuppressWarnings({"java:S115"})
     乙,
 
-    @SuppressWarnings({"java:S115"})
     辰,
 
-    @SuppressWarnings({"java:S115"})
     巽, // 易經
 
-    @SuppressWarnings({"java:S115"})
     巳,
 
-    @SuppressWarnings({"java:S115"})
     丙,
 
-    @SuppressWarnings({"java:S115"})
     午,
 
-    @SuppressWarnings({"java:S115"})
     丁,
 
-    @SuppressWarnings({"java:S115"})
     未,
 
-    @SuppressWarnings({"java:S115"})
     坤, // 易經
 
-    @SuppressWarnings({"java:S115"})
     申,
 
-    @SuppressWarnings({"java:S115"})
     庚,
 
-    @SuppressWarnings({"java:S115"})
     酉,
 
-    @SuppressWarnings({"java:S115"})
     辛,
 
-    @SuppressWarnings({"java:S115"})
     戌,
 
-    @SuppressWarnings({"java:S115"})
+    /**
+     * Indicates {@code 315°} (northwest).
+     */
     乾, // 易經
 
-    @SuppressWarnings({"java:S115"})
+    /**
+     * Indicates {@code 330°}.
+     */
     亥,
 
-    @SuppressWarnings({"java:S115"})
+    /**
+     * Indicates {@code 345°}.
+     */
     壬;
 
     // -----------------------------------------------------------------------------------------------------------------
-    private static final Map<Integer, 二十四方> VALUES_BY_ORDINALS = unmodifiableMap(mapValuesByOrdinals(二十四方.class));
+    private static final Map<Integer, 二十四方> VALUES_BY_ORDINALS
+            = Collections.unmodifiableMap(EnumUtils.mapValuesByOrdinals(二十四方.class));
 
     static 二十四方 valueOfOrdinal(final int ordinal) {
         final int i = (ordinal % 24) + (ordinal < 0 ? 24 : 0);
@@ -100,16 +99,15 @@ public enum 二十四方 implements RollingEnum<二十四方> {
 
     // -----------------------------------------------------------------------------------------------------------------
     private static final Map<Integer, 二十四方> VALUES_BY_DIRECTIONS
-            = unmodifiableMap(mapValuesBy(二十四方.class, v -> v.direction));
+            = Collections.unmodifiableMap(EnumUtils.mapValuesBy(二十四方.class, v -> v.direction));
 
     public static 二十四方 valueOfDirection(final int direction, final boolean exact) {
         final int d = (direction % 360) + (direction < 0 ? 360 : 0);
         if (exact) {
             return Optional.ofNullable(VALUES_BY_DIRECTIONS.get(d % 360))
-                    .orElseThrow(() -> new IllegalArgumentException("no value for direction " + direction));
+                    .orElseThrow(() -> new IllegalArgumentException("no value for (exact) direction: " + direction));
         } else {
-            final int index = Math.round(d / 15.0f);
-            return valueOfOrdinal(index);
+            return valueOfOrdinal(Math.round(d / 15.0f));
         }
     }
 
@@ -119,5 +117,11 @@ public enum 二十四方 implements RollingEnum<二十四方> {
     }
 
     // -----------------------------------------------------------------------------------------------------------------
+
+    /**
+     * The cardinal direction of this 二十四方 in {@code [0..360)°}.
+     */
+    @Max(345)
+    @Min(0)
     public final int direction;
 }

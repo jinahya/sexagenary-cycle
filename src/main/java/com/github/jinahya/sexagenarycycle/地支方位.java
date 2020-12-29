@@ -8,26 +8,26 @@ import java.util.Objects;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
-@SuppressWarnings("NonAsciiCharacters")
-final class 地支二十四方 {
+@SuppressWarnings({"NonAsciiCharacters", "java:S100", "java:S101", "java:S117"})
+final class 地支方位 {
 
-    private static final Map<地支, 二十四方> MAP = Collections.unmodifiableMap(
+    private static final Map<地支, 二十四方> 二十四方S_BY_地支S = Collections.unmodifiableMap(
             Arrays.stream(地支.values()).collect(Collectors.toMap(
                     Function.identity(),
                     v -> 二十四方.valueOfDirection(v.ordinal() * 30, true),
-                    (d1, d2) -> {
-                        throw new AssertionError("duplicate 地支; " + d1 + ", " + d2);
+                    (v1, v2) -> {
+                        throw new AssertionError("duplicate value; " + v1 + ", " + v2);
                     },
                     () -> new EnumMap<>(地支.class))
             )
     );
 
-    public static 二十四方 valueOf(final 地支 地支) {
+    public static 二十四方 方位Of(final 地支 地支) {
         Objects.requireNonNull(地支, "地支 is null");
-        return MAP.get(地支);
+        return 二十四方S_BY_地支S.get(地支);
     }
 
-    private 地支二十四方() {
+    private 地支方位() {
         throw new AssertionError("instantiation is not allowed");
     }
 }

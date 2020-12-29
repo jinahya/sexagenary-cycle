@@ -1,12 +1,8 @@
 package com.github.jinahya.sexagenarycycle;
 
-import java.util.Arrays;
 import java.util.Collections;
-import java.util.EnumMap;
 import java.util.Map;
 import java.util.Objects;
-import java.util.function.Function;
-import java.util.stream.Collectors;
 
 /**
  * Defines constants for {@code inter-regulating} cycle and {@code overacting} cycle, and {@code counteracting} cycle
@@ -14,8 +10,8 @@ import java.util.stream.Collectors;
  *
  * @author Jin Kwon &lt;onacit_at_gmail.com&gt;
  */
-@SuppressWarnings("NonAsciiCharacters")
-public enum 五行相剋 {
+@SuppressWarnings({"NonAsciiCharacters", "java:S115"})
+public enum 五行相剋 implements RollingEnum<五行相剋> {
 
     木剋土(五行.木, 五行.土),
 
@@ -28,43 +24,39 @@ public enum 五行相剋 {
     金剋木(五行.金, 五行.木);
 
     // -----------------------------------------------------------------------------------------------------------------
-    private static final Map<五行, 五行相剋> VALUES_BY_SUBJECTIVES = Collections.unmodifiableMap(
-            Arrays.stream(values()).collect(Collectors.toMap(
-                    v -> v.subjective,
-                    Function.identity(),
-                    (v1, v2) -> {
-                        throw new AssertionError("shouldn't happen; duplicate value: " + v1 + ", " + v2);
-                    },
-                    () -> new EnumMap<>(五行.class)
-            ))
-    );
+    private static final Map<五行, 五行相剋> VALUES_BY_SUBJECTIVES
+            = Collections.unmodifiableMap(EnumUtils.mapValuesBy(五行相剋.class, v -> v.subjective));
 
+    /**
+     * Returns the value associated to specified subjective.
+     *
+     * @param subjective the subjective.
+     * @return the value associated to {@code subjective}.
+     */
     public static 五行相剋 valueOfSubjective(final 五行 subjective) {
         Objects.requireNonNull(subjective, "subjective is null");
         final 五行相剋 value = VALUES_BY_SUBJECTIVES.get(subjective);
         if (value == null) {
-            throw new AssertionError("shouldn't happen; no value for subjective: " + subjective);
+            throw new AssertionError("no value for subjective: " + subjective);
         }
         return value;
     }
 
     // -----------------------------------------------------------------------------------------------------------------
-    private static final Map<五行, 五行相剋> VALUES_BY_OBJECTIVES = Collections.unmodifiableMap(
-            Arrays.stream(values()).collect(Collectors.toMap(
-                    v -> v.objective,
-                    Function.identity(),
-                    (v1, v2) -> {
-                        throw new AssertionError("shouldn't happen; duplicate value: " + v1 + ", " + v2);
-                    },
-                    () -> new EnumMap<>(五行.class)
-            ))
-    );
+    private static final Map<五行, 五行相剋> VALUES_BY_OBJECTIVES
+            = Collections.unmodifiableMap(EnumUtils.mapValuesBy(五行相剋.class, v -> v.objective));
 
+    /**
+     * Returns the value associated to specified objective.
+     *
+     * @param objective the objective.
+     * @return the value associated to {@code objective}.
+     */
     public static 五行相剋 valueOfObjective(final 五行 objective) {
         Objects.requireNonNull(objective, "objective is null");
         final 五行相剋 value = VALUES_BY_OBJECTIVES.get(objective);
         if (value == null) {
-            throw new AssertionError("shouldn't happen; no value for objective: " + objective);
+            throw new AssertionError("no value for objective: " + objective);
         }
         return value;
     }
@@ -105,6 +97,33 @@ public enum 五行相剋 {
         }
         this.subjective = subjective;
         this.objective = objective;
+    }
+
+    // -----------------------------------------------------------------------------------------------------------------
+    public 五行相剋 getPreviousInInterRegulatingCycle() {
+        return getPrevious();
+    }
+
+    public 五行相剋 getNextInInterRegulatingCycle() {
+        return getNext();
+    }
+
+    // -----------------------------------------------------------------------------------------------------------------
+    public 五行相剋 getPreviousInOveractingCycle() {
+        return getPreviousInInterRegulatingCycle();
+    }
+
+    public 五行相剋 getNextInOveractingCycle() {
+        return getNextInInterRegulatingCycle();
+    }
+
+    // -----------------------------------------------------------------------------------------------------------------
+    public 五行相剋 getPreviousInCounteractingCycle() {
+        return getNextInOveractingCycle();
+    }
+
+    public 五行相剋 getNextInCounteractingCycle() {
+        return getPreviousInOveractingCycle();
     }
 
     // -----------------------------------------------------------------------------------------------------------------

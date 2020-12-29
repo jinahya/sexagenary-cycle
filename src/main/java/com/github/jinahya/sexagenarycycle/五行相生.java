@@ -1,20 +1,17 @@
 package com.github.jinahya.sexagenarycycle;
 
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.EnumMap;
 import java.util.Map;
 import java.util.Objects;
-import java.util.function.Function;
-import java.util.stream.Collectors;
 
 /**
  * Defines constants for {@code inter-promoting} cycle and {@code weakening} cycle between values of {@link 五行}.
  *
  * @author Jin Kwon &lt;onacit_at_gmail.com&gt;
  */
-@SuppressWarnings("NonAsciiCharacters")
-public enum 五行相生 {
+@SuppressWarnings({"NonAsciiCharacters", "java:S115"})
+public enum 五行相生 implements RollingEnum<五行相生> {
 
     木生火(五行.木, 五行.火),
 
@@ -28,14 +25,7 @@ public enum 五行相生 {
 
     // -----------------------------------------------------------------------------------------------------------------
     private static final Map<五行, 五行相生> VALUES_BY_SUBJECTIVES = Collections.unmodifiableMap(
-            Arrays.stream(values()).collect(Collectors.toMap(
-                    v -> v.subjective,
-                    Function.identity(),
-                    (v1, v2) -> {
-                        throw new AssertionError("shouldn't happen; duplicate value: " + v1 + ", " + v2);
-                    },
-                    () -> new EnumMap<>(五行.class)
-            ))
+            EnumUtils.mapValuesBy(五行相生.class, v -> v.subjective, () -> new EnumMap<>(五行.class))
     );
 
     public static 五行相生 valueOfSubjective(final 五行 subject) {
@@ -49,14 +39,7 @@ public enum 五行相生 {
 
     // -----------------------------------------------------------------------------------------------------------------
     private static final Map<五行, 五行相生> VALUES_BY_OBJECTIVES = Collections.unmodifiableMap(
-            Arrays.stream(values()).collect(Collectors.toMap(
-                    v -> v.objective,
-                    Function.identity(),
-                    (v1, v2) -> {
-                        throw new AssertionError("shouldn't happen; duplicate value: " + v1 + ", " + v2);
-                    },
-                    () -> new EnumMap<>(五行.class)
-            ))
+            EnumUtils.mapValuesBy(五行相生.class, v -> v.objective, () -> new EnumMap<>(五行.class))
     );
 
     public static 五行相生 valueOfObjective(final 五行 objective) {
@@ -121,6 +104,24 @@ public enum 五行相生 {
         }
         this.subjective = subjective;
         this.objective = objective;
+    }
+
+    // -----------------------------------------------------------------------------------------------------------------
+    public 五行相生 getPreviousInInterPromotingCycle() {
+        return getPrevious();
+    }
+
+    public 五行相生 getNextInInterPromotingCycle() {
+        return getNext();
+    }
+
+    // -----------------------------------------------------------------------------------------------------------------
+    public 五行相生 getPreviousInWeakeningCycle() {
+        return getNextInInterPromotingCycle();
+    }
+
+    public 五行相生 getNextInWeakeningCycle() {
+        return getPreviousInInterPromotingCycle();
     }
 
     // -----------------------------------------------------------------------------------------------------------------

@@ -19,6 +19,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatNoException;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
+@SuppressWarnings({"NonAsciiCharacters", "java:S3577"})
 @Slf4j
 class 간지Test implements RollingTest<간지> {
 
@@ -44,6 +45,8 @@ class 간지Test implements RollingTest<간지> {
         return VALID_NAMES.stream();
     }
 
+    // -----------------------------------------------------------------------------------------------------------------
+
     /**
      * An unmodifiable list of invalid names among all the possible combinations.
      */
@@ -66,7 +69,7 @@ class 간지Test implements RollingTest<간지> {
     void REGEXP_NAME_Match() {
         final Pattern pattern = Pattern.compile(간지.REGEXP_NAME);
         for (final 간지 value : 간지.VALUES) {
-            final String name = value.name();
+            final String name = value.getName();
             assertThat(pattern.matcher(name)).satisfies(m -> {
                 assertThat(m.matches()).isTrue();
             });
@@ -79,7 +82,7 @@ class 간지Test implements RollingTest<간지> {
         assertThat(new HashSet<>(간지.VALUES).size()).isEqualTo(간지.VALUES.size());
         for (int i = 0; i < 간지.VALUES.size(); i++) {
             final 간지 value = 간지.VALUES.get(i);
-            assertThat(VALID_NAMES.indexOf(value.name())).isEqualTo(i);
+            assertThat(VALID_NAMES.indexOf(value.getName())).isEqualTo(i);
         }
     }
 
@@ -119,7 +122,7 @@ class 간지Test implements RollingTest<간지> {
     @Test
     void valueOfName_NonNullSame_OwnName() {
         for (final 간지 value : 간지.VALUES) {
-            assertThat(간지.valueOfName(value.name())).isNotNull().isSameAs(value);
+            assertThat(간지.valueOfName(value.getName())).isNotNull().isSameAs(value);
         }
     }
 
@@ -137,7 +140,6 @@ class 간지Test implements RollingTest<간지> {
     @Test
     void equals_False_ObjIsNull() {
         for (final 간지 value : 간지.VALUES) {
-            assertThat(value.equals(null)).isFalse();
             assertThat(value).isNotEqualTo(null);
         }
     }
@@ -146,7 +148,6 @@ class 간지Test implements RollingTest<간지> {
     @Test
     void equals_True_AgainstSelf() {
         for (final 간지 value : 간지.VALUES) {
-            assertThat(value.equals(value)).isTrue();
             assertThat(value).isEqualTo(value);
         }
     }
@@ -155,7 +156,7 @@ class 간지Test implements RollingTest<간지> {
     @Test
     void equals_False_ObjClassIsNotSame() {
         for (final 간지 value : 간지.VALUES) {
-            assertThat(value.equals(new Object())).isFalse();
+            assertThat(value).isNotEqualTo(new Object());
         }
     }
 
@@ -179,16 +180,18 @@ class 간지Test implements RollingTest<간지> {
     @Test
     void hashCode_NoExceptionThrown_() {
         for (final 간지 value : 간지.VALUES) {
-            assertThatNoException().isThrownBy(value::hashCode);
+            assertThatNoException().isThrownBy(() -> {
+                final int hashCode = value.hashCode();
+            });
         }
     }
 
     // -----------------------------------------------------------------------------------------------------------------
     @DisplayName("name() returns a non-null and two-characters long value")
     @Test
-    void name_NonNullAndHasSize2() {
+    void getName_NonNullAndHasSize2() {
         for (final 간지 value : 간지.VALUES) {
-            assertThat(value.name()).isNotNull().hasSize(2);
+            assertThat(value.getName()).isNotNull().hasSize(2);
         }
     }
 
