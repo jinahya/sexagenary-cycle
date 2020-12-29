@@ -10,6 +10,7 @@ import java.util.regex.Pattern;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
+@SuppressWarnings({"NonAsciiCharacters", "java:S3577"})
 @Slf4j
 class 천간Test {
 

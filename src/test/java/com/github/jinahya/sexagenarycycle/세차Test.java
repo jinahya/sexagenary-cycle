@@ -8,6 +8,7 @@ import java.util.stream.Stream;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatNoException;
 
+@SuppressWarnings({"NonAsciiCharacters", "java:S3577"})
 class 세차Test implements RollingTest<세차> {
 
     // -----------------------------------------------------------------------------------------------------------------
@@ -28,12 +29,6 @@ class 세차Test implements RollingTest<세차> {
     @ParameterizedTest
     void equals_True_Self(final 세차 세차) {
         assertThat(세차).isEqualTo(세차);
-    }
-
-    @MethodSource({"parameters"})
-    @ParameterizedTest
-    void equals_True_Clone(final 세차 세차) {
-        // TODO: fix
     }
 
     // -----------------------------------------------------------------------------------------------------------------
