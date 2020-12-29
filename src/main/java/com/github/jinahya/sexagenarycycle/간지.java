@@ -8,9 +8,6 @@ import java.util.Objects;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
-import static com.github.jinahya.sexagenarycycle.干支.REGEXP_NAME_GROUP_BRANCH;
-import static com.github.jinahya.sexagenarycycle.干支.REGEXP_NAME_GROUP_STEM;
-
 /**
  * A class for <a href="https://en.wikipedia.org/wiki/Sexagenary_cycle">Sexagenary cycle</a>.
  *
@@ -26,8 +23,8 @@ public final class 간지 implements Rolling<간지> { // \uac04\uc9c0
      * A regular expression for matching {@link #getName() name}. The value is {@value}.
      */
     public static final String REGEXP_NAME
-            = "(?<" + REGEXP_NAME_GROUP_STEM + ">" + 천간.REGEXP_NAME + ")"
-              + "(?<" + REGEXP_NAME_GROUP_BRANCH + ">" + 지지.REGEXP_NAME + ")";
+            = "(?<" + com.github.jinahya.sexagenarycycle.干支.REGEXP_NAME_GROUP_STEM + ">" + 천간.REGEXP_NAME + ")"
+              + "(?<" + com.github.jinahya.sexagenarycycle.干支.REGEXP_NAME_GROUP_BRANCH + ">" + 지지.REGEXP_NAME + ")";
 
     // -----------------------------------------------------------------------------------------------------------------
     static final List<간지> VALUES = Collections.unmodifiableList(

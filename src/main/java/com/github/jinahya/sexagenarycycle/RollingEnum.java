@@ -1,16 +1,15 @@
 package com.github.jinahya.sexagenarycycle;
 
 import javax.validation.constraints.NotNull;
+import java.util.Objects;
 import java.util.function.UnaryOperator;
-
-import static java.util.Objects.requireNonNull;
 
 interface RollingEnum<E extends Enum<E> & RollingEnum<E>> extends Rolling<E> {
 
     static <E extends Enum<E> & RollingEnum<E>> UnaryOperator<E> previousMapper(final Class<E> enumClass) {
-        requireNonNull(enumClass, "enumClass is null");
+        Objects.requireNonNull(enumClass, "enumClass is null");
         return c -> {
-            requireNonNull(c, "enumConstant is null");
+            Objects.requireNonNull(c, "enumConstant is null");
             final E[] values = enumClass.getEnumConstants();
             final int ordinal = c.ordinal();
             if (ordinal == 0) {
@@ -21,9 +20,9 @@ interface RollingEnum<E extends Enum<E> & RollingEnum<E>> extends Rolling<E> {
     }
 
     static <E extends Enum<E> & RollingEnum<E>> UnaryOperator<E> nextMapper(final Class<E> enumClass) {
-        requireNonNull(enumClass, "enumClass is null");
+        Objects.requireNonNull(enumClass, "enumClass is null");
         return c -> {
-            requireNonNull(c, "enumConstant is null");
+            Objects.requireNonNull(c, "enumConstant is null");
             final E[] values = enumClass.getEnumConstants();
             final int ordinal = c.ordinal();
             if (ordinal == values.length - 1) {

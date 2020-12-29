@@ -81,15 +81,30 @@ public class 歲次 extends Assigned<歲次> implements Rolling<歲次> {
     // -----------------------------------------------------------------------------------------------------------------
     @Override
     public @NotNull 歲次 getPrevious() {
-        return RollingHelper.getPrevious(歲次.class, this, c -> new 歲次(c.干支.getPrevious(), c.年.minusYears(1L)));
+        歲次 result = previous;
+        if (result == null) {
+            previous = result = new 歲次(干支.getPrevious(), 年.minusYears(1L));
+        }
+        return result;
     }
 
     @Override
     public @NotNull 歲次 getNext() {
-        return RollingHelper.getNext(歲次.class, this, c -> new 歲次(c.干支.getNext(), c.年.plusYears(1L)));
+        歲次 result = next;
+        if (result == null) {
+            next = result = new 歲次(干支.getNext(), 年.plusYears(1L));
+        }
+        return result;
     }
 
     // -----------------------------------------------------------------------------------------------------------------
     @NotNull
     public final Year 年;
+
+    // -----------------------------------------------------------------------------------------------------------------
+    @SuppressWarnings({"java:S3077"})
+    private volatile 歲次 previous;
+
+    @SuppressWarnings({"java:S3077"})
+    private volatile 歲次 next;
 }

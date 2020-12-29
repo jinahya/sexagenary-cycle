@@ -1,5 +1,7 @@
 package com.github.jinahya.sexagenarycycle;
 
+import javax.validation.constraints.NotNull;
+
 /**
  * Represents a {@link 간지} assigned to a specific year.
  *
@@ -36,35 +38,27 @@ public class 세차 extends 부여된<세차, 歲次> implements Rolling<세차>
 
     // -----------------------------------------------------------------------------------------------------------------
     @Override
-    public 세차 getPrevious() {
-        final 세차 result = previous;
-        if (result != null) {
-            return result;
+    public @NotNull 세차 getPrevious() {
+        세차 result = previous;
+        if (result == null) {
+            previous = result = new 세차(assigned.getPrevious());
         }
-        synchronized (this) {
-            if (previous == null) {
-                previous = new 세차(assigned.getPrevious());
-            }
-            return previous;
-        }
+        return result;
     }
 
     @Override
-    public 세차 getNext() {
-        final 세차 result = next;
-        if (result != null) {
-            return result;
+    public @NotNull 세차 getNext() {
+        세차 result = next;
+        if (result == null) {
+            next = result = new 세차(assigned.getNext());
         }
-        synchronized (this) {
-            if (next == null) {
-                next = new 세차(assigned.getNext());
-            }
-            return next;
-        }
+        return result;
     }
 
     // -----------------------------------------------------------------------------------------------------------------
+    @SuppressWarnings({"java:S3077"})
     private volatile 세차 previous;
 
+    @SuppressWarnings({"java:S3077"})
     private volatile 세차 next;
 }

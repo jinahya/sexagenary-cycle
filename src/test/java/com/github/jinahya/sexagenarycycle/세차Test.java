@@ -24,17 +24,19 @@ class 세차Test implements RollingTest<세차> {
         assertThat(세차.toString()).isNotBlank();
     }
 
-    // -----------------------------------------------------------------------------------------------------------------
+    // ---------------------------------------------------------------------------------------------------------- equals
     @MethodSource({"parameters"})
     @ParameterizedTest
     void equals_True_Self(final 세차 세차) {
         assertThat(세차).isEqualTo(세차);
+        assertThat(세차.equals(세차)).isTrue(); // coverage
     }
 
     // -----------------------------------------------------------------------------------------------------------------
     @MethodSource({"parameters"})
     @ParameterizedTest
     void hashCode_NoException_(final 세차 세차) {
+        //noinspection ResultOfMethodCallIgnored
         assertThatNoException().isThrownBy(세차::hashCode);
     }
 

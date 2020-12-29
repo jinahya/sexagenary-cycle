@@ -11,6 +11,8 @@ import static com.github.jinahya.sexagenarycycle.月建Test.of2020庚子年04辛
 import static com.github.jinahya.sexagenarycycle.月建Test.of2020庚子年04閏四月;
 import static com.github.jinahya.sexagenarycycle.月建Test.of2020庚子年11戊子月;
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 @SuppressWarnings({"NonAsciiCharacters", "java:S3577"})
@@ -50,37 +52,32 @@ class 日辰Test {
         assertThrows(IllegalArgumentException.class, () -> new 日辰(干支, 31, 月建));
     }
 
-    // -----------------------------------------------------------------------------------------------------------------
+    // -------------------------------------------------------------------------------------------------------- toString
     @MethodSource({"parameters"})
     @ParameterizedTest
-    void testToString(final 日辰 日辰) {
+    void toString_NonBlank(final 日辰 日辰) {
         assertThat(日辰.toString()).isNotBlank();
     }
 
+    // ---------------------------------------------------------------------------------------------------------- equals
     @MethodSource({"parameters"})
     @ParameterizedTest
-    void testEquals(final 日辰 日辰) {
-        // TODO: fix 
+    void equals_True_Self(final 日辰 日辰) {
+        assertThat(日辰).isEqualTo(日辰);
+        assertEquals(日辰, 日辰);
     }
 
+    // -------------------------------------------------------------------------------------------------------- hashCode
     @MethodSource({"parameters"})
     @ParameterizedTest
     void testHashCode(final 日辰 日辰) {
-        final int hashCode = 日辰.hashCode();
+        assertDoesNotThrow(日辰::hashCode);
     }
 
-    // -----------------------------------------------------------------------------------------------------------------
+    // ------------------------------------------------------------------------------------------------------- compareTo
     @MethodSource({"parameters"})
     @ParameterizedTest
-    void testCompareTo(final 日辰 日辰) {
-        // TODO: fix 
-    }
-
-    // -----------------------------------------------------------------------------------------------------------------
-    @MethodSource({"parameters"})
-    @ParameterizedTest
-    void testGet干支(final 日辰 日辰) {
-        assertThat(日辰.干支).satisfies(v -> {
-        });
+    void compareTo_Zero_Self(final 日辰 日辰) {
+        assertThat(日辰).isEqualByComparingTo(日辰);
     }
 }

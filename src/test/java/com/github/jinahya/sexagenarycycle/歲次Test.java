@@ -12,7 +12,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 @SuppressWarnings({"NonAsciiCharacters", "java:S3577"})
 @Slf4j
-class 歲次Test {
+class 歲次Test implements RollingTest<歲次>{
 
     // ------------------------------------------------------------------------------------------------------------ 2020
     static 歲次 of2020庚子年() { // 경자년
@@ -66,7 +66,7 @@ class 歲次Test {
 
     // ------------------------------------------------------------ getPrevious()Lcom.github.jinahya.sexagenarycycle.歲次;
     @Test
-    void testGetPrevious() {
+    void getPrevious_() {
         {
             final 歲次 庚子年 = of2020庚子年();
             final 歲次 己亥年 = new 歲次(干支.valueOfName("己亥"), Year.of(2019));
@@ -76,7 +76,7 @@ class 歲次Test {
 
     @MethodSource({"parameters"})
     @ParameterizedTest
-    void testGetPrevious(final 歲次 歲次) {
+    void getPrevious_(final 歲次 歲次) {
         AssignedAssertions.assertThat(歲次.getPrevious()).isNotNull().hasYear(歲次.年.minusYears(1L));
     }
 
@@ -94,5 +94,12 @@ class 歲次Test {
     @ParameterizedTest
     void getNext_(final 歲次 歲次) {
         AssignedAssertions.assertThat(歲次.getNext()).isNotNull().hasYear(歲次.年.plusYears(1L));
+    }
+
+    // -----------------------------------------------------------------------------------------------------------------
+
+    @Override
+    public 歲次[] values() {
+        return parameters().toArray(歲次[]::new);
     }
 }

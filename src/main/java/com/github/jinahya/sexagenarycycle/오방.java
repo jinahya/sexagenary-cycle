@@ -5,10 +5,9 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.EnumMap;
 import java.util.Map;
+import java.util.Objects;
 import java.util.function.Function;
 import java.util.stream.Collectors;
-
-import static java.util.Objects.requireNonNull;
 
 @SuppressWarnings({"NonAsciiCharacters", "java:S115", "java:S116", "java:S117"})
 public enum 오방 {
@@ -32,7 +31,7 @@ public enum 오방 {
     );
 
     public static 오방 valueOf(final 五方 五方) {
-        requireNonNull(五方, "五方 is null");
+        Objects.requireNonNull(五方, "五方 is null");
         final 오방 value = VALUES_BY_五方S.get(五方);
         if (value == null) {
             throw new AssertionError("shouldn't happen; no value for " + 五方);
@@ -42,7 +41,7 @@ public enum 오방 {
 
     // -----------------------------------------------------------------------------------------------------------------
     오방(final 五方 五方) {
-        this.五方 = requireNonNull(五方, "五方 is null");
+        this.五方 = Objects.requireNonNull(五方, "五方 is null");
     }
 
     // -----------------------------------------------------------------------------------------------------------------

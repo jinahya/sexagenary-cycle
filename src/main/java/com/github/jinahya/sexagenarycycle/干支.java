@@ -171,7 +171,7 @@ public final class 干支 implements Rolling<干支> { // \u5e72\u652f
      * @return previous value of this 干支.
      */
     @Override
-    public 干支 getPrevious() {
+    public @NotNull 干支 getPrevious() {
         return RollingHelper.getPrevious(this, c -> valueOf(c.干.getPrevious(), c.支.getPrevious()));
     }
 
@@ -181,7 +181,7 @@ public final class 干支 implements Rolling<干支> { // \u5e72\u652f
      * @return next value of this 干支.
      */
     @Override
-    public 干支 getNext() {
+    public @NotNull 干支 getNext() {
         return RollingHelper.getNext(this, c -> valueOf(c.干.getNext(), c.支.getNext()));
     }
 

@@ -10,6 +10,7 @@ import java.util.Objects;
  * Represents a 干支 assigned to a specific month of a year.
  *
  * @author Jin Kwon &lt;onacit_at_gmail.com&gt;
+ * @see 월건
  * @see <a href="https://ko.wikipedia.org/wiki/%EC%9B%94%EA%B1%B4">월건</a>
  */
 @SuppressWarnings({"NonAsciiCharacters", "java:S100", "java:S101", "java:S116", "java:S117"})

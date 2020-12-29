@@ -11,18 +11,16 @@ interface RollingTest<T extends Rolling<T>> {
     @Test
     default void getPrevious_NonNull_() {
         for (final T value : values()) {
-            assertThat(value.getPrevious()).isNotNull().satisfies(v -> {
-                assertThat(v.getNext()).isNotNull().isEqualTo(value);
-            });
+            assertThat(value.getPrevious()).isNotNull();
+            assertThat(value.getPrevious()).isNotNull();
         }
     }
 
     @Test
     default void getNext_NonNull_() {
         for (final T value : values()) {
-            assertThat(value.getNext()).isNotNull().satisfies(v -> {
-                assertThat(v.getPrevious()).isNotNull().isEqualTo(value);
-            });
+            assertThat(value.getNext()).isNotNull();
+            assertThat(value.getNext()).isNotNull();
         }
     }
 }

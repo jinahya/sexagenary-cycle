@@ -1,23 +1,9 @@
 package com.github.jinahya.sexagenarycycle;
 
 import javax.validation.constraints.NotNull;
+import java.util.Collections;
 import java.util.Map;
 import java.util.Objects;
-
-import static com.github.jinahya.sexagenarycycle.EnumUtils.mapValuesByNames;
-import static com.github.jinahya.sexagenarycycle.地支.丑;
-import static com.github.jinahya.sexagenarycycle.地支.亥;
-import static com.github.jinahya.sexagenarycycle.地支.午;
-import static com.github.jinahya.sexagenarycycle.地支.卯;
-import static com.github.jinahya.sexagenarycycle.地支.子;
-import static com.github.jinahya.sexagenarycycle.地支.寅;
-import static com.github.jinahya.sexagenarycycle.地支.巳;
-import static com.github.jinahya.sexagenarycycle.地支.戌;
-import static com.github.jinahya.sexagenarycycle.地支.未;
-import static com.github.jinahya.sexagenarycycle.地支.申;
-import static com.github.jinahya.sexagenarycycle.地支.辰;
-import static com.github.jinahya.sexagenarycycle.地支.酉;
-import static java.util.Collections.unmodifiableMap;
 
 /**
  * Constants of 10 <a href="https://en.wikipedia.org/wiki/Earthly_Branches">Earthly Branches</a>.
@@ -29,18 +15,18 @@ import static java.util.Collections.unmodifiableMap;
 @SuppressWarnings({"NonAsciiCharacters", "java:S115", "java:S116", "java:S117"})
 public enum 지지 { // \uc9c0\uc9c0
 
-    자(子),
-    축(丑),
-    인(寅),
-    묘(卯),
-    진(辰),
-    사(巳),
-    오(午),
-    미(未),
-    신(申),
-    유(酉),
-    술(戌),
-    해(亥);
+    자(com.github.jinahya.sexagenarycycle.地支.子),
+    축(com.github.jinahya.sexagenarycycle.地支.丑),
+    인(com.github.jinahya.sexagenarycycle.地支.寅),
+    묘(com.github.jinahya.sexagenarycycle.地支.卯),
+    진(com.github.jinahya.sexagenarycycle.地支.辰),
+    사(com.github.jinahya.sexagenarycycle.地支.巳),
+    오(com.github.jinahya.sexagenarycycle.地支.午),
+    미(com.github.jinahya.sexagenarycycle.地支.未),
+    신(com.github.jinahya.sexagenarycycle.地支.申),
+    유(com.github.jinahya.sexagenarycycle.地支.酉),
+    술(com.github.jinahya.sexagenarycycle.地支.戌),
+    해(com.github.jinahya.sexagenarycycle.地支.亥);
 
     // -----------------------------------------------------------------------------------------------------------------
 
@@ -51,7 +37,8 @@ public enum 지지 { // \uc9c0\uc9c0
             = "[\uc790\ucd95\uc778\ubb18\uc9c4\uc0ac\uc624\ubbf8\uc2e0\uc720\uc220\ud574]";
 
     // -----------------------------------------------------------------------------------------------------------------
-    private static final Map<String, 지지> VALUES_BY_NAMES = unmodifiableMap(mapValuesByNames(지지.class));
+    private static final Map<String, 지지> VALUES_BY_NAMES
+            = Collections.unmodifiableMap(EnumUtils.mapValuesByNames(지지.class));
 
     /**
      * Returns the constant of specified name. This method, unlikely to {@link #valueOf(String)} method, uses a cache.
@@ -69,7 +56,8 @@ public enum 지지 { // \uc9c0\uc9c0
     }
 
     // -----------------------------------------------------------------------------------------------------------------
-    private static final Map<地支, 지지> VALUES_BY_地支S = unmodifiableMap(EnumUtils.mapValuesBy(지지.class, v -> v.地支));
+    private static final Map<地支, 지지> VALUES_BY_地支S
+            = Collections.unmodifiableMap(EnumUtils.mapValuesBy(지지.class, v -> v.地支));
 
     /**
      * Returns the constant for specified 地支.

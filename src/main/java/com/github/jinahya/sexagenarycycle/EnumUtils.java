@@ -3,11 +3,10 @@ package com.github.jinahya.sexagenarycycle;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 import java.util.function.Function;
 import java.util.function.Supplier;
 import java.util.stream.Collectors;
-
-import static java.util.Objects.requireNonNull;
 
 @SuppressWarnings({"java:S1192"})
 final class EnumUtils {
@@ -15,9 +14,9 @@ final class EnumUtils {
     static <K, E extends Enum<E>> Map<K, E> mapValuesBy(final Class<E> enumClass,
                                                         final Function<? super E, ? extends K> keyMapper,
                                                         final Supplier<? extends Map<K, E>> mapFactory) {
-        requireNonNull(enumClass, "enumClass is null");
-        requireNonNull(keyMapper, "keyMapper is null");
-        requireNonNull(mapFactory, "mapFactory is null");
+        Objects.requireNonNull(enumClass, "enumClass is null");
+        Objects.requireNonNull(keyMapper, "keyMapper is null");
+        Objects.requireNonNull(mapFactory, "mapFactory is null");
         return Arrays.stream(enumClass.getEnumConstants()).collect(Collectors.toMap(
                 keyMapper,
                 Function.identity(),
@@ -33,12 +32,12 @@ final class EnumUtils {
     }
 
     static <E extends Enum<E>> Map<String, E> mapValuesByNames(final Class<E> enumClass) {
-        requireNonNull(enumClass, "enumClass is null");
+        Objects.requireNonNull(enumClass, "enumClass is null");
         return Arrays.stream(enumClass.getEnumConstants()).collect(Collectors.toMap(Enum::name, Function.identity()));
     }
 
     static <E extends Enum<E>> Map<Integer, E> mapValuesByOrdinals(final Class<E> enumClass) {
-        requireNonNull(enumClass, "enumClass is null");
+        Objects.requireNonNull(enumClass, "enumClass is null");
         return Arrays.stream(enumClass.getEnumConstants())
                 .collect(Collectors.toMap(Enum::ordinal, Function.identity()));
     }

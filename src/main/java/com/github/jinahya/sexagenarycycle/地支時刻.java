@@ -5,8 +5,7 @@ import java.time.LocalTime;
 import java.util.Collections;
 import java.util.EnumMap;
 import java.util.Map;
-
-import static java.util.Objects.requireNonNull;
+import java.util.Objects;
 
 @SuppressWarnings({"NonAsciiCharacters", "java:S100", "java:S115", "java:S116", "java:S117"})
 enum 地支時刻 {
@@ -33,7 +32,7 @@ enum 地支時刻 {
     );
 
     public static 地支時刻 valueOf(final 地支 地支) {
-        requireNonNull(地支, "地支 is null");
+        Objects.requireNonNull(地支, "地支 is null");
         final 地支時刻 value = VALUES_BY_地支s.get(地支);
         if (value == null) {
             throw new AssertionError("no value for " + 地支);
