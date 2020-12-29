@@ -65,10 +65,10 @@ public enum 五更 { // 오경
     // -----------------------------------------------------------------------------------------------------------------
 
     /**
-     * Checks whether this 時刻 includes specified time.
+     * Checks whether {@link 時刻} includes specified time.
      *
      * @param time the time.
-     * @return {@code true} if this 時刻 includes {@code time}; {@code false} otherwise.
+     * @return {@code true} if this {@link 時刻} includes {@code time}; {@code false} otherwise.
      * @see 時刻#includes(LocalTime)
      */
     public boolean includes(final LocalTime time) {

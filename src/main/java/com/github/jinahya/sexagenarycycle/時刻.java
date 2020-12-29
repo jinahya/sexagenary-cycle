@@ -14,11 +14,11 @@ import java.util.Objects;
 @SuppressWarnings({"NonAsciiCharacters", "java:S101"})
 public final class 時刻 { // 시각
 
-    public static Duration forTwoHours() {
+    static Duration forTwoHours() {
         return Duration.ofHours(2L);
     }
 
-    public static 時刻 newInstanceForTwoHoursFrom(final int hour) {
+    static 時刻 newInstanceForTwoHoursFrom(final int hour) {
         return new 時刻(LocalTime.of(hour, 0), forTwoHours());
     }
 

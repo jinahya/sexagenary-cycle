@@ -9,12 +9,18 @@ import java.util.Objects;
 public enum 五方正色 {
 
     /**
-     * Blue for Wood and East.
+     * Blue.
+     *
+     * @see com.github.jinahya.sexagenarycycle.五行#木
+     * @see com.github.jinahya.sexagenarycycle.五方#東
      */
     靑(com.github.jinahya.sexagenarycycle.五行.木, com.github.jinahya.sexagenarycycle.五方.東),
 
     /**
-     * Red for Fire and South.
+     * Red.
+     *
+     * @see com.github.jinahya.sexagenarycycle.五行#火
+     * @see com.github.jinahya.sexagenarycycle.五方#南
      */
     赤(com.github.jinahya.sexagenarycycle.五行.火, com.github.jinahya.sexagenarycycle.五方.南),
 
