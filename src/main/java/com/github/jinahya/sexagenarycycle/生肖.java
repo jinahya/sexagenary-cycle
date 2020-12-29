@@ -6,20 +6,73 @@ import java.util.EnumMap;
 import java.util.Map;
 import java.util.Objects;
 
+/**
+ * Constants for <a href="https://en.wikipedia.org/wiki/Chinese_zodiac">Chinese zodiac</a>.
+ *
+ * @author Jin Kwon &lt;onacit_at_gmail.com&gt;
+ * @see <a href="https://zh.wikipedia.org/wiki/%E7%94%9F%E8%82%96">生肖</a>
+ */
 @SuppressWarnings({"NonAsciiCharacters", "java:S115", "java:S116", "java:S117"})
 public enum 生肖 {
 
+    /**
+     * Rat.
+     */
     鼠(com.github.jinahya.sexagenarycycle.地支.子),
+
+    /**
+     * Ox.
+     */
     牛(com.github.jinahya.sexagenarycycle.地支.丑),
+
+    /**
+     * Tiger.
+     */
     虎(com.github.jinahya.sexagenarycycle.地支.寅),
+
+    /**
+     * Rabbit.
+     */
     兔(com.github.jinahya.sexagenarycycle.地支.卯),
+
+    /**
+     * Dragon.
+     */
     龙(com.github.jinahya.sexagenarycycle.地支.辰),
+
+    /**
+     * Snake.
+     */
     蛇(com.github.jinahya.sexagenarycycle.地支.巳),
+
+    /**
+     * Horse.
+     */
     马(com.github.jinahya.sexagenarycycle.地支.午),
+
+    /**
+     * Goat.
+     */
     羊(com.github.jinahya.sexagenarycycle.地支.未),
+
+    /**
+     * Monkey.
+     */
     猴(com.github.jinahya.sexagenarycycle.地支.申),
+
+    /**
+     * Rooster.
+     */
     鸡(com.github.jinahya.sexagenarycycle.地支.酉),
+
+    /**
+     * Dog.
+     */
     狗(com.github.jinahya.sexagenarycycle.地支.戌),
+
+    /**
+     * Pig.
+     */
     猪(com.github.jinahya.sexagenarycycle.地支.亥);
 
     // -----------------------------------------------------------------------------------------------------------------
