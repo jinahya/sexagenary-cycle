@@ -1,8 +1,5 @@
 package com.github.jinahya.sexagenarycycle;
 
-import java.util.Collections;
-import java.util.Map;
-
 /**
  * Constants for five directions.
  *
@@ -35,8 +32,4 @@ public enum 五方 {
      * North.
      */
     北;
-
-    // -----------------------------------------------------------------------------------------------------------------
-    static final Map<Integer, 五方> VALUES_BY_ORDINALS
-            = Collections.unmodifiableMap(EnumUtils.mapValuesByOrdinals(五方.class));
 }

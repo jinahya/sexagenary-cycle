@@ -2,12 +2,14 @@ package com.github.jinahya.sexagenarycycle;
 
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
+import java.util.Arrays;
 import java.util.Collections;
+import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
 /**
- * Represents 24 cardinal directions.
+ * Constants for 24 cardinal directions.
  *
  * @author Jin Kwon &lt;onacit_at_gmail.com&gt;
  * @see <a href="https://en.wikipedia.org/wiki/Earthly_Branches#Directions">Directions (Earthly Branches)</a>
@@ -85,17 +87,7 @@ public enum 二十四方 implements RollingEnum<二十四方> {
     壬;
 
     // -----------------------------------------------------------------------------------------------------------------
-    private static final Map<Integer, 二十四方> VALUES_BY_ORDINALS
-            = Collections.unmodifiableMap(EnumUtils.mapValuesByOrdinals(二十四方.class));
-
-    static 二十四方 valueOfOrdinal(final int ordinal) {
-        final int i = (ordinal % 24) + (ordinal < 0 ? 24 : 0);
-        final 二十四方 value = VALUES_BY_ORDINALS.get(i);
-        if (value == null) {
-            throw new AssertionError("invalid index(" + i + ") calculated from " + ordinal);
-        }
-        return value;
-    }
+    private static final List<二十四方> VALUES = Arrays.asList(values());
 
     // -----------------------------------------------------------------------------------------------------------------
     private static final Map<Integer, 二十四方> VALUES_BY_DIRECTIONS
@@ -107,7 +99,7 @@ public enum 二十四方 implements RollingEnum<二十四方> {
             return Optional.ofNullable(VALUES_BY_DIRECTIONS.get(d % 360))
                     .orElseThrow(() -> new IllegalArgumentException("no value for (exact) direction: " + direction));
         } else {
-            return valueOfOrdinal(Math.round(d / 15.0f));
+            return VALUES.get(Math.round(d / 15.0f));
         }
     }
 

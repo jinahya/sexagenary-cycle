@@ -36,12 +36,6 @@ final class EnumUtils {
         return Arrays.stream(enumClass.getEnumConstants()).collect(Collectors.toMap(Enum::name, Function.identity()));
     }
 
-    static <E extends Enum<E>> Map<Integer, E> mapValuesByOrdinals(final Class<E> enumClass) {
-        Objects.requireNonNull(enumClass, "enumClass is null");
-        return Arrays.stream(enumClass.getEnumConstants())
-                .collect(Collectors.toMap(Enum::ordinal, Function.identity()));
-    }
-
     private EnumUtils() {
         throw new AssertionError("instantiation is not allowed");
     }

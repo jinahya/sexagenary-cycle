@@ -2,8 +2,8 @@ package com.github.jinahya.sexagenarycycle;
 
 import java.time.Duration;
 import java.time.LocalTime;
-import java.util.Collections;
-import java.util.Map;
+import java.util.Arrays;
+import java.util.List;
 import java.util.Objects;
 
 @SuppressWarnings({"NonAsciiCharacters", "java:S115", "java:S116"})
@@ -35,8 +35,7 @@ public enum 五更 { // 오경
     五更;
 
     // -----------------------------------------------------------------------------------------------------------------
-    static final Map<Integer, 五更> VALUES_BY_ORDINALS
-            = Collections.unmodifiableMap(EnumUtils.mapValuesByOrdinals(五更.class));
+    static final List<五更> VALUES = Arrays.asList(values());
 
     // -----------------------------------------------------------------------------------------------------------------
 
