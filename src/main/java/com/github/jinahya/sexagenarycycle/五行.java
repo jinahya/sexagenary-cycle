@@ -1,8 +1,5 @@
 package com.github.jinahya.sexagenarycycle;
 
-import java.util.Collections;
-import java.util.Map;
-
 /**
  * Constants for <a href="https://en.wikipedia.org/wiki/Wuxing_(Chinese_philosophy)">Wuxing (Chinese philosophy)</a>.
  *
@@ -36,8 +33,4 @@ public enum 五行 implements RollingEnum<五行> {
      * Constant for Water.
      */
     水;
-
-    // -----------------------------------------------------------------------------------------------------------------
-    static final Map<Integer, 五行> VALUES_BY_ORDINALS
-            = Collections.unmodifiableMap(EnumUtils.mapValuesByOrdinals(五行.class));
 }

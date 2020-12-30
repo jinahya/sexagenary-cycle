@@ -5,8 +5,6 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.time.Month;
-import java.util.EnumSet;
-import java.util.Set;
 import java.util.regex.Pattern;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -44,40 +42,88 @@ class 地支Test implements RollingEnumTest<地支> {
         assertThrows(IllegalArgumentException.class, () -> 地支.ofName(""));
     }
 
-    // ----------------------------------------------------------------------------------------------------------- get五行
+    // ------------------------------------------------------------------------------------------------------------ 二十四方
     @Test
-    void get五行_NonNull() {
-        for (final 地支 value : 地支.values()) {
-            assertThat(value.get五行()).isNotNull();
-        }
+    void 二十四方_NonNullHasExpectedDirection_() {
+        assertThat(地支.子.二十四方).isNotNull().satisfies(v -> assertThat(v.direction).isZero());
+        assertThat(地支.丑.二十四方).isNotNull().satisfies(v -> assertThat(v.direction).isEqualTo(30));
+        assertThat(地支.寅.二十四方).isNotNull().satisfies(v -> assertThat(v.direction).isEqualTo(60));
+        assertThat(地支.卯.二十四方).isNotNull().satisfies(v -> assertThat(v.direction).isEqualTo(90));
+        assertThat(地支.辰.二十四方).isNotNull().satisfies(v -> assertThat(v.direction).isEqualTo(120));
+        assertThat(地支.巳.二十四方).isNotNull().satisfies(v -> assertThat(v.direction).isEqualTo(150));
+        assertThat(地支.午.二十四方).isNotNull().satisfies(v -> assertThat(v.direction).isEqualTo(180));
+        assertThat(地支.未.二十四方).isNotNull().satisfies(v -> assertThat(v.direction).isEqualTo(210));
+        assertThat(地支.申.二十四方).isNotNull().satisfies(v -> assertThat(v.direction).isEqualTo(240));
+        assertThat(地支.酉.二十四方).isNotNull().satisfies(v -> assertThat(v.direction).isEqualTo(270));
+        assertThat(地支.戌.二十四方).isNotNull().satisfies(v -> assertThat(v.direction).isEqualTo(300));
+        assertThat(地支.亥.二十四方).isNotNull().satisfies(v -> assertThat(v.direction).isEqualTo(330));
     }
 
-    // ----------------------------------------------------------------------------------------------------------- get陰陽
+    // -------------------------------------------------------------------------------------------------------------- 五行
     @Test
-    void get陰陽_NonNull() {
-        for (final 地支 value : 地支.values()) {
-            assertThat(value.get陰陽()).isNotNull();
-        }
+    void 五行_NonNullExpected_() {
+        assertThat(地支.子.五行).isNotNull().isSameAs(五行.水);
+        assertThat(地支.丑.五行).isNotNull().isSameAs(五行.土);
+        assertThat(地支.寅.五行).isNotNull().isSameAs(五行.木);
+        assertThat(地支.卯.五行).isNotNull().isSameAs(五行.木);
+        assertThat(地支.辰.五行).isNotNull().isSameAs(五行.土);
+        assertThat(地支.巳.五行).isNotNull().isSameAs(五行.火);
+        assertThat(地支.午.五行).isNotNull().isSameAs(五行.火);
+        assertThat(地支.未.五行).isNotNull().isSameAs(五行.土);
+        assertThat(地支.申.五行).isNotNull().isSameAs(五行.金);
+        assertThat(地支.酉.五行).isNotNull().isSameAs(五行.金);
+        assertThat(地支.戌.五行).isNotNull().isSameAs(五行.土);
+        assertThat(地支.亥.五行).isNotNull().isSameAs(五行.水);
     }
 
-    // --------------------------------------------------------------------------------------------------------- get二十四方
+    // ------------------------------------------------------------------------------------------------------------- 時刻
     @Test
-    void get二十四方_NonNullOrdinalTimes30() {
-        for (final 地支 value : 地支.values()) {
-            assertThat(value.get二十四方()).isNotNull().satisfies(v -> {
-                assertThat(v.direction).isEqualTo(value.ordinal() * 30);
-            });
-        }
+    void 時刻_NonNullExpected_() {
+        assertThat(地支.子.時刻).isNotNull().satisfies(v -> assertThat(v.time.getHour()).isEqualTo(23));
+        assertThat(地支.丑.時刻).isNotNull().satisfies(v -> assertThat(v.time.getHour()).isEqualTo(1));
+        assertThat(地支.寅.時刻).isNotNull().satisfies(v -> assertThat(v.time.getHour()).isEqualTo(3));
+        assertThat(地支.卯.時刻).isNotNull().satisfies(v -> assertThat(v.time.getHour()).isEqualTo(5));
+        assertThat(地支.辰.時刻).isNotNull().satisfies(v -> assertThat(v.time.getHour()).isEqualTo(7));
+        assertThat(地支.巳.時刻).isNotNull().satisfies(v -> assertThat(v.time.getHour()).isEqualTo(9));
+        assertThat(地支.午.時刻).isNotNull().satisfies(v -> assertThat(v.time.getHour()).isEqualTo(11));
+        assertThat(地支.未.時刻).isNotNull().satisfies(v -> assertThat(v.time.getHour()).isEqualTo(13));
+        assertThat(地支.申.時刻).isNotNull().satisfies(v -> assertThat(v.time.getHour()).isEqualTo(15));
+        assertThat(地支.酉.時刻).isNotNull().satisfies(v -> assertThat(v.time.getHour()).isEqualTo(17));
+        assertThat(地支.戌.時刻).isNotNull().satisfies(v -> assertThat(v.time.getHour()).isEqualTo(19));
+        assertThat(地支.亥.時刻).isNotNull().satisfies(v -> assertThat(v.time.getHour()).isEqualTo(21));
     }
 
-    // ----------------------------------------------------------------------------------------------------------- get月份
+    // -------------------------------------------------------------------------------------------------------------- 月份
     @Test
-    void get月份_NonNullUnique() {
-        final Set<Month> set = EnumSet.noneOf(Month.class);
-        for (final 地支 value : 地支.values()) {
-            assertThat(value.get月份()).isNotNull().satisfies(v -> {
-                assertThat(set.add(v)).isTrue();
-            });
-        }
+    void 月份_NonNullExpected_() {
+        assertThat(地支.子.月份).isNotNull().isSameAs(Month.NOVEMBER);
+        assertThat(地支.丑.月份).isNotNull().isSameAs(Month.DECEMBER);
+        assertThat(地支.寅.月份).isNotNull().isSameAs(Month.JANUARY);
+        assertThat(地支.卯.月份).isNotNull().isSameAs(Month.FEBRUARY);
+        assertThat(地支.辰.月份).isNotNull().isSameAs(Month.MARCH);
+        assertThat(地支.巳.月份).isNotNull().isSameAs(Month.APRIL);
+        assertThat(地支.午.月份).isNotNull().isSameAs(Month.MAY);
+        assertThat(地支.未.月份).isNotNull().isSameAs(Month.JUNE);
+        assertThat(地支.申.月份).isNotNull().isSameAs(Month.JULY);
+        assertThat(地支.酉.月份).isNotNull().isSameAs(Month.AUGUST);
+        assertThat(地支.戌.月份).isNotNull().isSameAs(Month.SEPTEMBER);
+        assertThat(地支.亥.月份).isNotNull().isSameAs(Month.OCTOBER);
+    }
+
+    // -------------------------------------------------------------------------------------------------------------- 陰陽
+    @Test
+    void 陰陽_NonNullExpected_() {
+        assertThat(地支.子.陰陽).isSameAs(陰陽.陽);
+        assertThat(地支.丑.陰陽).isSameAs(陰陽.陰);
+        assertThat(地支.寅.陰陽).isSameAs(陰陽.陽);
+        assertThat(地支.卯.陰陽).isSameAs(陰陽.陰);
+        assertThat(地支.辰.陰陽).isSameAs(陰陽.陽);
+        assertThat(地支.巳.陰陽).isSameAs(陰陽.陰);
+        assertThat(地支.午.陰陽).isSameAs(陰陽.陽);
+        assertThat(地支.未.陰陽).isSameAs(陰陽.陰);
+        assertThat(地支.申.陰陽).isSameAs(陰陽.陽);
+        assertThat(地支.酉.陰陽).isSameAs(陰陽.陰);
+        assertThat(地支.戌.陰陽).isSameAs(陰陽.陽);
+        assertThat(地支.亥.陰陽).isSameAs(陰陽.陰);
     }
 }

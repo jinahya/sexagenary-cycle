@@ -1,10 +1,14 @@
 package com.github.jinahya.sexagenarycycle;
 
+import javax.validation.constraints.NotNull;
+import java.time.Duration;
+import java.time.LocalTime;
 import java.time.Month;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Objects;
+
+import static java.util.Objects.requireNonNull;
 
 /**
  * Constants of 10 <a href="https://en.wikipedia.org/wiki/Earthly_Branches">Earthly Branches</a>.
@@ -13,32 +17,21 @@ import java.util.Objects;
  * @see 지지
  * @see <a href="https://zh.wikipedia.org/wiki/%E5%9C%B0%E6%94%AF">地支</a>
  */
-@SuppressWarnings({"NonAsciiCharacters", "java:S100", "java:S115"})
+@SuppressWarnings({"NonAsciiCharacters", "java:S100", "java:S115", "java:S116", "java:S117"})
 public enum 地支 implements RollingEnum<地支> { // \u5730\u652f
 
-    子, // 자
-
-    丑, // 축
-
-    寅, // 인
-
-    卯, // 묘
-
-    辰, // 진
-
-    巳, // 사
-
-    午, // 오
-
-    未, // 미
-
-    申, // 신
-
-    酉, // 유
-
-    戌, // 술
-
-    亥; // 해
+    子(com.github.jinahya.sexagenarycycle.五行.水), // 자
+    丑(com.github.jinahya.sexagenarycycle.五行.土), // 축
+    寅(com.github.jinahya.sexagenarycycle.五行.木), // 인
+    卯(com.github.jinahya.sexagenarycycle.五行.木), // 묘
+    辰(com.github.jinahya.sexagenarycycle.五行.土), // 진
+    巳(com.github.jinahya.sexagenarycycle.五行.火), // 사
+    午(com.github.jinahya.sexagenarycycle.五行.火), // 오
+    未(com.github.jinahya.sexagenarycycle.五行.土), // 미
+    申(com.github.jinahya.sexagenarycycle.五行.金), // 신
+    酉(com.github.jinahya.sexagenarycycle.五行.金), // 유
+    戌(com.github.jinahya.sexagenarycycle.五行.土), // 술
+    亥(com.github.jinahya.sexagenarycycle.五行.水); // 해
 
     // -----------------------------------------------------------------------------------------------------------------
 
@@ -66,7 +59,7 @@ public enum 地支 implements RollingEnum<地支> { // \u5730\u652f
      * @return the constant associated with {@code name}.
      */
     public static 地支 ofName(final String name) {
-        Objects.requireNonNull(name, "name is null");
+        requireNonNull(name, "name is null");
         final 地支 value = VALUES_BY_NAMES.get(name);
         if (value == null) {
             throw new IllegalArgumentException("no value for name: " + name);
@@ -75,44 +68,47 @@ public enum 地支 implements RollingEnum<地支> { // \u5730\u652f
     }
 
     // -----------------------------------------------------------------------------------------------------------------
-    地支() {
+    地支(com.github.jinahya.sexagenarycycle.五行 五行) {
+        二十四方 = com.github.jinahya.sexagenarycycle.二十四方.valueOfDirection(ordinal() * 30, true);
+        this.五行 = requireNonNull(五行, "五行 is null");
+        時刻 = new com.github.jinahya.sexagenarycycle.時刻(
+                LocalTime.MIDNIGHT.plus(Duration.ofHours(((long) ordinal() << 1L) - 1L)),
+                Duration.ofHours(2L)
+        );
+        月份 = Month.JANUARY.plus((long) ordinal() + 10L);
+        陰陽 = (ordinal() & 0x01) == 0
+             ? com.github.jinahya.sexagenarycycle.陰陽.陽 : com.github.jinahya.sexagenarycycle.陰陽.陰;
     }
 
     // -----------------------------------------------------------------------------------------------------------------
 
     /**
-     * Returns the 二十四方 associated to this 地支.
-     *
-     * @return the 二十四方 associated to this 地支.
+     * The 二十四方 associated with this 地支.
      */
-    public 二十四方 get二十四方() {
-        return 地支方位.方位Of(this);
-    }
+    @NotNull
+    public final 二十四方 二十四方;
 
     /**
-     * Returns the 五行 associated to this 地支.
-     *
-     * @return the 五行 associated to this 地支.
+     * The 五行 associated with this 地支.
      */
-    public 五行 get五行() {
-        return 地支五行.五行Of(this);
-    }
+    @NotNull
+    public final 五行 五行;
 
     /**
-     * Returns the 月份 associated to this 地支.
-     *
-     * @return the 月份 associated to this 地支.
+     * The 時刻 associated with this 地支.
      */
-    public Month get月份() {
-        return 地支月份.valueOf(this);
-    }
+    @NotNull
+    public final 時刻 時刻;
 
     /**
-     * Returns the 陰陽 associated to this 地支.
-     *
-     * @return the 陰陽 associated to this 地支.
+     * The Month associated with this 地支.
      */
-    public 陰陽 get陰陽() {
-        return 地支陰陽.valueOf(this);
-    }
+    @NotNull
+    public final Month 月份;
+
+    /**
+     * The 陰陽 associated with this 地支.
+     */
+    @NotNull
+    public final 陰陽 陰陽;
 }

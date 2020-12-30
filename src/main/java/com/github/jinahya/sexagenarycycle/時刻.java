@@ -18,8 +18,8 @@ public final class 時刻 { // 시각
         return Duration.ofHours(2L);
     }
 
-    static 時刻 newInstanceForTwoHoursFrom(final int hour) {
-        return new 時刻(LocalTime.of(hour, 0), forTwoHours());
+    static 時刻 newInstanceForTwoHoursFrom(final int baseHour, final int hoursToAdd) {
+        return new 時刻(LocalTime.of(baseHour, 0).plusHours(hoursToAdd), forTwoHours());
     }
 
     // -----------------------------------------------------------------------------------------------------------------

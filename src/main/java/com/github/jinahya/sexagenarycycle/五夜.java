@@ -44,7 +44,7 @@ public enum 五夜 { // 오야
     戊夜;
 
     // -----------------------------------------------------------------------------------------------------------------
-    static final Map<五更, 五夜> VALUES_BY_五更
+    static final Map<五更, 五夜> VALUES_BY_五更S
             = Collections.unmodifiableMap(EnumUtils.mapValuesBy(五夜.class, v -> v.五更));
 
     /**
@@ -55,7 +55,7 @@ public enum 五夜 { // 오야
      */
     public static 五夜 valueOf(final 五更 五更) {
         Objects.requireNonNull(五更, "五更 is null");
-        final 五夜 value = VALUES_BY_五更.get(五更);
+        final 五夜 value = VALUES_BY_五更S.get(五更);
         if (value == null) {
             throw new AssertionError("no value for " + 五更);
         }

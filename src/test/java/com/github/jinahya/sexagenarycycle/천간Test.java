@@ -15,9 +15,9 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 class 천간Test {
 
     // -----------------------------------------------------------------------------------------------------------------
-    @DisplayName("REGEXP_NAME matches for every name")
+    @DisplayName("REGEXP_NAME matches for each name")
     @Test
-    void REGEXP_NAME_Match_EveryName() {
+    void REGEXP_NAME_Match_ForEachName() {
         final Pattern pattern = Pattern.compile(천간.REGEXP_NAME);
         for (final 천간 value : 천간.values()) {
             assertThat(pattern.matcher(value.name()).matches()).isTrue();
@@ -27,13 +27,12 @@ class 천간Test {
     // -----------------------------------------------------------------------------------------------------------------
     @DisplayName("ofName(name) returns valid value for known name")
     @Test
-    void ofName_ExpectedResult_NameIsKnown() {
+    void valueOfName_ExpectedResult_NameIsKnown() {
         final EnumSet<천간> set = EnumSet.allOf(천간.class);
         final String[] names = new String[] {"갑", "을", "병", "정", "무", "기", "경", "신", "임", "계"};
         for (int i = 0; i < names.length; i++) {
             final String name = names[i];
             final 천간 value = 천간.valueOfName(name);
-            assertThat(value).isNotNull().isSameAs(천간.valueOf(name));
             assertThat(value.ordinal()).isSameAs(i);
             assertThat(set.remove(value)).isTrue();
         }

@@ -9,17 +9,6 @@ import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 @Slf4j
 class 二十四方Test implements RollingEnumTest<二十四方> {
 
-    // -----------------------------------------------------------------------------------------------------------------
-    @Test
-    void valueOfIndex_NonNullExpected_NegativeOne() {
-        assertThat(二十四方.valueOfOrdinal(-1)).isNotNull().isSameAs(二十四方.壬);
-    }
-
-    @Test
-    void valueOfIndex_NonNullExpected_NegativeTwo() {
-        assertThat(二十四方.valueOfOrdinal(-2)).isNotNull().isSameAs(二十四方.亥);
-    }
-
     // ---------------------------------------------------------------------------------- valueOfDirection(I,B)L...二十四方;
     @Test
     void valueOfDirection_NonNull_ForAllDirections() {

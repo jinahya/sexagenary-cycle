@@ -1,5 +1,6 @@
 package com.github.jinahya.sexagenarycycle;
 
+import javax.validation.constraints.NotNull;
 import java.util.Collections;
 import java.util.Map;
 import java.util.Objects;
@@ -11,7 +12,7 @@ import java.util.Objects;
  * @see 천간
  * @see <a href="https://zh.wikipedia.org/wiki/%E5%A4%A9%E5%B9%B2">天干</a>
  */
-@SuppressWarnings({"NonAsciiCharacters", "java:S100", "java:S115"})
+@SuppressWarnings({"NonAsciiCharacters", "java:S100", "java:S115", "java:S116"})
 public enum 天干 implements RollingEnum<天干> { // \u5929\u5e72
 
     甲, // 갑
@@ -57,40 +58,37 @@ public enum 天干 implements RollingEnum<天干> { // \u5929\u5e72
     }
 
     // -----------------------------------------------------------------------------------------------------------------
-
-    /**
-     * Returns the 二十四方 associated to this 天干.
-     *
-     * @return the 二十四方 associated to this 天干; may be {@code null} when associated to none.
-     */
-    public 二十四方 get二十四方() {
-        return 天干方位.方位Of(this);
+    天干() {
+        五方 = com.github.jinahya.sexagenarycycle.五方.values()[ordinal() >> 1];
+        二十四方 = 五方 == com.github.jinahya.sexagenarycycle.五方.中
+               ? null : com.github.jinahya.sexagenarycycle.二十四方.valueOf(name());
+        五行 = com.github.jinahya.sexagenarycycle.五行.values()[ordinal() >> 1];
+        陰陽 = (ordinal() & 0x01) == 0x00
+             ? com.github.jinahya.sexagenarycycle.陰陽.陽 : com.github.jinahya.sexagenarycycle.陰陽.陰;
     }
 
-    /**
-     * Returns the 五方 associated to this 天干.
-     *
-     * @return the 五方 associated to this 天干.
-     */
-    public 五方 get五方() {
-        return 天干五方.五方Of(this);
-    }
+    // -----------------------------------------------------------------------------------------------------------------
 
     /**
-     * Returns the 五行 associated to this 天干.
-     *
-     * @return the 五行 associated to this 天干.
+     * The 二十四方 of this 天干; {@code null} when {@link #五方} is {@link 五方#中 中}.
      */
-    public 五行 get五行() {
-        return 天干五行.五行Of(this);
-    }
+    public final 二十四方 二十四方;
 
     /**
-     * Returns the 陰陽 associated to this 天干.
-     *
-     * @return the 陰陽 associated to this 天干.
+     * The 五方 associated with this 天干.
      */
-    public 陰陽 get陰陽() {
-        return 天干陰陽.陰陽Of(this);
-    }
+    @NotNull
+    public final 五方 五方;
+
+    /**
+     * The 五行 associated with this 天干.
+     */
+    @NotNull
+    public final 五行 五行;
+
+    /**
+     * The 陰陽 associated with this 天干.
+     */
+    @NotNull
+    public final 陰陽 陰陽;
 }

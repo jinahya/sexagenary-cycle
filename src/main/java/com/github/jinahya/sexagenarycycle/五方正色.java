@@ -9,7 +9,7 @@ import java.util.Objects;
 public enum 五方正色 {
 
     /**
-     * Blue.
+     * Blue for Wood and East.
      *
      * @see com.github.jinahya.sexagenarycycle.五行#木
      * @see com.github.jinahya.sexagenarycycle.五方#東
@@ -17,7 +17,7 @@ public enum 五方正色 {
     靑(com.github.jinahya.sexagenarycycle.五行.木, com.github.jinahya.sexagenarycycle.五方.東),
 
     /**
-     * Red.
+     * Red for Fire and South.
      *
      * @see com.github.jinahya.sexagenarycycle.五行#火
      * @see com.github.jinahya.sexagenarycycle.五方#南
@@ -26,16 +26,25 @@ public enum 五方正色 {
 
     /**
      * Yellow for Earth and Center.
+     *
+     * @see com.github.jinahya.sexagenarycycle.五行#土
+     * @see com.github.jinahya.sexagenarycycle.五方#中
      */
     白(com.github.jinahya.sexagenarycycle.五行.土, com.github.jinahya.sexagenarycycle.五方.中),
 
     /**
      * White for Metal and West.
+     *
+     * @see com.github.jinahya.sexagenarycycle.五行#金
+     * @see com.github.jinahya.sexagenarycycle.五方#西
      */
     黑(com.github.jinahya.sexagenarycycle.五行.金, com.github.jinahya.sexagenarycycle.五方.西),
 
     /**
      * Black for Water and North.
+     *
+     * @see com.github.jinahya.sexagenarycycle.五行#水
+     * @see com.github.jinahya.sexagenarycycle.五方#北
      */
     黃(com.github.jinahya.sexagenarycycle.五行.水, com.github.jinahya.sexagenarycycle.五方.北);
 
@@ -63,10 +72,10 @@ public enum 五方正色 {
             = Collections.unmodifiableMap(EnumUtils.mapValuesBy(五方正色.class, v -> v.五方));
 
     /**
-     * Returns the value associated to specified 五方.
+     * Returns the value associated with specified 五方.
      *
      * @param 五方 the 五方.
-     * @return the value associated to {@code 五方}.
+     * @return the value associated with {@code 五方}.
      */
     public static 五方正色 valueOf(final 五方 五方) {
         Objects.requireNonNull(五方, "五方 is null");

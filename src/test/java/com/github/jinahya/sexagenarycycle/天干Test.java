@@ -51,48 +51,63 @@ class 天干Test implements RollingEnumTest<天干> {
         assertThrows(IllegalArgumentException.class, () -> 天干.valueOfName(""));
     }
 
-    // --------------------------------------------------------------------------------------------------------- get二十四方
+    // -----------------------------------------------------------------------------------------------------------------
+    @DisplayName("五方 is non-null and expected")
     @Test
-    void get二十四方_Null_五方Is中() {
-        for (final 天干 value : 天干.values()) {
-            if (value.get五方() != 五方.中) {
-                continue;
-            }
-            assertThat(value.get二十四方()).isNull();
-        }
+    void 五方_NonNullExpected() {
+        assertThat(天干.甲.五方).isNotNull().isSameAs(五方.東);
+        assertThat(天干.乙.五方).isNotNull().isSameAs(五方.東);
+        assertThat(天干.丙.五方).isNotNull().isSameAs(五方.南);
+        assertThat(天干.丁.五方).isNotNull().isSameAs(五方.南);
+        assertThat(天干.戊.五方).isNotNull().isSameAs(五方.中);
+        assertThat(天干.己.五方).isNotNull().isSameAs(五方.中);
+        assertThat(天干.庚.五方).isNotNull().isSameAs(五方.西);
+        assertThat(天干.辛.五方).isNotNull().isSameAs(五方.西);
+        assertThat(天干.壬.五方).isNotNull().isSameAs(五方.北);
+        assertThat(天干.癸.五方).isNotNull().isSameAs(五方.北);
     }
 
     @Test
-    void get二十四方_NonNull_五方IsNot中() {
-        for (final 天干 value : 天干.values()) {
-            if (value.get五方() == 五方.中) {
-                continue;
-            }
-            assertThat(value.get二十四方()).isNotNull();
-        }
+    void 方位Of天干_HasExpectedExpected() {
+        assertThat(天干.甲.二十四方.direction).isEqualTo(75);
+        assertThat(天干.乙.二十四方.direction).isEqualTo(105);
+        assertThat(天干.丙.二十四方.direction).isEqualTo(165);
+        assertThat(天干.丁.二十四方.direction).isEqualTo(195);
+        assertThat(天干.戊.二十四方).isNull();
+        assertThat(天干.己.二十四方).isNull();
+        assertThat(天干.庚.二十四方.direction).isEqualTo(255);
+        assertThat(天干.辛.二十四方.direction).isEqualTo(285);
+        assertThat(天干.壬.二十四方.direction).isEqualTo(345);
+        assertThat(天干.癸.二十四方.direction).isEqualTo(15);
     }
 
-    // ----------------------------------------------------------------------------------------------------------- get五方
+    @DisplayName("五行 is non-null and expected")
     @Test
-    void get五方_NonNull() {
-        for (final 天干 value : 天干.values()) {
-            assertThat(value.get五方()).isNotNull();
-        }
+    void 五行_NonNullExpected() {
+        assertThat(天干.甲.五行).isNotNull().isSameAs(五行.木);
+        assertThat(天干.乙.五行).isNotNull().isSameAs(五行.木);
+        assertThat(天干.丙.五行).isNotNull().isSameAs(五行.火);
+        assertThat(天干.丁.五行).isNotNull().isSameAs(五行.火);
+        assertThat(天干.戊.五行).isNotNull().isSameAs(五行.土);
+        assertThat(天干.己.五行).isNotNull().isSameAs(五行.土);
+        assertThat(天干.庚.五行).isNotNull().isSameAs(五行.金);
+        assertThat(天干.辛.五行).isNotNull().isSameAs(五行.金);
+        assertThat(天干.壬.五行).isNotNull().isSameAs(五行.水);
+        assertThat(天干.癸.五行).isNotNull().isSameAs(五行.水);
     }
 
-    // ----------------------------------------------------------------------------------------------------------- get五行
+    @DisplayName("陰陽 is non-null and expected")
     @Test
-    void get五行_NonNull() {
-        for (final 天干 value : 天干.values()) {
-            assertThat(value.get五行()).isNotNull();
-        }
-    }
-
-    // ----------------------------------------------------------------------------------------------------------- get陰陽
-    @Test
-    void get陰陽_NonNull() {
-        for (final 天干 value : 天干.values()) {
-            assertThat(value.get陰陽()).isNotNull();
-        }
+    void 陰陽Of天干_NonNullExpected() {
+        assertThat(天干.甲.陰陽).isNotNull().isSameAs(陰陽.陽);
+        assertThat(天干.乙.陰陽).isNotNull().isSameAs(陰陽.陰);
+        assertThat(天干.丙.陰陽).isNotNull().isSameAs(陰陽.陽);
+        assertThat(天干.丁.陰陽).isNotNull().isSameAs(陰陽.陰);
+        assertThat(天干.戊.陰陽).isNotNull().isSameAs(陰陽.陽);
+        assertThat(天干.己.陰陽).isNotNull().isSameAs(陰陽.陰);
+        assertThat(天干.庚.陰陽).isNotNull().isSameAs(陰陽.陽);
+        assertThat(天干.辛.陰陽).isNotNull().isSameAs(陰陽.陰);
+        assertThat(天干.壬.陰陽).isNotNull().isSameAs(陰陽.陽);
+        assertThat(天干.癸.陰陽).isNotNull().isSameAs(陰陽.陰);
     }
 }
