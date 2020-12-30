@@ -99,7 +99,7 @@ public enum 二十四方 implements RollingEnum<二十四方> {
             return Optional.ofNullable(VALUES_BY_DIRECTIONS.get(d % 360))
                     .orElseThrow(() -> new IllegalArgumentException("no value for (exact) direction: " + direction));
         } else {
-            return VALUES.get(Math.round(d / 15.0f));
+            return VALUES.get(Math.round(d / 15.0f) % VALUES.size());
         }
     }
 
