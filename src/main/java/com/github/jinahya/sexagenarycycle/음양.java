@@ -24,7 +24,7 @@ public enum 음양 {
         Objects.requireNonNull(陰陽, "陰陽 is null");
         final 음양 value = VALUES_BY_陰陽S.get(陰陽);
         if (value == null) {
-            throw new AssertionError("no vlaue for " + 陰陽);
+            throw new AssertionError("no value for " + 陰陽);
         }
         return value;
     }

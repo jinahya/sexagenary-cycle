@@ -25,7 +25,7 @@ class 천간Test {
     }
 
     // -----------------------------------------------------------------------------------------------------------------
-    @DisplayName("ofName(name) returns valid value for known name")
+    @DisplayName("valueOfName(name) returns valid value for known name")
     @Test
     void valueOfName_ExpectedResult_NameIsKnown() {
         final EnumSet<천간> set = EnumSet.allOf(천간.class);
@@ -39,16 +39,16 @@ class 천간Test {
         assertThat(set).isEmpty();
     }
 
-    @DisplayName("ofName(name) throws IllegalArgumentException when name is unknown")
+    @DisplayName("valueOfName(name) throws IllegalArgumentException when name is unknown")
     @Test
-    void ofName_IllegalArgumentException_NameIsUnknown() {
+    void valueOfName_IllegalArgumentException_NameIsUnknown() {
         assertThrows(IllegalArgumentException.class, () -> 천간.valueOfName(""));
     }
 
     // -----------------------------------------------------------------------------------------------------------------
-    @DisplayName("of天干(天干) returns valid value for known 天干")
+    @DisplayName("valueOf(天干) returns valid value for known 天干")
     @Test
-    void ofName天干_ExpectedResult_天干IsKnown() {
+    void valueOf天干_ExpectedResult_天干IsKnown() {
         final EnumSet<천간> set = EnumSet.noneOf(천간.class);
         for (final 天干 天干 : 天干.values()) {
             final 천간 value = 천간.valueOf(天干);

@@ -77,7 +77,7 @@ class 歲次Test implements RollingTest<歲次> {
     @MethodSource({"parameters"})
     @ParameterizedTest
     void getPrevious_(final 歲次 歲次) {
-        AssignedAssertions.assertThat(歲次.getPrevious()).isNotNull().hasYear(歲次.年.minusYears(1L));
+        assertThat(歲次.getPrevious()).isNotNull().satisfies(v -> assertThat(v.年).isEqualTo(歲次.年.minusYears(1L)));
     }
 
     // -----------------------------------------------------------------------------------------------------------------
@@ -93,7 +93,7 @@ class 歲次Test implements RollingTest<歲次> {
     @MethodSource({"parameters"})
     @ParameterizedTest
     void getNext_(final 歲次 歲次) {
-        AssignedAssertions.assertThat(歲次.getNext()).isNotNull().hasYear(歲次.年.plusYears(1L));
+        assertThat(歲次.getNext()).isNotNull().satisfies(v -> assertThat(v.年).isEqualTo(歲次.年.plusYears(1L)));
     }
 
     // -----------------------------------------------------------------------------------------------------------------

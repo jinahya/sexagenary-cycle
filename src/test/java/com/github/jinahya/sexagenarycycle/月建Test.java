@@ -10,6 +10,7 @@ import java.util.stream.Stream;
 
 import static com.github.jinahya.sexagenarycycle.歲次Test.of2020庚子年;
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 
 @SuppressWarnings({"NonAsciiCharacters", "java:S3577"})
 @Slf4j
@@ -60,24 +61,27 @@ class 月建Test {
         assertThat(月建.toString()).isNotBlank();
     }
 
+    // -----------------------------------------------------------------------------------------------------------------
     @MethodSource({"parameters"})
     @ParameterizedTest
-    void testEquals(final 月建 月建) {
-        // TODO: fix
+    void equals_True_Self(final 月建 月建) {
+        assertThat(月建).isEqualTo(月建);
     }
 
+    // -----------------------------------------------------------------------------------------------------------------
     @MethodSource({"parameters"})
     @ParameterizedTest
     void testHashCode(final 月建 月建) {
-        assertThat(月建.hashCode()).satisfies(v -> {
+        assertDoesNotThrow(() -> {
+            final int hashCode = 月建.hashCode();
         });
     }
 
     // -----------------------------------------------------------------------------------------------------------------
     @MethodSource({"parameters"})
     @ParameterizedTest
-    void testCompareTo(final 月建 月建) {
-        // TODO: fix
+    void compareTo_Zero_Self(final 月建 月建) {
+        assertThat(月建).isEqualByComparingTo(月建);
     }
 
     // -----------------------------------------------------------------------------------------------------------------
