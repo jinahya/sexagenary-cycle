@@ -7,7 +7,7 @@ import org.junit.jupiter.params.provider.EnumSource;
 import static java.util.Arrays.stream;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
-@SuppressWarnings("NonAsciiCharacters")
+@SuppressWarnings({"NonAsciiCharacters", "java:s3577"})
 class 相生間色Test extends 五方間色Test<相生間色> {
 
     相生間色Test() {
