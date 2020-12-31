@@ -1,17 +1,17 @@
 package com.github.jinahya.sexagenarycycle;
 
+import javax.validation.constraints.NotNull;
 import java.util.Collections;
 import java.util.Map;
 import java.util.Objects;
 
 /**
- * Defines constants for {@code inter-regulating} cycle and {@code overacting} cycle, and {@code counteracting} cycle
- * between values of {@link 五行}.
+ * Constants for 剋 cycle.
  *
  * @author Jin Kwon &lt;onacit_at_gmail.com&gt;
  */
 @SuppressWarnings({"NonAsciiCharacters", "java:S115"})
-public enum 五行相剋 implements RollingEnum<五行相剋> {
+public enum 五行相剋 implements RollingEnum<五行相剋>, 生剋五行<五行相剋> {
 
     木剋土(五行.木, 五行.土),
 
@@ -62,33 +62,6 @@ public enum 五行相剋 implements RollingEnum<五行相剋> {
     }
 
     // -----------------------------------------------------------------------------------------------------------------
-    public static 五行相剋 valueOfSubjectiveInInterRegulatingCycle(final 五行 subjective) {
-        return valueOfSubjective(subjective);
-    }
-
-    public static 五行相剋 valueOfObjectiveInInterRegulatingCycle(final 五行 objective) {
-        return valueOfObjective(objective);
-    }
-
-    // -----------------------------------------------------------------------------------------------------------------
-    public static 五行相剋 valueOfSubjectiveInOveractingCycle(final 五行 subjective) {
-        return valueOfSubjectiveInInterRegulatingCycle(subjective);
-    }
-
-    public static 五行相剋 valueOfObjectiveInOveractingCycle(final 五行 objective) {
-        return valueOfObjectiveInInterRegulatingCycle(objective);
-    }
-
-    // -----------------------------------------------------------------------------------------------------------------
-    public static 五行相剋 valueOfSubjectiveInCounteractingCycle(final 五行 subjective) {
-        return valueOfObjectiveInOveractingCycle(subjective);
-    }
-
-    public static 五行相剋 valueOfObjectiveInCounteractingCycle(final 五行 objective) {
-        return valueOfSubjectiveInOveractingCycle(objective);
-    }
-
-    // -----------------------------------------------------------------------------------------------------------------
     五行相剋(final 五行 subjective, final 五行 objective) {
         Objects.requireNonNull(subjective, "subjective is null");
         Objects.requireNonNull(objective, "objective is null");
@@ -100,41 +73,14 @@ public enum 五行相剋 implements RollingEnum<五行相剋> {
     }
 
     // -----------------------------------------------------------------------------------------------------------------
-    public 五行相剋 getPreviousInInterRegulatingCycle() {
-        return getPrevious();
-    }
-
-    public 五行相剋 getNextInInterRegulatingCycle() {
-        return getNext();
-    }
-
-    // -----------------------------------------------------------------------------------------------------------------
-    public 五行相剋 getPreviousInOveractingCycle() {
-        return getPreviousInInterRegulatingCycle();
-    }
-
-    public 五行相剋 getNextInOveractingCycle() {
-        return getNextInInterRegulatingCycle();
-    }
-
-    // -----------------------------------------------------------------------------------------------------------------
-    public 五行相剋 getPreviousInCounteractingCycle() {
-        return getNextInOveractingCycle();
-    }
-
-    public 五行相剋 getNextInCounteractingCycle() {
-        return getPreviousInOveractingCycle();
-    }
-
-    // -----------------------------------------------------------------------------------------------------------------
 
     /**
      * The subjective phase of this inter-promoting.
      */
-    public final 五行 subjective;
+    public final @NotNull 五行 subjective;
 
     /**
      * The objective phase of this inter-promoting.
      */
-    public final 五行 objective;
+    public final @NotNull 五行 objective;
 }
