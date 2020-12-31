@@ -12,6 +12,7 @@ import static java.util.concurrent.ThreadLocalRandom.current;
 
 final class TimeTestUtils {
 
+    // -----------------------------------------------------------------------------------------------------------------
     static final long MINIMUM_HOUR_OF_DAY;
 
     static final long MAXIMUM_HOUR_OF_DAY;
@@ -24,6 +25,11 @@ final class TimeTestUtils {
         assert MAXIMUM_HOUR_OF_DAY == 23L;
     }
 
+    static int randomHourOfDay() {
+        return (int) current().nextLong(MINIMUM_HOUR_OF_DAY, MAXIMUM_HOUR_OF_DAY + 1);
+    }
+
+    // -----------------------------------------------------------------------------------------------------------------
     static final long MINIMUM_MINUTE_OF_HOUR;
 
     static final long MAXIMUM_MINUTE_OF_HOUR;
@@ -36,17 +42,50 @@ final class TimeTestUtils {
         assert MAXIMUM_MINUTE_OF_HOUR == 59L;
     }
 
-    static int randomHourOfDay() {
+    static int randomMinuteOfHour() {
         return (int) current().nextLong(MINIMUM_HOUR_OF_DAY, MAXIMUM_HOUR_OF_DAY + 1);
     }
 
-    static int randomMinuteOfHour() {
-        return (int) current().nextLong(MINIMUM_MINUTE_OF_HOUR, MAXIMUM_MINUTE_OF_HOUR + 1);
+    // -----------------------------------------------------------------------------------------------------------------
+    static final long MINIMUM_SECOND_OF_MINUTE;
+
+    static final long MAXIMUM_SECOND_OF_MINUTE;
+
+    static {
+        final ValueRange range = IsoChronology.INSTANCE.range(ChronoField.SECOND_OF_MINUTE);
+        MINIMUM_SECOND_OF_MINUTE = range.getMinimum();
+        assert MINIMUM_SECOND_OF_MINUTE == 0L;
+        MAXIMUM_SECOND_OF_MINUTE = range.getMaximum();
+        assert MAXIMUM_SECOND_OF_MINUTE == 59L;
     }
 
-    static LocalTime randomTime() {
-        return LocalTime.of(randomHourOfDay(), randomMinuteOfHour());
+    static int randomSecondOfMinute() {
+        return (int) current().nextLong(MINIMUM_SECOND_OF_MINUTE, MAXIMUM_SECOND_OF_MINUTE + 1);
     }
+
+    // -----------------------------------------------------------------------------------------------------------------
+    static final long MINIMUM_NANO_OF_MINUTE;
+
+    static final long MAXIMUM_NANO_OF_MINUTE;
+
+    static {
+        final ValueRange range = IsoChronology.INSTANCE.range(ChronoField.NANO_OF_SECOND);
+        MINIMUM_NANO_OF_MINUTE = range.getMinimum();
+        assert MINIMUM_NANO_OF_MINUTE == 0L;
+        MAXIMUM_NANO_OF_MINUTE = range.getMaximum();
+        assert MAXIMUM_NANO_OF_MINUTE == 999_999_999L;
+    }
+
+    static int randomNanoOfSecond() {
+        return (int) current().nextLong(MINIMUM_NANO_OF_MINUTE, MAXIMUM_NANO_OF_MINUTE + 1);
+    }
+
+    // -----------------------------------------------------------------------------------------------------------------
+    static LocalTime randomTime() {
+        return LocalTime.of(randomHourOfDay(), randomMinuteOfHour(), randomSecondOfMinute(), randomNanoOfSecond());
+    }
+
+    // -----------------------------------------------------------------------------------------------------------------
 
     /**
      * Returns a stream of valid minutes in an hour which is {@code [0..60)}.
@@ -68,6 +107,7 @@ final class TimeTestUtils {
         return hours.flatMap(TimeTestUtils::mapMinutes);
     }
 
+    // -----------------------------------------------------------------------------------------------------------------
     private TimeTestUtils() {
         throw new AssertionError("instantiation is not allowed");
     }

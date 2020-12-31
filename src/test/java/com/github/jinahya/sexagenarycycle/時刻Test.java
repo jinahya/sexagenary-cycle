@@ -1,5 +1,7 @@
 package com.github.jinahya.sexagenarycycle;
 
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.RepeatedTest;
 import org.junit.jupiter.api.Test;
 
 import java.time.Duration;
@@ -7,10 +9,15 @@ import java.time.LocalTime;
 import java.time.temporal.ChronoUnit;
 import java.util.stream.IntStream;
 
+import static java.util.concurrent.ThreadLocalRandom.current;
 import static org.assertj.core.api.Assertions.assertThat;
 
 @SuppressWarnings({"NonAsciiCharacters", "java:S3577"})
 class 時刻Test {
+
+    static 時刻 randomInstance() {
+        return new 時刻(TimeTestUtils.randomTime(), Duration.ofMinutes(current().nextInt(0, 1200)));
+    }
 
     @Test
     void test() {
@@ -54,5 +61,36 @@ class 時刻Test {
         });
         assertThat(v.includes(LocalTime.of(20, 59, 59, 999999999))).isTrue();
         assertThat(v.includes(LocalTime.of(21, 0))).isFalse();
+    }
+
+    // -------------------------------------------------------------------------------------------------------- tostring
+    @Test
+    void toString_NonBlank_Random() {
+        assertThat(randomInstance().toString()).isNotBlank();
+    }
+
+    // ---------------------------------------------------------------------------------------------------------- equals
+    @SuppressWarnings("java:S5838")
+    @RepeatedTest(128)
+    void equals_True_Self() {
+        final 時刻 instance = randomInstance();
+        assertThat(instance).isEqualTo(instance);
+        //noinspection EqualsWithItself
+        assertThat(instance.equals(instance)).isTrue();
+    }
+
+    @RepeatedTest(128)
+    void equals_True_Copy() {
+        final 時刻 instance = randomInstance();
+        assertThat(instance).isEqualTo(new 時刻(instance));
+    }
+
+    // -------------------------------------------------------------------------------------------------------- hashCode
+    @Test
+    void hashCode_NoException_() {
+        final 時刻 instance = randomInstance();
+        Assertions.assertDoesNotThrow(() -> {
+            final int hashCode = instance.hashCode();
+        });
     }
 }

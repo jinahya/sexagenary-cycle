@@ -7,12 +7,14 @@ import java.time.LocalTime;
 import java.time.temporal.ChronoUnit;
 import java.util.Objects;
 
+import static java.util.Objects.requireNonNull;
+
 /**
  * Represents a time between two specific local times in a day.
  *
  * @author Jin Kwon &lt;onacit_at_gmail.com&gt;
  */
-@SuppressWarnings({"NonAsciiCharacters", "java:S101"})
+@SuppressWarnings({"NonAsciiCharacters", "java:S101", "java:S117"})
 public final class 時刻 { // 시각
 
     // -----------------------------------------------------------------------------------------------------------------
@@ -31,11 +33,20 @@ public final class 時刻 { // 시각
      */
     public 時刻(final LocalTime base, final Duration duration) {
         super();
-        this.base = Objects.requireNonNull(base, "time is null");
-        if (Objects.requireNonNull(duration, "duration is null").compareTo(Duration.ofHours(24L)) > 0) {
+        this.base = requireNonNull(base, "time is null");
+        if (requireNonNull(duration, "duration is null").compareTo(Duration.ofHours(24L)) > 0) {
             throw new IllegalArgumentException("duration(" + duration + ") > PH24H");
         }
         nanos = nanos(this.base, false) + duration.toNanos();
+    }
+
+    /**
+     * Creates a new instance coping specified instance.
+     *
+     * @param 時刻 the instance to copy.
+     */
+    public 時刻(final 時刻 時刻) {
+        this(requireNonNull(時刻, "時刻 is null").base, 時刻.duration());
     }
 
     // -----------------------------------------------------------------------------------------------------------------
@@ -92,8 +103,13 @@ public final class 時刻 { // 시각
      * @return {@code true} if this time includes {@code time}; {@code false} otherwise.
      */
     public boolean includes(final LocalTime time) {
-        Objects.requireNonNull(time, "time is null");
+        requireNonNull(time, "time is null");
         return nanos(time, time.isBefore(base)) < nanos;
+    }
+
+    // -----------------------------------------------------------------------------------------------------------------
+    Duration duration() {
+        return Duration.ofNanos(nanos - ChronoUnit.NANOS.between(LocalTime.MIDNIGHT, base));
     }
 
     // -----------------------------------------------------------------------------------------------------------------
