@@ -8,18 +8,44 @@ import java.util.Objects;
 import java.util.stream.LongStream;
 import java.util.stream.Stream;
 
+import static java.util.concurrent.ThreadLocalRandom.current;
+
 final class TimeTestUtils {
 
-    static final long minimumMinute;
+    static final long MINIMUM_HOUR_OF_DAY;
 
-    static final long maximumMinute;
+    static final long MAXIMUM_HOUR_OF_DAY;
+
+    static {
+        final ValueRange range = IsoChronology.INSTANCE.range(ChronoField.HOUR_OF_DAY);
+        MINIMUM_HOUR_OF_DAY = range.getMinimum();
+        assert MINIMUM_HOUR_OF_DAY == 0L;
+        MAXIMUM_HOUR_OF_DAY = range.getMaximum();
+        assert MAXIMUM_HOUR_OF_DAY == 23L;
+    }
+
+    static final long MINIMUM_MINUTE_OF_HOUR;
+
+    static final long MAXIMUM_MINUTE_OF_HOUR;
 
     static {
         final ValueRange range = IsoChronology.INSTANCE.range(ChronoField.MINUTE_OF_HOUR);
-        minimumMinute = range.getMinimum();
-        assert minimumMinute == 0L;
-        maximumMinute = range.getMaximum();
-        assert maximumMinute == 59L;
+        MINIMUM_MINUTE_OF_HOUR = range.getMinimum();
+        assert MINIMUM_MINUTE_OF_HOUR == 0L;
+        MAXIMUM_MINUTE_OF_HOUR = range.getMaximum();
+        assert MAXIMUM_MINUTE_OF_HOUR == 59L;
+    }
+
+    static int randomHourOfDay() {
+        return (int) current().nextLong(MINIMUM_HOUR_OF_DAY, MAXIMUM_HOUR_OF_DAY + 1);
+    }
+
+    static int randomMinuteOfHour() {
+        return (int) current().nextLong(MINIMUM_MINUTE_OF_HOUR, MAXIMUM_MINUTE_OF_HOUR + 1);
+    }
+
+    static LocalTime randomTime() {
+        return LocalTime.of(randomHourOfDay(), randomMinuteOfHour());
     }
 
     /**
@@ -28,7 +54,7 @@ final class TimeTestUtils {
      * @return a stream of valid minutes in an hour.
      */
     static LongStream minutes() {
-        return LongStream.rangeClosed(minimumMinute, maximumMinute);
+        return LongStream.rangeClosed(MINIMUM_MINUTE_OF_HOUR, MAXIMUM_MINUTE_OF_HOUR);
     }
 
     static Stream<LocalTime> mapMinutes(LocalTime hour) {

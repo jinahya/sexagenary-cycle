@@ -61,11 +61,17 @@ class 月建Test {
         assertThat(月建.toString()).isNotBlank();
     }
 
-    // -----------------------------------------------------------------------------------------------------------------
+    // ---------------------------------------------------------------------------------------------------------- equals
     @MethodSource({"parameters"})
     @ParameterizedTest
     void equals_True_Self(final 月建 月建) {
         assertThat(月建).isEqualTo(月建);
+    }
+
+    @MethodSource({"parameters"})
+    @ParameterizedTest
+    void equals_True_Copy(final 月建 月建) {
+        assertThat(月建).isEqualTo(new 月建(月建.干支, 月建.月, 月建.歲次));
     }
 
     // -----------------------------------------------------------------------------------------------------------------
@@ -82,6 +88,12 @@ class 月建Test {
     @ParameterizedTest
     void compareTo_Zero_Self(final 月建 月建) {
         assertThat(月建).isEqualByComparingTo(月建);
+    }
+
+    @MethodSource({"parameters"})
+    @ParameterizedTest
+    void compareTo_Zero_Copy(final 月建 月建) {
+        assertThat(月建).isEqualByComparingTo(new 月建(月建.干支, 月建.月, 月建.歲次));
     }
 
     // -----------------------------------------------------------------------------------------------------------------

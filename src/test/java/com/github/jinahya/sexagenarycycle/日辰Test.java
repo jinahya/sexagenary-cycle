@@ -67,6 +67,12 @@ class 日辰Test {
         assertEquals(日辰, 日辰);
     }
 
+    @MethodSource({"parameters"})
+    @ParameterizedTest
+    void equals_True_Copy(final 日辰 日辰) {
+        assertThat(日辰).isEqualTo(new 日辰(日辰.干支, 日辰.日, 日辰.月建));
+    }
+
     // -------------------------------------------------------------------------------------------------------- hashCode
     @MethodSource({"parameters"})
     @ParameterizedTest
@@ -79,5 +85,11 @@ class 日辰Test {
     @ParameterizedTest
     void compareTo_Zero_Self(final 日辰 日辰) {
         assertThat(日辰).isEqualByComparingTo(日辰);
+    }
+
+    @MethodSource({"parameters"})
+    @ParameterizedTest
+    void compareTo_Zero_Copy(final 日辰 日辰) {
+        assertThat(日辰).isEqualByComparingTo(new 日辰(日辰.干支, 日辰.日, 日辰.月建));
     }
 }

@@ -79,6 +79,12 @@ public class 歲次 extends Assigned<歲次> implements Rolling<歲次> {
     }
 
     // -----------------------------------------------------------------------------------------------------------------
+
+    /**
+     * Returns the previous 歲次 of this 歲次.
+     *
+     * @return the previous 歲次 of this 歲次.
+     */
     @Override
     public @NotNull 歲次 getPrevious() {
         歲次 result = previous;
@@ -88,6 +94,11 @@ public class 歲次 extends Assigned<歲次> implements Rolling<歲次> {
         return result;
     }
 
+    /**
+     * Returns the next 歲次 of this 歲次.
+     *
+     * @return the next 歲次 of this 歲次.
+     */
     @Override
     public @NotNull 歲次 getNext() {
         歲次 result = next;
@@ -98,6 +109,10 @@ public class 歲次 extends Assigned<歲次> implements Rolling<歲次> {
     }
 
     // -----------------------------------------------------------------------------------------------------------------
+
+    /**
+     * The year of this 歲次.
+     */
     @NotNull
     public final Year 年;
 

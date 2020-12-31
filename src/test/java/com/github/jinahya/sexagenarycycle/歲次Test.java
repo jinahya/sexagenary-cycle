@@ -33,12 +33,18 @@ class 歲次Test implements RollingTest<歲次> {
         assertThat(歲次.toString()).isNotBlank();
     }
 
-    // -----------------------------------------------------------------------------------------------------------------
+    // ---------------------------------------------------------------------------------------------------------- equals
     @MethodSource({"parameters"})
     @ParameterizedTest
     void equals_True_Self(final 歲次 歲次) {
         assertThat(歲次).isEqualTo(歲次);
         assertThat(歲次.equals(歲次)).isTrue();
+    }
+
+    @MethodSource({"parameters"})
+    @ParameterizedTest
+    void equals_True_Copy(final 歲次 歲次) {
+        assertThat(歲次).isEqualTo(new 歲次(歲次.干支, 歲次.年));
     }
 
     // ---------------------------------------------------------------------------------- compareTo(Ljava.lang.Object;)B

@@ -66,6 +66,7 @@ public enum 天干 implements RollingEnum<天干> { // \u5929\u5e72
     癸; // 계
 
     // -----------------------------------------------------------------------------------------------------------------
+
     /**
      * The regular expression for matching each name.
      */

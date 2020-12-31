@@ -11,7 +11,4 @@ package com.github.jinahya.sexagenarycycle;
 @SuppressWarnings({"NonAsciiCharacters", "java:S114"})
 interface 生剋五行<E extends Enum<E> & 生剋五行<E>> extends RollingEnum<E> {
 
-//    五行 getSubjective();
-
-//    五行 getObjective();
 }

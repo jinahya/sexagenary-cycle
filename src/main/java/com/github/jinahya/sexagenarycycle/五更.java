@@ -3,8 +3,6 @@ package com.github.jinahya.sexagenarycycle;
 import javax.validation.constraints.NotNull;
 import java.time.Duration;
 import java.time.LocalTime;
-import java.util.Arrays;
-import java.util.List;
 import java.util.Objects;
 
 // https://www.compart.com/en/unicode/block/U+1F300

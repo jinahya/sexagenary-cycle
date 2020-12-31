@@ -2,9 +2,9 @@ package com.github.jinahya.sexagenarycycle;
 
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.RepeatedTest;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.EnumSource;
 import org.junit.jupiter.params.provider.ValueSource;
 
@@ -13,7 +13,7 @@ import java.util.Arrays;
 import java.util.EnumSet;
 import java.util.Set;
 import java.util.regex.Pattern;
-import java.util.stream.Stream;
+import java.util.stream.Collectors;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertThrows;
@@ -62,7 +62,7 @@ class 地支Test implements RollingEnumTest<地支> {
     // ------------------------------------------------------------------------------------------------------------ 二十四方
     @DisplayName("valueOf(二十四方) returns non-null and expected for each 二十四方 whose direction is divided by 30")
     @Test
-    void valueOf二十四方_NonNullExpected_ForEach二十四方WhoseDegreeDividedBy30() {
+    void valueOf二十四方_NonNullExpected_ForEach二十四方WhoseDirectionIsMultipleOf30() {
         final Set<地支> set = EnumSet.noneOf(地支.class);
         Arrays.stream(二十四方.values()).filter(d -> d.direction % 30 == 0).forEach(d -> {
             assertThat(地支.valueOf(d)).isNotNull().satisfies(v -> {
@@ -75,7 +75,7 @@ class 地支Test implements RollingEnumTest<地支> {
 
     @DisplayName("二十四方 is non-null and direction is expected")
     @Test
-    void 二十四方_NonNullHasExpectedDirection_() {
+    void 二十四方_NonNullHasExpectedDirection_ForEachValue() {
         assertThat(地支.子.二十四方).isNotNull().satisfies(v -> assertThat(v.direction).isZero());
         assertThat(地支.丑.二十四方).isNotNull().satisfies(v -> assertThat(v.direction).isEqualTo(30));
         assertThat(地支.寅.二十四方).isNotNull().satisfies(v -> assertThat(v.direction).isEqualTo(60));
@@ -171,20 +171,16 @@ class 地支Test implements RollingEnumTest<地支> {
         assertThat(地支.valueOf(month)).isNotNull();
     }
 
-    @DisplayName("valueOf(Month) returns non-null for each Month")
+    @DisplayName("valueOf(Month) returns full set of values for all Months")
     @Test
-    void valueOfMonth_AllAssociated_ForEachMonth() {
-        final Set<地支> set = EnumSet.noneOf(地支.class);
-        Arrays.stream(Month.values()).map(地支::valueOf).forEach(v -> {
-            assertThat(v).isNotNull();
-            assertThat(set.add(v)).isTrue();
-        });
-        assertThat(set).isEqualTo(EnumSet.allOf(地支.class));
+    void valueOfMonth_AllAssociated_ForAllMonth() {
+        assertThat(Arrays.stream(Month.values()).map(地支::valueOf).collect(Collectors.toSet()))
+                .isEqualTo(EnumSet.allOf(地支.class));
     }
 
-    @DisplayName("valueOf(Month) returns non-null and expected")
+    @DisplayName("all 月份 are non-null and expected")
     @Test
-    void 月份_NonNullExpected_() {
+    void 月份_NonNullExpected_ForEachValue() {
         assertThat(地支.子.月份).isNotNull().isSameAs(Month.NOVEMBER);
         assertThat(地支.丑.月份).isNotNull().isSameAs(Month.DECEMBER);
         assertThat(地支.寅.月份).isNotNull().isSameAs(Month.JANUARY);
@@ -200,8 +196,14 @@ class 地支Test implements RollingEnumTest<地支> {
     }
 
     // -------------------------------------------------------------------------------------------------------------- 陰陽
+    @EnumSource(陰陽.class)
+    @ParameterizedTest
+    void valuesOf陰陽_NotEmpty_(final 陰陽 陰陽) {
+        assertThat(地支.valuesOf(陰陽)).isNotEmpty().doesNotContainNull().hasSize(6);
+    }
+
     @Test
-    void 陰陽_NonNullExpected_() {
+    void 陰陽_NonNullExpected_ForEachValue() {
         assertThat(地支.子.陰陽).isSameAs(陰陽.陽);
         assertThat(地支.丑.陰陽).isSameAs(陰陽.陰);
         assertThat(地支.寅.陰陽).isSameAs(陰陽.陽);
@@ -214,5 +216,11 @@ class 地支Test implements RollingEnumTest<地支> {
         assertThat(地支.酉.陰陽).isSameAs(陰陽.陰);
         assertThat(地支.戌.陰陽).isSameAs(陰陽.陽);
         assertThat(地支.亥.陰陽).isSameAs(陰陽.陰);
+    }
+
+    // -----------------------------------------------------------------------------------------------------------------
+    @RepeatedTest(128)
+    void includes_NonNull_ForAnyTime() {
+        assertThat(地支.valueOf(TimeTestUtils.randomTime())).isNotNull();
     }
 }
