@@ -9,19 +9,24 @@ import java.util.Set;
 import static org.assertj.core.api.Assertions.assertThat;
 
 @SuppressWarnings({"NonAsciiCharacters", "java:S3577"})
-class 五行相剋Test implements RollingEnumTest<五行相剋> {
+class 五行相剋Test extends 生剋五行Test<五行相剋> {
 
-    // -----------------------------------------------------------------------------------------------------------------
+    五行相剋Test() {
+        super(五行相剋.class);
+    }
+
+    // ------------------------------------------------------------------------------------------------------ subjective
     @Test
-    void fieldSubjective_Unique_EachOther() {
+    void subjective_Unique_EachOther() {
         final Set<五行> set = EnumSet.noneOf(五行.class);
         for (final 五行相剋 value : 五行相剋.values()) {
             assertThat(set.add(value.subjective)).isTrue();
         }
     }
 
+    // ------------------------------------------------------------------------------------------------------- objective
     @Test
-    void fieldObjective_Unique_EachOther() {
+    void objective_Unique_EachOther() {
         final Set<五行> set = EnumSet.noneOf(五行.class);
         for (final 五行相剋 value : 五行相剋.values()) {
             assertThat(set.add(value.objective)).isTrue();

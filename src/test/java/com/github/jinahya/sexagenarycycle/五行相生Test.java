@@ -8,7 +8,11 @@ import java.util.Set;
 import static org.assertj.core.api.Assertions.assertThat;
 
 @SuppressWarnings({"NonAsciiCharacters", "java:S3577"})
-class 五行相生Test implements RollingEnumTest<五行相生> {
+class 五行相生Test extends 生剋五行Test<五行相生> {
+
+    五行相生Test() {
+        super(五行相生.class);
+    }
 
     // -----------------------------------------------------------------------------------------------------------------
     @Test
@@ -38,6 +42,7 @@ class 五行相生Test implements RollingEnumTest<五行相生> {
         }
     }
 
+    // -----------------------------------------------------------------------------------------------------------------
     @Test
     void valueOfObjective_NonNullUnique_() {
         final Set<五行相生> set = EnumSet.noneOf(五行相生.class);
