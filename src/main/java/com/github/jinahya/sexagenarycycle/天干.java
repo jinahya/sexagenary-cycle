@@ -6,7 +6,7 @@ import java.util.Map;
 import java.util.Objects;
 
 /**
- * Constants of <a href="https://en.wikipedia.org/wiki/Heavenly_Stems">Heavenly Stems</a>.
+ * Constants of <a href="https://en.wikipedia.org/wiki/Heavenly_Stems">the ten Heavenly Stems</a>.
  *
  * @author Jin Kwon &lt;onacit_at_gmail.com&gt;
  * @see 천간
@@ -15,28 +15,61 @@ import java.util.Objects;
 @SuppressWarnings({"NonAsciiCharacters", "java:S100", "java:S115", "java:S116"})
 public enum 天干 implements RollingEnum<天干> { // \u5929\u5e72
 
+    /**
+     * The 1st.
+     */
     甲, // 갑
 
+    /**
+     * The 2nd.
+     */
     乙, // 을
 
+    /**
+     * The 3rd.
+     */
     丙, // 병
 
+    /**
+     * The 4th.
+     */
     丁, // 정
 
+    /**
+     * The 5th.
+     */
     戊, // 무
 
+    /**
+     * The 6th.
+     */
     己, // 기
 
+    /**
+     * The 7th.
+     */
     庚, // 경
 
+    /**
+     * The 8th.
+     */
     辛, // 신
 
+    /**
+     * The 9th.
+     */
     壬, // 임
 
+    /**
+     * The 10th.
+     */
     癸; // 계
 
     // -----------------------------------------------------------------------------------------------------------------
-    static final String REGEXP_NAME = "[\u7532\u4e59\u4e19\u4e01\u620a\u5df1\u5e9a\u8f9b\u58ec\u7678]";
+    /**
+     * The regular expression for matching each name.
+     */
+    public static final String REGEXP_NAME = "[\u7532\u4e59\u4e19\u4e01\u620a\u5df1\u5e9a\u8f9b\u58ec\u7678]";
 
     // -----------------------------------------------------------------------------------------------------------------
     private static final Map<String, 天干> VALUES_BY_NAMES

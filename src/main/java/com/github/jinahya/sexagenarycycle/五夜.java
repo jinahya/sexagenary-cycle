@@ -65,7 +65,7 @@ public enum 五夜 { // 오야
     // -----------------------------------------------------------------------------------------------------------------
 
     /**
-     * Returns the value {@link #includes(LocalTime) includes} specified time.
+     * Returns the value {@link 時刻#includes(LocalTime) includes} specified time.
      *
      * @param time the time.
      * @return the value includes {@code time}.
@@ -83,17 +83,15 @@ public enum 五夜 { // 오야
 
     // -----------------------------------------------------------------------------------------------------------------
     五夜() {
-        五更 = com.github.jinahya.sexagenarycycle.五更.VALUES.get(ordinal());
+        五更 = com.github.jinahya.sexagenarycycle.五更.values()[ordinal()];
     }
 
     // -----------------------------------------------------------------------------------------------------------------
-
     /**
-     * Checks whether this 時刻 includes specified time.
+     * Checks whether this 五夜 includes specified time.
      *
      * @param time the time.
-     * @return {@code true} if this 時刻 includes {@code time}; {@code false} otherwise.
-     * @see 五更#includes(LocalTime)
+     * @return {@code true} if this 五夜 includes {@code time}; {@code false} otherwise.
      */
     public boolean includes(final LocalTime time) {
         return 五更.時刻.includes(Objects.requireNonNull(time, "time is null"));

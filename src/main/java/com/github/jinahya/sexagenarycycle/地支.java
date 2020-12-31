@@ -10,12 +10,11 @@ import java.util.Collections;
 import java.util.EnumMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
-import static java.util.Objects.requireNonNull;
-
 /**
- * Constants of 10 <a href="https://en.wikipedia.org/wiki/Earthly_Branches">Earthly Branches</a>.
+ * Constants of <a href="https://en.wikipedia.org/wiki/Earthly_Branches">the twelve Earthly Branches</a>.
  *
  * @author Jin Kwon &lt;onacit_at_gmail.com&gt;
  * @see <a href="https://zh.wikipedia.org/wiki/%E5%9C%B0%E6%94%AF">地支</a>
@@ -23,23 +22,70 @@ import static java.util.Objects.requireNonNull;
 @SuppressWarnings({"NonAsciiCharacters", "java:S100", "java:S115", "java:S116", "java:S117"})
 public enum 地支 implements RollingEnum<地支> { // \u5730\u652f
 
+    /**
+     * The 1st.
+     */
     子(com.github.jinahya.sexagenarycycle.五行.水), // 자
+
+    /**
+     * The 2nd.
+     */
     丑(com.github.jinahya.sexagenarycycle.五行.土), // 축
+
+    /**
+     * The 3rd.
+     */
     寅(com.github.jinahya.sexagenarycycle.五行.木), // 인
+
+    /**
+     * The 4th.
+     */
     卯(com.github.jinahya.sexagenarycycle.五行.木), // 묘
+
+    /**
+     * The 5th.
+     */
     辰(com.github.jinahya.sexagenarycycle.五行.土), // 진
+
+    /**
+     * The 6th.
+     */
     巳(com.github.jinahya.sexagenarycycle.五行.火), // 사
+
+    /**
+     * The 7th.
+     */
     午(com.github.jinahya.sexagenarycycle.五行.火), // 오
+
+    /**
+     * The 8th.
+     */
     未(com.github.jinahya.sexagenarycycle.五行.土), // 미
+
+    /**
+     * The 9th.
+     */
     申(com.github.jinahya.sexagenarycycle.五行.金), // 신
+
+    /**
+     * The 10th.
+     */
     酉(com.github.jinahya.sexagenarycycle.五行.金), // 유
+
+    /**
+     * The 11th.
+     */
     戌(com.github.jinahya.sexagenarycycle.五行.土), // 술
+
+    /**
+     * The 12th.
+     */
     亥(com.github.jinahya.sexagenarycycle.五行.水); // 해
 
     // -----------------------------------------------------------------------------------------------------------------
 
     /**
-     * The regular expression for a single name.
+     * The regular expression for matching each name.
      */
     public static final String REGEXP_NAME
             = "[\u5b50\u4e11\u5bc5\u536f\u8fb0\u5df3\u5348\u672a\u7533\u9149\u620c\u4ea5]";
@@ -55,7 +101,7 @@ public enum 地支 implements RollingEnum<地支> { // \u5730\u652f
      * @return the constant associated with {@code name}.
      */
     public static 地支 valueOfName(final String name) {
-        requireNonNull(name, "name is null");
+        Objects.requireNonNull(name, "name is null");
         final 地支 value = VALUES_BY_NAMES.get(name);
         if (value == null) {
             throw new IllegalArgumentException("no value for name: " + name);
@@ -75,7 +121,7 @@ public enum 地支 implements RollingEnum<地支> { // \u5730\u652f
      * @return the value associated with {@code 二十四方}.
      */
     public static @NotNull 地支 valueOf(final @NotNull 二十四方 二十四方) {
-        requireNonNull(二十四方, "二十四方 is null");
+        Objects.requireNonNull(二十四方, "二十四方 is null");
         final 地支 value = VALUES_BY_二十四方S.get(二十四方);
         if (value == null) {
             throw new AssertionError("no value for " + 二十四方);
@@ -92,7 +138,7 @@ public enum 地支 implements RollingEnum<地支> { // \u5730\u652f
      * @return a list of values which each is associated with {@code 五行}.
      */
     public static @NotEmpty List<@NotNull 地支> valuesOf(final @NotNull 五行 五行) {
-        requireNonNull(五行, "五行 is null");
+        Objects.requireNonNull(五行, "五行 is null");
         return Arrays.stream(values())
                 .filter(v -> v.五行 == 五行)
                 .collect(Collectors.toList());
@@ -100,7 +146,7 @@ public enum 地支 implements RollingEnum<地支> { // \u5730\u652f
 
     // -----------------------------------------------------------------------------------------------------------------
     public static @NotNull 地支 valueOf(final @NotNull LocalTime time) {
-        requireNonNull(time, "time is null");
+        Objects.requireNonNull(time, "time is null");
         return Arrays.stream(values())
                 .filter(v -> v.includes(time))
                 .findAny()
@@ -113,7 +159,7 @@ public enum 地支 implements RollingEnum<地支> { // \u5730\u652f
     );
 
     public static @NotNull 地支 valueOf(final @NotNull Month month) {
-        requireNonNull(month, "month is null");
+        Objects.requireNonNull(month, "month is null");
         final 地支 value = VALUES_BY_MONTHS.get(month);
         if (value == null) {
             throw new AssertionError("no value for " + month);
@@ -130,7 +176,7 @@ public enum 地支 implements RollingEnum<地支> { // \u5730\u652f
      * @return a list of values which each is associated with {@code 陰陽}.
      */
     public static @NotEmpty List<@NotNull 地支> valuesOf(final @NotNull 陰陽 陰陽) {
-        requireNonNull(陰陽, "陰陽 is null");
+        Objects.requireNonNull(陰陽, "陰陽 is null");
         return Arrays.stream(values())
                 .filter(v -> v.陰陽 == 陰陽)
                 .collect(Collectors.toList());
@@ -139,7 +185,7 @@ public enum 地支 implements RollingEnum<地支> { // \u5730\u652f
     // -----------------------------------------------------------------------------------------------------------------
     地支(final @NotNull com.github.jinahya.sexagenarycycle.五行 五行) {
         二十四方 = com.github.jinahya.sexagenarycycle.二十四方.valueOfDirection(ordinal() * 30, true);
-        this.五行 = requireNonNull(五行, "五行 is null");
+        this.五行 = Objects.requireNonNull(五行, "五行 is null");
         時刻 = new com.github.jinahya.sexagenarycycle.時刻(
                 LocalTime.MIDNIGHT.plus(Duration.ofHours(((long) ordinal() << 1L) - 1L)),
                 Duration.ofHours(2L)
@@ -158,7 +204,7 @@ public enum 地支 implements RollingEnum<地支> { // \u5730\u652f
      * @return {@code true} when the time of this value includes {@code time}; {@code false} otherwise.
      */
     public boolean includes(final LocalTime time) {
-        requireNonNull(time, "time is null");
+        Objects.requireNonNull(time, "time is null");
         return 時刻.includes(time);
     }
 

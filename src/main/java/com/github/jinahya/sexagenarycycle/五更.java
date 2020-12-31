@@ -1,22 +1,29 @@
 package com.github.jinahya.sexagenarycycle;
 
+import javax.validation.constraints.NotNull;
 import java.time.Duration;
 import java.time.LocalTime;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 
+// https://www.compart.com/en/unicode/block/U+1F300
+// https://www.compart.com/en/unicode/U+33C2 (Square Am)
+// https://www.compart.com/en/unicode/U+33D8 (Square Pm)
 @SuppressWarnings({"NonAsciiCharacters", "java:S115", "java:S116"})
 public enum 五更 { // 오경
 
     /**
      * Represents the time between {@code 19:00} and {@code 21:00}.
      */
+    // https://www.compart.com/en/unicode/U+1F556
+    // https://www.compart.com/en/unicode/U+1F558 (Clock Face Nine Oclock)
     初更,
 
     /**
      * Represents the time between {@code 21:00} and {@code 23:00}.
      */
+    // https://www.compart.com/en/unicode/U+1F558
     二更,
 
     /**
@@ -35,12 +42,9 @@ public enum 五更 { // 오경
     五更;
 
     // -----------------------------------------------------------------------------------------------------------------
-    static final List<五更> VALUES = Arrays.asList(values());
-
-    // -----------------------------------------------------------------------------------------------------------------
 
     /**
-     * Returns the value {@link #includes(LocalTime) includes} specified time.
+     * Returns the value whose {@link #時刻} {@link 時刻#includes(LocalTime) includes} specified time.
      *
      * @param time the time.
      * @return the value includes {@code time}
@@ -49,7 +53,7 @@ public enum 五更 { // 오경
     public static 五更 valueIncludes(final LocalTime time) {
         Objects.requireNonNull(time, "time is null");
         for (final 五更 value : values()) {
-            if (value.includes(time)) {
+            if (value.時刻.includes(time)) {
                 return value;
             }
         }
@@ -64,16 +68,7 @@ public enum 五更 { // 오경
     // -----------------------------------------------------------------------------------------------------------------
 
     /**
-     * Checks whether {@link 時刻} includes specified time.
-     *
-     * @param time the time.
-     * @return {@code true} if this {@link 時刻} includes {@code time}; {@code false} otherwise.
-     * @see 時刻#includes(LocalTime)
+     * The 時刻 associated with this 五更.
      */
-    public boolean includes(final LocalTime time) {
-        return 時刻.includes(Objects.requireNonNull(time, "time is null"));
-    }
-
-    // -----------------------------------------------------------------------------------------------------------------
-    public final 時刻 時刻;
+    public final @NotNull 時刻 時刻;
 }
