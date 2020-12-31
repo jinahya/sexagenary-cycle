@@ -28,10 +28,10 @@ public enum 五行相剋 implements 生剋五行<五行相剋> {
             = Collections.unmodifiableMap(EnumUtils.mapValuesBy(五行相剋.class, v -> v.subjective));
 
     /**
-     * Returns the value associated to specified subjective.
+     * Returns the value associated with specified subjective.
      *
      * @param subjective the subjective.
-     * @return the value associated to {@code subjective}.
+     * @return the value associated with {@code subjective}.
      */
     public static 五行相剋 valueOfSubjective(final 五行 subjective) {
         Objects.requireNonNull(subjective, "subjective is null");
@@ -47,10 +47,10 @@ public enum 五行相剋 implements 生剋五行<五行相剋> {
             = Collections.unmodifiableMap(EnumUtils.mapValuesBy(五行相剋.class, v -> v.objective));
 
     /**
-     * Returns the value associated to specified objective.
+     * Returns the value associated with specified objective.
      *
      * @param objective the objective.
-     * @return the value associated to {@code objective}.
+     * @return the value associated with {@code objective}.
      */
     public static 五行相剋 valueOfObjective(final 五行 objective) {
         Objects.requireNonNull(objective, "objective is null");

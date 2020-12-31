@@ -48,10 +48,10 @@ public enum 五夜 { // 오야
             = Collections.unmodifiableMap(EnumUtils.mapValuesBy(五夜.class, v -> v.五更));
 
     /**
-     * Returns the value associated to specified 五更.
+     * Returns the value associated with specified 五更.
      *
      * @param 五更 the 五更.
-     * @return the value associated to {@code 五更}.
+     * @return the value associated with {@code 五更}.
      */
     public static 五夜 valueOf(final 五更 五更) {
         Objects.requireNonNull(五更, "五更 is null");

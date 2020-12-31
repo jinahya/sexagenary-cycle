@@ -49,10 +49,10 @@ public final class 간지 implements Rolling<간지> { // \uac04\uc9c0
             VALUES.stream().collect(Collectors.toMap(간지::getName, Function.identity())));
 
     /**
-     * Returns the value associated to specified name.
+     * Returns the value associated with specified name.
      *
      * @param name the name.
-     * @return the value of {@code name}.
+     * @return the value associated with {@code name}.
      */
     public static 간지 valueOfName(final String name) {
         Objects.requireNonNull(name, "name is null");

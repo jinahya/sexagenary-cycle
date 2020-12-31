@@ -48,10 +48,10 @@ public enum 五方正色 {
             = Collections.unmodifiableMap(EnumUtils.mapValuesBy(五方正色.class, v -> v.五行));
 
     /**
-     * Returns the value associated to specified 五行.
+     * Returns the value associated with specified 五行.
      *
      * @param 五行 the 五行.
-     * @return the value associated to {@code 五行}.
+     * @return the value associated with {@code 五行}.
      */
     public static 五方正色 valueOf(final 五行 五行) {
         Objects.requireNonNull(五行, "五行 is null");
@@ -88,9 +88,14 @@ public enum 五方正色 {
     }
 
     // -----------------------------------------------------------------------------------------------------------------
-    @NotNull
-    public final 五行 五行;
 
-    @NotNull
-    public final 五方 五方;
+    /**
+     * The 五行 associated with this 五方正色.
+     */
+    public final @NotNull 五行 五行;
+
+    /**
+     * The 五方 associated with this 五方正色.
+     */
+    public final @NotNull 五方 五方;
 }

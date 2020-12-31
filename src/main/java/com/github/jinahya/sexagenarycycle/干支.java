@@ -93,10 +93,10 @@ public final class 干支 implements Rolling<干支> { // \u5e72\u652f
             VALUES.stream().collect(Collectors.toMap(干支::getName, Function.identity())));
 
     /**
-     * Returns the value associated to specified name.
+     * Returns the value associated with specified name.
      *
      * @param name the name.
-     * @return the value of {@code name}.
+     * @return the value associated with {@code name}.
      */
     public static 干支 valueOfName(final String name) {
         Objects.requireNonNull(name, "name is null");
