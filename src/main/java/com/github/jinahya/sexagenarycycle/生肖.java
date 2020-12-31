@@ -12,67 +12,89 @@ import java.util.Objects;
  * @author Jin Kwon &lt;onacit_at_gmail.com&gt;
  * @see <a href="https://zh.wikipedia.org/wiki/%E7%94%9F%E8%82%96">生肖</a>
  */
+// https://www.compart.com/en/unicode/block/U+1F300
 @SuppressWarnings({"NonAsciiCharacters", "java:S115", "java:S116", "java:S117"})
 public enum 生肖 {
 
     /**
-     * Rat.
+     * Rat(&#x1F400;).
      */
+    // https://www.compart.com/en/unicode/U+1F400
+    // https://www.compart.com/en/unicode/U+1F42D
     鼠(com.github.jinahya.sexagenarycycle.地支.子),
 
     /**
-     * Ox.
+     * Ox(&#x1F402;).
      */
+    // https://www.compart.com/en/unicode/U+1F402
+    // https://www.compart.com/en/unicode/U+1F42E
     牛(com.github.jinahya.sexagenarycycle.地支.丑),
 
     /**
-     * Tiger.
+     * Tiger(&#x1F405;).
      */
+    // https://www.compart.com/en/unicode/U+1F405
+    // https://www.compart.com/en/unicode/U+1F42F
     虎(com.github.jinahya.sexagenarycycle.地支.寅),
 
     /**
-     * Rabbit.
+     * Rabbit(&#x1F407;).
      */
+    // https://www.compart.com/en/unicode/U+1F407
+    // https://www.compart.com/en/unicode/U+1F430
     兔(com.github.jinahya.sexagenarycycle.地支.卯),
 
     /**
-     * Dragon.
+     * Dragon(&#x1F409;).
      */
+    // https://www.compart.com/en/unicode/U+1F409
+    // https://www.compart.com/en/unicode/U+1F432
     龙(com.github.jinahya.sexagenarycycle.地支.辰),
 
     /**
-     * Snake.
+     * Snake(&#x1F40D;).
      */
+    // https://www.compart.com/en/unicode/U+1F40D
     蛇(com.github.jinahya.sexagenarycycle.地支.巳),
 
     /**
-     * Horse.
+     * Horse(&#x1F40E;).
      */
+    // https://www.compart.com/en/unicode/U+1F40E
+    // https://www.compart.com/en/unicode/U+1F434
     马(com.github.jinahya.sexagenarycycle.地支.午),
 
     /**
-     * Goat.
+     * Goat(&#x1F410;).
      */
+    // https://www.compart.com/en/unicode/U+1F410
     羊(com.github.jinahya.sexagenarycycle.地支.未),
 
     /**
-     * Monkey.
+     * Monkey(&#x1F412;).
      */
+    // https://www.compart.com/en/unicode/U+1F412
+    // https://www.compart.com/en/unicode/U+1F435
     猴(com.github.jinahya.sexagenarycycle.地支.申),
 
     /**
-     * Rooster.
+     * Rooster(&#x1F413;).
      */
+    // https://www.compart.com/en/unicode/U+1F413
     鸡(com.github.jinahya.sexagenarycycle.地支.酉),
 
     /**
-     * Dog.
+     * Dog(&#x1F415;).
      */
+    // https://www.compart.com/en/unicode/U+1F415
+    // https://www.compart.com/en/unicode/U+1F436
     狗(com.github.jinahya.sexagenarycycle.地支.戌),
 
     /**
-     * Pig.
+     * Pig(&#x1F416;).
      */
+    // https://www.compart.com/en/unicode/U+1F416
+    // https://www.compart.com/en/unicode/U+1F437
     猪(com.github.jinahya.sexagenarycycle.地支.亥);
 
     // -----------------------------------------------------------------------------------------------------------------
@@ -101,6 +123,10 @@ public enum 生肖 {
     }
 
     // -----------------------------------------------------------------------------------------------------------------
+
+    /**
+     * The 地支 associated with this 生肖.
+     */
     @NotNull
     public final 地支 地支;
 }

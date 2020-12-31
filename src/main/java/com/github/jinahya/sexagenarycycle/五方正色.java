@@ -14,44 +14,34 @@ import java.util.Objects;
 public enum 五方正色 {
 
     /**
-     * Blue for Wood and East.
-     *
-     * @see com.github.jinahya.sexagenarycycle.五行#木
-     * @see com.github.jinahya.sexagenarycycle.五方#東
+     * Blue(<font color="blue">&#x2b24;</font>) for Wood({@link com.github.jinahya.sexagenarycycle.五行#木 木}) and
+     * East({@link com.github.jinahya.sexagenarycycle.五方#東 東}).
      */
     靑(com.github.jinahya.sexagenarycycle.五行.木, com.github.jinahya.sexagenarycycle.五方.東),
 
     /**
-     * Red for Fire and South.
-     *
-     * @see com.github.jinahya.sexagenarycycle.五行#火
-     * @see com.github.jinahya.sexagenarycycle.五方#南
+     * Red(<font color="red">&#x2b24;</font>) for Fire({@link com.github.jinahya.sexagenarycycle.五行#火 火}) and
+     * South({@link com.github.jinahya.sexagenarycycle.五方#南 南}).
      */
     赤(com.github.jinahya.sexagenarycycle.五行.火, com.github.jinahya.sexagenarycycle.五方.南),
 
     /**
-     * Yellow for Earth and Center.
-     *
-     * @see com.github.jinahya.sexagenarycycle.五行#土
-     * @see com.github.jinahya.sexagenarycycle.五方#中
+     * Yellow(<font color="yellow">&#x2b24;</font>) for Earth({@link com.github.jinahya.sexagenarycycle.五行#土 土}) and
+     * Center({@link com.github.jinahya.sexagenarycycle.五方#中 中}).
      */
-    白(com.github.jinahya.sexagenarycycle.五行.土, com.github.jinahya.sexagenarycycle.五方.中),
+    黃(com.github.jinahya.sexagenarycycle.五行.土, com.github.jinahya.sexagenarycycle.五方.中),
 
     /**
-     * White for Metal and West.
-     *
-     * @see com.github.jinahya.sexagenarycycle.五行#金
-     * @see com.github.jinahya.sexagenarycycle.五方#西
+     * White(<font color="white">&#x2b24;</font>) for Metal({@link com.github.jinahya.sexagenarycycle.五行#金 金}) and
+     * West({@link com.github.jinahya.sexagenarycycle.五方#西 西}).
      */
-    黑(com.github.jinahya.sexagenarycycle.五行.金, com.github.jinahya.sexagenarycycle.五方.西),
+    白(com.github.jinahya.sexagenarycycle.五行.金, com.github.jinahya.sexagenarycycle.五方.西),
 
     /**
-     * Black for Water and North.
-     *
-     * @see com.github.jinahya.sexagenarycycle.五行#水
-     * @see com.github.jinahya.sexagenarycycle.五方#北
+     * Black(<font color="black">&#x2b24;</font>) for Water({@link com.github.jinahya.sexagenarycycle.五行#水 水}) and
+     * North({@link com.github.jinahya.sexagenarycycle.五方#北 北}).
      */
-    黃(com.github.jinahya.sexagenarycycle.五行.水, com.github.jinahya.sexagenarycycle.五方.北);
+    黑(com.github.jinahya.sexagenarycycle.五行.水, com.github.jinahya.sexagenarycycle.五方.北);
 
     // -----------------------------------------------------------------------------------------------------------------
     private static final Map<五行, 五方正色> VALUES_BY_五行S
@@ -93,8 +83,8 @@ public enum 五方正色 {
 
     // -----------------------------------------------------------------------------------------------------------------
     五方正色(final 五行 五行, final 五方 五方) {
-        this.五方 = Objects.requireNonNull(五方, "五方 is null");
         this.五行 = Objects.requireNonNull(五行, "五行 is null");
+        this.五方 = Objects.requireNonNull(五方, "五方 is null");
     }
 
     // -----------------------------------------------------------------------------------------------------------------

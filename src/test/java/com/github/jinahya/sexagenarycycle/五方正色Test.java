@@ -19,6 +19,7 @@ class 五方正色Test {
                 assertThat(set.add(v)).isTrue();
             });
         }
+        assertThat(set).isEqualTo(EnumSet.allOf(五方正色.class));
     }
 
     // -----------------------------------------------------------------------------------------------------------------
@@ -30,5 +31,6 @@ class 五方正色Test {
                 assertThat(set.add(v)).isTrue();
             });
         }
+        assertThat(set).isEqualTo(EnumSet.allOf(五方正色.class));
     }
 }
