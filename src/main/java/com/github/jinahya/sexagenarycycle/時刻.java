@@ -1,6 +1,7 @@
 package com.github.jinahya.sexagenarycycle;
 
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.PositiveOrZero;
 import java.time.Duration;
 import java.time.LocalTime;
 import java.time.temporal.ChronoUnit;
@@ -14,16 +15,8 @@ import java.util.Objects;
 @SuppressWarnings({"NonAsciiCharacters", "java:S101"})
 public final class 時刻 { // 시각
 
-    static Duration forTwoHours() {
-        return Duration.ofHours(2L);
-    }
-
-    static 時刻 newInstanceForTwoHoursFrom(final int baseHour, final int hoursToAdd) {
-        return new 時刻(LocalTime.of(baseHour, 0).plusHours(hoursToAdd), forTwoHours());
-    }
-
     // -----------------------------------------------------------------------------------------------------------------
-    private static long limit(final LocalTime time, final boolean leap) {
+    private static long nanos(final LocalTime time, final boolean leap) {
         return ChronoUnit.NANOS.between(LocalTime.MIDNIGHT, time) + (leap ? Duration.ofHours(24L).toNanos() : 0L);
     }
 
@@ -32,35 +25,81 @@ public final class 時刻 { // 시각
     /**
      * Creates a new instance with specified time and duration.
      *
-     * @param time     the staring time.
+     * @param base     the staring time.
      * @param duration the duration of the time.
      * @throws IllegalArgumentException when {@code duration} is greater than {@code PT24H}.
      */
-    public 時刻(final LocalTime time, final Duration duration) {
+    public 時刻(final LocalTime base, final Duration duration) {
         super();
-        this.time = Objects.requireNonNull(time, "time is null");
+        this.base = Objects.requireNonNull(base, "time is null");
         if (Objects.requireNonNull(duration, "duration is null").compareTo(Duration.ofHours(24L)) > 0) {
             throw new IllegalArgumentException("duration(" + duration + ") > PH24H");
         }
-        limit = limit(this.time, false) + duration.toNanos();
+        nanos = nanos(this.base, false) + duration.toNanos();
     }
 
     // -----------------------------------------------------------------------------------------------------------------
 
     /**
-     * Checks whether this time includes specified time.
+     * Returns a string representation of this object.
+     *
+     * @return a string representation of this object.
+     */
+    @Override
+    public String toString() {
+        return super.toString() + '{'
+               + "base=" + base
+               + ",nanos=" + nanos
+               + '}';
+    }
+
+    // -----------------------------------------------------------------------------------------------------------------
+
+    /**
+     * Indicates whether some other object is "equal to" this one.
+     *
+     * @param obj the reference object with which to compare.
+     * @return {@code true} if this object is the same as the obj argument; {@code false} otherwise.
+     */
+    @Override
+    public boolean equals(final Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null || getClass() != obj.getClass()) {
+            return false;
+        }
+        final 時刻 casted = (時刻) obj;
+        return nanos == casted.nanos && base.equals(casted.base);
+    }
+
+    /**
+     * Returns a hash code value for the object.
+     *
+     * @return a hash code value for this object.
+     */
+    @Override
+    public int hashCode() {
+        return Objects.hash(base, nanos);
+    }
+
+    // -----------------------------------------------------------------------------------------------------------------
+
+    /**
+     * Checks whether this 時刻 includes specified time.
      *
      * @param time the time to check.
      * @return {@code true} if this time includes {@code time}; {@code false} otherwise.
      */
     public boolean includes(final LocalTime time) {
         Objects.requireNonNull(time, "time is null");
-        return limit(time, time.isBefore(this.time)) < this.limit;
+        return nanos(time, time.isBefore(base)) < nanos;
     }
 
     // -----------------------------------------------------------------------------------------------------------------
     @NotNull
-    final LocalTime time;
+    final LocalTime base;
 
-    private final long limit;
+    @PositiveOrZero
+    private final long nanos;
 }

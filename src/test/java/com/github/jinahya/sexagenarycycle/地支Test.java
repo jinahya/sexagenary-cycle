@@ -3,8 +3,14 @@ package com.github.jinahya.sexagenarycycle;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.EnumSource;
+import org.junit.jupiter.params.provider.ValueSource;
 
 import java.time.Month;
+import java.util.Arrays;
+import java.util.EnumSet;
+import java.util.Set;
 import java.util.regex.Pattern;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -14,35 +20,58 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 @Slf4j
 class 地支Test implements RollingEnumTest<地支> {
 
-    // -----------------------------------------------------------------------------------------------------------------
-    @DisplayName("REGEXP_NAME matches for every value's name")
+    static Set<地支> noneOf() {
+        return EnumSet.noneOf(地支.class);
+    }
+
+    static Set<地支> allOf() {
+        return EnumSet.allOf(地支.class);
+    }
+
+    // ----------------------------------------------------------------------------------------------------- REGEXP_NAME
+    @DisplayName("REGEXP_NAME matches for each value's name")
     @Test
-    void REGEXP_NAME_Match_EveryName() {
+    void REGEXP_NAME_Match_ForEachValueName() {
         final Pattern pattern = Pattern.compile(地支.REGEXP_NAME);
         for (final 地支 value : 地支.values()) {
             assertThat(pattern.matcher(value.name()).matches()).isTrue();
         }
     }
 
-    // -----------------------------------------------------------------------------------------------------------------
-    @DisplayName("valueOf(name) returns valid value for known name")
+    // --------------------------------------------------------------------------------------------- valueOfName(String)
+    @DisplayName("valueOfName(name) returns non-null and expected for each known name")
     @Test
     void valueOfName_ExpectedResult_NameIsKnown() {
         final String[] names = new String[] {"子", "丑", "寅", "卯", "辰", "巳", "午", "未", "申", "酉", "戌", "亥"};
         for (int i = 0; i < names.length; i++) {
             final String name = names[i];
-            assertThat(地支.ofName(name)).isNotNull().isSameAs(地支.valueOf(name));
-            assertThat(地支.ofName(name).ordinal()).isSameAs(i);
+            assertThat(地支.valueOfName(name)).isNotNull().isSameAs(地支.valueOf(name));
+            assertThat(地支.valueOfName(name).ordinal()).isSameAs(i);
         }
     }
 
     @DisplayName("valueOfName(name) throws IllegalArgumentException when name is unknown")
-    @Test
-    void valueOfName_IllegalArgumentException_NameIsUnknown() {
-        assertThrows(IllegalArgumentException.class, () -> 地支.ofName(""));
+    @ValueSource(strings = {"", "愛"})
+    @ParameterizedTest
+    void valueOfName_IllegalArgumentException_NameIsUnknown(final String unknownName) {
+        assertThrows(IllegalArgumentException.class, () -> 地支.valueOfName(unknownName));
     }
 
     // ------------------------------------------------------------------------------------------------------------ 二十四方
+    @DisplayName("valueOf(二十四方) returns non-null and expected for each 二十四方 whose direction is divided by 30")
+    @Test
+    void valueOf二十四方_NonNullExpected_ForEach二十四方WhoseDegreeDividedBy30() {
+        final Set<地支> set = EnumSet.noneOf(地支.class);
+        Arrays.stream(二十四方.values()).filter(d -> d.direction % 30 == 0).forEach(d -> {
+            assertThat(地支.valueOf(d)).isNotNull().satisfies(v -> {
+                assertThat(v.二十四方).isSameAs(d);
+                assertThat(set.add(v)).isTrue();
+            });
+        });
+        assertThat(set).isEqualTo(EnumSet.allOf(地支.class));
+    }
+
+    @DisplayName("二十四方 is non-null and direction is expected")
     @Test
     void 二十四方_NonNullHasExpectedDirection_() {
         assertThat(地支.子.二十四方).isNotNull().satisfies(v -> assertThat(v.direction).isZero());
@@ -60,6 +89,45 @@ class 地支Test implements RollingEnumTest<地支> {
     }
 
     // -------------------------------------------------------------------------------------------------------------- 五行
+    @DisplayName("valuesOf(五行) returns non-null, non-empty and contains no nulls")
+    @EnumSource(五行.class)
+    @ParameterizedTest
+    void valuesOf五行_NonNullNotEmptyNoNulls(final 五行 五行) {
+        assertThat(地支.valuesOf(五行)).isNotNull().isNotEmpty().doesNotContainNull();
+    }
+
+    @DisplayName("valuesOf(五行) returns list contains expected in order")
+    @Test
+    void valuesOf五行_ContainsExpectedInOrder_ForEach五行() {
+        final Set<地支> set = EnumSet.noneOf(地支.class);
+        assertThat(地支.valuesOf(五行.木)).isNotNull().isNotEmpty().doesNotContainNull()
+                .containsExactly(地支.寅, 地支.卯)
+                .allSatisfy(v -> {
+                    assertThat(set.add(v)).isTrue();
+                });
+        assertThat(地支.valuesOf(五行.火)).isNotNull().isNotEmpty().doesNotContainNull()
+                .containsExactly(地支.巳, 地支.午)
+                .allSatisfy(v -> {
+                    assertThat(set.add(v)).isTrue();
+                });
+        assertThat(地支.valuesOf(五行.土)).isNotNull().isNotEmpty().doesNotContainNull()
+                .containsExactly(地支.丑, 地支.辰, 地支.未, 地支.戌)
+                .allSatisfy(v -> {
+                    assertThat(set.add(v)).isTrue();
+                });
+        assertThat(地支.valuesOf(五行.金)).isNotNull().isNotEmpty().doesNotContainNull()
+                .containsExactly(地支.申, 地支.酉)
+                .allSatisfy(v -> {
+                    assertThat(set.add(v)).isTrue();
+                });
+        assertThat(地支.valuesOf(五行.水)).isNotNull().isNotEmpty().doesNotContainNull()
+                .containsExactly(地支.子, 地支.亥)
+                .allSatisfy(v -> {
+                    assertThat(set.add(v)).isTrue();
+                });
+        assertThat(set).isEqualTo(EnumSet.allOf(地支.class));
+    }
+
     @Test
     void 五行_NonNullExpected_() {
         assertThat(地支.子.五行).isNotNull().isSameAs(五行.水);
@@ -79,21 +147,40 @@ class 地支Test implements RollingEnumTest<地支> {
     // ------------------------------------------------------------------------------------------------------------- 時刻
     @Test
     void 時刻_NonNullExpected_() {
-        assertThat(地支.子.時刻).isNotNull().satisfies(v -> assertThat(v.time.getHour()).isEqualTo(23));
-        assertThat(地支.丑.時刻).isNotNull().satisfies(v -> assertThat(v.time.getHour()).isEqualTo(1));
-        assertThat(地支.寅.時刻).isNotNull().satisfies(v -> assertThat(v.time.getHour()).isEqualTo(3));
-        assertThat(地支.卯.時刻).isNotNull().satisfies(v -> assertThat(v.time.getHour()).isEqualTo(5));
-        assertThat(地支.辰.時刻).isNotNull().satisfies(v -> assertThat(v.time.getHour()).isEqualTo(7));
-        assertThat(地支.巳.時刻).isNotNull().satisfies(v -> assertThat(v.time.getHour()).isEqualTo(9));
-        assertThat(地支.午.時刻).isNotNull().satisfies(v -> assertThat(v.time.getHour()).isEqualTo(11));
-        assertThat(地支.未.時刻).isNotNull().satisfies(v -> assertThat(v.time.getHour()).isEqualTo(13));
-        assertThat(地支.申.時刻).isNotNull().satisfies(v -> assertThat(v.time.getHour()).isEqualTo(15));
-        assertThat(地支.酉.時刻).isNotNull().satisfies(v -> assertThat(v.time.getHour()).isEqualTo(17));
-        assertThat(地支.戌.時刻).isNotNull().satisfies(v -> assertThat(v.time.getHour()).isEqualTo(19));
-        assertThat(地支.亥.時刻).isNotNull().satisfies(v -> assertThat(v.time.getHour()).isEqualTo(21));
+        assertThat(地支.子.時刻).isNotNull().satisfies(v -> assertThat(v.base.getHour()).isEqualTo(23));
+        assertThat(地支.丑.時刻).isNotNull().satisfies(v -> assertThat(v.base.getHour()).isEqualTo(1));
+        assertThat(地支.寅.時刻).isNotNull().satisfies(v -> assertThat(v.base.getHour()).isEqualTo(3));
+        assertThat(地支.卯.時刻).isNotNull().satisfies(v -> assertThat(v.base.getHour()).isEqualTo(5));
+        assertThat(地支.辰.時刻).isNotNull().satisfies(v -> assertThat(v.base.getHour()).isEqualTo(7));
+        assertThat(地支.巳.時刻).isNotNull().satisfies(v -> assertThat(v.base.getHour()).isEqualTo(9));
+        assertThat(地支.午.時刻).isNotNull().satisfies(v -> assertThat(v.base.getHour()).isEqualTo(11));
+        assertThat(地支.未.時刻).isNotNull().satisfies(v -> assertThat(v.base.getHour()).isEqualTo(13));
+        assertThat(地支.申.時刻).isNotNull().satisfies(v -> assertThat(v.base.getHour()).isEqualTo(15));
+        assertThat(地支.酉.時刻).isNotNull().satisfies(v -> assertThat(v.base.getHour()).isEqualTo(17));
+        assertThat(地支.戌.時刻).isNotNull().satisfies(v -> assertThat(v.base.getHour()).isEqualTo(19));
+        assertThat(地支.亥.時刻).isNotNull().satisfies(v -> assertThat(v.base.getHour()).isEqualTo(21));
     }
 
     // -------------------------------------------------------------------------------------------------------------- 月份
+    @DisplayName("valueOf(Month) returns non-null for each Month")
+    @EnumSource(Month.class)
+    @ParameterizedTest
+    void valueOfMonth_NonNull_ForEachMonth(final Month month) {
+        assertThat(地支.valueOf(month)).isNotNull();
+    }
+
+    @DisplayName("valueOf(Month) returns non-null for each Month")
+    @Test
+    void valueOfMonth_AllAssociated_ForEachMonth() {
+        final Set<地支> set = EnumSet.noneOf(地支.class);
+        Arrays.stream(Month.values()).map(地支::valueOf).forEach(v -> {
+            assertThat(v).isNotNull();
+            assertThat(set.add(v)).isTrue();
+        });
+        assertThat(set).isEqualTo(EnumSet.allOf(地支.class));
+    }
+
+    @DisplayName("valueOf(Month) returns non-null and expected")
     @Test
     void 月份_NonNullExpected_() {
         assertThat(地支.子.月份).isNotNull().isSameAs(Month.NOVEMBER);

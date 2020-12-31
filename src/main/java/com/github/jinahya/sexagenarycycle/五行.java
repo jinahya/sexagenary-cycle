@@ -4,7 +4,12 @@ package com.github.jinahya.sexagenarycycle;
  * Constants for <a href="https://en.wikipedia.org/wiki/Wuxing_(Chinese_philosophy)">Wuxing (Chinese philosophy)</a>.
  *
  * @author Jin Kwon &lt;onacit_at_gmail.com&gt;
- * @see <a href="https://zh.wikipedia.org/wiki/%E4%BA%94%E8%A1%8C">五行</a>
+ * @see 五方正色#valueOf(com.github.jinahya.sexagenarycycle.五行)
+ * @see 五行相剋#valueOfSubjective(五行)
+ * @see 五行相剋#valueOfObjective(五行)
+ * @see 五行相生#valueOfSubjective(五行)
+ * @see 五行相生#valueOfObjective(五行)
+ * @see <a href="https://zh.wikipedia.org/wiki/%E4%BA%94%E8%A1%8C">五行 (Wikipedia)</a>
  */
 // https://www.compart.com/en/unicode/block/U+1F300
 // https://www.compart.com/en/unicode/block/U+1F700 (Alchemical Symbols)

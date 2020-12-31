@@ -28,9 +28,9 @@ assertThat(乙.getPrevious()).isSameAs(甲);
 ## [지지][지지]\([地支][地支], [Earthly Branches][Earthly_Branches])
 
 ```java
-final 地支 子=地支.ofName("子");
-assertThat(子.getPrevious()).isSameAs(地支.ofName("亥"));
-final 地支 丑=地支.valueOf("丑");
+final 地支 子 = 地支.valueOfName("子");
+assertThat(子.getPrevious()).isSameAs(地支.valueOfName("亥"));
+final 地支 丑 = 地支.valueOf("丑");
 assertThat(丑.getNext()).isSameAs(地支.valueOf("寅"));
 assertThat(丑.getPrevious()).isSameAs(子);
 ```
@@ -38,9 +38,9 @@ assertThat(丑.getPrevious()).isSameAs(子);
 ## [간지][간지]\([干支][干支], [Sexagenary cycle][Sexagenary_cycle])
 
 ```java
-final 干支 甲子=干支.valueOfName("甲子");
+final 干支 甲子 = 干支.valueOfName("甲子");
 assertThat(甲子.getName()).isEqualTo("甲子");
-assertThat(甲子).isSameAs(干支.valueOf(天干.ofName("甲"),地支.ofName("子")));
+assertThat(甲子).isSameAs(干支.valueOf(天干.valueOfName("甲"), 地支.valueOfName("子")));
 assertThat(甲子.getPrevious()).isSameAs(干支.valueOfName("癸亥"));
 assertThat(甲子.getNext()).isSameAs(干支.valueOfName("乙丑"));
 ```
