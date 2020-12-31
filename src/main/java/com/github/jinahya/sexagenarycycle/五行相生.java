@@ -12,7 +12,7 @@ import java.util.Objects;
  * @author Jin Kwon &lt;onacit_at_gmail.com&gt;
  */
 @SuppressWarnings({"NonAsciiCharacters", "java:S115"})
-public enum 五行相生 implements RollingEnum<五行相生>, 生剋五行<五行相生> {
+public enum 五行相生 implements 生剋五行<五行相生> {
 
     /**
      * Wood({@link 五行#木 木}) feeds Fire({@link 五行#火 火}).

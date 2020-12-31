@@ -11,7 +11,7 @@ import java.util.Objects;
  * @author Jin Kwon &lt;onacit_at_gmail.com&gt;
  */
 @SuppressWarnings({"NonAsciiCharacters", "java:S115"})
-public enum 五行相剋 implements RollingEnum<五行相剋>, 生剋五行<五行相剋> {
+public enum 五行相剋 implements 生剋五行<五行相剋> {
 
     木剋土(五行.木, 五行.土),
 
