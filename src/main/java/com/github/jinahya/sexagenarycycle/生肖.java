@@ -10,7 +10,7 @@ import java.util.Objects;
  * Constants for <a href="https://en.wikipedia.org/wiki/Chinese_zodiac">Chinese zodiac</a>.
  *
  * @author Jin Kwon &lt;onacit_at_gmail.com&gt;
- * @see <a href="https://zh.wikipedia.org/wiki/%E7%94%9F%E8%82%96">生肖</a>
+ * @see <a href="https://zh.wikipedia.org/wiki/%E7%94%9F%E8%82%96">生肖 (Wikipedia)</a>
  */
 // https://www.compart.com/en/unicode/block/U+1F300
 @SuppressWarnings({"NonAsciiCharacters", "java:S115", "java:S116", "java:S117"})
