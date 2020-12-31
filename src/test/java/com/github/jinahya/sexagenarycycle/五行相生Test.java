@@ -1,9 +1,6 @@
 package com.github.jinahya.sexagenarycycle;
 
-import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.EnumSource;
 
 import java.util.EnumSet;
 import java.util.Set;
@@ -49,36 +46,5 @@ class 五行相生Test implements RollingEnumTest<五行相生> {
                 assertThat(set.add(v)).isTrue();
             });
         }
-    }
-
-    // -----------------------------------------------------------------------------------------------------------------
-    @DisplayName("valueOfSubjectiveInWeakeningCycle(五行) returns non-null and same as getValueOfObjective(五行)")
-    @EnumSource(五行.class)
-    @ParameterizedTest
-    void valueOfSubjectiveInWeakeningCycle_NonNullSameAsValueOfObjective_ForEach五行(final 五行 五行) {
-        assertThat(五行相生.valueOfSubjectiveInWeakeningCycle(五行)).isNotNull().isSameAs(五行相生.valueOfObjective(五行));
-    }
-
-    @DisplayName("valueOfObjectiveInWeakeningCycle(五行) returns non-null and same as getValueOfSubjective(五行)")
-    @EnumSource(五行.class)
-    @ParameterizedTest
-    void valueOfObjectiveInWeakeningCycle_NonNullSameAsValueOfSubjective_ForEach五行(final 五行 五行) {
-        assertThat(五行相生.valueOfObjectiveInWeakeningCycle(五行)).isNotNull().isSameAs(五行相生.valueOfSubjective(五行));
-    }
-
-    // -----------------------------------------------------------------------------------------------------------------
-    @DisplayName("getPreviousInWeakeningCycle() returns non-null and same as getNext()")
-    @EnumSource(五行相生.class)
-    @ParameterizedTest
-    void getPreviousInWeakeningCycle_NonNullSameAsNext_ForEachValue(final 五行相生 value) {
-        assertThat(value.getPreviousInWeakeningCycle()).isNotNull().isSameAs(value.getNext());
-    }
-
-    // -----------------------------------------------------------------------------------------------------------------
-    @DisplayName("getNextInWeakeningCycle() returns non-null and same as getPrevious()")
-    @EnumSource(五行相生.class)
-    @ParameterizedTest
-    void getNextInWeakeningCycle__NonNullSameAsPrevious_ForEachValue(final 五行相生 value) {
-        assertThat(value.getNextInWeakeningCycle()).isNotNull().isSameAs(value.getPrevious());
     }
 }
