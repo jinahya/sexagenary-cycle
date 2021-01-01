@@ -19,67 +19,67 @@ public enum 生肖 {
     /**
      * 0: Rat(&#x1F400;).
      */
-    鼠, // 서
+    鼠, // 쥐 서
 
     /**
      * 1: Ox(&#x1F402;).
      */
-    牛, // 우
+    牛, // 소 우
 
     /**
      * 2: Tiger(&#x1F405;).
      */
-    虎, // 호
+    虎, // 범 호
 
     /**
      * 3: Rabbit(&#x1F407;).
      */
-    兔, // 토, 兎
+    兔, // 토끼 토, 兎
 
     /**
      * 4: Dragon(&#x1F409;).
      */
-    龙, // 용, 龍
+    龙, // 용 용, 龍
 
     /**
      * 5: Snake(&#x1F40D;).
      */
-    蛇, // 사
+    蛇, // 뱀 사
 
     /**
      * 6: Horse(&#x1F40E;).
      */
-    马, // 마, 馬
+    马, // 말 마, 馬
 
     /**
      * 7: Goat(&#x1F410;).
      */
-    羊, // 양
+    羊, // 양 양
 
     /**
      * 8: Monkey(&#x1F412;).
      */
-    猴, // 후
+    猴, // 원숭이 후
 
     /**
      * 9: Rooster(&#x1F413;).
      */
-    鸡, // 계, 雞
+    鸡, // 닭 계, 雞
 
     /**
      * A: Dog(&#x1F415;).
      */
-    狗, // 구, 견(犬)
+    狗, // 개 구, 견(犬)
 
     /**
      * B: Pig(&#x1F416;).
      */
-    猪; // 저, 豬
+    猪; // 돼지 저, 豬
 
     // -----------------------------------------------------------------------------------------------------------------
-    private static final Map<地支, 生肖> VALUES_BY_地支S = Collections.unmodifiableMap(EnumUtils.mapValuesBy(
-            生肖.class, v -> v.地支, () -> new EnumMap<>(地支.class)
-    ));
+    private static final Map<地支, 生肖> VALUES_BY_地支S = Collections.unmodifiableMap(
+            EnumUtils.mapValuesBy(生肖.class, v -> v.地支, () -> new EnumMap<>(地支.class))
+    );
 
     /**
      * Returns the value associated with specified 地支.

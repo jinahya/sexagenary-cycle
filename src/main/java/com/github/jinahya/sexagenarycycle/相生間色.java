@@ -12,20 +12,15 @@ import java.util.Set;
 @SuppressWarnings({"NonAsciiCharacters", "java:S115", "java:S116", "java:S117"})
 public enum 相生間色 implements 五方間色<相生間色, 五行相生> {
 
-    // 정, 짙은 보라.
-    靘,
+    靘, // 검푸른 빛 정
 
-    // 훈, 주황.
-    纁,
+    纁, // 분홍빛 훈
 
-    // 규, 연두록.
-    硅,
+    硅, // 규소 규, 연두록
 
-    // 불, 잿빛.
-    黻,
+    黻, // 수 불, 잿빛
 
-    // 암, 천정색.
-    黯;
+    黯; // 검을 암
 
     // -----------------------------------------------------------------------------------------------------------------
     private static final Map<五行相生, 相生間色> VALUES_BY_五行相生S = Collections.unmodifiableMap(
