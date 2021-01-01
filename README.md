@@ -18,10 +18,10 @@ also [datagokr-api-b090041-lrsrcldinfoservice-client-spring](https://github.com/
 ## [천간][천간]\([天干][天干], [Heavenly Stems][Heavenly_Stems])
 
 ```java
-final 天干 甲=天干.valueOf("甲");
-assertThat(甲.getPrevious()).isSameAs(天干.ofName("癸"));
-final 天干 乙=天干.ofName("乙");
-assertThat(乙.getNext()).isSameAs(天干.ofName("丙"));
+final 天干 甲 = 天干.valueOf("甲");
+assertThat(甲.getPrevious()).isSameAs(天干.valueOfName("癸"));
+final 天干 乙 = 天干.valueOfName("乙");
+assertThat(乙.getNext()).isSameAs(天干.valueOfName("丙"));
 assertThat(乙.getPrevious()).isSameAs(甲);
 ```
 
@@ -49,32 +49,32 @@ assertThat(甲子.getNext()).isSameAs(干支.valueOfName("乙丑"));
 
 ```java
 // (陰曆) 2020
-final 歲次 庚子年=new 歲次(干支.valueOfName("庚子"),Year.of(2020));
+final 歲次 庚子年 = new 歲次(干支.valueOfName("庚子"), Year.of(2020));
 assertThat(庚子年.年.getValue()).isEqualTo(2020);
-assertThat(庚子年.getPrevious()).isEqualTo(new 歲次(干支.valueOfName("庚子").getPrevious(),Year.of(2019)));
-assertThat(庚子年.getNext()).isEqualTo(new 歲次(干支.valueOfName("庚子").getNext(),Year.of(2021)));
+assertThat(庚子年.getPrevious()).isEqualTo(new 歲次(干支.valueOfName("庚子").getPrevious(), Year.of(2019)));
+assertThat(庚子年.getNext()).isEqualTo(new 歲次(干支.valueOfName("庚子").getNext(), Year.of(2021)));
 // (陰曆) 2020-12
-final 月建 戊子月=new 月建(干支.valueOfName("戊子"),Month.DECEMBER,庚子年);
+final 月建 戊子月 = new 月建(干支.valueOfName("戊子"), Month.DECEMBER, 庚子年);
 assertThat(戊子月.月).isSameAs(Month.DECEMBER);
 assertThat(戊子月.is閏月()).isFalse();
 // (陰曆) 2020-12-23 / (陽曆) 2021-02-04.
-final 日辰 庚子日=new 日辰(干支.valueOfName("庚子"),23,戊子月);
+final 日辰 庚子日 = new 日辰(干支.valueOfName("庚子"), 23, 戊子月);
 assertThat(庚子日.日).isEqualTo(23);
 // Two APRIL(4月)s in 2020
 {
     // (陰曆) 2020-04; the 1st APRIL of 2020
-    final 月建 辛巳月=new 月建(干支.valueOfName("辛巳"),Month.APRIL,庚子年);
+    final 月建 辛巳月 = new 月建(干支.valueOfName("辛巳"), Month.APRIL, 庚子年);
     assertThat(辛巳月.is閏月()).isFalse();
     // (陰曆) 2020-04-01 / (陽曆) 2020-04-23
-    final 日辰 丙申日=new 日辰(干支.valueOfName("丙申"),23,辛巳月);
+    final 日辰 丙申日 = new 日辰(干支.valueOfName("丙申"), 23, 辛巳月);
     assertThat(丙申日.日).isEqualTo(23);
 }
 {
     // (陰曆) 2020-04; the 2nd APRIL of 2020
-    final 月建 閏四月=月建.newInstanceOf閏月(Month.APRIL,庚子年);
+    final 月建 閏四月 = 月建.newInstanceOf閏月(Month.APRIL, 庚子年);
     assertThat(閏四月.is閏月()).isTrue();
     // (陰曆) 2020-04-01 / (陽曆) 2020-05-23.
-    final 日辰 丙寅日=new 日辰(干支.valueOfName("丙寅"),1,閏四月);
+    final 日辰 丙寅日 = new 日辰(干支.valueOfName("丙寅"), 1, 閏四月);
     assertThat(丙寅日.日).isEqualTo(1);
 }
 ```
