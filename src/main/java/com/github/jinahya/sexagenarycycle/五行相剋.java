@@ -6,7 +6,7 @@ import java.util.Map;
 import java.util.Objects;
 
 /**
- * Constants for 剋 cycle.
+ * Constants for inter-regulating cycle of 五行.
  *
  * @author Jin Kwon &lt;onacit_at_gmail.com&gt;
  */

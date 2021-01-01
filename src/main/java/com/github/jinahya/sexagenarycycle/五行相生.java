@@ -7,36 +7,21 @@ import java.util.Map;
 import java.util.Objects;
 
 /**
- * Constants for 生 cycle.
+ * Constants for inter-promoting cycle of 五行.
  *
  * @author Jin Kwon &lt;onacit_at_gmail.com&gt;
  */
 @SuppressWarnings({"NonAsciiCharacters", "java:S115"})
 public enum 五行相生 implements 生剋五行<五行相生> {
 
-    /**
-     * Wood({@link 五行#木 木}) feeds Fire({@link 五行#火 火}).
-     */
     木生火(五行.木, 五行.火),
 
-    /**
-     * Fire({@link 五行#火 火}) produces Earth({@link 五行#土 土}).
-     */
     火生土(五行.火, 五行.土),
 
-    /**
-     * Earth({@link 五行#土 土}) bears Metal({@link 五行#金 金}).
-     */
     土生金(五行.土, 五行.金),
 
-    /**
-     * Metal({@link 五行#金 金}) collects Water({@link 五行#水 水}).
-     */
     金生水(五行.金, 五行.水),
 
-    /**
-     * Water({@link 五行#水 水}) nourishes Wood({@link 五行#木 木}).
-     */
     水生木(五行.水, 五行.木);
 
     // -----------------------------------------------------------------------------------------------------------------
@@ -83,8 +68,8 @@ public enum 五行相生 implements 生剋五行<五行相生> {
     五行相生(final 五行 subjective, final 五行 objective) {
         Objects.requireNonNull(subjective, "subjective is null");
         Objects.requireNonNull(objective, "objective is null");
-        if (subjective == objective) {
-            throw new IllegalArgumentException("subjective(" + subjective + ") == objective(" + objective + ")");
+        if (objective == subjective) {
+            throw new IllegalArgumentException("objective(" + objective + " == " + "subjective(" + subjective + ")");
         }
         this.subjective = subjective;
         this.objective = objective;

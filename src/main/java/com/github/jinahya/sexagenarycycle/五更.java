@@ -19,30 +19,30 @@ import static com.github.jinahya.sexagenarycycle.時刻.localTimeOfTheClock;
 public enum 五更 { // 오경
 
     /**
-     * The 1st time between {@code 19:00} and {@code 21:00}.
+     * 19: The 1st time between {@code 19:00} and {@code 21:00}.
      */
     // https://www.compart.com/en/unicode/U+1F556
     // https://www.compart.com/en/unicode/U+1F558 (Clock Face Nine Oclock)
     初更,
 
     /**
-     * The 2nd time between {@code 21:00} and {@code 23:00}.
+     * 21: The 2nd time between {@code 21:00} and {@code 23:00}.
      */
     // https://www.compart.com/en/unicode/U+1F558
     二更,
 
     /**
-     * The 3rd time between {@code 23:00} and {@code 01:00}.
+     * 23: The 3rd time between {@code 23:00} and {@code 01:00}.
      */
     三更,
 
     /**
-     * The 4th time between {@code 01:00} and {@code 03:00}.
+     * 25: The 4th time between {@code 01:00} and {@code 03:00}.
      */
     四更,
 
     /**
-     * The 5th time between {@code 03:00} and {@code 05:00}.
+     * 27: The 5th time between {@code 03:00} and {@code 05:00}.
      */
     五更;
 

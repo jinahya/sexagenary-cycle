@@ -11,8 +11,7 @@ import java.util.Objects;
  * Represents a 干支 assigned to a specific date.
  *
  * @author Jin Kwon &lt;onacit_at_gmail.com&gt;
- * @see 일진
- * @see <a href="https://ko.wikipedia.org/wiki/%EC%9D%BC%EC%A7%84_(%EA%B0%84%EC%A7%80)">일진 (간지)</a>
+ * @see <a href="https://ko.wikipedia.org/wiki/%EC%9D%BC%EC%A7%84_(%EA%B0%84%EC%A7%80)">일진 (간지) (Wikipedia)</a>
  */
 @SuppressWarnings({"NonAsciiCharacters", "java:S101", "java:S116", "java:S117"})
 public class 日辰 extends Assigned<日辰> {

@@ -7,7 +7,7 @@ import java.util.Map;
 import java.util.Objects;
 
 /**
- * Constants for <a href="https://en.wikipedia.org/wiki/Chinese_zodiac">Chinese zodiac</a>.
+ * Constants for the <a href="https://en.wikipedia.org/wiki/Chinese_zodiac">Chinese zodiac</a>.
  *
  * @author Jin Kwon &lt;onacit_at_gmail.com&gt;
  * @see <a href="https://zh.wikipedia.org/wiki/%E7%94%9F%E8%82%96">生肖 (Wikipedia)</a>
@@ -17,85 +17,64 @@ import java.util.Objects;
 public enum 生肖 {
 
     /**
-     * Rat(&#x1F400;).
+     * 0: Rat(&#x1F400;).
      */
-    // https://www.compart.com/en/unicode/U+1F400
-    // https://www.compart.com/en/unicode/U+1F42D
-    鼠(com.github.jinahya.sexagenarycycle.地支.子),
+    鼠, // 서
 
     /**
-     * Ox(&#x1F402;).
+     * 1: Ox(&#x1F402;).
      */
-    // https://www.compart.com/en/unicode/U+1F402
-    // https://www.compart.com/en/unicode/U+1F42E
-    牛(com.github.jinahya.sexagenarycycle.地支.丑),
+    牛, // 우
 
     /**
-     * Tiger(&#x1F405;).
+     * 2: Tiger(&#x1F405;).
      */
-    // https://www.compart.com/en/unicode/U+1F405
-    // https://www.compart.com/en/unicode/U+1F42F
-    虎(com.github.jinahya.sexagenarycycle.地支.寅),
+    虎, // 호
 
     /**
-     * Rabbit(&#x1F407;).
+     * 3: Rabbit(&#x1F407;).
      */
-    // https://www.compart.com/en/unicode/U+1F407
-    // https://www.compart.com/en/unicode/U+1F430
-    兔(com.github.jinahya.sexagenarycycle.地支.卯),
+    兔, // 토, 兎
 
     /**
-     * Dragon(&#x1F409;).
+     * 4: Dragon(&#x1F409;).
      */
-    // https://www.compart.com/en/unicode/U+1F409
-    // https://www.compart.com/en/unicode/U+1F432
-    龙(com.github.jinahya.sexagenarycycle.地支.辰),
+    龙, // 용, 龍
 
     /**
-     * Snake(&#x1F40D;).
+     * 5: Snake(&#x1F40D;).
      */
-    // https://www.compart.com/en/unicode/U+1F40D
-    蛇(com.github.jinahya.sexagenarycycle.地支.巳),
+    蛇, // 사
 
     /**
-     * Horse(&#x1F40E;).
+     * 6: Horse(&#x1F40E;).
      */
-    // https://www.compart.com/en/unicode/U+1F40E
-    // https://www.compart.com/en/unicode/U+1F434
-    马(com.github.jinahya.sexagenarycycle.地支.午),
+    马, // 마, 馬
 
     /**
-     * Goat(&#x1F410;).
+     * 7: Goat(&#x1F410;).
      */
-    // https://www.compart.com/en/unicode/U+1F410
-    羊(com.github.jinahya.sexagenarycycle.地支.未),
+    羊, // 양
 
     /**
-     * Monkey(&#x1F412;).
+     * 8: Monkey(&#x1F412;).
      */
-    // https://www.compart.com/en/unicode/U+1F412
-    // https://www.compart.com/en/unicode/U+1F435
-    猴(com.github.jinahya.sexagenarycycle.地支.申),
+    猴, // 후
 
     /**
-     * Rooster(&#x1F413;).
+     * 9: Rooster(&#x1F413;).
      */
-    // https://www.compart.com/en/unicode/U+1F413
-    鸡(com.github.jinahya.sexagenarycycle.地支.酉),
+    鸡, // 계, 雞
 
     /**
-     * Dog(&#x1F415;).
+     * A: Dog(&#x1F415;).
      */
-    // https://www.compart.com/en/unicode/U+1F415
-    // https://www.compart.com/en/unicode/U+1F436
-    狗(com.github.jinahya.sexagenarycycle.地支.戌),
+    狗, // 구, 견(犬)
 
     /**
-     * Pig(&#x1F416;).
+     * B: Pig(&#x1F416;).
      */
-    // https://www.compart.com/en/unicode/U+1F416
-    // https://www.compart.com/en/unicode/U+1F437
-    猪(com.github.jinahya.sexagenarycycle.地支.亥);
+    猪; // 저, 豬
 
     // -----------------------------------------------------------------------------------------------------------------
     private static final Map<地支, 生肖> VALUES_BY_地支S = Collections.unmodifiableMap(EnumUtils.mapValuesBy(
@@ -118,8 +97,8 @@ public enum 生肖 {
     }
 
     // -----------------------------------------------------------------------------------------------------------------
-    生肖(final 地支 地支) {
-        this.地支 = Objects.requireNonNull(地支, "地支 is null");
+    生肖() {
+        地支 = com.github.jinahya.sexagenarycycle.地支.values()[ordinal()];
     }
 
     // -----------------------------------------------------------------------------------------------------------------
@@ -127,6 +106,5 @@ public enum 生肖 {
     /**
      * The 地支 associated with this 生肖.
      */
-    @NotNull
-    public final 地支 地支;
+    public final @NotNull 地支 地支;
 }

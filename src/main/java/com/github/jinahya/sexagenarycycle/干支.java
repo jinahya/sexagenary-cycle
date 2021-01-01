@@ -15,8 +15,7 @@ import java.util.stream.Collectors;
  * A class for <a href="https://en.wikipedia.org/wiki/Sexagenary_cycle">Sexagenary cycle</a>.
  *
  * @author Jin Kwon &lt;onacit_at_gmail.com&gt;
- * @see 간지
- * @see <a href="https://zh.wikipedia.org/wiki/%E5%B9%B2%E6%94%AF">干支</a>.
+ * @see <a href="https://zh.wikipedia.org/wiki/%E5%B9%B2%E6%94%AF">干支 (Wikipedia)</a>.
  */
 @SuppressWarnings({"NonAsciiCharacters", "java:S101", "java:S116", "java:S117"})
 public final class 干支 implements Rotating<干支> { // \u5e72\u652f

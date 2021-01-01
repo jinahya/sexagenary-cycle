@@ -11,27 +11,27 @@ package com.github.jinahya.sexagenarycycle;
 public enum 五方 {
 
     /**
-     * East.
+     * 0: East.
      */
-    東,
+    東, // 동녘 동
 
     /**
-     * South.
+     * 1: South.
      */
-    南,
+    南, // 남녘 남
 
     /**
-     * Center.
+     * 3: Center.
      */
-    中,
+    中, // 가운데 중
 
     /**
-     * West.
+     * 4: West.
      */
-    西,
+    西, // 남녘 남
 
     /**
-     * North.
+     * 5: North.
      */
-    北;
+    北; // 북녘 북
 }

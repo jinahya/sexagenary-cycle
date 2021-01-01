@@ -12,128 +12,129 @@ import java.util.Optional;
  * Constants for 24 cardinal directions.
  *
  * @author Jin Kwon &lt;onacit_at_gmail.com&gt;
- * @see <a href="https://en.wikipedia.org/wiki/Earthly_Branches#Directions">Directions (Earthly Branches)</a>
+ * @see <a href="https://en.wikipedia.org/wiki/Earthly_Branches#Directions">Directions (Earthly Branches)
+ * (Wikipedia)</a>
  */
 @SuppressWarnings({"NonAsciiCharacters", "java:S115", "java:S3577"})
 public enum 二十四方 implements RotatingEnum<二十四方> {
 
     /**
-     * Indicates {@code 0°} (north).
+     * 00: Indicates {@code 0°} (north).
      */
     子,
 
     /**
-     * Indicates {@code 15°}.
+     * 01: Indicates {@code 15°}.
      */
     癸,
 
     /**
-     * Indicates {@code 30°}.
+     * 02: Indicates {@code 30°}.
      */
     丑,
 
     /**
-     * Indicates {@code 45°}.
+     * 03: Indicates {@code 45°}.
      */
     艮, // 易經
 
     /**
-     * Indicates {@code 60°}.
+     * 04: Indicates {@code 60°}.
      */
     寅,
 
     /**
-     * Indicates {@code 75°}.
+     * 05: Indicates {@code 75°}.
      */
     甲,
 
     /**
-     * Indicates {@code 90°}.
+     * 06: Indicates {@code 90°}.
      */
     卯,
 
     /**
-     * Indicates {@code 105°}.
+     * 07: Indicates {@code 105°}.
      */
     乙,
 
     /**
-     * Indicates {@code 120°}.
+     * 08: Indicates {@code 120°}.
      */
     辰,
 
     /**
-     * Indicates {@code 135°}.
+     * 09: Indicates {@code 135°}.
      */
     巽, // 易經
 
     /**
-     * Indicates {@code 150°}.
+     * 0A: Indicates {@code 150°}.
      */
     巳,
 
     /**
-     * Indicates {@code 165°}.
+     * 0B: Indicates {@code 165°}.
      */
     丙,
 
     /**
-     * Indicates {@code 180°}.
+     * 0C: Indicates {@code 180°}.
      */
     午,
 
     /**
-     * Indicates {@code 195°}.
+     * 0D: Indicates {@code 195°}.
      */
     丁,
 
     /**
-     * Indicates {@code 210°}.
+     * 0F: Indicates {@code 210°}.
      */
     未,
 
     /**
-     * Indicates {@code 225°}.
+     * 10: Indicates {@code 225°}.
      */
     坤, // 易經
 
     /**
-     * Indicates {@code 240°}.
+     * 11: Indicates {@code 240°}.
      */
     申,
 
     /**
-     * Indicates {@code 255°}.
+     * 12: Indicates {@code 255°}.
      */
     庚,
 
     /**
-     * Indicates {@code 270°}.
+     * 13: Indicates {@code 270°}.
      */
     酉,
 
     /**
-     * Indicates {@code 285°}.
+     * 14: Indicates {@code 285°}.
      */
     辛,
 
     /**
-     * Indicates {@code 300°}.
+     * 15: Indicates {@code 300°}.
      */
     戌,
 
     /**
-     * Indicates {@code 315°} (northwest).
+     * 16: Indicates {@code 315°} (northwest).
      */
     乾, // 易經
 
     /**
-     * Indicates {@code 330°}.
+     * 17: Indicates {@code 330°}.
      */
     亥,
 
     /**
-     * Indicates {@code 345°}.
+     * 18: Indicates {@code 345°}.
      */
     壬;
 

@@ -9,7 +9,7 @@ import java.util.Objects;
 /**
  * Constants for <a href="https://en.wikipedia.org/wiki/Obangsaek">Obangsaek</a>.
  *
- * @see <a href="https://ko.wikipedia.org/wiki/%EC%98%A4%EB%B0%A9%EC%83%89">오방색</a>
+ * @see <a href="https://ko.wikipedia.org/wiki/%EC%98%A4%EB%B0%A9%EC%83%89">오방색 (Wikipedia)</a>
  * @see 五方間色
  */
 @SuppressWarnings({"NonAsciiCharacters", "java:S115", "java:S116", "java:S117"})
@@ -19,31 +19,31 @@ public enum 五方正色 {
      * Blue(<font color="blue">&#x2b24;</font>) for Wood({@link com.github.jinahya.sexagenarycycle.五行#木 木}) and
      * East({@link com.github.jinahya.sexagenarycycle.五方#東 東}).
      */
-    靑(com.github.jinahya.sexagenarycycle.五行.木, com.github.jinahya.sexagenarycycle.五方.東),
+    靑, // 푸를 청
 
     /**
      * Red(<font color="red">&#x2b24;</font>) for Fire({@link com.github.jinahya.sexagenarycycle.五行#火 火}) and
      * South({@link com.github.jinahya.sexagenarycycle.五方#南 南}).
      */
-    赤(com.github.jinahya.sexagenarycycle.五行.火, com.github.jinahya.sexagenarycycle.五方.南),
+    赤, // 붉을 적
 
     /**
      * Yellow(<font color="yellow">&#x2b24;</font>) for Earth({@link com.github.jinahya.sexagenarycycle.五行#土 土}) and
      * Center({@link com.github.jinahya.sexagenarycycle.五方#中 中}).
      */
-    黃(com.github.jinahya.sexagenarycycle.五行.土, com.github.jinahya.sexagenarycycle.五方.中),
+    黃, // 누를 황
 
     /**
      * White(<font color="white">&#x2b24;</font>) for Metal({@link com.github.jinahya.sexagenarycycle.五行#金 金}) and
      * West({@link com.github.jinahya.sexagenarycycle.五方#西 西}).
      */
-    白(com.github.jinahya.sexagenarycycle.五行.金, com.github.jinahya.sexagenarycycle.五方.西),
+    白, // 흰 백
 
     /**
      * Black(<font color="black">&#x2b24;</font>) for Water({@link com.github.jinahya.sexagenarycycle.五行#水 水}) and
      * North({@link com.github.jinahya.sexagenarycycle.五方#北 北}).
      */
-    黑(com.github.jinahya.sexagenarycycle.五行.水, com.github.jinahya.sexagenarycycle.五方.北);
+    黑; // 검을 흑
 
     // -----------------------------------------------------------------------------------------------------------------
     private static final Map<五行, 五方正色> VALUES_BY_五行S = Collections.unmodifiableMap(
@@ -86,9 +86,9 @@ public enum 五方正色 {
     }
 
     // -----------------------------------------------------------------------------------------------------------------
-    五方正色(final 五行 五行, final 五方 五方) {
-        this.五行 = Objects.requireNonNull(五行, "五行 is null");
-        this.五方 = Objects.requireNonNull(五方, "五方 is null");
+    五方正色() {
+        五行 = com.github.jinahya.sexagenarycycle.五行.values()[ordinal()];
+        五方 = com.github.jinahya.sexagenarycycle.五方.values()[ordinal()];
     }
 
     // -----------------------------------------------------------------------------------------------------------------

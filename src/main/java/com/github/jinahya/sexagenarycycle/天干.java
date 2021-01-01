@@ -7,8 +7,7 @@ import java.util.Objects;
  * Constants of <a href="https://en.wikipedia.org/wiki/Heavenly_Stems">the ten Heavenly Stems</a>.
  *
  * @author Jin Kwon &lt;onacit_at_gmail.com&gt;
- * @see 천간
- * @see <a href="https://zh.wikipedia.org/wiki/%E5%A4%A9%E5%B9%B2">天干</a>
+ * @see <a href="https://zh.wikipedia.org/wiki/%E5%A4%A9%E5%B9%B2">天干 (Wikipedia)</a>
  */
 @SuppressWarnings({"NonAsciiCharacters", "java:S100", "java:S115", "java:S116"})
 public enum 天干 implements RotatingEnum<天干> { // \u5929\u5e72
