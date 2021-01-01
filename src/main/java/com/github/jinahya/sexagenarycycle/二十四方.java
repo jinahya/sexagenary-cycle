@@ -37,38 +37,89 @@ public enum 二十四方 implements RollingEnum<二十四方> {
      */
     艮, // 易經
 
+    /**
+     * Indicates {@code 60°}.
+     */
     寅,
 
+    /**
+     * Indicates {@code 75°}.
+     */
     甲,
 
+    /**
+     * Indicates {@code 90°}.
+     */
     卯,
 
+    /**
+     * Indicates {@code 105°}.
+     */
     乙,
 
+    /**
+     * Indicates {@code 120°}.
+     */
     辰,
 
+    /**
+     * Indicates {@code 135°}.
+     */
     巽, // 易經
 
+    /**
+     * Indicates {@code 150°}.
+     */
     巳,
 
+    /**
+     * Indicates {@code 165°}.
+     */
     丙,
 
+    /**
+     * Indicates {@code 180°}.
+     */
     午,
 
+    /**
+     * Indicates {@code 195°}.
+     */
     丁,
 
+    /**
+     * Indicates {@code 210°}.
+     */
     未,
 
+    /**
+     * Indicates {@code 225°}.
+     */
     坤, // 易經
 
+    /**
+     * Indicates {@code 240°}.
+     */
     申,
 
+    /**
+     * Indicates {@code 255°}.
+     */
     庚,
 
+    /**
+     * Indicates {@code 270°}.
+     */
     酉,
 
+    /**
+     * Indicates {@code 285°}.
+     */
     辛,
 
+    /**
+     * Indicates {@code 300°}.
+     */
     戌,
 
     /**

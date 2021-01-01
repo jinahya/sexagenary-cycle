@@ -48,14 +48,14 @@ public enum 五更 { // 오경
      * @return the value includes {@code time}
      * @throws IllegalArgumentException when no value includes {@code time};
      */
-    public static 五更 valueIncludes(final LocalTime time) {
+    public static 五更 valueOf(final LocalTime time) {
         Objects.requireNonNull(time, "time is null");
         for (final 五更 value : values()) {
             if (value.時刻.includes(time)) {
                 return value;
             }
         }
-        throw new IllegalArgumentException("no value includes " + time);
+        throw new IllegalArgumentException("no value for " + time);
     }
 
     // -----------------------------------------------------------------------------------------------------------------

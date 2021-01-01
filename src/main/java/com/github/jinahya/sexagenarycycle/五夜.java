@@ -1,5 +1,6 @@
 package com.github.jinahya.sexagenarycycle;
 
+import javax.validation.constraints.NotNull;
 import java.time.LocalTime;
 import java.util.Collections;
 import java.util.Map;
@@ -9,35 +10,35 @@ import java.util.Objects;
 public enum 五夜 { // 오야
 
     /**
-     * Represents the time between {@code 19:00} and {@code 21:00}.
+     * Represents the 1st time between {@code 19:00} and {@code 21:00}.
      *
      * @see 五更#初更
      */
     初夜,
 
     /**
-     * Represents the time between {@code 21:00} and {@code 23:00}.
+     * Represents the 2nd time between {@code 21:00} and {@code 23:00}.
      *
      * @see 五更#二更
      */
     乙夜,
 
     /**
-     * Represents the time between {@code 23:00} and {@code 01:00}.
+     * Represents the 3rd time between {@code 23:00} and {@code 01:00}.
      *
      * @see 五更#三更
      */
     丙夜,
 
     /**
-     * Represents the time between {@code 01:00} and {@code 03:00}.
+     * Represents the 4th time between {@code 01:00} and {@code 03:00}.
      *
      * @see 五更#四更
      */
     丁夜,
 
     /**
-     * Represents the time between {@code 03:00} and {@code 05:00}.
+     * Represents the 5th time between {@code 03:00} and {@code 05:00}.
      *
      * @see 五更#五更
      */
@@ -71,7 +72,7 @@ public enum 五夜 { // 오야
      * @return the value includes {@code time}.
      * @throws IllegalArgumentException when no value includes {@code time}.
      */
-    public static 五夜 valueIncludes(final LocalTime time) {
+    public static 五夜 valueOf(final LocalTime time) {
         Objects.requireNonNull(time, "time is null");
         for (final 五夜 value : values()) {
             if (value.includes(time)) {
@@ -99,5 +100,5 @@ public enum 五夜 { // 오야
     }
 
     // -----------------------------------------------------------------------------------------------------------------
-    private final 五更 五更;
+    private final @NotNull 五更 五更;
 }

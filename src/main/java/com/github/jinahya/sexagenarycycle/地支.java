@@ -91,8 +91,6 @@ public enum 地支 implements RollingEnum<地支> { // \u5730\u652f
             = "[\u5b50\u4e11\u5bc5\u536f\u8fb0\u5df3\u5348\u672a\u7533\u9149\u620c\u4ea5]";
 
     // -----------------------------------------------------------------------------------------------------------------
-    private static final Map<String, 地支> VALUES_BY_NAMES
-            = Collections.unmodifiableMap(EnumUtils.mapValuesByNames(地支.class));
 
     /**
      * Returns the constant of specified name. This method, unlikely to {@link #valueOf(String)} method, uses a cache.
@@ -102,11 +100,7 @@ public enum 地支 implements RollingEnum<地支> { // \u5730\u652f
      */
     public static 地支 valueOfName(final String name) {
         Objects.requireNonNull(name, "name is null");
-        final 地支 value = VALUES_BY_NAMES.get(name);
-        if (value == null) {
-            throw new IllegalArgumentException("no value for name: " + name);
-        }
-        return value;
+        return EnumUtils.valueOfName(地支.class, name);
     }
 
     // -----------------------------------------------------------------------------------------------------------------
@@ -145,12 +139,19 @@ public enum 地支 implements RollingEnum<地支> { // \u5730\u652f
     }
 
     // -----------------------------------------------------------------------------------------------------------------
+
+    /**
+     * Returns the value contains specified time.
+     *
+     * @param time the time.
+     * @return the value contains specified time.
+     */
     public static @NotNull 地支 valueOf(final @NotNull LocalTime time) {
         Objects.requireNonNull(time, "time is null");
         return Arrays.stream(values())
                 .filter(v -> v.includes(time))
                 .findAny()
-                .orElseThrow(() -> new AssertionError("no value includes " + time));
+                .orElseThrow(() -> new AssertionError("no value for " + time));
     }
 
     // -----------------------------------------------------------------------------------------------------------------
@@ -158,6 +159,12 @@ public enum 地支 implements RollingEnum<地支> { // \u5730\u652f
             EnumUtils.mapValuesBy(地支.class, v -> v.月份, () -> new EnumMap<>(Month.class))
     );
 
+    /**
+     * Returns the value associated with specified month.
+     *
+     * @param month the month.
+     * @return the value associated with {@code month};
+     */
     public static @NotNull 地支 valueOf(final @NotNull Month month) {
         Objects.requireNonNull(month, "month is null");
         final 地支 value = VALUES_BY_MONTHS.get(month);
@@ -213,30 +220,25 @@ public enum 地支 implements RollingEnum<地支> { // \u5730\u652f
     /**
      * The 二十四方 associated with this 地支.
      */
-    @NotNull
-    public final 二十四方 二十四方;
+    public final @NotNull 二十四方 二十四方;
 
     /**
      * The 五行 associated with this 地支.
      */
-    @NotNull
-    public final 五行 五行;
+    public final @NotNull 五行 五行;
 
     /**
      * The 時刻 associated with this 地支.
      */
-    @NotNull
-    final 時刻 時刻;
+    final @NotNull 時刻 時刻;
 
     /**
      * The Month associated with this 地支.
      */
-    @NotNull
-    public final Month 月份;
+    public final @NotNull Month 月份;
 
     /**
      * The 陰陽 associated with this 地支.
      */
-    @NotNull
-    public final 陰陽 陰陽;
+    public final @NotNull 陰陽 陰陽;
 }

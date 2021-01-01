@@ -39,7 +39,7 @@ public class 月建 extends Assigned<月建> { // 월건
     // -------------------------------------------------------------------------------------------------------------
 
     /**
-     * Creates a new instance with specified 干支, 歲次, and month.
+     * Creates a new instance with specified 干支, month, and 歲次.
      *
      * @param 干支 the 干支; {@code null} for a leap month.
      * @param 月  the month.
@@ -70,15 +70,15 @@ public class 月建 extends Assigned<月建> { // 월건
     /**
      * Indicates whether some other object is "equal to" this one.
      *
-     * @param o the reference object with which to compare.
+     * @param obj the reference object with which to compare.
      * @return {@code true} if this object is the same as the obj argument; {@code false} otherwise.
      */
     @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        if (!super.equals(o)) return false;
-        final 月建 casted = (月建) o;
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (obj == null || getClass() != obj.getClass()) return false;
+        if (!super.equals(obj)) return false;
+        final 月建 casted = (月建) obj;
         return 歲次.equals(casted.歲次) && 月 == casted.月;
     }
 
@@ -114,13 +114,10 @@ public class 月建 extends Assigned<月建> { // 월건
     /**
      * The 月 of this 月建.
      */
-    @NotNull
-    public final Month 月;
+    public final @NotNull Month 月;
 
     /**
-     * ` The 歲次 of this 月建.
+     * The 歲次 of this 月建.
      */
-    @Valid
-    @NotNull
-    public final 歲次 歲次;
+    public final @Valid @NotNull 歲次 歲次;
 }

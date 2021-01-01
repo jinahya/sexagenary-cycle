@@ -7,8 +7,6 @@ import java.time.LocalTime;
 import java.time.temporal.ChronoUnit;
 import java.util.Objects;
 
-import static java.util.Objects.requireNonNull;
-
 /**
  * Represents a time between two specific local times in a day.
  *
@@ -33,8 +31,8 @@ public final class 時刻 { // 시각
      */
     public 時刻(final LocalTime base, final Duration duration) {
         super();
-        this.base = requireNonNull(base, "time is null");
-        if (requireNonNull(duration, "duration is null").compareTo(Duration.ofHours(24L)) > 0) {
+        this.base = Objects.requireNonNull(base, "time is null");
+        if (Objects.requireNonNull(duration, "duration is null").compareTo(Duration.ofHours(24L)) > 0) {
             throw new IllegalArgumentException("duration(" + duration + ") > PH24H");
         }
         nanos = nanos(this.base, false) + duration.toNanos();
@@ -46,7 +44,7 @@ public final class 時刻 { // 시각
      * @param 時刻 the instance to copy.
      */
     public 時刻(final 時刻 時刻) {
-        this(requireNonNull(時刻, "時刻 is null").base, 時刻.duration());
+        this(Objects.requireNonNull(時刻, "時刻 is null").base, 時刻.duration());
     }
 
     // -----------------------------------------------------------------------------------------------------------------
@@ -74,12 +72,8 @@ public final class 時刻 { // 시각
      */
     @Override
     public boolean equals(final Object obj) {
-        if (this == obj) {
-            return true;
-        }
-        if (obj == null || getClass() != obj.getClass()) {
-            return false;
-        }
+        if (this == obj) return true;
+        if (obj == null || getClass() != obj.getClass()) return false;
         final 時刻 casted = (時刻) obj;
         return nanos == casted.nanos && base.equals(casted.base);
     }
@@ -103,7 +97,7 @@ public final class 時刻 { // 시각
      * @return {@code true} if this time includes {@code time}; {@code false} otherwise.
      */
     public boolean includes(final LocalTime time) {
-        requireNonNull(time, "time is null");
+        Objects.requireNonNull(time, "time is null");
         return nanos(time, time.isBefore(base)) < nanos;
     }
 
@@ -113,9 +107,7 @@ public final class 時刻 { // 시각
     }
 
     // -----------------------------------------------------------------------------------------------------------------
-    @NotNull
-    final LocalTime base;
+    final @NotNull LocalTime base;
 
-    @PositiveOrZero
-    private final long nanos;
+    private final @PositiveOrZero long nanos;
 }

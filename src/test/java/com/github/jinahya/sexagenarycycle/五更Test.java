@@ -22,7 +22,7 @@ class 五更Test {
                 .mapToObj(h -> LocalTime.of(h, 0))
                 .flatMap(TimeTestUtils::mapMinutes)
                 .forEach(t -> {
-                    assertThatThrownBy(() -> 五更.valueIncludes(t)).isInstanceOf(IllegalArgumentException.class);
+                    assertThatThrownBy(() -> 五更.valueOf(t)).isInstanceOf(IllegalArgumentException.class);
                 })
         ;
     }
@@ -34,7 +34,7 @@ class 五更Test {
         LongStream.range(0L, 10L)
                 .mapToObj(h -> LocalTime.of(19, 0).plusHours(h))
                 .flatMap(TimeTestUtils::mapMinutes)
-                .map(五更::valueIncludes)
+                .map(五更::valueOf)
                 .forEach(v -> {
                     assertThat(v).isNotNull();
                 })

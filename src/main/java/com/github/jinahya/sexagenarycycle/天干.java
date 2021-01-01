@@ -1,8 +1,6 @@
 package com.github.jinahya.sexagenarycycle;
 
 import javax.validation.constraints.NotNull;
-import java.util.Collections;
-import java.util.Map;
 import java.util.Objects;
 
 /**
@@ -73,8 +71,6 @@ public enum 天干 implements RollingEnum<天干> { // \u5929\u5e72
     public static final String REGEXP_NAME = "[\u7532\u4e59\u4e19\u4e01\u620a\u5df1\u5e9a\u8f9b\u58ec\u7678]";
 
     // -----------------------------------------------------------------------------------------------------------------
-    private static final Map<String, 天干> VALUES_BY_NAMES
-            = Collections.unmodifiableMap(EnumUtils.mapValuesByNames(天干.class));
 
     /**
      * Returns the constant of specified name. This method, unlikely to {@link #valueOf(String)} method, uses a cache.
@@ -84,11 +80,7 @@ public enum 天干 implements RollingEnum<天干> { // \u5929\u5e72
      */
     public static 天干 valueOfName(final String name) {
         Objects.requireNonNull(name, "name is null");
-        final 天干 value = VALUES_BY_NAMES.get(name);
-        if (value == null) {
-            throw new IllegalArgumentException("no value for name: " + name);
-        }
-        return value;
+        return EnumUtils.valueOfName(天干.class, name);
     }
 
     // -----------------------------------------------------------------------------------------------------------------

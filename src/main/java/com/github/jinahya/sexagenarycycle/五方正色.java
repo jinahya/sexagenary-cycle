@@ -2,6 +2,7 @@ package com.github.jinahya.sexagenarycycle;
 
 import javax.validation.constraints.NotNull;
 import java.util.Collections;
+import java.util.EnumMap;
 import java.util.Map;
 import java.util.Objects;
 
@@ -44,8 +45,9 @@ public enum 五方正色 {
     黑(com.github.jinahya.sexagenarycycle.五行.水, com.github.jinahya.sexagenarycycle.五方.北);
 
     // -----------------------------------------------------------------------------------------------------------------
-    private static final Map<五行, 五方正色> VALUES_BY_五行S
-            = Collections.unmodifiableMap(EnumUtils.mapValuesBy(五方正色.class, v -> v.五行));
+    private static final Map<五行, 五方正色> VALUES_BY_五行S = Collections.unmodifiableMap(
+            EnumUtils.mapValuesBy(五方正色.class, v -> v.五行, () -> new EnumMap<>(五行.class))
+    );
 
     /**
      * Returns the value associated with specified 五行.
@@ -63,8 +65,9 @@ public enum 五方正色 {
     }
 
     // -----------------------------------------------------------------------------------------------------------------
-    private static final Map<五方, 五方正色> VALUES_BY_五方S
-            = Collections.unmodifiableMap(EnumUtils.mapValuesBy(五方正色.class, v -> v.五方));
+    private static final Map<五方, 五方正色> VALUES_BY_五方S = Collections.unmodifiableMap(
+            EnumUtils.mapValuesBy(五方正色.class, v -> v.五方, () -> new EnumMap<>(五方.class))
+    );
 
     /**
      * Returns the value associated with specified 五方.

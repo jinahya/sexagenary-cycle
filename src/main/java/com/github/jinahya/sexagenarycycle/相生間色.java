@@ -8,19 +8,19 @@ import java.util.Objects;
 @SuppressWarnings({"NonAsciiCharacters", "java:S115", "java:S116", "java:S117"})
 enum 相生間色 implements 五方間色 {
 
-    // 정
+    // 정, 짙은 보라.
     靘(com.github.jinahya.sexagenarycycle.五行相生.木生火),
 
-    // 훈
+    // 훈, 주황.
     纁(com.github.jinahya.sexagenarycycle.五行相生.火生土),
 
-    // 규
+    // 규, 연두록.
     硅(com.github.jinahya.sexagenarycycle.五行相生.土生金),
 
-    // 불
+    // 불, 잿빛.
     黻(com.github.jinahya.sexagenarycycle.五行相生.金生水),
 
-    // 암
+    // 암, 천정색.
     黯(com.github.jinahya.sexagenarycycle.五行相生.水生木);
 
     // -----------------------------------------------------------------------------------------------------------------
