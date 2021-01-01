@@ -81,7 +81,7 @@ final class TimeTestUtils {
     }
 
     // -----------------------------------------------------------------------------------------------------------------
-    static LocalTime randomTime() {
+    static LocalTime randomLocalTime() {
         return LocalTime.of(randomHourOfDay(), randomMinuteOfHour(), randomSecondOfMinute(), randomNanoOfSecond());
     }
 

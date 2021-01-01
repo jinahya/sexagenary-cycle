@@ -13,14 +13,34 @@ import java.util.Objects;
 @SuppressWarnings({"NonAsciiCharacters", "java:S115"})
 public enum 五行相剋 implements 生剋五行<五行相剋> {
 
+    /**
+     * The 1st.
+     * <blockquote>Wood parts (or stabilizes) Earth (roots of trees can prevent soil erosion)</blockquote>
+     */
     木剋土(五行.木, 五行.土),
 
+    /**
+     * The 2nd.
+     * <blockquote>Earth contains (or directs) Water (dams or river banks)</blockquote>
+     */
     土剋水(五行.土, 五行.水),
 
+    /**
+     * The 3rd.
+     * <blockquote>Water dampens (or regulates) Fire</blockquote>
+     */
     水剋火(五行.水, 五行.火),
 
+    /**
+     * The 4th.
+     * <blockquote>ire melts (or refines or shapes) Metal</blockquote>
+     */
     火剋金(五行.火, 五行.金),
 
+    /**
+     * The 5th.
+     * <blockquote>Metal chops (or carves) Wood</blockquote>
+     */
     金剋木(五行.金, 五行.木);
 
     // -----------------------------------------------------------------------------------------------------------------
@@ -34,17 +54,10 @@ public enum 五行相剋 implements 生剋五行<五行相剋> {
      * @return the value associated with {@code subjective}.
      */
     public static 五行相剋 valueOfSubjective(final 五行 subjective) {
-        Objects.requireNonNull(subjective, "subjective is null");
-        final 五行相剋 value = VALUES_BY_SUBJECTIVES.get(subjective);
-        if (value == null) {
-            throw new AssertionError("no value for subjective: " + subjective);
-        }
-        return value;
+        return 生剋五行Helper.valueOfSubjective(五行相剋.class, subjective);
     }
 
     // -----------------------------------------------------------------------------------------------------------------
-    private static final Map<五行, 五行相剋> VALUES_BY_OBJECTIVES
-            = Collections.unmodifiableMap(EnumUtils.mapValuesBy(五行相剋.class, v -> v.objective));
 
     /**
      * Returns the value associated with specified objective.
@@ -53,12 +66,7 @@ public enum 五行相剋 implements 生剋五行<五行相剋> {
      * @return the value associated with {@code objective}.
      */
     public static 五行相剋 valueOfObjective(final 五行 objective) {
-        Objects.requireNonNull(objective, "objective is null");
-        final 五行相剋 value = VALUES_BY_OBJECTIVES.get(objective);
-        if (value == null) {
-            throw new AssertionError("no value for objective: " + objective);
-        }
-        return value;
+        return 生剋五行Helper.valueOfObjective(五行相剋.class, objective);
     }
 
     // -----------------------------------------------------------------------------------------------------------------
@@ -73,14 +81,25 @@ public enum 五行相剋 implements 生剋五行<五行相剋> {
     }
 
     // -----------------------------------------------------------------------------------------------------------------
+    @Override
+    public @NotNull 五行 getSubjective() {
+        return subjective;
+    }
+
+    @Override
+    public @NotNull 五行 getObjective() {
+        return objective;
+    }
+
+    // -----------------------------------------------------------------------------------------------------------------
 
     /**
      * The subjective phase of this inter-promoting.
      */
-    public final @NotNull 五行 subjective;
+    private final @NotNull 五行 subjective;
 
     /**
      * The objective phase of this inter-promoting.
      */
-    public final @NotNull 五行 objective;
+    private final @NotNull 五行 objective;
 }

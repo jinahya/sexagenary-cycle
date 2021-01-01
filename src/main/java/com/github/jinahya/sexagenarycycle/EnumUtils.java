@@ -12,7 +12,7 @@ import java.util.stream.Collectors;
 @SuppressWarnings({"java:S1192"})
 final class EnumUtils {
 
-    static <K, E extends Enum<E>> Map<K, E> mapValuesBy(final Class<E> enumClass,
+    static <E extends Enum<E>, K> Map<K, E> mapValuesBy(final Class<E> enumClass,
                                                         final Function<? super E, ? extends K> keyMapper,
                                                         final Supplier<? extends Map<K, E>> mapFactory) {
         Objects.requireNonNull(enumClass, "enumClass is null");
@@ -27,7 +27,7 @@ final class EnumUtils {
                 mapFactory));
     }
 
-    static <K, E extends Enum<E>> Map<K, E> mapValuesBy(final Class<E> enumClass,
+    static <E extends Enum<E>, K> Map<K, E> mapValuesBy(final Class<E> enumClass,
                                                         final Function<? super E, ? extends K> keyMapper) {
         return mapValuesBy(enumClass, keyMapper, HashMap::new);
     }

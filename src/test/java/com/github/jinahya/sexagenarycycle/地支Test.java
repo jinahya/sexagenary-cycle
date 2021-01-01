@@ -221,6 +221,6 @@ class 地支Test implements RollingEnumTest<地支> {
     // -----------------------------------------------------------------------------------------------------------------
     @RepeatedTest(128)
     void includes_NonNull_ForAnyTime() {
-        assertThat(地支.valueOf(TimeTestUtils.randomTime())).isNotNull();
+        assertThat(地支.valueOf(TimeTestUtils.randomLocalTime())).isNotNull();
     }
 }

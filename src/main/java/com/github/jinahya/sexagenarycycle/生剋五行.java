@@ -1,5 +1,7 @@
 package com.github.jinahya.sexagenarycycle;
 
+import javax.validation.constraints.NotNull;
+
 /**
  * An interface for defining relationships between {@link 五行}s.
  *
@@ -11,4 +13,17 @@ package com.github.jinahya.sexagenarycycle;
 @SuppressWarnings({"NonAsciiCharacters", "java:S114"})
 interface 生剋五行<E extends Enum<E> & 生剋五行<E>> extends RotatingEnum<E> {
 
+    /**
+     * Returns the subjective phase of this value.
+     *
+     * @return the subjective phase of this value.
+     */
+    @NotNull 五行 getSubjective();
+
+    /**
+     * Returns the objective phase of this value.
+     *
+     * @return the objective phase of this value.
+     */
+    @NotNull 五行 getObjective();
 }

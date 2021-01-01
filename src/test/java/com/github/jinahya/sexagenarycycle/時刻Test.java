@@ -9,6 +9,7 @@ import java.time.LocalTime;
 import java.time.temporal.ChronoUnit;
 import java.util.stream.IntStream;
 
+import static com.github.jinahya.sexagenarycycle.TimeTestUtils.randomLocalTime;
 import static java.util.concurrent.ThreadLocalRandom.current;
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -16,7 +17,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 class 時刻Test {
 
     static 時刻 randomInstance() {
-        return new 時刻(TimeTestUtils.randomTime(), Duration.ofMinutes(current().nextInt(0, 1200)));
+        return new 時刻(randomLocalTime(), Duration.ofMinutes(current().nextInt(0, 1200)));
     }
 
     @Test
@@ -61,6 +62,14 @@ class 時刻Test {
         });
         assertThat(v.includes(LocalTime.of(20, 59, 59, 999999999))).isTrue();
         assertThat(v.includes(LocalTime.of(21, 0))).isFalse();
+    }
+
+    // -----------------------------------------------------------------------------------------------------------------
+    @Test
+    void 時刻_IllegalArgumentException_DurationIsGreaterThanPT24H() {
+        final LocalTime base = randomLocalTime();
+        final Duration duration = Duration.ofHours(24L).plusNanos(1L);
+        Assertions.assertThrows(IllegalArgumentException.class, () -> new 時刻(base, duration));
     }
 
     // -------------------------------------------------------------------------------------------------------- tostring

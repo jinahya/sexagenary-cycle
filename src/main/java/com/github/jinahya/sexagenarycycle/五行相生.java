@@ -14,14 +14,34 @@ import java.util.Objects;
 @SuppressWarnings({"NonAsciiCharacters", "java:S115"})
 public enum 五行相生 implements 生剋五行<五行相生> {
 
+    /**
+     * The 1st.
+     * <blockquote>Wood feeds Fire</blockquote>
+     */
     木生火(五行.木, 五行.火),
 
+    /**
+     * The 2nd.
+     * <blockquote>Fire produces Earth (ash, lava)</blockquote>
+     */
     火生土(五行.火, 五行.土),
 
+    /**
+     * The 3rd.
+     * <blockquote>Earth bears Metal (geological processes produce minerals)</blockquote>
+     */
     土生金(五行.土, 五行.金),
 
+    /**
+     * The 4th.
+     * <blockquote>Metal collects Water (water vapor condenses on metal)</blockquote>
+     */
     金生水(五行.金, 五行.水),
 
+    /**
+     * The 5th.
+     * <blockquote>Water nourishes Wood</blockquote>
+     */
     水生木(五行.水, 五行.木);
 
     // -----------------------------------------------------------------------------------------------------------------
@@ -77,13 +97,25 @@ public enum 五行相生 implements 生剋五行<五行相生> {
 
     // -----------------------------------------------------------------------------------------------------------------
 
+    @Override
+    public @NotNull 五行 getSubjective() {
+        return subjective;
+    }
+
+    @Override
+    public @NotNull 五行 getObjective() {
+        return objective;
+    }
+
+    // -----------------------------------------------------------------------------------------------------------------
+
     /**
      * The subjective phase of this inter-promoting.
      */
-    public final @NotNull 五行 subjective;
+    private final @NotNull 五行 subjective;
 
     /**
      * The objective phase of this inter-promoting.
      */
-    public final @NotNull 五行 objective;
+    private final @NotNull 五行 objective;
 }

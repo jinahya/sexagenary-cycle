@@ -17,35 +17,35 @@ import java.util.Objects;
 public enum 五夜 { // 오야
 
     /**
-     * The 1st time between {@code 19:00} and {@code 21:00}.
+     * 19: The 1st time between {@code 19:00} and {@code 21:00}.
      *
      * @see 五更#初更
      */
     初夜,
 
     /**
-     * The 2nd time between {@code 21:00} and {@code 23:00}.
+     * 21: The 2nd time between {@code 21:00} and {@code 23:00}.
      *
      * @see 五更#二更
      */
     乙夜,
 
     /**
-     * The 3rd time between {@code 23:00} and {@code 01:00}.
+     * 23: The 3rd time between {@code 23:00} and {@code 01:00}.
      *
      * @see 五更#三更
      */
     丙夜,
 
     /**
-     * The 4th time between {@code 01:00} and {@code 03:00}.
+     * 25: The 4th time between {@code 01:00} and {@code 03:00}.
      *
      * @see 五更#四更
      */
     丁夜,
 
     /**
-     * The 5th time between {@code 03:00} and {@code 05:00}.
+     * 27: The 5th time between {@code 03:00} and {@code 05:00}.
      *
      * @see 五更#五更
      */
