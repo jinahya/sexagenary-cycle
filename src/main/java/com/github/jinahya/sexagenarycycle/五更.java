@@ -1,10 +1,17 @@
 package com.github.jinahya.sexagenarycycle;
 
 import javax.validation.constraints.NotNull;
-import java.time.Duration;
 import java.time.LocalTime;
 import java.util.Objects;
 
+import static com.github.jinahya.sexagenarycycle.時刻.durationOfTwoHours;
+import static com.github.jinahya.sexagenarycycle.時刻.localTimeOfTheClock;
+
+/**
+ * Constants for five times in a night.
+ *
+ * @author Jin Kwon &lt;onacit_at_gmail.com&gt;
+ */
 // https://www.compart.com/en/unicode/block/U+1F300
 // https://www.compart.com/en/unicode/U+33C2 (Square Am)
 // https://www.compart.com/en/unicode/U+33D8 (Square Pm)
@@ -12,30 +19,30 @@ import java.util.Objects;
 public enum 五更 { // 오경
 
     /**
-     * Represents the time between {@code 19:00} and {@code 21:00}.
+     * The 1st time between {@code 19:00} and {@code 21:00}.
      */
     // https://www.compart.com/en/unicode/U+1F556
     // https://www.compart.com/en/unicode/U+1F558 (Clock Face Nine Oclock)
     初更,
 
     /**
-     * Represents the time between {@code 21:00} and {@code 23:00}.
+     * The 2nd time between {@code 21:00} and {@code 23:00}.
      */
     // https://www.compart.com/en/unicode/U+1F558
     二更,
 
     /**
-     * Represents the time between {@code 23:00} and {@code 01:00}.
+     * The 3rd time between {@code 23:00} and {@code 01:00}.
      */
     三更,
 
     /**
-     * Represents the time between {@code 01:00} and {@code 03:00}.
+     * The 4th time between {@code 01:00} and {@code 03:00}.
      */
     四更,
 
     /**
-     * Represents the time between {@code 03:00} and {@code 05:00}.
+     * The 5th time between {@code 03:00} and {@code 05:00}.
      */
     五更;
 
@@ -60,7 +67,7 @@ public enum 五更 { // 오경
 
     // -----------------------------------------------------------------------------------------------------------------
     五更() {
-        時刻 = new 時刻(LocalTime.of(19, 0).plus(Duration.ofHours((long) ordinal() << 1L)), Duration.ofHours(2L));
+        時刻 = new 時刻(localTimeOfTheClock(19, (long) ordinal() << 1L), durationOfTwoHours());
     }
 
     // -----------------------------------------------------------------------------------------------------------------

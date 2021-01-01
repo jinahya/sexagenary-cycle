@@ -3,42 +3,49 @@ package com.github.jinahya.sexagenarycycle;
 import javax.validation.constraints.NotNull;
 import java.time.LocalTime;
 import java.util.Collections;
+import java.util.EnumMap;
 import java.util.Map;
 import java.util.Objects;
 
+/**
+ * Constants for five times in a night.
+ *
+ * @author Jin Kwon &lt;onacit_at_gmail.com&gt;
+ * @see 五更
+ */
 @SuppressWarnings({"NonAsciiCharacters", "java:S115", "java:S116", "java:S117"})
 public enum 五夜 { // 오야
 
     /**
-     * Represents the 1st time between {@code 19:00} and {@code 21:00}.
+     * The 1st time between {@code 19:00} and {@code 21:00}.
      *
      * @see 五更#初更
      */
     初夜,
 
     /**
-     * Represents the 2nd time between {@code 21:00} and {@code 23:00}.
+     * The 2nd time between {@code 21:00} and {@code 23:00}.
      *
      * @see 五更#二更
      */
     乙夜,
 
     /**
-     * Represents the 3rd time between {@code 23:00} and {@code 01:00}.
+     * The 3rd time between {@code 23:00} and {@code 01:00}.
      *
      * @see 五更#三更
      */
     丙夜,
 
     /**
-     * Represents the 4th time between {@code 01:00} and {@code 03:00}.
+     * The 4th time between {@code 01:00} and {@code 03:00}.
      *
      * @see 五更#四更
      */
     丁夜,
 
     /**
-     * Represents the 5th time between {@code 03:00} and {@code 05:00}.
+     * The 5th time between {@code 03:00} and {@code 05:00}.
      *
      * @see 五更#五更
      */
@@ -46,7 +53,7 @@ public enum 五夜 { // 오야
 
     // -----------------------------------------------------------------------------------------------------------------
     static final Map<五更, 五夜> VALUES_BY_五更S
-            = Collections.unmodifiableMap(EnumUtils.mapValuesBy(五夜.class, v -> v.五更));
+            = Collections.unmodifiableMap(EnumUtils.mapValuesBy(五夜.class, v -> v.五更, () -> new EnumMap<>(五更.class)));
 
     /**
      * Returns the value associated with specified 五更.

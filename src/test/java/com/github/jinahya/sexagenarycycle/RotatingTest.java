@@ -4,7 +4,7 @@ import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-interface RollingTest<T extends Rolling<T>> {
+interface RotatingTest<T extends Rotating<T>> {
 
     T[] values();
 

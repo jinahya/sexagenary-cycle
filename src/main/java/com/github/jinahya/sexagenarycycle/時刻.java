@@ -15,6 +15,18 @@ import java.util.Objects;
 @SuppressWarnings({"NonAsciiCharacters", "java:S101", "java:S117"})
 public final class 時刻 { // 시각
 
+    static Duration durationOfTwoHours() {
+        return Duration.ofHours(2L);
+    }
+
+    static LocalTime localTimeOfTheClock(final int hour) {
+        return LocalTime.of(hour, 0);
+    }
+
+    static LocalTime localTimeOfTheClock(final int hour, final long hoursToAdd) {
+        return localTimeOfTheClock(hour).plusHours(hoursToAdd);
+    }
+
     // -----------------------------------------------------------------------------------------------------------------
     private static long nanos(final LocalTime time, final boolean leap) {
         return ChronoUnit.NANOS.between(LocalTime.MIDNIGHT, time) + (leap ? Duration.ofHours(24L).toNanos() : 0L);

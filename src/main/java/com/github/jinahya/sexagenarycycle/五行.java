@@ -13,7 +13,7 @@ package com.github.jinahya.sexagenarycycle;
 // https://www.compart.com/en/unicode/block/U+1F700 (Alchemical Symbols)
 // https://www.compart.com/en/unicode/block/U+3200 (Enclosed CJK Letters and Months)
 @SuppressWarnings({"NonAsciiCharacters", "java:S115"})
-public enum 五行 implements RollingEnum<五行> {
+public enum 五行 implements RotatingEnum<五行> {
 
     /**
      * Constant for Wood.

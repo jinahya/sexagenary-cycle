@@ -1,6 +1,6 @@
 package com.github.jinahya.sexagenarycycle;
 
-interface RollingEnumTest<E extends Enum<E> & RollingEnum<E>> {
+interface RollingEnumTest<E extends Enum<E> & RotatingEnum<E>> {
 
     @SuppressWarnings({"unchecked"})
     default E[] values() {

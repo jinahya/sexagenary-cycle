@@ -14,8 +14,8 @@ final class RollingHelper {
             = Collections.synchronizedMap(new WeakHashMap<>());
 
     @SuppressWarnings({"unchecked", "java:S1192"})
-    static <T extends Rolling<T>> T getPrevious(final Class<? super T> clazz, final T current,
-                                                final Function<? super T, ? extends T> computer) {
+    static <T extends Rotating<T>> T getPrevious(final Class<? super T> clazz, final T current,
+                                                 final Function<? super T, ? extends T> computer) {
         Objects.requireNonNull(clazz, "clazz is null");
         Objects.requireNonNull(current, "current is null");
         Objects.requireNonNull(computer, "computer is null");
@@ -24,7 +24,7 @@ final class RollingHelper {
     }
 
     @SuppressWarnings({"unchecked"})
-    static <T extends Rolling<T>> T getPrevious(final T current, final Function<? super T, ? extends T> computer) {
+    static <T extends Rotating<T>> T getPrevious(final T current, final Function<? super T, ? extends T> computer) {
         Objects.requireNonNull(current, "current is null");
         return getPrevious((Class<T>) current.getClass(), current, computer);
     }
@@ -34,8 +34,8 @@ final class RollingHelper {
             = Collections.synchronizedMap(new ConcurrentHashMap<>());
 
     @SuppressWarnings({"unchecked"})
-    static <T extends Rolling<T>> T getNext(final Class<? super T> clazz, final T current,
-                                            final Function<? super T, ? extends T> computer) {
+    static <T extends Rotating<T>> T getNext(final Class<? super T> clazz, final T current,
+                                             final Function<? super T, ? extends T> computer) {
         Objects.requireNonNull(clazz, "clazz is null");
         Objects.requireNonNull(current, "current is null");
         Objects.requireNonNull(computer, "computer is null");
@@ -45,8 +45,8 @@ final class RollingHelper {
     }
 
     @SuppressWarnings({"unchecked"})
-    static <T extends Rolling<T>> T getNext(final T current,
-                                            final Function<? super T, ? extends T> computer) {
+    static <T extends Rotating<T>> T getNext(final T current,
+                                             final Function<? super T, ? extends T> computer) {
         Objects.requireNonNull(current, "current is null");
         return getNext((Class<T>) current.getClass(), current, computer);
     }

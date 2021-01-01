@@ -1,27 +1,22 @@
 package com.github.jinahya.sexagenarycycle;
 
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.EnumSource;
 
-import static java.util.Arrays.stream;
-import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
+import static org.assertj.core.api.Assertions.assertThat;
 
-@SuppressWarnings({"NonAsciiCharacters", "java:s3577"})
-class 相生間色Test extends 五方間色Test<相生間色> {
+@SuppressWarnings({"NonAsciiCharacters", "java:S3577"})
+class 相生間色Test extends 五方間色Test<相生間色, 五行相生> {
 
     相生間色Test() {
-        super(相生間色.class);
-    }
-
-    @EnumSource(五行相生.class)
-    @ParameterizedTest
-    void valueOf_NonNull_ForEach五行相生(final 五行相生 五行相生) {
-        assertThat(相生間色.valueOf(五行相生)).isNotNull();
+        super(相生間色.class, 五行相生.class);
     }
 
     @Test
-    void valueOf_AllValues_ForAll五行相生() {
-        assertThat(stream(五行相生.values()).map(相生間色::valueOf).toArray(相生間色[]::new)).isEqualTo(相生間色.values());
+    void get五方正色Set_Expected_ForEachValue() {
+        assertThat(相生間色.靘.get五方正色Set()).containsExactly(五方正色.靑, 五方正色.赤);
+        assertThat(相生間色.纁.get五方正色Set()).containsExactly(五方正色.赤, 五方正色.黃);
+        assertThat(相生間色.硅.get五方正色Set()).containsExactly(五方正色.黃, 五方正色.白);
+        assertThat(相生間色.黻.get五方正色Set()).containsExactly(五方正色.白, 五方正色.黑);
+        assertThat(相生間色.黯.get五方正色Set()).containsExactly(五方正色.黑, 五方正色.靑);
     }
 }

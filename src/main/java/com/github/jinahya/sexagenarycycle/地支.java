@@ -20,7 +20,7 @@ import java.util.stream.Collectors;
  * @see <a href="https://zh.wikipedia.org/wiki/%E5%9C%B0%E6%94%AF">地支</a>
  */
 @SuppressWarnings({"NonAsciiCharacters", "java:S100", "java:S115", "java:S116", "java:S117"})
-public enum 地支 implements RollingEnum<地支> { // \u5730\u652f
+public enum 地支 implements RotatingEnum<地支> { // \u5730\u652f
 
     /**
      * The 1st.

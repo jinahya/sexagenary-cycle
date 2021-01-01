@@ -15,7 +15,7 @@ import java.util.Optional;
  * @see <a href="https://en.wikipedia.org/wiki/Earthly_Branches#Directions">Directions (Earthly Branches)</a>
  */
 @SuppressWarnings({"NonAsciiCharacters", "java:S115", "java:S3577"})
-public enum 二十四方 implements RollingEnum<二十四方> {
+public enum 二十四方 implements RotatingEnum<二十四方> {
 
     /**
      * Indicates {@code 0°} (north).

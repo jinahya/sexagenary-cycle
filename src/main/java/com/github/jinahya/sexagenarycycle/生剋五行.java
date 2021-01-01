@@ -9,6 +9,6 @@ package com.github.jinahya.sexagenarycycle;
  * (Wikipedia)</a>
  */
 @SuppressWarnings({"NonAsciiCharacters", "java:S114"})
-interface 生剋五行<E extends Enum<E> & 生剋五行<E>> extends RollingEnum<E> {
+interface 生剋五行<E extends Enum<E> & 生剋五行<E>> extends RotatingEnum<E> {
 
 }

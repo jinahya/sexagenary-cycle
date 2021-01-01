@@ -2,7 +2,7 @@ package com.github.jinahya.sexagenarycycle;
 
 import javax.validation.constraints.NotNull;
 
-interface Rolling<T extends Rolling<T>> {
+interface Rotating<T extends Rotating<T>> {
 
     /**
      * Returns the previous value of this value.

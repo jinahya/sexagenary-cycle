@@ -4,9 +4,9 @@ import javax.validation.constraints.NotNull;
 import java.util.Objects;
 import java.util.function.UnaryOperator;
 
-interface RollingEnum<E extends Enum<E> & RollingEnum<E>> extends Rolling<E> {
+interface RotatingEnum<E extends Enum<E> & RotatingEnum<E>> extends Rotating<E> {
 
-    static <E extends Enum<E> & RollingEnum<E>> UnaryOperator<E> previousMapper(final Class<E> enumClass) {
+    static <E extends Enum<E> & RotatingEnum<E>> UnaryOperator<E> previousMapper(final Class<E> enumClass) {
         Objects.requireNonNull(enumClass, "enumClass is null");
         return c -> {
             Objects.requireNonNull(c, "enumConstant is null");
@@ -19,7 +19,7 @@ interface RollingEnum<E extends Enum<E> & RollingEnum<E>> extends Rolling<E> {
         };
     }
 
-    static <E extends Enum<E> & RollingEnum<E>> UnaryOperator<E> nextMapper(final Class<E> enumClass) {
+    static <E extends Enum<E> & RotatingEnum<E>> UnaryOperator<E> nextMapper(final Class<E> enumClass) {
         Objects.requireNonNull(enumClass, "enumClass is null");
         return c -> {
             Objects.requireNonNull(c, "enumConstant is null");

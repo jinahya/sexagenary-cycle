@@ -9,11 +9,10 @@ import java.util.Objects;
  * Represents a 干支 assigned to a specific year.
  *
  * @author Jin Kwon &lt;onacit_at_gmail.com&gt;
- * @see 세차
  * @see <a href="https://ko.wikipedia.org/wiki/%EC%84%B8%EC%B0%A8_(%EA%B0%84%EC%A7%80)">세차 (간지)</a>
  */
 @SuppressWarnings({"NonAsciiCharacters", "java:S101", "java:S116", "java:S117"})
-public class 歲次 extends Assigned<歲次> implements Rolling<歲次> {
+public class 歲次 extends Assigned<歲次> implements Rotating<歲次> {
 
     /**
      * A comparator compares instances with their {@link 歲次#年} property.

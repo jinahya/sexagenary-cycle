@@ -19,7 +19,7 @@ import java.util.stream.Collectors;
  * @see <a href="https://zh.wikipedia.org/wiki/%E5%B9%B2%E6%94%AF">干支</a>.
  */
 @SuppressWarnings({"NonAsciiCharacters", "java:S101", "java:S116", "java:S117"})
-public final class 干支 implements Rolling<干支> { // \u5e72\u652f
+public final class 干支 implements Rotating<干支> { // \u5e72\u652f
 
     // -----------------------------------------------------------------------------------------------------------------
 

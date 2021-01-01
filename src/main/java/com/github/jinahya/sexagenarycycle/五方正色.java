@@ -10,6 +10,7 @@ import java.util.Objects;
  * Constants for <a href="https://en.wikipedia.org/wiki/Obangsaek">Obangsaek</a>.
  *
  * @see <a href="https://ko.wikipedia.org/wiki/%EC%98%A4%EB%B0%A9%EC%83%89">오방색</a>
+ * @see 五方間色
  */
 @SuppressWarnings({"NonAsciiCharacters", "java:S115", "java:S116", "java:S117"})
 public enum 五方正色 {
