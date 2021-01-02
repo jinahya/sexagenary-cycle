@@ -44,9 +44,6 @@ public enum 五行相剋 implements 生剋五行<五行相剋> {
     金剋木(五行.金, 五行.木);
 
     // -----------------------------------------------------------------------------------------------------------------
-    private static final Map<五行, 五行相剋> VALUES_BY_SUBJECTIVES
-            = Collections.unmodifiableMap(EnumUtils.mapValuesBy(五行相剋.class, v -> v.subjective));
-
     /**
      * Returns the value associated with specified subjective.
      *

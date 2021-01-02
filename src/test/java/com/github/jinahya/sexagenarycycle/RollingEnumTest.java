@@ -4,6 +4,6 @@ interface RollingEnumTest<E extends Enum<E> & RotatingEnum<E>> {
 
     @SuppressWarnings({"unchecked"})
     default E[] values() {
-        return (E[]) getClass().getEnumConstants();
+        return ((Class<E>) getClass()).getEnumConstants();
     }
 }
