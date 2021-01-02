@@ -1,7 +1,6 @@
 package com.github.jinahya.sexagenarycycle;
 
 import javax.validation.constraints.NotNull;
-import java.util.Objects;
 
 /**
  * Constants of <a href="https://en.wikipedia.org/wiki/Heavenly_Stems">the ten Heavenly Stems</a>.
@@ -68,21 +67,6 @@ public enum 天干 implements RotatingEnum<天干> { // \u5929\u5e72
      * The regular expression for matching each name.
      */
     public static final String REGEXP_NAME = "[\u7532\u4e59\u4e19\u4e01\u620a\u5df1\u5e9a\u8f9b\u58ec\u7678]";
-
-    // -----------------------------------------------------------------------------------------------------------------
-
-    /**
-     * Returns the enum constant of this type with the specified name. This method, unlikely to {@link #valueOf(String)}
-     * method, uses a cache.
-     *
-     * @param name the name of the enum constant to be returned.
-     * @return the enum constant with the {@code name}
-     * @throws IllegalArgumentException if this enum type has no constant with the specified name
-     */
-    public static 天干 valueOfName(final String name) {
-        Objects.requireNonNull(name, "name is null");
-        return EnumUtils.valueOfName(天干.class, name);
-    }
 
     // -----------------------------------------------------------------------------------------------------------------
     天干() {

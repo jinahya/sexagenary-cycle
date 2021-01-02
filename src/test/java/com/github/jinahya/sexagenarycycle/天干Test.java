@@ -3,9 +3,7 @@ package com.github.jinahya.sexagenarycycle;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
-import org.junit.jupiter.params.provider.MethodSource;
 
 import java.util.Arrays;
 import java.util.List;
@@ -14,7 +12,6 @@ import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.assertThrows;
 
 @SuppressWarnings({"NonAsciiCharacters", "java:S3577"})
 @Slf4j
@@ -34,21 +31,6 @@ class 天干Test implements RollingEnumTest<天干> {
         for (final 天干 value : 天干.values()) {
             assertThat(pattern.matcher(value.name()).matches()).isTrue();
         }
-    }
-
-    // -----------------------------------------------------------------------------------------------------------------
-    @DisplayName("valueOfName(name) returns valid value for known name")
-    @MethodSource({"validNamesWithIndices"})
-    @ParameterizedTest
-    void valueOfName_ExpectedResult_NameIsKnown(final String name, final int index) {
-        assertThat(天干.valueOfName(name)).isNotNull().isSameAs(天干.valueOf(name));
-        assertThat(天干.valueOfName(name).ordinal()).isSameAs(index);
-    }
-
-    @DisplayName("valueOfName(name) throws IllegalArgumentException when name is unknown")
-    @Test
-    void valueOfName_IllegalArgumentException_NameIsUnknown() {
-        assertThrows(IllegalArgumentException.class, () -> 天干.valueOfName(""));
     }
 
     // -----------------------------------------------------------------------------------------------------------------

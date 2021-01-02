@@ -91,19 +91,6 @@ public enum 地支 implements RotatingEnum<地支> { // \u5730\u652f
             = "[\u5b50\u4e11\u5bc5\u536f\u8fb0\u5df3\u5348\u672a\u7533\u9149\u620c\u4ea5]";
 
     // -----------------------------------------------------------------------------------------------------------------
-
-    /**
-     * Returns the constant of specified name. This method, unlikely to {@link #valueOf(String)} method, uses a cache.
-     *
-     * @param name the name.
-     * @return the constant associated with {@code name}.
-     */
-    public static 地支 valueOfName(final String name) {
-        Objects.requireNonNull(name, "name is null");
-        return EnumUtils.valueOfName(地支.class, name);
-    }
-
-    // -----------------------------------------------------------------------------------------------------------------
     private static final Map<二十四方, 地支> VALUES_BY_二十四方S = Collections.unmodifiableMap(
             EnumUtils.mapValuesBy(地支.class, v -> v.二十四方, () -> new EnumMap<>(二十四方.class))
     );

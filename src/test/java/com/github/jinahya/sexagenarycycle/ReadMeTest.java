@@ -13,16 +13,16 @@ class ReadMeTest {
     @Test
     void 天干() {
         final 天干 甲 = 天干.valueOf("甲");
-        assertThat(甲.getPrevious()).isSameAs(天干.valueOfName("癸"));
-        final 天干 乙 = 天干.valueOfName("乙");
-        assertThat(乙.getNext()).isSameAs(天干.valueOfName("丙"));
+        assertThat(甲.getPrevious()).isSameAs(天干.valueOf("癸"));
+        final 天干 乙 = 天干.valueOf("乙");
+        assertThat(乙.getNext()).isSameAs(天干.valueOf("丙"));
         assertThat(乙.getPrevious()).isSameAs(甲);
     }
 
     @Test
     void 地支() {
-        final 地支 子 = 地支.valueOfName("子");
-        assertThat(子.getPrevious()).isSameAs(地支.valueOfName("亥"));
+        final 地支 子 = 地支.valueOf("子");
+        assertThat(子.getPrevious()).isSameAs(地支.valueOf("亥"));
         final 地支 丑 = 地支.valueOf("丑");
         assertThat(丑.getNext()).isSameAs(地支.valueOf("寅"));
         assertThat(丑.getPrevious()).isSameAs(子);
@@ -32,7 +32,7 @@ class ReadMeTest {
     void 干支() {
         final 干支 甲子 = 干支.valueOfName("甲子");
         assertThat(甲子.getName()).isEqualTo("甲子");
-        assertThat(甲子).isSameAs(干支.valueOf(天干.valueOfName("甲"), 地支.valueOfName("子")));
+        assertThat(甲子).isSameAs(干支.valueOf(天干.valueOf("甲"), 地支.valueOf("子")));
         assertThat(甲子.getPrevious()).isSameAs(干支.valueOfName("癸亥"));
         assertThat(甲子.getNext()).isSameAs(干支.valueOfName("乙丑"));
     }

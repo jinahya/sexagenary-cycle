@@ -6,7 +6,6 @@ import org.junit.jupiter.api.RepeatedTest;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.EnumSource;
-import org.junit.jupiter.params.provider.ValueSource;
 
 import java.time.Month;
 import java.util.Arrays;
@@ -16,7 +15,6 @@ import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.assertThrows;
 
 @SuppressWarnings({"NonAsciiCharacters", "java:S3577"})
 @Slf4j
@@ -38,25 +36,6 @@ class 地支Test implements RollingEnumTest<地支> {
         for (final 地支 value : 地支.values()) {
             assertThat(pattern.matcher(value.name()).matches()).isTrue();
         }
-    }
-
-    // --------------------------------------------------------------------------------------------- valueOfName(String)
-    @DisplayName("valueOfName(name) returns non-null and expected for each known name")
-    @Test
-    void valueOfName_ExpectedResult_NameIsKnown() {
-        final String[] names = new String[] {"子", "丑", "寅", "卯", "辰", "巳", "午", "未", "申", "酉", "戌", "亥"};
-        for (int i = 0; i < names.length; i++) {
-            final String name = names[i];
-            assertThat(地支.valueOfName(name)).isNotNull().isSameAs(地支.valueOf(name));
-            assertThat(地支.valueOfName(name).ordinal()).isSameAs(i);
-        }
-    }
-
-    @DisplayName("valueOfName(name) throws IllegalArgumentException when name is unknown")
-    @ValueSource(strings = {"", "愛"})
-    @ParameterizedTest
-    void valueOfName_IllegalArgumentException_NameIsUnknown(final String unknownName) {
-        assertThrows(IllegalArgumentException.class, () -> 地支.valueOfName(unknownName));
     }
 
     // ------------------------------------------------------------------------------------------------------------ 二十四方

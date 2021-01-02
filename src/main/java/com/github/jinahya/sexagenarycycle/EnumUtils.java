@@ -4,7 +4,6 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
-import java.util.concurrent.ConcurrentHashMap;
 import java.util.function.Function;
 import java.util.function.Supplier;
 import java.util.stream.Collectors;
@@ -39,18 +38,18 @@ final class EnumUtils {
     }
 
     // -----------------------------------------------------------------------------------------------------------------
-    private static final Map<Class<?>, Map<String, ?>> VALUES_BY_NAMES = new ConcurrentHashMap<>();
-
-    @SuppressWarnings({"unchecked"})
-    static <E extends Enum<E>> E valueOfName(final Class<E> clazz, final String name) {
-        Objects.requireNonNull(clazz, "enumClass is null");
-        Objects.requireNonNull(name, "name is null");
-        final E value = (E) VALUES_BY_NAMES.computeIfAbsent(clazz, k -> mapValuesByNames((Class<E>) k)).get(name);
-        if (value == null) {
-            throw new IllegalArgumentException("no value for " + name);
-        }
-        return value;
-    }
+//    private static final Map<Class<?>, Map<String, ?>> VALUES_BY_NAMES = new ConcurrentHashMap<>();
+//
+//    @SuppressWarnings({"unchecked"})
+//    static <E extends Enum<E>> E valueOfName(final Class<E> clazz, final String name) {
+//        Objects.requireNonNull(clazz, "enumClass is null");
+//        Objects.requireNonNull(name, "name is null");
+//        final E value = (E) VALUES_BY_NAMES.computeIfAbsent(clazz, k -> mapValuesByNames((Class<E>) k)).get(name);
+//        if (value == null) {
+//            throw new IllegalArgumentException("no value for " + name);
+//        }
+//        return value;
+//    }
 
     // -----------------------------------------------------------------------------------------------------------------
 
