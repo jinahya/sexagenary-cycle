@@ -92,14 +92,10 @@ public class 日辰 extends Assigned<日辰> {
     /**
      * The day-of-month of this 日辰.
      */
-    @Max(30)
-    @Min(1)
-    public final int 日;
+    public final @Max(30) @Min(1) int 日;
 
     /**
      * The 月建 of this 日辰.
      */
-    @Valid
-    @NotNull
-    public final 月建 月建;
+    public final @Valid @NotNull 月建 月建;
 }

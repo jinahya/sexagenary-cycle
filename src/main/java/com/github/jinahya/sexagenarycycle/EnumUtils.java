@@ -12,6 +12,7 @@ import java.util.stream.Collectors;
 @SuppressWarnings({"java:S1192"})
 final class EnumUtils {
 
+    // -----------------------------------------------------------------------------------------------------------------
     static <E extends Enum<E>, K> Map<K, E> mapValuesBy(final Class<E> enumClass,
                                                         final Function<? super E, ? extends K> keyMapper,
                                                         final Supplier<? extends Map<K, E>> mapFactory) {

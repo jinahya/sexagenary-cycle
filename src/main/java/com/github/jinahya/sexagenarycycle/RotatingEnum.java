@@ -32,12 +32,22 @@ interface RotatingEnum<E extends Enum<E> & RotatingEnum<E>> extends Rotating<E> 
         };
     }
 
+    /**
+     * {@inheritDoc}
+     *
+     * @return {@inheritDoc}
+     */
     @SuppressWarnings({"unchecked"})
     @Override
     default @NotNull E getPrevious() {
         return RollingEnumHelper.getPrevious((E) this, previousMapper((Class<E>) getClass()));
     }
 
+    /**
+     * {@inheritDoc}
+     *
+     * @return {@inheritDoc}
+     */
     @SuppressWarnings({"unchecked"})
     @Override
     default @NotNull E getNext() {

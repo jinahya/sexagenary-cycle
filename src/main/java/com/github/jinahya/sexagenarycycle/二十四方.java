@@ -165,7 +165,5 @@ public enum 二十四方 implements RotatingEnum<二十四方> {
     /**
      * The cardinal direction of this 二十四方 in {@code [0..360)°}.
      */
-    @Max(345)
-    @Min(0)
-    public final int direction;
+    public final @Max(345) @Min(0) int direction;
 }

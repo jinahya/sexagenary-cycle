@@ -142,12 +142,8 @@ public final class 干支 implements Rotating<干支> { // \u5e72\u652f
      */
     @Override
     public boolean equals(final Object o) {
-        if (this == o) {
-            return true;
-        }
-        if (o == null || getClass() != o.getClass()) {
-            return false;
-        }
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
         final 干支 casted = (干支) o;
         return 干 == casted.干 && 支 == casted.支;
     }
@@ -197,9 +193,14 @@ public final class 干支 implements Rotating<干支> { // \u5e72\u652f
     }
 
     // -----------------------------------------------------------------------------------------------------------------
-    @NotNull
-    public final 天干 干;
 
-    @NotNull
-    public final 地支 支;
+    /**
+     * The 天干 of this 干支.
+     */
+    public final @NotNull 天干 干;
+
+    /**
+     * The 地支 of this 干支.
+     */
+    public final @NotNull 地支 支;
 }

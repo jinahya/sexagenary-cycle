@@ -112,8 +112,7 @@ public class 歲次 extends Assigned<歲次> implements Rotating<歲次> {
     /**
      * The year of this 歲次.
      */
-    @NotNull
-    public final Year 年;
+    public final @NotNull Year 年;
 
     // -----------------------------------------------------------------------------------------------------------------
     @SuppressWarnings({"java:S3077"})

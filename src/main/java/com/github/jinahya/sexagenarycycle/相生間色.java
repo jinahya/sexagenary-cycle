@@ -63,11 +63,7 @@ public enum 相生間色 implements 五方間色<相生間色, 五行相生> {
 
     @Override
     public com.github.jinahya.sexagenarycycle.五行相生 get生剋五行() {
-        com.github.jinahya.sexagenarycycle.五行相生 result = 生剋五行;
-        if (result == null) {
-            生剋五行 = result = com.github.jinahya.sexagenarycycle.五行相生.values()[ordinal()];
-        }
-        return result;
+        return 五行相生;
     }
 
     // -----------------------------------------------------------------------------------------------------------------
@@ -75,12 +71,10 @@ public enum 相生間色 implements 五方間色<相生間色, 五行相生> {
     /**
      * The 五行相生 associated with this 相生間色.
      */
-    public final 五行相生 五行相生;
+    private final 五行相生 五行相生;
 
     // -----------------------------------------------------------------------------------------------------------------
     // a lazy-initialized unmodifiable set of two 五方正色s.
     @SuppressWarnings({"java:S3077"})
     private volatile @Size(min = 2, max = 2) Set<@NotNull 五方正色> 五方正色;
-
-    private volatile 五行相生 生剋五行;
 }

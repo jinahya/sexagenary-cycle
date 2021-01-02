@@ -72,10 +72,12 @@ public enum 天干 implements RotatingEnum<天干> { // \u5929\u5e72
     // -----------------------------------------------------------------------------------------------------------------
 
     /**
-     * Returns the constant of specified name. This method, unlikely to {@link #valueOf(String)} method, uses a cache.
+     * Returns the enum constant of this type with the specified name. This method, unlikely to {@link #valueOf(String)}
+     * method, uses a cache.
      *
-     * @param name the name.
-     * @return the constant associated with {@code name}.
+     * @param name the name of the enum constant to be returned.
+     * @return the enum constant with the {@code name}
+     * @throws IllegalArgumentException if this enum type has no constant with the specified name
      */
     public static 天干 valueOfName(final String name) {
         Objects.requireNonNull(name, "name is null");
@@ -97,23 +99,20 @@ public enum 天干 implements RotatingEnum<天干> { // \u5929\u5e72
     /**
      * The 二十四方 of this 天干; {@code null} when {@link #五方} is {@link 五方#中 中}.
      */
-    public final 二十四方 二十四方;
+    public final 二十四方 二十四方; // NULLABLE
 
     /**
      * The 五方 associated with this 天干.
      */
-    @NotNull
-    public final 五方 五方;
+    public final @NotNull 五方 五方;
 
     /**
      * The 五行 associated with this 天干.
      */
-    @NotNull
-    public final 五行 五行;
+    public final @NotNull 五行 五行;
 
     /**
      * The 陰陽 associated with this 天干.
      */
-    @NotNull
-    public final 陰陽 陰陽;
+    public final @NotNull 陰陽 陰陽;
 }

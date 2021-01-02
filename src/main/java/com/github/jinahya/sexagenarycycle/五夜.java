@@ -52,8 +52,9 @@ public enum 五夜 { // 오야
     戊夜;
 
     // -----------------------------------------------------------------------------------------------------------------
-    static final Map<五更, 五夜> VALUES_BY_五更S
-            = Collections.unmodifiableMap(EnumUtils.mapValuesBy(五夜.class, v -> v.五更, () -> new EnumMap<>(五更.class)));
+    static final Map<五更, 五夜> VALUES_BY_五更S = Collections.unmodifiableMap(
+            EnumUtils.mapValuesBy(五夜.class, v -> v.五更, () -> new EnumMap<>(五更.class))
+    );
 
     /**
      * Returns the value associated with specified 五更.
