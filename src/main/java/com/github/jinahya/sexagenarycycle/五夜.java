@@ -8,7 +8,7 @@ import java.util.Map;
 import java.util.Objects;
 
 /**
- * Constants for five times in a night.
+ * &#x1F303; Constants for five times in a night.
  *
  * @author Jin Kwon &lt;onacit_at_gmail.com&gt;
  * @see 五更

@@ -1,7 +1,7 @@
 package com.github.jinahya.sexagenarycycle;
 
 /**
- * Constants for five cardinal directions.
+ * &#x1F9ED; Constants for five cardinal directions.
  *
  * @author Jin Kwon &lt;onacit_at_gmail.com&gt;
  * @see 五方正色#valueOf(五方)
@@ -18,7 +18,7 @@ public enum 五方 {
     /**
      * 1: South.
      */
-    南, // 남녘 남
+    南, // 남녘 남s
 
     /**
      * 3: Center.

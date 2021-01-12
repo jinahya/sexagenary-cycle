@@ -8,7 +8,7 @@ import java.time.temporal.ChronoUnit;
 import java.util.Objects;
 
 /**
- * Represents a time between two specific local times in a day.
+ * &#x231A; Represents a time between two specific local times in a day.
  *
  * @author Jin Kwon &lt;onacit_at_gmail.com&gt;
  */
